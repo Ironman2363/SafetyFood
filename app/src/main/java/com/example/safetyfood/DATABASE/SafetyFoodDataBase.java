@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class SafetyFoodDataBase extends SQLiteOpenHelper {
 
-    static final String dbName = "PNLIB";
+    static final String dbName = "SAFRTYFOOD";
     static final int dbVersion = 1;
     public SafetyFoodDataBase( Context context) {
         super(context, dbName, null, dbVersion);
@@ -60,6 +60,19 @@ public class SafetyFoodDataBase extends SQLiteOpenHelper {
                 "Amount INTEGER NOT NULL)";
         db.execSQL(createTableChiTietDatHang);
 
+        String createTableCuaHang = "create table CuaHang("+
+                "Id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                "Name TEXT NOT NULL,"+
+                "Image TEXT NOT NULL,"+
+                "Phone INTEGER NOT NULL,"+
+                "Email TEXT NOT NULL,"+
+                "Addres TEXT NOT NULL,"+
+                "Created datatime NOT NULL,"+
+                "Updated datatime NOT NULL,"+
+                "Status INTEGER NOT NULL)";
+
+        db.execSQL(createTableCuaHang);
+
         String createTableLoaiSanPham = "create table LoaiSanPham("+
                 "Id INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "Name TEXT NOT NULL,"+
@@ -88,6 +101,8 @@ public class SafetyFoodDataBase extends SQLiteOpenHelper {
         db.execSQL(dropTableVaiTro);
         String dropTableThongTinNguoiDung = "drop table if exists ThongTinNguoiDung";
         db.execSQL(dropTableThongTinNguoiDung);
+        String dropTableCuaHang = "drop table if exists CuaHang";
+        db.execSQL(dropTableCuaHang);
         String dropTableDatHang = "drop table if exists DatHang";
         db.execSQL(dropTableDatHang);
         String dropTableChiTietDatHang = "drop table if exists ChiTietDatHang";
