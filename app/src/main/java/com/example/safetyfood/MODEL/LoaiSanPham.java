@@ -2,6 +2,7 @@ package com.example.safetyfood.MODEL;
 
 public class LoaiSanPham {
     int id;
+    int idCuahang;
     String nameLoaisanpham;
     String imgLoaisanpham;
     String createLoaisanpham;
@@ -11,8 +12,9 @@ public class LoaiSanPham {
     public LoaiSanPham() {
     }
 
-    public LoaiSanPham(int id, String nameLoaisanpham, String imgLoaisanpham, String createLoaisanpham, String updatedLoaisanpham, int statusLoaisanpham) {
+    public LoaiSanPham(int id, int idCuahang, String nameLoaisanpham, String imgLoaisanpham, String createLoaisanpham, String updatedLoaisanpham, int statusLoaisanpham) {
         this.id = id;
+        this.idCuahang = idCuahang;
         this.nameLoaisanpham = nameLoaisanpham;
         this.imgLoaisanpham = imgLoaisanpham;
         this.createLoaisanpham = createLoaisanpham;
@@ -26,6 +28,14 @@ public class LoaiSanPham {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getIdCuahang() {
+        return idCuahang;
+    }
+
+    public void setIdCuahang(int idCuahang) {
+        this.idCuahang = idCuahang;
     }
 
     public String getNameLoaisanpham() {
