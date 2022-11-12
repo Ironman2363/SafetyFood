@@ -112,6 +112,5 @@ public class SafetyFoodDataBase extends SQLiteOpenHelper {
         String dropTableSanPham = "drop table if exists SanPham";
         db.execSQL(dropTableSanPham);
         onCreate(db);
-
     }
 }
