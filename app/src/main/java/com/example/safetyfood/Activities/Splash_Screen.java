@@ -1,8 +1,10 @@
-package com.example.safetyfood;
+package com.example.safetyfood.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.safetyfood.R;
 
 public class Splash_Screen extends AppCompatActivity {
 
