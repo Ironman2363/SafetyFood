@@ -76,6 +76,7 @@ public class SafetyFoodDataBase extends SQLiteOpenHelper {
 
         String createTableLoaiSanPham = "create table LoaiSanPham("+
                 "Id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                "Idcuahang INTEGER REFERENCES CuaHang(Id),"+
                 "Name TEXT NOT NULL,"+
                 "Image TEXT NOT NULL,"+
                 "Created TEXT NOT NULL,"+
