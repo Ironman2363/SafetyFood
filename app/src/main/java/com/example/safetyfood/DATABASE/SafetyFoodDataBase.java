@@ -64,7 +64,7 @@ public class SafetyFoodDataBase extends SQLiteOpenHelper {
                 "Id INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "Name TEXT NOT NULL,"+
                 "Image TEXT NOT NULL,"+
-                "Phone INTEGER NOT NULL,"+
+                "Phone TEXT NOT NULL,"+
                 "Email TEXT NOT NULL,"+
                 "Addres TEXT NOT NULL,"+
                 "Created datatime NOT NULL,"+
