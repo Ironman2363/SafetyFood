@@ -12,6 +12,7 @@ public class SafetyFoodDataBase extends SQLiteOpenHelper {
         super(context, dbName, null, dbVersion);
     }
 
+    
     @Override
     public void onCreate(SQLiteDatabase db) {
 
