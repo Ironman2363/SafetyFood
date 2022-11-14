@@ -13,8 +13,13 @@
         android:theme="@style/Theme.SafetyFood"
         tools:targetApi="31">
         <activity
-            android:name=".Sign_Up"
-            android:exported="false">
+            android:name=".Activities.Sign_Up"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
