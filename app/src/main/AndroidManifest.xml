@@ -12,7 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SafetyFood"
         tools:targetApi="31">
-
         <activity
             android:name=".Activities.Splash_Screen"
             android:exported="true">
@@ -25,19 +24,9 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <activity android:name=".Activities.Login"
-            android:exported="false">
-
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-
-
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+            android:exported="false"/>
     </application>
 
 </manifest>
