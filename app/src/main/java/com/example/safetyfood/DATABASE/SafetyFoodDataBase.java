@@ -12,7 +12,7 @@ public class SafetyFoodDataBase extends SQLiteOpenHelper {
         super(context, dbName, null, dbVersion);
     }
 
-    
+
     @Override
     public void onCreate(SQLiteDatabase db) {
 
@@ -27,8 +27,8 @@ public class SafetyFoodDataBase extends SQLiteOpenHelper {
                 "Id INTEGER REFERENCES TaiKhoan(Roled)," +
                 "Name TEXT NOT NULL," +
                 "Description TEXT NOT NULL,"+
-                "Created datatime not null,"+
-                "Updated datatime not null)";
+                "Created TEXT not null,"+
+                "Updated TEXT not null)";
         db.execSQL(createTableVaiTro);
 
         String createTableThongTinNguoiDung = "create table ThongTinNguoiDung("+
@@ -40,16 +40,16 @@ public class SafetyFoodDataBase extends SQLiteOpenHelper {
                 "Avatar TEXT NOT NULL,"+
                 "Birthday DATE NOT NULL,"+
                 "Gender INT NOT NULL,"+
-                "Created datetime not null,"+
-                "Updated datetime not null)";
+                "Created TEXT not null,"+
+                "Updated TEXT not null)";
         db.execSQL(createTableThongTinNguoiDung);
 
         String createTableDatHang = "create table DatHang("+
                 "Id INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "AccountId INTEGER REFERENCES TaiKhoan(Id),"+
                 "TotalPrice Float NOT NULL,"+
-                "Created datatime NOT NULL,"+
-                "Updated datatime NOT NULL,"+
+                "Created TEXT NOT NULL,"+
+                "Updated TEXT NOT NULL,"+
                 "Status INTEGER not null)";
         db.execSQL(createTableDatHang);
 
@@ -68,8 +68,8 @@ public class SafetyFoodDataBase extends SQLiteOpenHelper {
                 "Phone INTEGER NOT NULL,"+
                 "Email TEXT NOT NULL,"+
                 "Addres TEXT NOT NULL,"+
-                "Created datatime NOT NULL,"+
-                "Updated datatime NOT NULL,"+
+                "Created TEXT NOT NULL,"+
+                "Updated TEXT NOT NULL,"+
                 "Status INTEGER NOT NULL)";
 
         db.execSQL(createTableCuaHang);
@@ -78,8 +78,8 @@ public class SafetyFoodDataBase extends SQLiteOpenHelper {
                 "Id INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "Name TEXT NOT NULL,"+
                 "Image TEXT NOT NULL,"+
-                "Created datatime NOT NULL,"+
-                "Updated datatime NOT NULL,"+
+                "Created TEXT NOT NULL,"+
+                "Updated TEXT NOT NULL,"+
                 "Status INTEGER NOT NULL)";
         db.execSQL(createTableLoaiSanPham);
 
@@ -89,8 +89,8 @@ public class SafetyFoodDataBase extends SQLiteOpenHelper {
                 "Image TEXT NOT NULL,"+
                 "Price FLOAT NOT NULL,"+
                 "TypeproDuct INTEGER REFERENCES LoaiSanPham(Id),"+
-                "Created datatime NOT NULL,"+
-                "Updated datatime NOT NULL,"+
+                "Created TEXT NOT NULL,"+
+                "Updated TEXT NOT NULL,"+
                 "Status INTEGER NOT NULL)";
         db.execSQL(createTableSanPham);
     }
