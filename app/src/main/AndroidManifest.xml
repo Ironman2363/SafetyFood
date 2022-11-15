@@ -13,6 +13,13 @@
         android:theme="@style/Theme.SafetyFood"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.Passwordchange"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Activities.Splash_Screen"
             android:exported="false">
             <meta-data
@@ -32,6 +39,12 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+<<<<<<< Updated upstream
+=======
+        <activity
+            android:name=".Activities.Login"
+            android:exported="false" />
+>>>>>>> Stashed changes
     </application>
 
 </manifest>
