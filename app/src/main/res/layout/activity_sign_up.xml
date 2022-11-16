@@ -104,18 +104,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appCompatButton" />
 
-    <TextView
-        android:id="@+id/txt_toFPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Quên mật khẩu"
-        android:textColor="@color/red"
-        android:textSize="16sp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_toLogin" />
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
