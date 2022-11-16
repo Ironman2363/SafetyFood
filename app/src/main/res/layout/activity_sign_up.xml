@@ -7,8 +7,17 @@
     android:padding="16dp"
     tools:context=".Activities.Sign_Up">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/SU_tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/imageView"
+        android:layout_marginTop="16dp"
         android:layout_width="160dp"
         android:layout_height="160dp"
         android:src="@drawable/logo"
@@ -22,6 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:boxBackgroundColor="#FFFFFF"
+        app:hintTextColor="@color/red"
         android:hint="User name"
         android:alpha="0.75"
         android:textColorHint="@color/red"
@@ -42,6 +52,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:boxBackgroundColor="#FFFFFF"
+        app:hintTextColor="@color/red"
+        app:passwordToggleEnabled="true"
         android:hint="PassWord"
         android:alpha="0.75"
         android:textColorHint="@color/red"
@@ -62,6 +74,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:boxBackgroundColor="#FFFFFF"
+        app:hintTextColor="@color/red"
+        app:passwordToggleEnabled="true"
         android:hint="RePassWord"
         android:alpha="0.75"
         android:textColorHint="@color/red"
@@ -110,7 +124,7 @@
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_toFPassword">
+        app:layout_constraintTop_toBottomOf="@+id/txt_toLogin">
 
         <ImageView
             android:layout_width="wrap_content"
