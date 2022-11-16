@@ -31,6 +31,15 @@ public class ThongKeDAO {
         String sql = "select "+ProductId+", count("+ProductId+") as sum from "+ Table_ChiTietDH +" group by "+ProductId+
                 " order by sum desc limit 10";
         Cursor cursor = db.rawQuery(sql,null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+            Top top = new Top(  );
+            top.setProductId(cursor.getInt(cursor.getColumnIndex(ProductId)));
+            top.setSum(cursor.getInt(cursor.getColumnIndex("sum")));
+            list.add(top);
+            cursor.moveToNext();
+        }
+        cursor.close();
         return list;
     }
 
