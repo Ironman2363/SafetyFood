@@ -28,6 +28,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:itemTextColor="@color/icon_change_color_bottom"
+        app:itemIconTint="@color/icon_change_color_bottom"
         app:menu="@menu/botton_nav_menu"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
