@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.safetyfood.R;
+
 public class Sign_Up extends AppCompatActivity {
 
     @Override
