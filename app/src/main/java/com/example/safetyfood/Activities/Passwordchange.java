@@ -9,14 +9,16 @@ import android.widget.Toast;
 import com.example.safetyfood.R;
 
 public class Passwordchange extends AppCompatActivity {
-    EditText edtOldPass = findViewById(R.id.edtOldPass);
-    EditText edtNewPass = findViewById(R.id.edtNewPass);
-    EditText edtReNewPass = findViewById(R.id.edtReNewPass);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passwordchange);
+
+        EditText edtOldPass = findViewById(R.id.edtOldPass);
+        EditText edtNewPass = findViewById(R.id.edtNewPass);
+        EditText edtReNewPass = findViewById(R.id.edtReNewPass);
 
         String oldPass = edtOldPass.getText().toString();
         String newPass = edtNewPass.getText().toString();
