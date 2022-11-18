@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/logo" />
+
+    <EditText
+        android:id="@+id/edtHoten"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/boder_edittext"
+        android:hint="Họ và tên:"
+        android:paddingLeft="10dp" />
+
+    <EditText
+        android:id="@+id/edtEmail"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/boder_edittext"
+        android:hint="Email:"
+        android:paddingLeft="10dp" />
+
+    <EditText
+        android:id="@+id/edtSdt"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/boder_edittext"
+        android:hint="Số điện thoại:"
+        android:paddingLeft="10dp" />
+
+    <EditText
+        android:id="@+id/edtDiachi"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/boder_edittext"
+        android:hint="Địa chỉ:"
+        android:paddingLeft="10dp" />
+
+    <EditText
+        android:id="@+id/edtNgaysinh"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/boder_edittext"
+        android:hint="Ngày sinh:"
+        android:paddingLeft="10dp" />
+
+    <EditText
+        android:id="@+id/edtGioitinh"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/boder_edittext"
+        android:hint="Giới tính:"
+        android:paddingLeft="10dp" />
+
+
+    <Button
+        android:id="@+id/btnDangkythongtin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="#F22626"
+        android:text="Hoàn tất" />
+</LinearLayout>
