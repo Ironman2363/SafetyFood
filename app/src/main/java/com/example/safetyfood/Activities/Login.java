@@ -14,9 +14,10 @@ import com.example.safetyfood.MainActivity;
 import com.example.safetyfood.R;
 
 public class Login extends AppCompatActivity {
-   EditText email , pass;
-   Button login;
-   TextView account , quenpass;
+    EditText email, pass;
+    Button login;
+    TextView account, signUp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,21 +25,34 @@ public class Login extends AppCompatActivity {
         email = findViewById(R.id.edit_sdt);
         pass = findViewById(R.id.edit_pass);
         login = findViewById(R.id.btn_login);
-        account = findViewById(R.id.taotk);
-        quenpass = findViewById(R.id.quenpass);
+        account = findViewById(R.id.skip);
+        signUp = findViewById(R.id.signUp);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String mail = email.getText().toString();
                 String mk = pass.getText().toString();
-                if (mail.isEmpty()|| mk.isEmpty()){
+                if (mail.isEmpty() || mk.isEmpty()) {
                     Toast.makeText(Login.this, "Bạn cần nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
 
-                }else{
+                } else {
+                    startActivity(new Intent(Login.this, MainActivity.class));
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     Toast.makeText(Login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Login.this, Sign_Up.class));
+            }
+        });
+        account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Login.this, MainActivity.class));
             }
         });
     }
