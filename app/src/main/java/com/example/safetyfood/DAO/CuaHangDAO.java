@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 public class CuaHangDAO {
 
+    
     private SQLiteDatabase db;
     SafetyFoodDataBase safetyFoodDataBase;
     public CuaHangDAO(Context context){safetyFoodDataBase = new SafetyFoodDataBase(context);}
