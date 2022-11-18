@@ -29,6 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:hint="Họ và tên"
+        app:startIconDrawable="@drawable/name_24"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <EditText
@@ -43,6 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:hint="Email"
+        app:startIconDrawable="@drawable/gmail_24"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <EditText
@@ -59,6 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:hint="Số điện thoại"
+        app:startIconDrawable="@drawable/circle_phone_24"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <EditText
@@ -74,6 +77,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:hint="Địa chỉ"
+        app:startIconDrawable="@drawable/map_24"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <EditText
@@ -89,6 +93,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:hint="Ngày sinh"
+        app:startIconDrawable="@drawable/calendar_24"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <EditText
