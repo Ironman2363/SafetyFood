@@ -9,8 +9,8 @@
     android:layout_height="match_parent"
     tools:context=".Activities.Login">
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:src="@drawable/logo"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
@@ -45,11 +45,12 @@
             />
     </com.google.android.material.textfield.TextInputLayout>
     <Button
-        android:layout_width="150dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Đăng nhập"
+        android:backgroundTint="#F22626"
         android:id="@+id/btn_login"
-       android:background="@drawable/boder"
+        android:textColor="@color/white"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:textStyle="bold"
@@ -76,18 +77,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Quên mật khẩu ?"
+        android:text="Bạn chưa có tài khoản?"
         android:textStyle="bold"
-        android:id="@+id/quenpass"
+        android:id="@+id/signUp"
         android:textColor="#D10F0F"
         android:textSize="15sp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:text="Tạo tài khoản"
+        android:text="Bỏ qua đăng nhập"
         android:textStyle="bold"
-        android:id="@+id/taotk"
+        android:id="@+id/skip"
         android:textColor="#D10F0F"
         android:textSize="15sp" />
 </LinearLayout>
