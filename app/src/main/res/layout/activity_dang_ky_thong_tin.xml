@@ -4,62 +4,100 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp"
+    android:padding="16dp"
+    android:background="#FEFEFE"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <TextView
+        android:textColor="#F22626"
+        android:textStyle="bold"
+        android:textSize="40dp"
+        android:gravity="center"
+        android:text="Thông tin cá nhân"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
     <ImageView
-        android:layout_width="130dp"
-        android:layout_height="130dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="30dp"
-        android:src="@drawable/logo" />
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/avatar" />
 
-    <EditText
-        android:id="@+id/edtHoten"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@drawable/boder_edittext"
-        android:hint="Họ và tên:"
-        android:paddingLeft="10dp" />
+        android:hint="Họ và tên">
 
-    <EditText
-        android:id="@+id/edtEmail"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/boder_edittext"
-        android:hint="Email:"
-        android:paddingLeft="10dp" />
+        <EditText
+            android:id="@+id/edtHoten"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/boder_edittext"
+            android:padding="10dp" />
 
-    <EditText
-        android:id="@+id/edtSdt"
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@drawable/boder_edittext"
-        android:hint="Số điện thoại:"
-        android:paddingLeft="10dp" />
+        android:hint="Email">
 
-    <EditText
-        android:id="@+id/edtDiachi"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/boder_edittext"
-        android:hint="Địa chỉ:"
-        android:paddingLeft="10dp" />
+        <EditText
+            android:id="@+id/edtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/boder_edittext"
+            android:padding="10dp" />
 
-    <EditText
-        android:id="@+id/edtNgaysinh"
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@drawable/boder_edittext"
-        android:hint="Ngày sinh:"
-        android:paddingLeft="10dp" />
+        android:hint="Số điện thoại">
+
+        <EditText
+            android:id="@+id/edtSdt"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/boder_edittext"
+            android:padding="10dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Địa chỉ">
+
+        <EditText
+            android:id="@+id/edtDiachi"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/boder_edittext"
+            android:padding="10dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Ngày sinh">
+
+        <EditText
+            android:id="@+id/edtNgaysinh"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/boder_edittext"
+            android:padding="10dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <RadioGroup
         android:layout_marginTop="10dp"
@@ -89,6 +127,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:textColor="@color/white"
         android:backgroundTint="#F22626"
         android:text="Hoàn tất" />
 </LinearLayout>
