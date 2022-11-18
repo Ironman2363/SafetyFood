@@ -17,34 +17,49 @@
 
     <ImageView
         android:id="@+id/imageView"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_marginTop="16dp"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
         android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:text="Đăng ký"
+        android:textColor="#F22626"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/SU_tool_bar" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/SU_til_UserName"
-        android:layout_marginTop="32dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:boxBackgroundColor="#FFFFFF"
-        app:hintTextColor="@color/red"
-        android:hint="User name"
+        android:layout_marginTop="100dp"
         android:alpha="0.75"
-        android:textColorHint="@color/red"
+        android:hint="Nhập tài khoản"
+        app:boxBackgroundColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/SU_edt_UserName"
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColorHighlight="#FF0000"/>
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/boder_edittext"
+            android:padding="10dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -52,22 +67,21 @@
         android:id="@+id/SU_til_PassWord"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:boxBackgroundColor="#FFFFFF"
-        app:hintTextColor="@color/red"
-        app:passwordToggleEnabled="true"
-        android:hint="PassWord"
         android:alpha="0.75"
-        android:textColorHint="@color/red"
+        android:hint="Mật khẩu"
+        app:boxBackgroundColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SU_til_UserName">
+        app:layout_constraintTop_toBottomOf="@+id/SU_til_UserName"
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/SU_edt_PassWord"
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColorHighlight="#FF0000"/>
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/boder_edittext"
+            android:padding="10dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -75,22 +89,21 @@
         android:id="@+id/SU_til_RePassWord"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:boxBackgroundColor="#FFFFFF"
-        app:hintTextColor="@color/red"
-        app:passwordToggleEnabled="true"
-        android:hint="RePassWord"
         android:alpha="0.75"
-        android:textColorHint="@color/red"
+        android:hint="Nhập lại mật khẩu"
+        app:boxBackgroundColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SU_til_PassWord">
+        app:layout_constraintTop_toBottomOf="@+id/SU_til_PassWord"
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/SU_edt_RePassWord"
             android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:layout_marginTop="10dp"
-            android:layout_height="wrap_content"
-            android:textColorHighlight="#FF0000"/>
+            android:background="@drawable/boder_edittext"
+            android:padding="10dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -98,12 +111,13 @@
         android:id="@+id/appCompatButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/custom_button"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="#F22626"
         android:padding="16dp"
         android:text="Tạo tài khoản"
         android:textAllCaps="false"
         android:textColor="@color/white"
+        android:textSize="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SU_til_RePassWord" />
@@ -112,15 +126,16 @@
         android:id="@+id/txt_toLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="Đăng nhập"
         android:textColor="@color/red"
         android:textSize="16sp"
-        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appCompatButton" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"

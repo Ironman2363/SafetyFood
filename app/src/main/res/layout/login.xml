@@ -10,22 +10,33 @@
     tools:context=".Activities.Login">
 
     <ImageView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:src="@drawable/logo" />
+    <TextView
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:textSize="40dp"
+        android:textColor="#F22626"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đăng nhập"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:hint="Số điện thoại hoặc email">
+        android:hint="Tài khoản">
 
         <EditText
             android:id="@+id/edit_sdt"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="50dp"
+            android:background="@drawable/boder_edittext"
+            android:padding="10dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -41,21 +52,23 @@
         <EditText
             android:id="@+id/edit_pass"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword" />
+            android:layout_height="50dp"
+            android:background="@drawable/boder_edittext"
+            android:inputType="textPassword"
+            android:padding="10dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_login"
-        android:layout_width="150dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:background="@drawable/custom_button"
-        android:textColor="@color/white"
-        android:padding="10dp"
+        android:backgroundTint="#F22626"
+        android:padding="16dp"
         android:text="Đăng nhập"
-        android:textStyle="bold" />
+        android:textSize="12dp"
+        android:textColor="@color/white" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -84,21 +97,21 @@
         android:orientation="vertical">
 
         <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
             android:id="@+id/signUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Bạn chưa có tài khoản?"
             android:textColor="#D10F0F"
             android:textSize="15sp"
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/skip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
             android:text="Bỏ qua đăng nhập"
-            android:layout_marginTop="16dp"
             android:textColor="#D10F0F"
-            android:id="@+id/skip"
             android:textSize="15sp"
             android:textStyle="bold" />
     </LinearLayout>

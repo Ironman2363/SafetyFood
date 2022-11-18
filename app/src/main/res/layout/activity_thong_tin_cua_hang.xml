@@ -57,7 +57,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Dia chi: Đơn nguyên 1,2 khu nhà ở sinh viên, P. Hàm Nghi, Hà Nội "
+        android:text="Đia chi: Đơn nguyên 1,2 khu nhà ở sinh viên, P. Hàm Nghi, Hà Nội "
         android:layout_marginTop="20dp"
         android:textSize="18dp"
         />
