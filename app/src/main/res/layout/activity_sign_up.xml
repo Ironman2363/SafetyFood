@@ -48,17 +48,17 @@
         android:layout_marginTop="100dp"
         android:alpha="0.75"
         android:hint="Nhập tài khoản"
-        app:boxBackgroundColor="#FFFFFF"
+        app:startIconDrawable="@drawable/user_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/SU_edt_UserName"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/boder_edittext"
             android:padding="10dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -69,18 +69,18 @@
         android:layout_height="wrap_content"
         android:alpha="0.75"
         android:hint="Mật khẩu"
-        app:boxBackgroundColor="#FFFFFF"
+        app:startIconDrawable="@drawable/lock_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SU_til_UserName"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="true"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/SU_edt_PassWord"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/boder_edittext"
             android:padding="10dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -91,18 +91,18 @@
         android:layout_height="wrap_content"
         android:alpha="0.75"
         android:hint="Nhập lại mật khẩu"
-        app:boxBackgroundColor="#FFFFFF"
+        app:startIconDrawable="@drawable/lock_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SU_til_PassWord"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="true"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/SU_edt_RePassWord"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/boder_edittext"
             android:padding="10dp" />
 
     </com.google.android.material.textfield.TextInputLayout>

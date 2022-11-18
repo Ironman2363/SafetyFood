@@ -29,13 +29,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:hint="Tài khoản">
+        app:startIconDrawable="@drawable/user_24"
+        android:hint="Tài khoản"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_sdt"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/boder_edittext"
             android:padding="10dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -47,13 +48,14 @@
         android:hint="Mật khẩu"
         app:counterEnabled="true"
         app:counterMaxLength="50"
-        app:passwordToggleEnabled="true">
+        app:startIconDrawable="@drawable/lock_24"
+        app:passwordToggleEnabled="true"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_pass"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/boder_edittext"
             android:inputType="textPassword"
             android:padding="10dp" />
     </com.google.android.material.textfield.TextInputLayout>
