@@ -61,14 +61,27 @@
         android:hint="Ngày sinh:"
         android:paddingLeft="10dp" />
 
-    <EditText
-        android:id="@+id/edtGioitinh"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
+    <RadioGroup
         android:layout_marginTop="10dp"
-        android:background="@drawable/boder_edittext"
-        android:hint="Giới tính:"
-        android:paddingLeft="10dp" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rdo_GT_Nam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nam" />
+
+        <RadioButton
+            android:id="@+id/rdo_BTN_Nu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24sp"
+            android:text="Nữ" />
+
+    </RadioGroup>
 
 
     <Button
