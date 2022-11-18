@@ -43,7 +43,6 @@
             android:id="@+id/SU_edt_UserName"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:background="@drawable/boder_edittext"
             android:layout_height="wrap_content"
             android:textColorHighlight="#FF0000"/>
 
@@ -67,7 +66,6 @@
             android:id="@+id/SU_edt_PassWord"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:background="@drawable/boder_edittext"
             android:layout_height="wrap_content"
             android:textColorHighlight="#FF0000"/>
 
@@ -92,7 +90,6 @@
             android:layout_width="match_parent"
             android:layout_marginTop="10dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/boder_edittext"
             android:textColorHighlight="#FF0000"/>
 
     </com.google.android.material.textfield.TextInputLayout>
