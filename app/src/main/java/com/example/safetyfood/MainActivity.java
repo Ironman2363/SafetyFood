@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         replaceFragment(new HomeFragment());
 
+        binding.bottomNavigationView.setItemIconTintList(null);
+
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()){
 
@@ -46,7 +48,9 @@ public class MainActivity extends AppCompatActivity {
     }
     private void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.enter_right_to_left,R.anim.exit_right_to_left,
+                        R.anim.enter_left_to_right,R.anim.exit_left_to_right);
         fragmentTransaction.replace(R.id.frameLayout,fragment);
         fragmentTransaction.commit();
     }
