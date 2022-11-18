@@ -9,6 +9,7 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:layout_marginTop="50dp"
         android:textColor="#F22626"
         android:textStyle="bold"
         android:textSize="40dp"
@@ -17,8 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
@@ -51,7 +52,7 @@
             android:id="@+id/edtEmail"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            
+
             android:padding="10dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
