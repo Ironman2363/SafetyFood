@@ -41,7 +41,9 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/SU_edt_UserName"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
+            android:background="@drawable/boder_edittext"
             android:layout_height="wrap_content"
             android:textColorHighlight="#FF0000"/>
 
@@ -63,7 +65,9 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/SU_edt_PassWord"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
+            android:background="@drawable/boder_edittext"
             android:layout_height="wrap_content"
             android:textColorHighlight="#FF0000"/>
 
@@ -86,14 +90,16 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/SU_edt_RePassWord"
             android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/boder_edittext"
             android:textColorHighlight="#FF0000"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/appCompatButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:background="@drawable/custom_button"
@@ -101,7 +107,6 @@
         android:text="Tạo tài khoản"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SU_til_RePassWord" />
