@@ -23,7 +23,7 @@ public class ThongKeDAO {
 
     public ThongKeDAO(Context context) {
         dataBase = new SafetyFoodDataBase(context);
-        db = dataBase.getReadableDatabase( );
+        db = dataBase.getReadableDatabase();
     }
 
     public List<Top> getTop(){

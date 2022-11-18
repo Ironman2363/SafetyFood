@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Safety Food</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="FPass"><u>Quên mật khẩu ?</u></string>
+    <string name="skip"><u>Skip</u></string>
+    <string name="crate_account"><u>Tao tai khoan</u></string>
 </resources>

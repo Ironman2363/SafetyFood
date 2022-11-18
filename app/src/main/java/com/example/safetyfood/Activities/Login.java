@@ -14,6 +14,7 @@ import com.example.safetyfood.MainActivity;
 import com.example.safetyfood.R;
 
 public class Login extends AppCompatActivity {
+
     EditText email, pass;
     Button login;
     TextView account, signUp;
@@ -28,28 +29,27 @@ public class Login extends AppCompatActivity {
         account = findViewById(R.id.skip);
         signUp = findViewById(R.id.signUp);
 
-        login.setOnClickListener(new View.OnClickListener() {
+        login.setOnClickListener(new View.OnClickListener( ) {
             @Override
             public void onClick(View v) {
-                String mail = email.getText().toString();
-                String mk = pass.getText().toString();
-                if (mail.isEmpty() || mk.isEmpty()) {
-                    Toast.makeText(Login.this, "Bạn cần nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                String mail = email.getText( ).toString( );
+                String mk = pass.getText( ).toString( );
+                if (mail.isEmpty( ) || mk.isEmpty( )) {
+                    Toast.makeText(Login.this, "Bạn cần nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show( );
 
                 } else {
                     startActivity(new Intent(Login.this, MainActivity.class));
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    Toast.makeText(Login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show( );
                 }
             }
         });
-        signUp.setOnClickListener(new View.OnClickListener() {
+        signUp.setOnClickListener(new View.OnClickListener( ) {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Login.this, Sign_Up.class));
             }
         });
-        account.setOnClickListener(new View.OnClickListener() {
+        account.setOnClickListener(new View.OnClickListener( ) {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Login.this, MainActivity.class));
