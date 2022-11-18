@@ -1,5 +1,6 @@
 package com.example.safetyfood.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.safetyfood.MainActivity;
 import com.example.safetyfood.R;
 
 public class Login extends AppCompatActivity {
@@ -34,6 +36,7 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(Login.this, "Bạn cần nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
 
                 }else{
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     Toast.makeText(Login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                 }
             }
