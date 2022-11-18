@@ -12,10 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.safetyfood.MainActivity;
 import com.example.safetyfood.R;
+import com.google.android.material.textfield.TextInputEditText;
 
 public class Login extends AppCompatActivity {
 
-    EditText email, pass;
+    TextInputEditText email, pass;
     Button login;
     TextView account, signUp;
 
