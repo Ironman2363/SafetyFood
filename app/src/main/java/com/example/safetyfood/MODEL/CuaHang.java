@@ -11,7 +11,7 @@ public class CuaHang {
     String updateCuahang;
     int statusCuahang;
 
-    public CuaHang() {
+    public CuaHang(int anInt, String string, String cursorString, String s, String string1, String cursorString1, String s1, String string2, String cursorInt, String cursorString2, int i) {
     }
 
     public CuaHang(int id, String nameCuahang, String imgCuahang, String phoneCuahang, String emailCuahang, String addresCuahang, String cretaeCuahang, String updateCuahang, int statusCuahang) {
