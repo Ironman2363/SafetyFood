@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.example.safetyfood.DATABASE.SafetyFoodDataBase;
 import com.example.safetyfood.MODEL.SanPham;
@@ -24,7 +26,9 @@ public class SanPhamDAO {
         if (cursor.getCount() != 0) {
             cursor.moveToFirst();
             do {
-                list.add(new SanPham(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getFloat(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getInt(7)));
+                list.add(new SanPham(cursor.getInt(0), cursor.getString(1),
+                        cursor.getString(2), cursor.getFloat(3), cursor.getString(4),
+                        cursor.getString(5), cursor.getString(6), cursor.getInt(7)));
             } while (cursor.moveToNext());
         }
         return list;
@@ -73,6 +77,18 @@ public class SanPhamDAO {
             return 0;
         return 1;
 
+    }
+
+    public SanPham getID(int id){
+        SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getWritableDatabase();
+        String sql = "Select * from SanPham where id=?";
+        Cursor cursor = sqLiteDatabase.rawQuery(sql,new String[]{String.valueOf(id)});
+
+        cursor.moveToFirst();
+
+        return new SanPham(cursor.getInt(0), cursor.getString(1),
+                cursor.getString(2), cursor.getFloat(3), cursor.getString(4),
+                cursor.getString(5), cursor.getString(6), cursor.getInt(7));
     }
 
 }

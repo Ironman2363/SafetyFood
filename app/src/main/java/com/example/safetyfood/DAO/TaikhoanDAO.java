@@ -74,4 +74,12 @@ public class TaikhoanDAO {
         List<TaiKhoan>list = getAllTaikhoan(sql);
         return list.get(0);
     }
+
+    public TaiKhoan getName(String name){
+        String sql = "SELECT * FROM TaiKhoan WHERE UserName=?";
+        List<TaiKhoan>list = getAllTaikhoan(sql,new String[]{name});
+        if(list.size()==0)
+            return null;
+        return list.get(0);
+    }
 }

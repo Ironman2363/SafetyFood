@@ -1,6 +1,8 @@
 package com.example.safetyfood.MODEL;
 
-public class SanPham {
+import java.io.Serializable;
+
+public class SanPham implements Serializable {
     int id;
     String nameSanpham;
     String imgSanpham;
@@ -13,7 +15,8 @@ public class SanPham {
     public SanPham() {
     }
 
-    public SanPham(int id, String nameSanpham, String imgSanpham, Float priceSanpham, String loaiSanpham, String createSanpham, String updatedSanpham, int statusSanpham) {
+    public SanPham(int id, String nameSanpham, String imgSanpham, Float priceSanpham,
+                   String loaiSanpham, String createSanpham, String updatedSanpham, int statusSanpham) {
         this.id = id;
         this.nameSanpham = nameSanpham;
         this.imgSanpham = imgSanpham;
@@ -86,5 +89,19 @@ public class SanPham {
 
     public void setStatusSanpham(int statusSanpham) {
         this.statusSanpham = statusSanpham;
+    }
+
+    @Override
+    public String toString() {
+        return "SanPham{" +
+                "id=" + id +
+                ", nameSanpham='" + nameSanpham + '\'' +
+                ", imgSanpham='" + imgSanpham + '\'' +
+                ", priceSanpham=" + priceSanpham +
+                ", loaiSanpham='" + loaiSanpham + '\'' +
+                ", createSanpham='" + createSanpham + '\'' +
+                ", updatedSanpham='" + updatedSanpham + '\'' +
+                ", statusSanpham=" + statusSanpham +
+                '}';
     }
 }

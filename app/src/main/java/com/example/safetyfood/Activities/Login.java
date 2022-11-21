@@ -4,12 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.safetyfood.DAO.TaikhoanDAO;
+import com.example.safetyfood.MODEL.TaiKhoan;
 import com.example.safetyfood.MainActivity;
 import com.example.safetyfood.R;
 import com.google.android.material.textfield.TextInputEditText;
@@ -18,7 +19,8 @@ public class Login extends AppCompatActivity {
 
     TextInputEditText email, pass;
     Button login;
-    TextView account, signUp;
+    TextView skip, signUp;
+    TaikhoanDAO dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +29,9 @@ public class Login extends AppCompatActivity {
         email = findViewById(R.id.edit_sdt);
         pass = findViewById(R.id.edit_pass);
         login = findViewById(R.id.btn_login);
-        account = findViewById(R.id.skip);
+        skip = findViewById(R.id.skip);
         signUp = findViewById(R.id.signUp);
+        dao = new TaikhoanDAO(this);
 
         login.setOnClickListener(new View.OnClickListener( ) {
             @Override
@@ -37,10 +40,15 @@ public class Login extends AppCompatActivity {
                 String mk = pass.getText( ).toString( );
                 if (mail.isEmpty( ) || mk.isEmpty( )) {
                     Toast.makeText(Login.this, "Bạn cần nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show( );
-
                 } else {
-                    startActivity(new Intent(Login.this, MainActivity.class));
-                    Toast.makeText(Login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show( );
+                    if(checkTK(mail,mk)){
+                        Toast.makeText(Login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show( );
+                        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                        Bundle bundle = new Bundle(  );
+                        bundle.putSerializable("tk",dao.getName(mail));
+                        intent.putExtra("bundle",bundle);
+                        startActivity(intent);
+                    }
                 }
             }
         });
@@ -50,11 +58,25 @@ public class Login extends AppCompatActivity {
                 startActivity(new Intent(Login.this, Sign_Up.class));
             }
         });
-        account.setOnClickListener(new View.OnClickListener( ) {
+        skip.setOnClickListener(new View.OnClickListener( ) {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Login.this, MainActivity.class));
             }
         });
+    }
+
+    private boolean checkTK(String mail, String mk) {
+        if(dao.getName(mail)==null){
+            Toast.makeText(Login.this, "Tài khoản không tồn tại", Toast.LENGTH_SHORT).show( );
+            return false;
+        }else {
+            TaiKhoan tk = dao.getName(mail);
+            if(!mk.equals(tk.getPassword())){
+                Toast.makeText(Login.this, "Mật khẩu sai", Toast.LENGTH_SHORT).show( );
+                return false;
+            }
+        }
+        return true;
     }
 }
