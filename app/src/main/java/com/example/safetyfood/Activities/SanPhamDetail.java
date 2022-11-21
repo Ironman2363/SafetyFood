@@ -2,6 +2,7 @@ package com.example.safetyfood.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -9,9 +10,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.safetyfood.DAO.ChiTietDatHangDAO;
+import com.example.safetyfood.MODEL.ChiTietDatHang;
 import com.example.safetyfood.MODEL.SanPham;
 import com.example.safetyfood.R;
 
@@ -20,6 +24,8 @@ public class SanPhamDetail extends AppCompatActivity {
     Toolbar SPDetail_toolbar;
     ImageView SPDetail_Img;
     TextView SPDetail_Ten,SPDetail_Gia,SpDetail_Created,SPDetail_Status;
+    ImageButton SPDetail_Buy;
+    ChiTietDatHangDAO dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +43,15 @@ public class SanPhamDetail extends AppCompatActivity {
         Bundle bundle = intent.getBundleExtra("bundle");
         SanPham sanPham = (SanPham) bundle.getSerializable("sp");
         setData(sanPham);
+
+        SPDetail_Buy.setOnClickListener(v -> {
+            addToCart(sanPham);
+        });
+    }
+
+    private void addToCart(SanPham sanPham) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+
     }
 
     private void setData(SanPham sanPham) {
@@ -60,6 +75,8 @@ public class SanPhamDetail extends AppCompatActivity {
         SPDetail_Gia = findViewById(R.id.SPDetail_Gia);
         SpDetail_Created = findViewById(R.id.SpDetail_Created);
         SPDetail_Status = findViewById(R.id.SPDetail_Status);
+        SPDetail_Buy = findViewById(R.id.SPDetail_Buy);
+        dao = new ChiTietDatHangDAO(getApplicationContext());
     }
 
     @Override
