@@ -13,7 +13,8 @@ public class SanPham {
     public SanPham() {
     }
 
-    public SanPham(int id, String nameSanpham, String imgSanpham, Float priceSanpham, String loaiSanpham, String createSanpham, String updatedSanpham, int statusSanpham) {
+    public SanPham(int id, String nameSanpham, String imgSanpham, Float priceSanpham,
+                   String loaiSanpham, String createSanpham, String updatedSanpham, int statusSanpham) {
         this.id = id;
         this.nameSanpham = nameSanpham;
         this.imgSanpham = imgSanpham;
