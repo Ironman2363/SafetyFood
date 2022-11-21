@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.safetyfood.ADAPTER.LoaiSanPhamAdapter;
+import com.example.safetyfood.ADAPTER.SanPhamAdapter;
 import com.example.safetyfood.DAO.LoaiSanPhamDAO;
 import com.example.safetyfood.DAO.SanPhamDAO;
 import com.example.safetyfood.MODEL.LoaiSanPham;
@@ -30,7 +31,7 @@ public class HomeFragment extends Fragment {
     Context context;
     EditText edt_findFood;
     TextInputLayout Home_TIL_findFood;
-    RecyclerView RCL_loaiSP;
+    RecyclerView RCL_loaiSP,RCL_SP;
     LoaiSanPhamDAO loaiSanPhamDAO;
     SanPhamDAO sanPhamDAO;
     List<LoaiSanPham> loaiSanPhamList;
@@ -58,6 +59,11 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false);
         RCL_loaiSP.setLayoutManager(linearLayoutManager);
         RCL_loaiSP.setAdapter(adapter);
+
+        SanPhamAdapter sanPhamAdapter = new SanPhamAdapter(sanPhamList);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false);
+        RCL_SP.setLayoutManager(layoutManager);
+        RCL_SP.setAdapter(sanPhamAdapter);
     }
 
     private void getData() {
@@ -86,6 +92,7 @@ public class HomeFragment extends Fragment {
         edt_findFood = view.findViewById(R.id.edt_findFood);
         Home_TIL_findFood = view.findViewById(R.id.Home_TIL_findFood);
         RCL_loaiSP = view.findViewById(R.id.RCL_loaiSP);
+        RCL_SP = view.findViewById(R.id.RCL_SP);
         loaiSanPhamDAO = new LoaiSanPhamDAO(context);
         sanPhamDAO = new SanPhamDAO(context);
     }
