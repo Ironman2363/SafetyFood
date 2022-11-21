@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -43,6 +44,7 @@ public class SanPhamDetail extends AppCompatActivity {
         Bundle bundle = intent.getBundleExtra("bundle");
         SanPham sanPham = (SanPham) bundle.getSerializable("sp");
         setData(sanPham);
+        Log.e("ZZZZZ", "onCreate: "+sanPham.getImgSanpham() );
 
         SPDetail_Buy.setOnClickListener(v -> {
             addToCart(sanPham);

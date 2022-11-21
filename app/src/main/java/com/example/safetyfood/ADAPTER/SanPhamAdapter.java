@@ -3,6 +3,7 @@ package com.example.safetyfood.ADAPTER;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,7 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.SanPhamA
     @Override
     public void onBindViewHolder(@NonNull SanPhamAdapterHolder holder, int position) {
         SanPham sp = list.get(position);
+        Log.e("ZZZZZ", "onBindViewHolder: "+sp.getImgSanpham()+"/"+Integer.parseInt(sp.getImgSanpham( )));
         holder.SP_items_Img.setImageResource(Integer.parseInt(sp.getImgSanpham()));
         holder.SP_items_Gia.setText(sp.getPriceSanpham()+" VND");
         holder.SP_items_Ten.setText(sp.getNameSanpham());
