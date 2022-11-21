@@ -1,14 +1,20 @@
 package com.example.safetyfood.ADAPTER;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.safetyfood.Activities.Login;
+import com.example.safetyfood.Activities.SanPhamDetail;
 import com.example.safetyfood.MODEL.SanPham;
 import com.example.safetyfood.R;
 
@@ -17,9 +23,11 @@ import java.util.List;
 public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.SanPhamAdapterHolder>{
 
     List<SanPham> list;
+    Context context;
 
-    public SanPhamAdapter(List<SanPham> list) {
+    public SanPhamAdapter(List<SanPham> list,Context context) {
         this.list = list;
+        this.context = context;
     }
 
     @NonNull
@@ -34,6 +42,13 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.SanPhamA
         holder.SP_items_Img.setImageResource(Integer.parseInt(sp.getImgSanpham()));
         holder.SP_items_Gia.setText(sp.getPriceSanpham()+" VND");
         holder.SP_items_Ten.setText(sp.getNameSanpham());
+        holder.SP_items_View.setOnClickListener(v -> {
+            Intent intent = new Intent(context,SanPhamDetail.class);
+            Bundle bundle = new Bundle(  );
+            bundle.putSerializable("sp",sp);
+            intent.putExtra("bundle",bundle);
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -44,11 +59,13 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.SanPhamA
     class SanPhamAdapterHolder extends RecyclerView.ViewHolder {
         ImageView SP_items_Img;
         TextView SP_items_Gia,SP_items_Ten;
+        LinearLayout SP_items_View;
         public SanPhamAdapterHolder(@NonNull View itemView) {
             super(itemView);
             SP_items_Img = itemView.findViewById(R.id.SP_items_Img);
             SP_items_Gia = itemView.findViewById(R.id.SP_items_Gia);
             SP_items_Ten = itemView.findViewById(R.id.SP_items_Ten);
+            SP_items_View = itemView.findViewById(R.id.SP_items_View);
         }
     }
 }

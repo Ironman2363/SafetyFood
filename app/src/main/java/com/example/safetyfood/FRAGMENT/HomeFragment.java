@@ -60,7 +60,7 @@ public class HomeFragment extends Fragment {
         RCL_loaiSP.setLayoutManager(linearLayoutManager);
         RCL_loaiSP.setAdapter(adapter);
 
-        SanPhamAdapter sanPhamAdapter = new SanPhamAdapter(sanPhamList);
+        SanPhamAdapter sanPhamAdapter = new SanPhamAdapter(sanPhamList,getContext());
         LinearLayoutManager layoutManager = new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false);
         RCL_SP.setLayoutManager(layoutManager);
         RCL_SP.setAdapter(sanPhamAdapter);

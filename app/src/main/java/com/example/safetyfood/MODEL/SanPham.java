@@ -1,6 +1,8 @@
 package com.example.safetyfood.MODEL;
 
-public class SanPham {
+import java.io.Serializable;
+
+public class SanPham implements Serializable {
     int id;
     String nameSanpham;
     String imgSanpham;

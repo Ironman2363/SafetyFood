@@ -6,6 +6,7 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
+        android:id="@+id/SP_items_View"
         android:layout_width="wrap_content"
         android:orientation="vertical"
         android:layout_height="wrap_content">

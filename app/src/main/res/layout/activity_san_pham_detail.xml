@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp"
+    tools:context=".Activities.SanPhamDetail">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/SPDetail_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"/>
+
+    <ImageView
+        android:id="@+id/SPDetail_Img"
+        android:layout_width="match_parent"
+        android:layout_height="167dp"
+        android:src="@drawable/loaisp_coca" />
+
+    <TextView
+        android:id="@+id/SPDetail_Ten"
+        android:text="Coca cola"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="@color/red"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/SPDetail_Gia"
+        android:text="25000 VND"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/SpDetail_Created"
+        android:text="21/11/2022"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/SPDetail_Status"
+        android:text="Còn hàng"
+        android:textSize="24dp"
+        android:textColor="@color/green"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
