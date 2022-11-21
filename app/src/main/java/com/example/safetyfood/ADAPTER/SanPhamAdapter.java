@@ -40,7 +40,6 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.SanPhamA
     @Override
     public void onBindViewHolder(@NonNull SanPhamAdapterHolder holder, int position) {
         SanPham sp = list.get(position);
-        Log.e("ZZZZZ", "onBindViewHolder: "+sp.getImgSanpham()+"/"+Integer.parseInt(sp.getImgSanpham( )));
         holder.SP_items_Img.setImageResource(Integer.parseInt(sp.getImgSanpham()));
         holder.SP_items_Gia.setText(sp.getPriceSanpham()+" VND");
         holder.SP_items_Ten.setText(sp.getNameSanpham());

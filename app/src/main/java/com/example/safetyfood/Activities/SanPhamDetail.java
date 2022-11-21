@@ -10,10 +10,15 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.safetyfood.DAO.ChiTietDatHangDAO;
 import com.example.safetyfood.MODEL.ChiTietDatHang;
@@ -35,6 +40,8 @@ public class SanPhamDetail extends AppCompatActivity {
 
         anhXa();
 
+        Log.e("Check", "onCreate: "+dao.getDSChiTietDatHang().get(0) );
+
         setSupportActionBar(SPDetail_toolbar);
 
         ActionBar actionBar = getSupportActionBar();
@@ -44,7 +51,7 @@ public class SanPhamDetail extends AppCompatActivity {
         Bundle bundle = intent.getBundleExtra("bundle");
         SanPham sanPham = (SanPham) bundle.getSerializable("sp");
         setData(sanPham);
-        Log.e("ZZZZZ", "onCreate: "+sanPham.getImgSanpham() );
+        Log.e("ZZZZZ", "onCreate: "+sanPham.getId() );
 
         SPDetail_Buy.setOnClickListener(v -> {
             addToCart(sanPham);
@@ -52,8 +59,50 @@ public class SanPhamDetail extends AppCompatActivity {
     }
 
     private void addToCart(SanPham sanPham) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.dialog_add_to_cart,null);
+        builder.setView(view);
 
+        AlertDialog dialog;
+        ImageButton dialog_atc_remove,dialog_atc_add;
+        EditText dialog_atc_amount;
+        Button dialog_atc_cancle,dialog_atc_ok;
+        int amount = 0;
+
+        dialog_atc_amount = view.findViewById(R.id.dialog_atc_amount);
+        dialog_atc_remove = view.findViewById(R.id.dialog_atc_remove);
+        dialog_atc_add = view.findViewById(R.id.dialog_atc_add);
+        dialog_atc_cancle = view.findViewById(R.id.dialog_atc_cancle);
+        dialog_atc_ok = view.findViewById(R.id.dialog_atc_ok);
+
+        dialog = builder.create();
+
+        dialog_atc_add.setOnClickListener(v -> {
+            dialog_atc_amount.setText(String.valueOf(Integer.parseInt(dialog_atc_amount.getText().toString())+1));
+        });
+
+        dialog_atc_remove.setOnClickListener(v -> {
+            if (dialog_atc_amount.getText().toString().equals("0")){
+                Toast.makeText(this, "Số lượng phải lớn hơn hoặc bằng 0", Toast.LENGTH_SHORT).show( );
+                return;
+            }
+            dialog_atc_amount.setText(String.valueOf(Integer.parseInt(dialog_atc_amount.getText().toString())-1));
+        });
+
+        dialog_atc_ok.setOnClickListener(v -> {
+            ChiTietDatHang chiTietDatHang = new ChiTietDatHang(  );
+            chiTietDatHang.setAmount(Integer.parseInt(dialog_atc_amount.getText().toString()));
+            chiTietDatHang.setProductid(sanPham.getId());
+            chiTietDatHang.setUnitprice(Integer.parseInt(dialog_atc_amount.getText().toString())* sanPham.getPriceSanpham( ));
+            dao.ThemChiTietDatHang(chiTietDatHang);
+        });
+
+        dialog_atc_cancle.setOnClickListener(v -> {
+            dialog.dismiss();
+        });
+
+
+        dialog.show();
     }
 
     private void setData(SanPham sanPham) {

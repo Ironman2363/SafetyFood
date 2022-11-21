@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:text="Mời nhập số lượng :"
+        android:textSize="24sp"
+        android:textColor="@color/red"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="12">
+
+        <ImageButton
+            android:id="@+id/dialog_atc_remove"
+            android:src="@drawable/remove"
+            android:backgroundTintMode="screen"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/dialog_atc_amount"
+            android:text="0"
+            android:textAlignment="center"
+            android:textSize="32sp"
+            android:layout_weight="8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <ImageButton
+            android:id="@+id/dialog_atc_add"
+            android:src="@drawable/plus"
+            android:backgroundTintMode="screen"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="12">
+        <Button
+            android:id="@+id/dialog_atc_cancle"
+            android:text="Hủy"
+            android:backgroundTint="@color/clay"
+            android:layout_width="0dp"
+            android:layout_weight="6"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/dialog_atc_ok"
+            android:text="Đặt hàng"
+            android:backgroundTint="@color/red"
+            android:layout_width="0dp"
+            android:layout_weight="6"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</LinearLayout>
