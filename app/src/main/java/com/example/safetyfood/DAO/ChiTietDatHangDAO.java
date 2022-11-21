@@ -73,11 +73,11 @@ public class ChiTietDatHangDAO {
         return 1;
     }
 
-    public List<ChiTietDatHang> getListCT() {
+    public List<ChiTietDatHang> getListCT(int idDatHang) {
         List<ChiTietDatHang> list = new ArrayList<>( );
-
-        String sql = "select * from ChiTietDatHang where OrderId = 0";
-        Cursor cursor = db.rawQuery(sql, null);
+        db = dataBase.getWritableDatabase( );
+        String sql = "select * from ChiTietDatHang where OrderId =?";
+        Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(idDatHang)});
         cursor.moveToFirst( );
         while (!cursor.isAfterLast( )) {
 

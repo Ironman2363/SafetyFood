@@ -90,4 +90,18 @@ public class SanPham implements Serializable {
     public void setStatusSanpham(int statusSanpham) {
         this.statusSanpham = statusSanpham;
     }
+
+    @Override
+    public String toString() {
+        return "SanPham{" +
+                "id=" + id +
+                ", nameSanpham='" + nameSanpham + '\'' +
+                ", imgSanpham='" + imgSanpham + '\'' +
+                ", priceSanpham=" + priceSanpham +
+                ", loaiSanpham='" + loaiSanpham + '\'' +
+                ", createSanpham='" + createSanpham + '\'' +
+                ", updatedSanpham='" + updatedSanpham + '\'' +
+                ", statusSanpham=" + statusSanpham +
+                '}';
+    }
 }

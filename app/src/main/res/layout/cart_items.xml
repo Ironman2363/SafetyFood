@@ -1,6 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:id="@+id/Cart_items_View">
+
+    <LinearLayout
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="12">
+
+        <ImageView
+            android:id="@+id/Cart_items_img"
+            android:src="@drawable/loaisp_coca"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size_img_cart"
+            android:scaleType="centerCrop"/>
+
+        <LinearLayout
+            android:layout_weight="10"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/Cart_items_name"
+                android:text="Coca-cola"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            
+            <TextView
+                android:id="@+id/Cart_items_amount"
+                android:text="Số lượng : 2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            
+            <TextView
+                android:id="@+id/Cart_items_price"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/red"
+                android:text="45000d"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+    </LinearLayout>
 
 </androidx.cardview.widget.CardView>

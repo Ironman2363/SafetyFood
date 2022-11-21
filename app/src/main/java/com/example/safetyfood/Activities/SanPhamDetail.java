@@ -1,5 +1,7 @@
 package com.example.safetyfood.Activities;
 
+import static com.example.safetyfood.MainActivity.check_login;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
@@ -40,8 +42,6 @@ public class SanPhamDetail extends AppCompatActivity {
 
         anhXa();
 
-        Log.e("Check", "onCreate: "+dao.getDSChiTietDatHang().get(0) );
-
         setSupportActionBar(SPDetail_toolbar);
 
         ActionBar actionBar = getSupportActionBar();
@@ -51,15 +51,20 @@ public class SanPhamDetail extends AppCompatActivity {
         Bundle bundle = intent.getBundleExtra("bundle");
         SanPham sanPham = (SanPham) bundle.getSerializable("sp");
         setData(sanPham);
-        Log.e("ZZZZZ", "onCreate: "+sanPham.getId() );
+        Log.e("ZZZZZ", "onCreate: "+sanPham );
 
         SPDetail_Buy.setOnClickListener(v -> {
-            addToCart(sanPham);
+            if (check_login){
+                addToCart(sanPham);
+            }else {
+                Toast.makeText(this, "Bạn cần đăng nhập để sử dụng chức năng", Toast.LENGTH_SHORT).show( );
+            }
         });
     }
 
     private void addToCart(SanPham sanPham) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        ChiTietDatHang chiTietDatHang = new ChiTietDatHang(  );
         View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.dialog_add_to_cart,null);
         builder.setView(view);
 
@@ -82,19 +87,21 @@ public class SanPhamDetail extends AppCompatActivity {
         });
 
         dialog_atc_remove.setOnClickListener(v -> {
-            if (dialog_atc_amount.getText().toString().equals("0")){
-                Toast.makeText(this, "Số lượng phải lớn hơn hoặc bằng 0", Toast.LENGTH_SHORT).show( );
+            if (dialog_atc_amount.getText().toString().equals("1")){
+                Toast.makeText(this, "Số lượng phải lớn hơn hoặc bằng 1", Toast.LENGTH_SHORT).show( );
                 return;
             }
             dialog_atc_amount.setText(String.valueOf(Integer.parseInt(dialog_atc_amount.getText().toString())-1));
         });
 
         dialog_atc_ok.setOnClickListener(v -> {
-            ChiTietDatHang chiTietDatHang = new ChiTietDatHang(  );
+
             chiTietDatHang.setAmount(Integer.parseInt(dialog_atc_amount.getText().toString()));
             chiTietDatHang.setProductid(sanPham.getId());
             chiTietDatHang.setUnitprice(Integer.parseInt(dialog_atc_amount.getText().toString())* sanPham.getPriceSanpham( ));
             dao.ThemChiTietDatHang(chiTietDatHang);
+            Toast.makeText(this, "Đã đặt thành công", Toast.LENGTH_SHORT).show( );
+            dialog.dismiss();
         });
 
         dialog_atc_cancle.setOnClickListener(v -> {

@@ -21,7 +21,7 @@
         </activity>
         <activity
             android:name=".Activities.ThongTinCuaHang"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".Activities.DangKyThongTinActivity"
             android:exported="false">
@@ -31,7 +31,7 @@
         </activity>
         <activity
             android:name=".Activities.Sign_Up"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".Activities.Passwordchange"
             android:exported="false">

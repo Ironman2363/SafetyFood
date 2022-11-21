@@ -1,6 +1,8 @@
 package com.example.safetyfood.MODEL;
 
-public class TaiKhoan {
+import java.io.Serializable;
+
+public class TaiKhoan implements Serializable {
     int id;
     String username;
     String password;

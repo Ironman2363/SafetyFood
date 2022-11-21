@@ -58,6 +58,15 @@ public class DatHangDAO {
         return getData(sql, String.valueOf(ID)).get(0);
     }
 
+    public DatHang getLastCart(int accountID){
+        String sql = "Select * from "+table_name+" where "+AccountId+"=?";
+        List<DatHang> list = new ArrayList<>(  );
+        list = getData(sql,String.valueOf(accountID));
+        if(list.size()==0)
+            return null;
+        return list.get(list.size( )-1);
+    }
+
     public List<DatHang> getData(String sql, String... selectionArgs) {
         List<DatHang> list = new ArrayList<>( );
 
