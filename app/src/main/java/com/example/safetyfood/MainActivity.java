@@ -36,9 +36,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent!=null){
             Bundle bundle = intent.getBundleExtra("bundle");
-            account_all = (TaiKhoan) bundle.getSerializable("tk");
-            check_login = true;
-            checkLastCart();
+            if (bundle!=null){
+                account_all = (TaiKhoan) bundle.getSerializable("tk");
+                check_login = true;
+                checkLastCart();
+            }
         }
 
         binding.bottomNavigationView.setItemIconTintList(null);
