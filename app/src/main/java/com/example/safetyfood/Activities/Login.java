@@ -1,5 +1,8 @@
 package com.example.safetyfood.Activities;
 
+import static com.example.safetyfood.MainActivity.account_all;
+import static com.example.safetyfood.MainActivity.cart_all;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.safetyfood.DAO.TaikhoanDAO;
+import com.example.safetyfood.MODEL.DatHang;
 import com.example.safetyfood.MODEL.TaiKhoan;
 import com.example.safetyfood.MainActivity;
 import com.example.safetyfood.R;
@@ -62,6 +66,8 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Login.this, MainActivity.class));
+                cart_all = new DatHang(  );
+                account_all = new TaiKhoan(  );
             }
         });
     }

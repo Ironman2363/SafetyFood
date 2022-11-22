@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/test_ID_Order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ID : 1"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/test_UserID_Order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ID : 1"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/test_ID_Order" />
+
+    <TextView
+        android:id="@+id/test_TotalPrice_Order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="100k"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/test_UserID_Order" />
+
+    <TextView
+        android:id="@+id/test_Status_Order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Done"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/test_TotalPrice_Order" />
+
+    <TextView
+        android:id="@+id/test_Create_Order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="22/11/2022"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/test_Status_Order" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

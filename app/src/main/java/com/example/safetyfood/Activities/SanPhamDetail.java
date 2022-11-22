@@ -1,5 +1,6 @@
 package com.example.safetyfood.Activities;
 
+import static com.example.safetyfood.MainActivity.cart_all;
 import static com.example.safetyfood.MainActivity.check_login;
 
 import androidx.annotation.NonNull;
@@ -72,7 +73,6 @@ public class SanPhamDetail extends AppCompatActivity {
         ImageButton dialog_atc_remove,dialog_atc_add;
         EditText dialog_atc_amount;
         Button dialog_atc_cancle,dialog_atc_ok;
-        int amount = 0;
 
         dialog_atc_amount = view.findViewById(R.id.dialog_atc_amount);
         dialog_atc_remove = view.findViewById(R.id.dialog_atc_remove);
@@ -99,6 +99,7 @@ public class SanPhamDetail extends AppCompatActivity {
             chiTietDatHang.setAmount(Integer.parseInt(dialog_atc_amount.getText().toString()));
             chiTietDatHang.setProductid(sanPham.getId());
             chiTietDatHang.setUnitprice(Integer.parseInt(dialog_atc_amount.getText().toString())* sanPham.getPriceSanpham( ));
+            chiTietDatHang.setIdDathang(cart_all.getId());
             dao.ThemChiTietDatHang(chiTietDatHang);
             Toast.makeText(this, "Đã đặt thành công", Toast.LENGTH_SHORT).show( );
             dialog.dismiss();

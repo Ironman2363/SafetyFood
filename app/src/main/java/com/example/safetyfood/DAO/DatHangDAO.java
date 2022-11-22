@@ -33,7 +33,6 @@ public class DatHangDAO {
 
     public void InsertDH(DatHang datHang) {
         ContentValues values = new ContentValues( );
-        values.put(DH_ID, datHang.getId( ));
         values.put(AccountId, datHang.getIdtaikhoan( ));
         values.put(TotalPrice, datHang.getTotalpriceDathang( ));
         values.put(Created, datHang.getCreateDathang( ));
@@ -48,6 +47,17 @@ public class DatHangDAO {
         Log.e(TagZZZ, "InsertDH: " + kq);
     }
 
+    public void UpgradeDH(DatHang datHang) {
+        ContentValues values = new ContentValues( );
+        values.put(AccountId, datHang.getIdtaikhoan( ));
+        values.put(TotalPrice, datHang.getTotalpriceDathang( ));
+        values.put(Created, datHang.getCreateDathang( ));
+        values.put(Updated, datHang.getUpdateDathang( ));
+        values.put(Status, datHang.getStatusDathang( ));
+        long kq = db.update(table_name, values, DH_ID+"=?",new String[]{String.valueOf(datHang.getId())});
+        Log.e(TagZZZ, "UpgradeDH: " + kq);
+    }
+
     public List<DatHang> getAllList(){
         String sql = "select * from "+table_name;
         return getData(sql);
@@ -58,13 +68,18 @@ public class DatHangDAO {
         return getData(sql, String.valueOf(ID)).get(0);
     }
 
-    public DatHang getLastCart(int accountID){
-        String sql = "Select * from "+table_name+" where "+AccountId+"=?";
+    public DatHang getBuyingCart(int accountID){
+        String sql = "Select * from "+table_name+" where "+AccountId+"=? and "+Status+" = 0";
         List<DatHang> list = new ArrayList<>(  );
         list = getData(sql,String.valueOf(accountID));
-        if(list.size()==0)
+        if(list.size()<=0)
             return null;
         return list.get(list.size( )-1);
+    }
+
+    public List<DatHang> getCartStatus(int ID,int status){
+        String sql = "Select * from "+table_name+" where "+AccountId+"=? and "+Status+" = ?";
+        return getData(sql,new String[]{String.valueOf(ID), String.valueOf(status)});
     }
 
     public List<DatHang> getData(String sql, String... selectionArgs) {
@@ -87,4 +102,13 @@ public class DatHangDAO {
         cursor.close( );
         return list;
     }
+
+//    Trạng thái của status :
+//    0: Đang đặt hàng
+//    1: Đã đặt hàng đang chờ xử lý
+//    2: Đã xử lý đang giao hàng
+//    3: Hủy từ phía người dùng
+//    4: Hủy từ phía cửa hàng
+//    5: Giao hàng thành công
+
 }

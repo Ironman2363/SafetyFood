@@ -22,6 +22,7 @@ public class Splash_Screen extends AppCompatActivity {
         dao = new TaikhoanDAO(this);
         if(dao.getAll().isEmpty()){
             dao.insertTaikhoan(new TaiKhoan(0,"test","test",0,0));
+            dao.insertTaikhoan(new TaiKhoan(0,"test1","test1",0,0));
         }
 
         CountDownTimer countDownTimer = new CountDownTimer(3000,3000) {
