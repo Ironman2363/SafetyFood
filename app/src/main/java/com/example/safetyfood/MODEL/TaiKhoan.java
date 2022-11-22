@@ -59,4 +59,15 @@ public class TaiKhoan implements Serializable {
     public void setStatusTaikhoan(int statusTaikhoan) {
         this.statusTaikhoan = statusTaikhoan;
     }
+
+    @Override
+    public String toString() {
+        return "TaiKhoan{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                ", statusTaikhoan=" + statusTaikhoan +
+                '}';
+    }
 }

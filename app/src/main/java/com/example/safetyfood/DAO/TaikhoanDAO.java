@@ -43,7 +43,6 @@ public class TaikhoanDAO {
     public boolean insertTaikhoan(TaiKhoan taiKhoan){
        db = safetyFoodDataBase.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("Id",taiKhoan.getId());
         values.put("UserName",taiKhoan.getUsername());
         values.put("Password",taiKhoan.getPassword());
         values.put("Roled",taiKhoan.getRole());

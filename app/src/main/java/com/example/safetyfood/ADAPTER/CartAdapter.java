@@ -43,7 +43,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartAdapterHol
     @Override
     public void onBindViewHolder(@NonNull CartAdapterHolder holder, int position) {
         ChiTietDatHang chiTietDatHang = list.get(position);
-        Log.e("CartAdapter", "onBindViewHolder: "+sanPhamDAO.getDSSanPham().size() );
         SanPham sanPham = sanPhamDAO.getID(chiTietDatHang.getProductid());
         holder.Cart_items_img.setImageResource(Integer.parseInt(sanPham.getImgSanpham()));
         holder.Cart_items_name.setText(sanPham.getNameSanpham());
