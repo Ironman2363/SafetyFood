@@ -13,6 +13,20 @@
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".SettingAdminActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".AdminActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Activities.SanPhamDetail"
             android:exported="false">
             <meta-data
@@ -58,7 +72,8 @@
         <activity
             android:name=".Activities.Login"
             android:exported="false" />
-        <service android:name=".Service.CheckCartService"/>
+
+        <service android:name=".Service.CheckCartService" />
     </application>
 
 </manifest>
