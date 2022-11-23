@@ -1,28 +1,46 @@
 package com.example.safetyfood.ADAPTER;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.safetyfood.Activities.OrderDetail;
+import com.example.safetyfood.DAO.ChiTietDatHangDAO;
 import com.example.safetyfood.DAO.DatHangDAO;
+import com.example.safetyfood.DAO.SanPhamDAO;
+import com.example.safetyfood.MODEL.ChiTietDatHang;
 import com.example.safetyfood.MODEL.DatHang;
+import com.example.safetyfood.MODEL.SanPham;
 import com.example.safetyfood.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapterHolder>{
 
     List<DatHang> list;
     DatHangDAO datHangDAO;
+    ChiTietDatHangDAO chiTietDatHangDAO;
+    SanPhamDAO sanPhamDAO;
+    Context context;
 
     public OrderAdapter(List<DatHang> list, Context context) {
         this.list = list;
         datHangDAO = new DatHangDAO(context);
+        chiTietDatHangDAO = new ChiTietDatHangDAO(context);
+        sanPhamDAO = new SanPhamDAO(context);
+        this.context = context;
     }
 
     @NonNull
@@ -34,15 +52,23 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
     @Override
     public void onBindViewHolder(@NonNull OrderAdapterHolder holder, int position) {
         DatHang datHang = list.get(position);
+        ChiTietDatHang chiTietDatHang = chiTietDatHangDAO.getListCT(datHang.getId()).get(0);
+        SanPham sanPham = sanPhamDAO.getID(chiTietDatHang.getProductid());
         String textStatus = "";
         int statusDH = datHang.getStatusDathang();
-        holder.test_ID_Order.setText("ID Order : "+datHang.getId());
-        holder.test_UserID_Order.setText("ID User : "+datHang.getIdtaikhoan());
-        holder.test_TotalPrice_Order.setText("Tổng : "+datHang.getTotalpriceDathang());
-        holder.test_Create_Order.setText("Ngày đặt : "+datHang.getCreateDathang());
+        holder.Order_items_nameSP.setText(sanPham.getNameSanpham());
+        holder.Order_items_Img.setImageResource(Integer.parseInt(sanPham.getImgSanpham()));
+        holder.Order_items_Amount.setText("x "+chiTietDatHang.getAmount());
+        holder.Order_items_Price.setText("Giá : "+sanPham.getPriceSanpham());
+        holder.Order_items_totalAmount.setText(chiTietDatHangDAO.getListCT(datHang.getId( )).size()+" sản phẩm");
+        holder.Order_items_totalPrice.setText("Thành tiền : "+datHang.getTotalpriceDathang());
+        if (chiTietDatHangDAO.getListCT(datHang.getId( )).size()>1){
+            holder.Order_items_xemThem.setVisibility(View.VISIBLE);
+        }
         switch (statusDH){
             case 1 : {
                 textStatus = "Đang chờ xử lý";
+                holder.Order_items_MuaLai.setText("Hủy");
                 break;
             }
             case 2 :{
@@ -62,7 +88,14 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
                 break;
             }
         }
-        holder.test_Status_Order.setText(textStatus);
+        holder.Order_items_status.setText(textStatus);
+        holder.Order_items_View.setOnClickListener(v -> {
+            Intent intent = new Intent( context, OrderDetail.class);
+            Bundle bundle = new Bundle(  );
+            bundle.putSerializable("datHang",datHang);
+            intent.putExtra("bundle",bundle);
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -71,14 +104,26 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
     }
 
     class OrderAdapterHolder extends RecyclerView.ViewHolder {
-        TextView test_ID_Order,test_UserID_Order,test_TotalPrice_Order,test_Status_Order,test_Create_Order;
+
+        ImageView Order_items_Img;
+        TextView Order_items_nameSP,Order_items_Amount,Order_items_Price
+                ,Order_items_totalAmount,Order_items_totalPrice,Order_items_status,
+                Order_items_xemThem;
+        Button Order_items_MuaLai;
+        ConstraintLayout Order_items_View;
+
         public OrderAdapterHolder(@NonNull View itemView) {
             super(itemView);
-            test_ID_Order = itemView.findViewById(R.id.test_ID_Order);
-            test_UserID_Order = itemView.findViewById(R.id.test_UserID_Order);
-            test_TotalPrice_Order = itemView.findViewById(R.id.test_TotalPrice_Order);
-            test_Status_Order = itemView.findViewById(R.id.test_Status_Order);
-            test_Create_Order = itemView.findViewById(R.id.test_Create_Order);
+            Order_items_Img = itemView.findViewById(R.id.Order_items_Img);
+            Order_items_nameSP = itemView.findViewById(R.id.Order_items_nameSP);
+            Order_items_Amount = itemView.findViewById(R.id.Order_items_Amount);
+            Order_items_Price = itemView.findViewById(R.id.Order_items_Price);
+            Order_items_totalAmount = itemView.findViewById(R.id.Order_items_totalAmount);
+            Order_items_totalPrice = itemView.findViewById(R.id.Order_items_totalPrice);
+            Order_items_status = itemView.findViewById(R.id.Order_items_status);
+            Order_items_MuaLai = itemView.findViewById(R.id.Order_items_MuaLai);
+            Order_items_View = itemView.findViewById(R.id.Order_items_View);
+            Order_items_xemThem = itemView.findViewById(R.id.Order_items_xemThem);
         }
     }
 }

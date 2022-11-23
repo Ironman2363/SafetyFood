@@ -24,7 +24,7 @@ public class SafetyFoodDataBase extends SQLiteOpenHelper {
         db.execSQL(createTableTaiKhoan);
 
         String createTableVaiTro = "create table VaiTro("+
-                "Id INTEGER REFERENCES TaiKhoan(Roled)," +
+                "Id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "Name TEXT NOT NULL," +
                 "Description TEXT NOT NULL,"+
                 "Created TEXT not null,"+
