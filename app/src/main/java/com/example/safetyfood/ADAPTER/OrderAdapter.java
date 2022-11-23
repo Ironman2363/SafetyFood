@@ -68,6 +68,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
         switch (statusDH){
             case 1 : {
                 textStatus = "Đang chờ xử lý";
+                holder.Order_items_MuaLai.setText("Hủy");
                 break;
             }
             case 2 :{

@@ -1,66 +1,59 @@
 package com.example.safetyfood.Tab_Fragment;
 
+import static com.example.safetyfood.MainActivity.account_all;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.safetyfood.ADAPTER.OrderAdapter;
+import com.example.safetyfood.DAO.DatHangDAO;
+import com.example.safetyfood.MODEL.DatHang;
 import com.example.safetyfood.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DaNhanFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.List;
+
 public class DaNhanFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public DaNhanFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DaNhanFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static DaNhanFragment newInstance(String param1, String param2) {
-        DaNhanFragment fragment = new DaNhanFragment( );
-        Bundle args = new Bundle( );
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    View view;
+    RecyclerView Order_list;
+    List<DatHang> list;
+    DatHangDAO datHangDAO;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments( ) != null) {
-            mParam1 = getArguments( ).getString(ARG_PARAM1);
-            mParam2 = getArguments( ).getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_da_nhan, container, false);
+        view = inflater.inflate(R.layout.fragment_da_nhan, container, false);
+
+        Order_list = view.findViewById(R.id.Order_list);
+        datHangDAO = new DatHangDAO(getContext());
+
+        getData();
+
+        return view;
+    }
+
+    private void getData() {
+        list = datHangDAO.getCartStatus(account_all.getId(),5);
+        setList();
+    }
+
+    private void setList() {
+        OrderAdapter adapter = new OrderAdapter(list,getContext());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        Order_list.setLayoutManager(linearLayoutManager);
+        Order_list.setAdapter(adapter);
     }
 }
