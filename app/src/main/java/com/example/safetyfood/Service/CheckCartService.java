@@ -3,6 +3,7 @@ package com.example.safetyfood.Service;
 import static com.example.safetyfood.MainActivity.account_all;
 import static com.example.safetyfood.MainActivity.cart_all;
 
+import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +15,9 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.safetyfood.DAO.DatHangDAO;
 import com.example.safetyfood.MODEL.DatHang;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class CheckCartService extends Service {
 
@@ -29,6 +33,9 @@ public class CheckCartService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         int check = -1;
+        Calendar calendar = Calendar.getInstance();
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat( "hh:mm dd/MM/yyyy");
+        String text = simpleDateFormat.format(calendar.getTime());
         datHangDAO = new DatHangDAO(getApplicationContext());
 
         DatHang datHang = datHangDAO.getBuyingCart(account_all.getId());
@@ -36,8 +43,8 @@ public class CheckCartService extends Service {
             DatHang datHang1 = new DatHang(  );
             datHang1.setIdtaikhoan(account_all.getId());
             datHang1.setStatusDathang(0);
-            datHang1.setCreateDathang("21/11/2022");
-            datHang1.setUpdateDathang("21/11/2022");
+            datHang1.setCreateDathang(text);
+            datHang1.setUpdateDathang(text);
             datHang1.setTotalpriceDathang(0);
             datHangDAO.InsertDH(datHang1);
             check = 1;

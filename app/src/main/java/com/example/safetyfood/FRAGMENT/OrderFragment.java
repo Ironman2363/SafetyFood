@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,6 @@ public class OrderFragment extends Fragment {
 
         getData();
 
-        setRCL();
         return view;
     }
 
@@ -50,6 +50,8 @@ public class OrderFragment extends Fragment {
 
     private void getData() {
         datHangList = datHangDAO.getCartStatus(account_all.getId(),1);
+        setRCL();
+        Log.e("ZZZZ", "getData: "+datHangList.size() );
     }
 
     private void anhXa() {

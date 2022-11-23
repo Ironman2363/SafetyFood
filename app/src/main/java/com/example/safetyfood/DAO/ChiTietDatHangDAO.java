@@ -95,4 +95,27 @@ public class ChiTietDatHangDAO {
         cursor.close( );
         return list;
     }
+
+    public List<ChiTietDatHang> checkCart(int idDatHang, int IdSP){
+        List<ChiTietDatHang> list = new ArrayList<>( );
+        db = dataBase.getWritableDatabase( );
+        String sql = "select * from ChiTietDatHang where OrderId =? and ProductId =?";
+        Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(idDatHang),String.valueOf(IdSP)});
+        cursor.moveToFirst( );
+        while (!cursor.isAfterLast( )) {
+
+            int id = cursor.getInt(0);
+            int idDathang = cursor.getInt(1);
+            int productid = cursor.getInt(2);
+            float unitprice = cursor.getFloat(3);
+            float amount = cursor.getFloat(4);
+
+            ChiTietDatHang chiTietDatHang = new ChiTietDatHang(id,idDathang,productid,unitprice,amount);
+            list.add(chiTietDatHang);
+
+            cursor.moveToNext( );
+        }
+        cursor.close( );
+        return list;
+    }
 }

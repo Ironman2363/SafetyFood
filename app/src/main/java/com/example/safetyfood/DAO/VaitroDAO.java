@@ -52,7 +52,6 @@ public class VaitroDAO {
     public boolean insertVaitro(VaiTro vaiTro){
         db = safetyFoodDataBase.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("Id",vaiTro.getId());
         values.put("Name",vaiTro.getNameVaitro());
         values.put("Description",vaiTro.getDeschiptionVaitro());
         values.put("Created",vaiTro.getCreateVaitro());
