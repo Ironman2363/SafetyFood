@@ -89,6 +89,13 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
             }
         }
         holder.Order_items_status.setText(textStatus);
+        holder.Order_items_MuaLai.setOnClickListener(v -> {
+            if(statusDH==1){
+                datHang.setStatusDathang(3);
+                datHangDAO.UpgradeDH(datHang);
+                holder.Order_items_View.setVisibility(View.GONE);
+            }
+        });
         holder.Order_items_View.setOnClickListener(v -> {
             Intent intent = new Intent( context, OrderDetail.class);
             Bundle bundle = new Bundle(  );
