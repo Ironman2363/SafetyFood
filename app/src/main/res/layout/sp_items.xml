@@ -2,7 +2,8 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="5dp"
+    app:cardCornerRadius="8dp"
+    android:layout_margin="8dp"
     android:layout_height="wrap_content">
 
     <LinearLayout
@@ -11,6 +12,7 @@
         android:orientation="vertical"
         android:layout_height="wrap_content">
         <ImageView
+            android:layout_gravity="center"
             android:id="@+id/SP_items_Img"
             android:src="@drawable/loaisp_coca"
             android:layout_width="160dp"
