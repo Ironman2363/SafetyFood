@@ -38,4 +38,5 @@ public class Splash_Screen extends AppCompatActivity {
         };
         countDownTimer.start();
     }
+
 }
