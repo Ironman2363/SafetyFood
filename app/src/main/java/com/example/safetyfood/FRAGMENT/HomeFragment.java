@@ -45,7 +45,7 @@ public class HomeFragment extends Fragment {
         anhXa();
 
         Home_TIL_findFood.setStartIconOnClickListener(v -> {
-            Toast.makeText(context, "find", Toast.LENGTH_SHORT).show( );
+            Toast.makeText(context, ""+edt_findFood.getText().toString(), Toast.LENGTH_SHORT).show( );
         });
 
         getData();
@@ -56,7 +56,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void setRCLAdapter() {
-        LoaiSanPhamAdapter adapter = new LoaiSanPhamAdapter(loaiSanPhamList);
+        LoaiSanPhamAdapter adapter = new LoaiSanPhamAdapter(loaiSanPhamList,getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false);
         RCL_loaiSP.setLayoutManager(linearLayoutManager);
         RCL_loaiSP.setAdapter(adapter);
@@ -78,13 +78,26 @@ public class HomeFragment extends Fragment {
         }
         if(sanPhamDAO.getDSSanPham().isEmpty()){
             sanPhamDAO.themSanpham(new SanPham(0,"Coca-cola",String.valueOf(R.drawable.loaisp_coca),25000f
-                    ,"Nước uống","19/11/2022","19/11/2022",1));
+                    ,"1","19/11/2022","19/11/2022",1));
             sanPhamDAO.themSanpham(new SanPham(0,"Phở bò",String.valueOf(R.drawable.loaisp_pho),35000f
-                    ,"Phở","19/11/2022","19/11/2022",1));
+                    ,"2","19/11/2022","19/11/2022",1));
             sanPhamDAO.themSanpham(new SanPham(0,"Gàn rán",String.valueOf(R.drawable.loaisp_garan),35000f
-                    ,"Gà rán","19/11/2022","19/11/2022",1));
+                    ,"3","19/11/2022","19/11/2022",1));
+            sanPhamDAO.themSanpham(new SanPham(0,"Pepsi",String.valueOf(R.drawable.pepsi),25000f
+                    ,"1","19/11/2022","19/11/2022",1));
+            sanPhamDAO.themSanpham(new SanPham(0,"Bún bò",String.valueOf(R.drawable.bun_bo),40000f
+                    ,"2","19/11/2022","19/11/2022",1));
+            sanPhamDAO.themSanpham(new SanPham(0,"Hamburger",String.valueOf(R.drawable.hamburger),45000f
+                    ,"3","19/11/2022","19/11/2022",1));
+            sanPhamDAO.themSanpham(new SanPham(0,"Pepsi_Clone",String.valueOf(R.drawable.pepsi),20000f
+                    ,"1","19/11/2022","19/11/2022",1));
+            sanPhamDAO.themSanpham(new SanPham(0,"Bún bò_Clone",String.valueOf(R.drawable.bun_bo),30000f
+                    ,"2","19/11/2022","19/11/2022",1));
+            sanPhamDAO.themSanpham(new SanPham(0,"Hamburger_Clone",String.valueOf(R.drawable.hamburger),35000f
+                    ,"3","19/11/2022","19/11/2022",1));
         }
         loaiSanPhamList = loaiSanPhamDAO.getDSLoaiSanPham();
+        Log.e("ZZZZZ", "getData: "+loaiSanPhamList.get(0) );
         sanPhamList = sanPhamDAO.getDSSanPham();
     }
 

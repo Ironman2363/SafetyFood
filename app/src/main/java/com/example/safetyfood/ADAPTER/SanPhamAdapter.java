@@ -48,6 +48,7 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.SanPhamA
             Bundle bundle = new Bundle(  );
             bundle.putSerializable("sp",sp);
             intent.putExtra("bundle",bundle);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         });
     }
