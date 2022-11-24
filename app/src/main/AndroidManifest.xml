@@ -27,12 +27,18 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Admin.AdminActivity"
-            android:exported="true">
+            android:name=".Admin.SettingAdminActivity"
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-
+        </activity>
+        <activity
+            android:name=".Admin.AdminActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
         </activity>
         <activity
             android:name=".Activities.SanPhamDetail"
@@ -73,7 +79,6 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-
         </activity>
         <activity
             android:name=".MainActivity"
