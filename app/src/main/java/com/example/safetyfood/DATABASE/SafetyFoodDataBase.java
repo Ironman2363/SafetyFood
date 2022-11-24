@@ -95,6 +95,8 @@ public class SafetyFoodDataBase extends SQLiteOpenHelper {
                 "Updated TEXT NOT NULL," +
                 "Status INTEGER NOT NULL)";
         db.execSQL(createTableSanPham);
+
+        db.execSQL("INSERT INTO VaiTro VALUES(1,'ADMIN','ADMIN','24/11/2022','24/11/2022'),(2,'NHANVIEN','NHANVIEN','24/11/2022','24/11/2022'),(3,'KHACHHANG','KHACHHANG','24/11/2022','24/11/2022')");
     }
 
     @Override

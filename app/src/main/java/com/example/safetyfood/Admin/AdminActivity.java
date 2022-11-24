@@ -8,16 +8,17 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 
 import com.example.safetyfood.R;
+import com.example.safetyfood.databinding.ActivityAdminBinding;
 import com.example.safetyfood.databinding.ActivityMainBinding;
 
 public class AdminActivity extends AppCompatActivity {
 
-    ActivityMainBinding mainBinding;
+    ActivityAdminBinding mainBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mainBinding = ActivityMainBinding.inflate(getLayoutInflater());
+        mainBinding = ActivityAdminBinding.inflate(getLayoutInflater());
         setContentView(mainBinding.getRoot());
         mainBinding.bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
