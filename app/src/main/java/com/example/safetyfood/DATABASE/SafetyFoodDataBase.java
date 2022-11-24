@@ -8,7 +8,8 @@ public class SafetyFoodDataBase extends SQLiteOpenHelper {
 
     static final String dbName = "SAFRTYFOOD";
     static final int dbVersion = 1;
-    public SafetyFoodDataBase( Context context) {
+
+    public SafetyFoodDataBase(Context context) {
         super(context, dbName, null, dbVersion);
     }
 
@@ -16,90 +17,93 @@ public class SafetyFoodDataBase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String createTableTaiKhoan = "create table TaiKhoan("+
+        String createTableTaiKhoan = "create table TaiKhoan(" +
                 "Id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 " UserName TEXT NOT NULL," +
-                "Password TEXT NOT NULL,"+
-                "Roled INTEGER NOT NULL)";
+                "Password TEXT NOT NULL," +
+                "Roled INTEGER REFERENCES VaiTro(Id))";
         db.execSQL(createTableTaiKhoan);
 
-        String createTableVaiTro = "create table VaiTro("+
+        String createTableVaiTro = "create table VaiTro(" +
                 "Id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "Name TEXT NOT NULL," +
-                "Description TEXT NOT NULL,"+
-                "Created TEXT not null,"+
+                "Description TEXT NOT NULL," +
+                "Created TEXT not null," +
                 "Updated TEXT not null)";
         db.execSQL(createTableVaiTro);
 
-        String createTableThongTinNguoiDung = "create table ThongTinNguoiDung("+
-                "Id INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                "AccountId INTEGER REFERENCES TaiKhoan(Id),"+
-                "FullName Text not null,"+
-                "Email TEXT NOT NULL,"+
-                "Addres TEXT NOT NULL,"+
-                "Avatar TEXT NOT NULL,"+
-                "Birthday DATE NOT NULL,"+
-                "Gender INT NOT NULL,"+
-                "Created TEXT not null,"+
+        String createTableThongTinNguoiDung = "create table ThongTinNguoiDung(" +
+                "Id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "AccountId INTEGER REFERENCES TaiKhoan(Id)," +
+                "FullName Text not null," +
+                "Email TEXT NOT NULL," +
+                "Addres TEXT NOT NULL," +
+                "Avatar TEXT NOT NULL," +
+                "Birthday DATE NOT NULL," +
+                "Gender INT NOT NULL," +
+                "Created TEXT not null," +
                 "Updated TEXT not null)";
         db.execSQL(createTableThongTinNguoiDung);
 
-        String createTableDatHang = "create table DatHang("+
-                "Id INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                "AccountId INTEGER REFERENCES TaiKhoan(Id),"+
-                "TotalPrice Float NOT NULL,"+
-                "Created TEXT NOT NULL,"+
-                "Updated TEXT NOT NULL,"+
+        String createTableDatHang = "create table DatHang(" +
+                "Id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "AccountId INTEGER REFERENCES TaiKhoan(Id)," +
+                "TotalPrice Float NOT NULL," +
+                "Created TEXT NOT NULL," +
+                "Updated TEXT NOT NULL," +
                 "Status INTEGER not null)";
         db.execSQL(createTableDatHang);
 
-        String createTableChiTietDatHang = "create table ChiTietDatHang("+
-                "Id INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                "OrderId INTEGER REFERENCES DatHang(Id),"+
-                "ProductId INTEGER NOT NULL,"+
-                "UnitPrice Float NOT NULL ,"+
+        String createTableChiTietDatHang = "create table ChiTietDatHang(" +
+                "Id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "OrderId INTEGER REFERENCES DatHang(Id)," +
+                "ProductId INTEGER NOT NULL," +
+                "UnitPrice Float NOT NULL ," +
                 "Amount INTEGER NOT NULL)";
         db.execSQL(createTableChiTietDatHang);
 
-        String createTableCuaHang = "create table CuaHang("+
-                "Id INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                "Name TEXT NOT NULL,"+
-                "Image TEXT NOT NULL,"+
-                "Phone TEXT NOT NULL,"+
-                "Email TEXT NOT NULL,"+
-                "Addres TEXT NOT NULL,"+
-                "Created TEXT NOT NULL,"+
-                "Updated TEXT NOT NULL,"+
+        String createTableCuaHang = "create table CuaHang(" +
+                "Id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "Name TEXT NOT NULL," +
+                "Image TEXT NOT NULL," +
+                "Phone TEXT NOT NULL," +
+                "Email TEXT NOT NULL," +
+                "Addres TEXT NOT NULL," +
+                "Created TEXT NOT NULL," +
+                "Updated TEXT NOT NULL," +
                 "Status INTEGER NOT NULL)";
 
         db.execSQL(createTableCuaHang);
 
-        String createTableLoaiSanPham = "create table LoaiSanPham("+
-                "Id INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                "Idcuahang INTEGER REFERENCES CuaHang(Id),"+
-                "Name TEXT NOT NULL,"+
-                "Image TEXT NOT NULL,"+
-                "Created TEXT NOT NULL,"+
-                "Updated TEXT NOT NULL,"+
+        String createTableLoaiSanPham = "create table LoaiSanPham(" +
+                "Id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "Idcuahang INTEGER REFERENCES CuaHang(Id)," +
+                "Name TEXT NOT NULL," +
+                "Image TEXT NOT NULL," +
+                "Created TEXT NOT NULL," +
+                "Updated TEXT NOT NULL," +
                 "Status INTEGER NOT NULL)";
         db.execSQL(createTableLoaiSanPham);
 
-        String createTableSanPham = "create table SanPham("+
-                "Id INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                "Name TEXT NOT NULL,"+
-                "Image TEXT NOT NULL,"+
-                "Price FLOAT NOT NULL,"+
-                "TypeproDuct INTEGER REFERENCES LoaiSanPham(Id),"+
-                "Created TEXT NOT NULL,"+
-                "Updated TEXT NOT NULL,"+
+        String createTableSanPham = "create table SanPham(" +
+                "Id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "Name TEXT NOT NULL," +
+                "Image TEXT NOT NULL," +
+                "Price FLOAT NOT NULL," +
+                "TypeproDuct INTEGER REFERENCES LoaiSanPham(Id)," +
+                "Created TEXT NOT NULL," +
+                "Updated TEXT NOT NULL," +
                 "Status INTEGER NOT NULL)";
         db.execSQL(createTableSanPham);
+
+        db.execSQL("INSERT INTO VaiTro VALUES(1,'ADMIN','ADMIN','24/11/2022','24/11/2022'),(2,'NHANVIEN','NHANVIEN','24/11/2022','24/11/2022'),(3,'KHACHHANG','KHACHHANG','24/11/2022','24/11/2022')");
     }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         String dropTableTaiKhoan = "drop table if exists TaiKhoan";
         db.execSQL(dropTableTaiKhoan);
-        String dropTableVaiTro= "drop table if exists VaiTro";
+        String dropTableVaiTro = "drop table if exists VaiTro";
         db.execSQL(dropTableVaiTro);
         String dropTableThongTinNguoiDung = "drop table if exists ThongTinNguoiDung";
         db.execSQL(dropTableThongTinNguoiDung);
