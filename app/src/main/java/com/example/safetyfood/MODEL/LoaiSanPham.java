@@ -1,6 +1,8 @@
 package com.example.safetyfood.MODEL;
 
-public class LoaiSanPham {
+import java.io.Serializable;
+
+public class LoaiSanPham implements Serializable {
     int id;
     int idCuahang;
     String nameLoaisanpham;
@@ -76,5 +78,18 @@ public class LoaiSanPham {
 
     public void setStatusLoaisanpham(int statusLoaisanpham) {
         this.statusLoaisanpham = statusLoaisanpham;
+    }
+
+    @Override
+    public String toString() {
+        return "LoaiSanPham{" +
+                "id=" + id +
+                ", idCuahang=" + idCuahang +
+                ", nameLoaisanpham='" + nameLoaisanpham + '\'' +
+                ", imgLoaisanpham='" + imgLoaisanpham + '\'' +
+                ", createLoaisanpham='" + createLoaisanpham + '\'' +
+                ", updatedLoaisanpham='" + updatedLoaisanpham + '\'' +
+                ", statusLoaisanpham=" + statusLoaisanpham +
+                '}';
     }
 }
