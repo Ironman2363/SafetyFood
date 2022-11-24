@@ -1,30 +1,18 @@
 package com.example.safetyfood.FRAGMENT;
 
-import static com.example.safetyfood.MainActivity.account_all;
-
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.safetyfood.ADAPTER.OrderAdapter;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager2.widget.ViewPager2;
+
 import com.example.safetyfood.ADAPTER.ViewPager2Adapter;
-import com.example.safetyfood.DAO.DatHangDAO;
-import com.example.safetyfood.MODEL.DatHang;
 import com.example.safetyfood.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class OrderFragment extends Fragment {
