@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.safetyfood.MODEL.LoaiSanPham;
@@ -42,11 +43,13 @@ public class LoaiSanPhamAdapter extends RecyclerView.Adapter<LoaiSanPhamAdapter.
 
     class LoaiSanPhamHolder extends RecyclerView.ViewHolder {
         ImageView loaiSP_items_Img;
+        CardView loaiSP_items_View;
         TextView loaiSP_items_txt;
         public LoaiSanPhamHolder(@NonNull View itemView) {
             super(itemView);
             loaiSP_items_txt = itemView.findViewById(R.id.loaiSP_items_txt);
             loaiSP_items_Img = itemView.findViewById(R.id.loaiSP_items_Img);
+            loaiSP_items_View = itemView.findViewById(R.id.loaiSP_items_View);
         }
     }
 }
