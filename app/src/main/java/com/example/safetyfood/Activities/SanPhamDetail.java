@@ -8,6 +8,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -38,6 +39,7 @@ public class SanPhamDetail extends AppCompatActivity {
     TextView SPDetail_Ten, SPDetail_Gia, SpDetail_Created, SPDetail_Status;
     ImageButton SPDetail_Buy;
     ChiTietDatHangDAO dao;
+    RecyclerView SPDetail_List_Tuong_Tu,SPDetail_List_Goi_Y;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,7 @@ public class SanPhamDetail extends AppCompatActivity {
         Bundle bundle = intent.getBundleExtra("bundle");
         SanPham sanPham = (SanPham) bundle.getSerializable("sp");
         setData(sanPham);
+        setList(sanPham);
         Log.e("ZZZZZ", "onCreate: " + sanPham);
 
         SPDetail_Buy.setOnClickListener(v -> {
@@ -64,6 +67,10 @@ public class SanPhamDetail extends AppCompatActivity {
                 Toast.makeText(this, "Bạn cần đăng nhập để sử dụng chức năng", Toast.LENGTH_SHORT).show( );
             }
         });
+    }
+
+    private void setList(SanPham sanPham) {
+
     }
 
     private ChiTietDatHang CheckCart(SanPham sanPham) {
@@ -157,6 +164,8 @@ public class SanPhamDetail extends AppCompatActivity {
         SpDetail_Created = findViewById(R.id.SpDetail_Created);
         SPDetail_Status = findViewById(R.id.SPDetail_Status);
         SPDetail_Buy = findViewById(R.id.SPDetail_Buy);
+        SPDetail_List_Tuong_Tu = findViewById(R.id.SPDetail_List_Tuong_Tu);
+        SPDetail_List_Goi_Y = findViewById(R.id.SPDetail_List_Goi_Y);
         dao = new ChiTietDatHangDAO(getApplicationContext( ));
     }
 
