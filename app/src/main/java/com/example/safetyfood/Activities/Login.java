@@ -38,44 +38,54 @@ public class Login extends AppCompatActivity {
         signUp = findViewById(R.id.signUp);
         dao = new TaikhoanDAO(this);
 
-        login.setOnClickListener(new View.OnClickListener( ) {
+        login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String mail = email.getText( ).toString( );
-                String mk = pass.getText( ).toString( );
-                if (dao.checkDangNhapkh(mail,mk) == true){
-                    startActivity(new Intent(Login.this,MainActivity.class));
+                String mail = email.getText().toString();
+                String mk = pass.getText().toString();
+                if (dao.checkDangNhapkh(mail, mk) == true) {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("tk", dao.getName(mail));
+                    intent.putExtra("bundle", bundle);
+                    startActivity(intent);
+                } else if (mail.equalsIgnoreCase("")) {
+                    Toast.makeText(Login.this, "Vui lòng nhập tài khoản", Toast.LENGTH_SHORT).show();
+                } else if (mk.equalsIgnoreCase("")) {
+                    Toast.makeText(Login.this, "Vui lòng nhập mật khẩu", Toast.LENGTH_SHORT).show();
+                }else if (mail.equalsIgnoreCase("ADMIN") && mk.equalsIgnoreCase("ADMIN")){
+                    startActivity(new Intent(Login.this,AdminActivity.class));
                 }
                 else {
-                    Toast.makeText(Login.this, "aa", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, "Tài khoản hoặc mật khẩu sai", Toast.LENGTH_SHORT).show();
                 }
 
             }
         });
-        signUp.setOnClickListener(new View.OnClickListener( ) {
+        signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Login.this, Sign_Up.class));
             }
         });
-        skip.setOnClickListener(new View.OnClickListener( ) {
+        skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Login.this, MainActivity.class));
-                cart_all = new DatHang(  );
-                account_all = new TaiKhoan(  );
+                cart_all = new DatHang();
+                account_all = new TaiKhoan();
             }
         });
     }
 
     private boolean checkTK(String mail, String mk) {
-        if(dao.getName(mail)==null){
-            Toast.makeText(Login.this, "Tài khoản không tồn tại", Toast.LENGTH_SHORT).show( );
+        if (dao.getName(mail) == null) {
+            Toast.makeText(Login.this, "Tài khoản không tồn tại", Toast.LENGTH_SHORT).show();
             return false;
-        }else {
+        } else {
             TaiKhoan tk = dao.getName(mail);
-            if(!mk.equals(tk.getPassword())){
-                Toast.makeText(Login.this, "Mật khẩu sai", Toast.LENGTH_SHORT).show( );
+            if (!mk.equals(tk.getPassword())) {
+                Toast.makeText(Login.this, "Mật khẩu sai", Toast.LENGTH_SHORT).show();
                 return false;
             }
         }
