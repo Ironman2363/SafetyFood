@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.safetyfood.Admin.AdminActivity;
 import com.example.safetyfood.DAO.TaikhoanDAO;
 import com.example.safetyfood.MODEL.DatHang;
 import com.example.safetyfood.MODEL.TaiKhoan;
@@ -42,18 +43,13 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 String mail = email.getText( ).toString( );
                 String mk = pass.getText( ).toString( );
-                if (mail.isEmpty( ) || mk.isEmpty( )) {
-                    Toast.makeText(Login.this, "Bạn cần nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show( );
-                } else {
-                    if(checkTK(mail,mk)){
-                        Toast.makeText(Login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show( );
-                        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                        Bundle bundle = new Bundle(  );
-                        bundle.putSerializable("tk",dao.getName(mail));
-                        intent.putExtra("bundle",bundle);
-                        startActivity(intent);
-                    }
+                if (dao.checkDangNhapkh(mail,mk) == true){
+                    startActivity(new Intent(Login.this,MainActivity.class));
                 }
+                else {
+                    Toast.makeText(Login.this, "aa", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         signUp.setOnClickListener(new View.OnClickListener( ) {

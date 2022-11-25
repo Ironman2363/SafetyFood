@@ -42,13 +42,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Stand out"
+                android:text="Loại sản phẩm"
                 android:textColor="@color/red"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/RCL_loaiSP"
+                android:padding="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -64,13 +65,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Top buy"
+                android:text="Sản phẩm"
                 android:textColor="@color/red"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/RCL_SP"
+                android:padding="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

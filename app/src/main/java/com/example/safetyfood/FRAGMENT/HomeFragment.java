@@ -73,7 +73,7 @@ public class HomeFragment extends Fragment {
                     ,"19/11/2022","19/11/2022",1));
             loaiSanPhamDAO.themLoaiSanPham(new LoaiSanPham(0,0,"Phở",String.valueOf(R.drawable.loaisp_pho)
                     ,"19/11/2022","19/11/2022",1));
-            loaiSanPhamDAO.themLoaiSanPham(new LoaiSanPham(0,0,"Gà rán",String.valueOf(R.drawable.loaisp_garan)
+            loaiSanPhamDAO.themLoaiSanPham(new LoaiSanPham(0,0,"Đồ ăn nhanh",String.valueOf(R.drawable.loaisp_garan)
                     ,"19/11/2022","19/11/2022",1));
         }
         if(sanPhamDAO.getDSSanPham().isEmpty()){

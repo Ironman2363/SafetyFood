@@ -14,14 +14,15 @@
 
         <ImageView
             android:id="@+id/loaiSP_items_Img"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
+            android:layout_width="140dp"
+            android:layout_height="120dp"
             android:src="@drawable/loaisp_coca" />
 
         <TextView
+            android:textStyle="bold"
             android:id="@+id/loaiSP_items_txt"
-            android:text="Nước uống"
-            android:textSize="24sp"
+            android:text="Nước giải khát"
+            android:textSize="20sp"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

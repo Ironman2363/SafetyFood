@@ -7,6 +7,7 @@
     android:id="@+id/Order_items_View">
 
     <TextView
+        android:layout_marginTop="10dp"
         android:id="@+id/Order_items_nameShop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,7 +33,7 @@
         <ImageView
             android:id="@+id/Order_items_Img"
             android:layout_width="0dp"
-            android:layout_height="100dp"
+            android:layout_height="80dp"
             android:layout_weight="3"
             android:src="@drawable/loaisp_coca" />
 
@@ -64,7 +65,7 @@
                 android:text="155000 VND"
                 android:textAlignment="viewEnd"
                 android:textColor="@color/red"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
         </LinearLayout>
 
@@ -96,7 +97,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Total : 120000 VND"
-        android:textSize="24sp"
+        android:textSize="22sp"
+        android:textStyle="bold"
         android:textColor="@color/red"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

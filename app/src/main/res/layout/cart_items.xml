@@ -43,7 +43,7 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="@color/red"
-                android:text="45000d"
+                android:text="45000đ"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 

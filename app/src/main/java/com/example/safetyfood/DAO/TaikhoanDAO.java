@@ -2,6 +2,7 @@ package com.example.safetyfood.DAO;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -19,6 +20,20 @@ public class TaikhoanDAO {
         safetyFoodDataBase = new SafetyFoodDataBase(context);
         db = safetyFoodDataBase.getWritableDatabase();
     }
+
+    public ArrayList<TaiKhoan> getDSNV() {
+        ArrayList<TaiKhoan> list = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM TaiKhoan where Roled=2", null);
+        if (cursor.getCount() != 0) {
+            cursor.moveToFirst();
+            do {
+                list.add(new TaiKhoan(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3)));
+            } while (cursor.moveToNext());
+        }
+        return list;
+    }
+
     public List<TaiKhoan>getAllTaikhoan(String sql , String...select){
         List<TaiKhoan>list = new ArrayList<>();
         db = safetyFoodDataBase.getReadableDatabase();
@@ -41,7 +56,7 @@ public class TaikhoanDAO {
         return list;
     }
     public boolean insertTaikhoan(TaiKhoan taiKhoan){
-       db = safetyFoodDataBase.getWritableDatabase();
+        db = safetyFoodDataBase.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("UserName",taiKhoan.getUsername());
         values.put("Password",taiKhoan.getPassword());
@@ -59,10 +74,12 @@ public class TaikhoanDAO {
         int row = db.update("TaiKhoan",values,"Id=?",new String[]{taiKhoan.getId()+""});
         return row >0;
     }
-    public boolean deleteTaikhoan(String id){
+
+
+    public int deleteTaikhoan(String id){
         db = safetyFoodDataBase.getWritableDatabase();
         int row = db.delete("TaiKhoan","Id=?",new String[]{id});
-        return row >0;
+        return row;
     }
     public List<TaiKhoan>getAll(){
         String sql = "SELECT * FROM TaiKhoan";
@@ -81,4 +98,14 @@ public class TaikhoanDAO {
             return null;
         return list.get(0);
     }
+    public boolean checkDangNhapkh(String UserName, String Password) {
+        SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM TaiKhoan WHERE UserName = ? AND Password = ? AND Roled = 3 ", new String[]{UserName, Password});
+        if (cursor.getCount() != 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
