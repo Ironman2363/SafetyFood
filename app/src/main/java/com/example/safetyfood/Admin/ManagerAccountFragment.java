@@ -86,9 +86,8 @@ public class ManagerAccountFragment extends Fragment {
             public void onClick(View view) {
                 String user = edtTK.getText().toString();
                 String pass = edtMK.getText().toString();
-//                TaiKhoan taiKhoan = new TaiKhoan(0,user,pass,2,1);
-                TaiKhoan taiKhoan = new TaiKhoan();
-                if(taikhoanDAO.updateTaikhoan(taiKhoan)){
+                TaiKhoan taiKhoan = new TaiKhoan(0,user,pass,2);
+                if(taikhoanDAO.thayDoiLoaiSach(taiKhoan)){
 
                     loaddata();
                     Toast.makeText(getContext(), "Sửa thành công", Toast.LENGTH_SHORT).show();

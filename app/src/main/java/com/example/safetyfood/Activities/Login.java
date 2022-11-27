@@ -26,6 +26,7 @@ public class Login extends AppCompatActivity {
     Button login;
     TextView skip, signUp;
     TaikhoanDAO dao;
+    TaiKhoan taiKhoan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +42,12 @@ public class Login extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Intent intent;
                 String mail = email.getText().toString();
                 String mk = pass.getText().toString();
                 if (dao.checkDangNhapkh(mail, mk) == true) {
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent = new Intent(getApplicationContext(), MainActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("tk", dao.getName(mail));
                     intent.putExtra("bundle", bundle);
@@ -53,12 +56,34 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(Login.this, "Vui lòng nhập tài khoản", Toast.LENGTH_SHORT).show();
                 } else if (mk.equalsIgnoreCase("")) {
                     Toast.makeText(Login.this, "Vui lòng nhập mật khẩu", Toast.LENGTH_SHORT).show();
-                }else if (mail.equalsIgnoreCase("ADMIN") && mk.equalsIgnoreCase("ADMIN")){
-                    startActivity(new Intent(Login.this,AdminActivity.class));
                 }
-                else {
+                else if (dao.checkDangNhapkhNVAD(mail,mk) == true){
+                    intent = new Intent(getApplicationContext(), AdminActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("tk", dao.getName(mail));
+                    intent.putExtra("bundle", bundle);
+                    startActivity(intent);
+                }
+                else{
+
+
                     Toast.makeText(Login.this, "Tài khoản hoặc mật khẩu sai", Toast.LENGTH_SHORT).show();
+
                 }
+                Toast.makeText(Login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+//                if (checkTK(mail,mk)){
+//                    Intent intent;
+//                    if (taiKhoan.getRole() == 3){
+//                        intent = new Intent(getApplicationContext(),MainActivity.class);
+//                    }else {
+//                        intent = new Intent(getApplicationContext(),AdminActivity.class);
+//                    }
+//                    Toast.makeText(Login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+//                    Bundle bundle = new Bundle();
+//                    bundle.putSerializable("tk", dao.getName(mail));
+//                    intent.putExtra("bundle", bundle);
+//                    startActivity(intent);
+//                }
 
             }
         });

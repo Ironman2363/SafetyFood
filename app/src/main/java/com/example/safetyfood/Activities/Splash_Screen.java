@@ -21,7 +21,6 @@ public class Splash_Screen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
 
 
-
         CountDownTimer countDownTimer = new CountDownTimer(3000,3000) {
             @Override
             public void onTick(long millisUntilFinished) {
