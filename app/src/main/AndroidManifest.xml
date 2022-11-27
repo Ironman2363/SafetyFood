@@ -82,7 +82,21 @@
             android:name=".Activities.Login"
             android:exported="false" />
 
+<<<<<<< HEAD
         <service android:name=".Service.CheckCartService" />
+=======
+        <activity android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".Activities.Login"
+            android:exported="false"/>
+>>>>>>> 08d593b2ea059e566aa28085e9b56d60083e9581
     </application>
 
 </manifest>
