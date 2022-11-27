@@ -1,6 +1,8 @@
 package com.example.safetyfood.FRAGMENT;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
