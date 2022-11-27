@@ -7,14 +7,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.safetyfood.Activities.SanPhamDetail;
+import com.example.safetyfood.DAO.ChiTietDatHangDAO;
 import com.example.safetyfood.DAO.SanPhamDAO;
 import com.example.safetyfood.MODEL.ChiTietDatHang;
 import com.example.safetyfood.MODEL.SanPham;
@@ -48,6 +51,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartAdapterHol
         holder.Cart_items_name.setText(sanPham.getNameSanpham());
         holder.Cart_items_amount.setText("Số lượng : "+ chiTietDatHang.getAmount());
         holder.Cart_items_price.setText(String.valueOf(sanPham.getPriceSanpham()));
+
+
         holder.Cart_items_View.setOnClickListener(v -> {
             Intent intent = new Intent(context, SanPhamDetail.class);
             Bundle bundle = new Bundle(  );
@@ -63,7 +68,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartAdapterHol
     }
 
     class CartAdapterHolder extends RecyclerView.ViewHolder {
-
         ImageView Cart_items_img;
         TextView Cart_items_name,Cart_items_amount,Cart_items_price;
         CardView Cart_items_View;

@@ -129,6 +129,11 @@
             android:layout_weight="4"
             android:backgroundTint="@color/red"
             android:text="Mua lại" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Xac Nhan"
+            android:id="@+id/btnxacnhan"/>
 
     </LinearLayout>
 

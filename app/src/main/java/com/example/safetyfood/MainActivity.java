@@ -13,6 +13,8 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.safetyfood.Admin.OrderAdminFragment;
+import com.example.safetyfood.Admin.ThongKeFragment;
 import com.example.safetyfood.DAO.DatHangDAO;
 import com.example.safetyfood.FRAGMENT.CartFragment;
 import com.example.safetyfood.FRAGMENT.HomeFragment;

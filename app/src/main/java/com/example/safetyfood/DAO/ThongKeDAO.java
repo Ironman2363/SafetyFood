@@ -44,20 +44,17 @@ public class ThongKeDAO {
     }
 
     public int getDoanhThu(String tuNgay, String denNgay){
+        tuNgay = tuNgay.replace("/","");
+        denNgay = denNgay.replace("/","");
         String sql = "select SUM("+TotalPrice+") as doanhThu from "+Table_DatHang+" where "+Created+" between ? and ?";
-        List<Integer> list = new ArrayList<>(  );
+        List<Integer> list = new ArrayList<>();
         Cursor cursor = db.rawQuery(sql,new String[]{tuNgay,denNgay});
         cursor.moveToFirst();
-        while (!cursor.isAfterLast( )){
-            try {
-                list.add(Integer.parseInt(cursor.getString(cursor.getColumnIndex("doanhThu"))));
-            }catch (Exception e){
-                list.add(0);
-            }
-            cursor.moveToNext();
+        if (cursor.getCount()!=0){
+            cursor.moveToFirst();
+            return cursor.getInt(0);
         }
         cursor.close( );
-        return list.get(0);
+        return 0;
     }
-
 }
