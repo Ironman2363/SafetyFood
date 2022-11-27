@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="10dp"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#D6E9F4"
+        android:padding="10dp">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="9"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/txt_tknv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/txt_mknv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <ImageView
+            android:src="@drawable/ic_editnv"
+            android:layout_gravity="center"
+            android:id="@+id/btn_editnv"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            />
+        <ImageView
+            android:src="@drawable/ic_deletenv"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/btn_deletenv"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

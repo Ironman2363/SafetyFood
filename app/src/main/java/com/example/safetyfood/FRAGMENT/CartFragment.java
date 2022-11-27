@@ -65,6 +65,7 @@ public class CartFragment extends Fragment {
             cart_all.setTotalpriceDathang(totalPrice);
             cart_all.setStatusDathang(1);
             datHangDAO.UpgradeDH(cart_all);
+
             getContext( ).startService(new Intent(getContext( ), CheckCartService.class));
         }
     }

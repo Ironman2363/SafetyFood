@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 
+import com.example.safetyfood.FRAGMENT.HomeFragment;
 import com.example.safetyfood.R;
 import com.example.safetyfood.databinding.ActivityAdminBinding;
 import com.example.safetyfood.databinding.ActivityMainBinding;
@@ -20,6 +21,7 @@ public class AdminActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mainBinding = ActivityAdminBinding.inflate(getLayoutInflater());
         setContentView(mainBinding.getRoot());
+        replaceFragment(new HomeAdminFragment());
         mainBinding.bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.home1:
@@ -29,13 +31,14 @@ public class AdminActivity extends AppCompatActivity {
                     replaceFragment(new OrderAdminFragment());
                     break;
                 case R.id.order1:
-                    replaceFragment(new ManagerAccountFragment());
+                    replaceFragment(new SeingAdminFragment());
                     break;
                 case R.id.Statistical1:
                     replaceFragment(new ThongKeFragment());
                     break;
                 case R.id.setting1:
-                    replaceFragment(new SeingAdminFragment());
+
+                    replaceFragment(new ManagerAccountFragment());
                     break;
             }
             return true;

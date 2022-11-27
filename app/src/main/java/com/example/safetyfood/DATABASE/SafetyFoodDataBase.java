@@ -97,6 +97,7 @@ public class SafetyFoodDataBase extends SQLiteOpenHelper {
         db.execSQL(createTableSanPham);
 
         db.execSQL("INSERT INTO VaiTro VALUES(1,'ADMIN','ADMIN','24/11/2022','24/11/2022'),(2,'NHANVIEN','NHANVIEN','24/11/2022','24/11/2022'),(3,'KHACHHANG','KHACHHANG','24/11/2022','24/11/2022')");
+        db.execSQL("INSERT INTO TaiKhoan VALUES(1,'ADMIN','ADMIN',1),(2,'KH1','KH1',3),(3,'NV1','MV1',2)");
     }
 
     @Override

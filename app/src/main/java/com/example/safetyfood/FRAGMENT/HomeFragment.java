@@ -69,11 +69,17 @@ public class HomeFragment extends Fragment {
 
     private void getData() {
         if(loaiSanPhamDAO.getDSLoaiSanPham().isEmpty()){
-            loaiSanPhamDAO.themLoaiSanPham(new LoaiSanPham(0,0,"Nước uống",String.valueOf(R.drawable.loaisp_coca)
+            loaiSanPhamDAO.themLoaiSanPham(new LoaiSanPham(0,0,"Nước ngọt",String.valueOf(R.drawable.nuocoga)
                     ,"19/11/2022","19/11/2022",1));
-            loaiSanPhamDAO.themLoaiSanPham(new LoaiSanPham(0,0,"Phở",String.valueOf(R.drawable.loaisp_pho)
+            loaiSanPhamDAO.themLoaiSanPham(new LoaiSanPham(0,0,"Phở",String.valueOf(R.drawable.pho)
                     ,"19/11/2022","19/11/2022",1));
-            loaiSanPhamDAO.themLoaiSanPham(new LoaiSanPham(0,0,"Gà rán",String.valueOf(R.drawable.loaisp_garan)
+            loaiSanPhamDAO.themLoaiSanPham(new LoaiSanPham(0,0,"Đồ ăn nhanh",String.valueOf(R.drawable.doananh)
+                    ,"19/11/2022","19/11/2022",1));
+            loaiSanPhamDAO.themLoaiSanPham(new LoaiSanPham(0,0,"Cơm",String.valueOf(R.drawable.com)
+                    ,"19/11/2022","19/11/2022",1));
+            loaiSanPhamDAO.themLoaiSanPham(new LoaiSanPham(0,0,"Bánh mì",String.valueOf(R.drawable.bread)
+                    ,"19/11/2022","19/11/2022",1));
+            loaiSanPhamDAO.themLoaiSanPham(new LoaiSanPham(0,0,"Thịt",String.valueOf(R.drawable.meat)
                     ,"19/11/2022","19/11/2022",1));
         }
         if(sanPhamDAO.getDSSanPham().isEmpty()){
@@ -103,7 +109,7 @@ public class HomeFragment extends Fragment {
 
     private void anhXa() {
         context = view.getContext();
-        edt_findFood = view.findViewById(R.id.edt_findFood);
+//        edt_findFood = view.findViewById(R.id.edt_findFood);
         Home_TIL_findFood = view.findViewById(R.id.Home_TIL_findFood);
         RCL_loaiSP = view.findViewById(R.id.RCL_loaiSP);
         RCL_SP = view.findViewById(R.id.RCL_SP);

@@ -2,6 +2,8 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10dp"
     android:id="@+id/Cart_items_View">
 
     <LinearLayout
@@ -43,7 +45,7 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="@color/red"
-                android:text="45000d"
+                android:text="45000đ"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 

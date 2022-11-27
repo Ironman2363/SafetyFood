@@ -7,17 +7,15 @@ public class TaiKhoan implements Serializable {
     String username;
     String password;
     int role;
-    int statusTaikhoan;
 
     public TaiKhoan() {
     }
 
-    public TaiKhoan(int id, String username, String password, int role, int statusTaikhoan) {
+    public TaiKhoan(int id, String username, String password, int role) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.role = role;
-        this.statusTaikhoan = statusTaikhoan;
     }
 
     public int getId() {
@@ -50,24 +48,5 @@ public class TaiKhoan implements Serializable {
 
     public void setRole(int role) {
         this.role = role;
-    }
-
-    public int getStatusTaikhoan() {
-        return statusTaikhoan;
-    }
-
-    public void setStatusTaikhoan(int statusTaikhoan) {
-        this.statusTaikhoan = statusTaikhoan;
-    }
-
-    @Override
-    public String toString() {
-        return "TaiKhoan{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", role=" + role +
-                ", statusTaikhoan=" + statusTaikhoan +
-                '}';
     }
 }

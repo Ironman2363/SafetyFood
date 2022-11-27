@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="8dp"
     android:layout_margin="8dp"
     android:layout_height="wrap_content">
 
@@ -15,23 +13,24 @@
             android:layout_gravity="center"
             android:id="@+id/SP_items_Img"
             android:src="@drawable/loaisp_coca"
-            android:layout_width="160dp"
-            android:layout_height="160dp"/>
+            android:layout_width="140dp"
+            android:layout_height="120dp"/>
         <TextView
             android:id="@+id/SP_items_Gia"
             android:layout_gravity="center"
-            android:text="25000 D"
-            android:textSize="24sp"
+            android:text="25000 đ"
+            android:textSize="18sp"
             android:textColor="@color/red"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:textStyle="bold"
             android:id="@+id/SP_items_Ten"
             android:layout_gravity="center"
-            android:text="CoCa Cola"
-            android:textSize="24sp"
+            android:text="Coca Cola"
+            android:textSize="22sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>

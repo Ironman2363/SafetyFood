@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 
 import com.example.safetyfood.DAO.TaikhoanDAO;
 import com.example.safetyfood.MODEL.TaiKhoan;
@@ -19,11 +20,6 @@ public class Splash_Screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        dao = new TaikhoanDAO(this);
-        if(dao.getAll().isEmpty()){
-            dao.insertTaikhoan(new TaiKhoan(1,"test","test",3,0));
-            dao.insertTaikhoan(new TaiKhoan(2,"test1","test1",3,0));
-        }
 
         CountDownTimer countDownTimer = new CountDownTimer(3000,3000) {
             @Override

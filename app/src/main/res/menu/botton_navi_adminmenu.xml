@@ -6,13 +6,13 @@
     <item android:title="Cart"
         android:icon="@drawable/icon_cart_selected"
         android:id="@+id/cart1"/>
-    <item android:title="Order"
+    <item android:title="Order history"
         android:icon="@drawable/icon_order_selected"
         android:id="@+id/order1"/>
     <item android:title="Statistical"
-        android:icon="@drawable/icon_setting_selected"
+        android:icon="@drawable/thongke"
         android:id="@+id/Statistical1"/>
-    <item android:title="Setting"
+    <item android:title="Manager Account"
         android:icon="@drawable/icon_setting_selected"
         android:id="@+id/setting1"/>
 </menu>
