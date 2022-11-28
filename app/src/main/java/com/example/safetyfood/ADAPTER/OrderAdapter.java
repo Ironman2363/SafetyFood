@@ -1,6 +1,8 @@
 package com.example.safetyfood.ADAPTER;
 
 import static com.example.safetyfood.MainActivity.account_all;
+import static com.example.safetyfood.MainActivity.check_login;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -66,10 +68,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
         holder.Order_items_Price.setText("Giá : "+sanPham.getPriceSanpham());
         holder.Order_items_totalAmount.setText(chiTietDatHangDAO.getListCT(datHang.getId( )).size()+" sản phẩm");
         holder.Order_items_totalPrice.setText("Thành tiền : "+datHang.getTotalpriceDathang());
-
-        if (account_all.getRole() == 1){
-            holder.btnXacnhan.setVisibility(View.VISIBLE);
-        }else {
+        holder.btnXacnhan.setVisibility(View.VISIBLE);
+        if (account_all.getRole() != 1){
             holder.btnXacnhan.setVisibility(View.GONE);
         }
 
@@ -105,7 +105,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
         }
         holder.Order_items_status.setText(textStatus);
         holder.Order_items_MuaLai.setOnClickListener(v -> {
-            if(statusDH==1){
+            if(statusDH==3){
                 datHang.setStatusDathang(3);
                 datHangDAO.UpgradeDH(datHang);
                 holder.Order_items_View.setVisibility(View.GONE);

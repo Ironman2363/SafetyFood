@@ -7,12 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-<<<<<<< HEAD
     <color name="red">#F22626</color>
     <color name="green">#51D618</color>
     <color name="Order_Done">#5EB637</color>
     <color name="clay">#A6A6A6</color>
-=======
     <color name="orange">#FFA100</color>
->>>>>>> 08d593b2ea059e566aa28085e9b56d60083e9581
 </resources>
