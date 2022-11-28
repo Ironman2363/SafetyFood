@@ -82,7 +82,9 @@
             android:name=".Activities.Login"
             android:exported="false" />
 
+
         <service android:name=".Service.CheckCartService" />
+
     </application>
 
 </manifest>

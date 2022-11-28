@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:title="Home"
+
         android:icon="@drawable/icon_home_selected"
         android:id="@+id/home"/>
     <item android:title="Cart"
         android:icon="@drawable/icon_cart_selected"
         android:id="@+id/cart"/>
     <item android:title="Order"
-        android:icon="@drawable/icon_order_selected"
-        android:id="@+id/order"/>
+        android:id="@+id/order"
+        android:icon="@drawable/icon_order_selected"/>
+
     <item android:title="Setting"
         android:icon="@drawable/icon_setting_selected"
         android:id="@+id/setting"/>

@@ -1,5 +1,8 @@
 package com.example.safetyfood.ADAPTER;
 
+import static com.example.safetyfood.MainActivity.account_all;
+import static com.example.safetyfood.MainActivity.check_login;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +25,7 @@ import com.example.safetyfood.DAO.SanPhamDAO;
 import com.example.safetyfood.MODEL.ChiTietDatHang;
 import com.example.safetyfood.MODEL.DatHang;
 import com.example.safetyfood.MODEL.SanPham;
+import com.example.safetyfood.MODEL.TaiKhoan;
 import com.example.safetyfood.R;
 
 import java.util.ArrayList;
@@ -34,6 +38,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
     ChiTietDatHangDAO chiTietDatHangDAO;
     SanPhamDAO sanPhamDAO;
     Context context;
+
 
     public OrderAdapter(List<DatHang> list, Context context) {
         this.list = list;
@@ -52,6 +57,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
     @Override
     public void onBindViewHolder(@NonNull OrderAdapterHolder holder, int position) {
         DatHang datHang = list.get(position);
+
         ChiTietDatHang chiTietDatHang = chiTietDatHangDAO.getListCT(datHang.getId()).get(0);
         SanPham sanPham = sanPhamDAO.getID(chiTietDatHang.getProductid());
         String textStatus = "";
@@ -62,6 +68,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
         holder.Order_items_Price.setText("Giá : "+sanPham.getPriceSanpham());
         holder.Order_items_totalAmount.setText(chiTietDatHangDAO.getListCT(datHang.getId( )).size()+" sản phẩm");
         holder.Order_items_totalPrice.setText("Thành tiền : "+datHang.getTotalpriceDathang());
+        holder.btnXacnhan.setVisibility(View.VISIBLE);
+        if (account_all.getRole() != 1){
+            holder.btnXacnhan.setVisibility(View.GONE);
+        }
+
         if (chiTietDatHangDAO.getListCT(datHang.getId( )).size()>1){
             holder.Order_items_xemThem.setVisibility(View.VISIBLE);
         }
@@ -73,6 +84,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
             }
             case 2 :{
                 textStatus = "Đang giao hàng";
+                if (textStatus.equals("Đang giao hàng")){
+                    holder.btnXacnhan.setVisibility(View.GONE);
+                    holder.Order_items_MuaLai.setVisibility(View.GONE);
+                }
                 break;
             }
             case 3 :{
@@ -90,8 +105,15 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
         }
         holder.Order_items_status.setText(textStatus);
         holder.Order_items_MuaLai.setOnClickListener(v -> {
-            if(statusDH==1){
+            if(statusDH==3){
                 datHang.setStatusDathang(3);
+                datHangDAO.UpgradeDH(datHang);
+                holder.Order_items_View.setVisibility(View.GONE);
+            }
+        });
+        holder.btnXacnhan.setOnClickListener(v -> {
+            if(statusDH==1){
+                datHang.setStatusDathang(2);
                 datHangDAO.UpgradeDH(datHang);
                 holder.Order_items_View.setVisibility(View.GONE);
             }
@@ -116,7 +138,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
         TextView Order_items_nameSP,Order_items_Amount,Order_items_Price
                 ,Order_items_totalAmount,Order_items_totalPrice,Order_items_status,
                 Order_items_xemThem;
-        Button Order_items_MuaLai;
+        Button Order_items_MuaLai,btnXacnhan;
         ConstraintLayout Order_items_View;
 
         public OrderAdapterHolder(@NonNull View itemView) {
@@ -131,6 +153,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
             Order_items_MuaLai = itemView.findViewById(R.id.Order_items_MuaLai);
             Order_items_View = itemView.findViewById(R.id.Order_items_View);
             Order_items_xemThem = itemView.findViewById(R.id.Order_items_xemThem);
+            btnXacnhan = itemView.findViewById(R.id.btnxacnhan);
         }
     }
 }

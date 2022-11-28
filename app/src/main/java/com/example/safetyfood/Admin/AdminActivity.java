@@ -1,13 +1,18 @@
 package com.example.safetyfood.Admin;
 
+import static com.example.safetyfood.MainActivity.account_all;
+import static com.example.safetyfood.MainActivity.check_login;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.safetyfood.FRAGMENT.HomeFragment;
+import com.example.safetyfood.MODEL.TaiKhoan;
 import com.example.safetyfood.R;
 import com.example.safetyfood.databinding.ActivityAdminBinding;
 import com.example.safetyfood.databinding.ActivityMainBinding;
@@ -22,6 +27,16 @@ public class AdminActivity extends AppCompatActivity {
         mainBinding = ActivityAdminBinding.inflate(getLayoutInflater());
         setContentView(mainBinding.getRoot());
         replaceFragment(new HomeAdminFragment());
+
+        Intent intent = getIntent( );
+        Bundle bundle = intent.getBundleExtra("bundle");
+        if (bundle != null) {
+            account_all = (TaiKhoan) bundle.getSerializable("tk");
+            check_login = true;
+        }
+
+        Log.e("ZZZZZ", "onCreate: "+account_all );
+
         mainBinding.bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.home1:
@@ -29,6 +44,7 @@ public class AdminActivity extends AppCompatActivity {
                     break;
                 case R.id.cart1:
                     replaceFragment(new OrderAdminFragment());
+
                     break;
                 case R.id.order1:
                     replaceFragment(new SeingAdminFragment());

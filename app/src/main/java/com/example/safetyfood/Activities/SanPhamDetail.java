@@ -131,7 +131,7 @@ public class SanPhamDetail extends AppCompatActivity {
 
             dialog_atc_ok.setOnClickListener(v -> {
                 if (checkCart==null){
-                    ChiTietDatHang chiTietDatHang = new ChiTietDatHang( );
+                    ChiTietDatHang chiTietDatHang = new ChiTietDatHang();
                     chiTietDatHang.setAmount(Integer.parseInt(dialog_atc_amount.getText( ).toString( )));
                     chiTietDatHang.setProductid(sanPham.getId( ));
                     chiTietDatHang.setUnitprice(Integer.parseInt(dialog_atc_amount.getText( ).toString( )) * sanPham.getPriceSanpham( ));

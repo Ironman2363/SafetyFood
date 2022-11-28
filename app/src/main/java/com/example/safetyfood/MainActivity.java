@@ -1,5 +1,7 @@
 package com.example.safetyfood;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -13,6 +15,8 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.safetyfood.Admin.OrderAdminFragment;
+import com.example.safetyfood.Admin.ThongKeFragment;
 import com.example.safetyfood.DAO.DatHangDAO;
 import com.example.safetyfood.FRAGMENT.CartFragment;
 import com.example.safetyfood.FRAGMENT.HomeFragment;
@@ -22,13 +26,18 @@ import com.example.safetyfood.MODEL.DatHang;
 import com.example.safetyfood.MODEL.TaiKhoan;
 import com.example.safetyfood.Service.CheckCartService;
 import com.example.safetyfood.databinding.ActivityMainBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
+
     public static boolean check_login = false;
     public static TaiKhoan account_all = new TaiKhoan( );
     public static DatHang cart_all = new DatHang( );
     DatHangDAO datHangDAO;
+
+
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
 
         binding.bottomNavigationView.setItemIconTintList(null);
 
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId( )) {
 
@@ -66,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.setting:
                     replaceFragment(new SettingFragment( ));
                     break;
-
             }
 
             return true;
