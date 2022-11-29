@@ -28,7 +28,7 @@ public class SanPhamDAO {
             cursor.moveToFirst( );
             do {
                 list.add(new SanPham(cursor.getInt(0), cursor.getString(1),
-                        cursor.getString(2), cursor.getFloat(3), cursor.getString(4),
+                        cursor.getString(2), cursor.getInt(3), cursor.getString(4),
                         cursor.getString(5), cursor.getString(6), cursor.getInt(7)));
             } while (cursor.moveToNext( ));
         }
@@ -88,7 +88,7 @@ public class SanPhamDAO {
         cursor.moveToFirst( );
 
         return new SanPham(cursor.getInt(0), cursor.getString(1),
-                cursor.getString(2), cursor.getFloat(3), cursor.getString(4),
+                cursor.getString(2), cursor.getInt(3), cursor.getString(4),
                 cursor.getString(5), cursor.getString(6), cursor.getInt(7));
     }
 
@@ -102,7 +102,7 @@ public class SanPhamDAO {
 
         while (!cursor.isAfterLast( )) {
             list.add(new SanPham(cursor.getInt(0), cursor.getString(1),
-                    cursor.getString(2), cursor.getFloat(3), cursor.getString(4),
+                    cursor.getString(2), cursor.getInt(3), cursor.getString(4),
                     cursor.getString(5), cursor.getString(6), cursor.getInt(7)));
             cursor.moveToNext();
         }
@@ -121,7 +121,7 @@ public class SanPhamDAO {
 
         while (!cursor.isAfterLast( )) {
             list.add(new SanPham(cursor.getInt(0), cursor.getString(1),
-                    cursor.getString(2), cursor.getFloat(3), cursor.getString(4),
+                    cursor.getString(2), cursor.getInt(3), cursor.getString(4),
                     cursor.getString(5), cursor.getString(6), cursor.getInt(7)));
             cursor.moveToNext();
         }

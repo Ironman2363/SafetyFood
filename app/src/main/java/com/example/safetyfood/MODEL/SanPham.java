@@ -6,7 +6,7 @@ public class SanPham implements Serializable {
     int id;
     String nameSanpham;
     String imgSanpham;
-    Float priceSanpham;
+    int priceSanpham;
     String loaiSanpham;
     String createSanpham;
     String updatedSanpham;
@@ -15,8 +15,7 @@ public class SanPham implements Serializable {
     public SanPham() {
     }
 
-    public SanPham(int id, String nameSanpham, String imgSanpham, Float priceSanpham,
-                   String loaiSanpham, String createSanpham, String updatedSanpham, int statusSanpham) {
+    public SanPham(int id, String nameSanpham, String imgSanpham, int priceSanpham, String loaiSanpham, String createSanpham, String updatedSanpham, int statusSanpham) {
         this.id = id;
         this.nameSanpham = nameSanpham;
         this.imgSanpham = imgSanpham;
@@ -51,11 +50,11 @@ public class SanPham implements Serializable {
         this.imgSanpham = imgSanpham;
     }
 
-    public Float getPriceSanpham() {
+    public int getPriceSanpham() {
         return priceSanpham;
     }
 
-    public void setPriceSanpham(Float priceSanpham) {
+    public void setPriceSanpham(int priceSanpham) {
         this.priceSanpham = priceSanpham;
     }
 

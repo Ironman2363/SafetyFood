@@ -28,6 +28,7 @@ import com.example.safetyfood.DAO.DatHangDAO;
 import com.example.safetyfood.MODEL.ChiTietDatHang;
 import com.example.safetyfood.R;
 import com.example.safetyfood.Service.CheckCartService;
+import com.example.safetyfood.Tab_Fragment.GiaoHangFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,7 +76,7 @@ public class CartFragment extends Fragment {
         for (ChiTietDatHang x : chiTietDatHangList) {
             sum += x.getUnitprice( );
         }
-        Cart_TotalPrice.setText("Tổng tiền : " + sum + " VND");
+        Cart_TotalPrice.setText("Tổng tiền : " + sum + "đ");
         return sum;
     }
 

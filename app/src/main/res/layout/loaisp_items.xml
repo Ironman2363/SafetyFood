@@ -7,24 +7,27 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
+        android:background="@drawable/boder_recycel"
         android:id="@+id/loaiSP_items_View"
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <ImageView
+
             android:layout_gravity="center"
             android:id="@+id/loaiSP_items_Img"
-            android:layout_width="100dp"
-            android:layout_height="80dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:src="@drawable/loaisp_coca" />
 
         <TextView
+            android:textColor="@color/black"
             android:gravity="center"
             android:textStyle="bold"
             android:id="@+id/loaiSP_items_txt"
             android:text="Nước giải khát"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

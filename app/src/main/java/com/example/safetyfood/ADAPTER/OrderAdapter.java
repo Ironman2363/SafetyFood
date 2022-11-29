@@ -66,7 +66,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
         holder.Order_items_Img.setImageResource(Integer.parseInt(sanPham.getImgSanpham()));
         holder.Order_items_Amount.setText("x "+chiTietDatHang.getAmount());
         holder.Order_items_Price.setText("Giá : "+sanPham.getPriceSanpham());
-        holder.Order_items_totalAmount.setText(chiTietDatHangDAO.getListCT(datHang.getId( )).size()+" sản phẩm");
+//        holder.Order_items_totalAmount.setText(chiTietDatHangDAO.getListCT(datHang.getId( )).size()+" sản phẩm");
+        holder.Order_items_totalAmount.setText(chiTietDatHangDAO.getSum(datHang.getId( ))+" sản phẩm");
         holder.Order_items_totalPrice.setText("Thành tiền : "+datHang.getTotalpriceDathang());
         holder.btnXacnhan.setVisibility(View.VISIBLE);
         if (account_all.getRole() != 1){

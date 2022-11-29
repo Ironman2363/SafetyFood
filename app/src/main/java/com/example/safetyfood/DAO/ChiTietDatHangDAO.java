@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.safetyfood.DATABASE.SafetyFoodDataBase;
 import com.example.safetyfood.MODEL.ChiTietDatHang;
@@ -117,5 +118,13 @@ public class ChiTietDatHangDAO {
         }
         cursor.close( );
         return list;
+    }
+    public int getSum(int idDatHang){
+        String sql = "SELECT SUM(Amount) AS sum from ChiTietDatHang WHERE OrderId =?";
+        Cursor cursor = db.rawQuery(sql,new String[]{String.valueOf(idDatHang)});
+        cursor.moveToFirst();
+        Log.e("IDdatHang", "getSum: "+idDatHang );
+        Log.e("Sum", "getSum: "+cursor.getInt(cursor.getColumnIndex("sum")) );
+        return cursor.getInt(0);
     }
 }
