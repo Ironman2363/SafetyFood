@@ -20,12 +20,12 @@ public class VaitroDAO {
         db = safetyFoodDataBase.getWritableDatabase();
     }
 
-    public List<VaiTro> getAllVaitro(String sql , String...select){
-      List<VaiTro>list = new ArrayList<>();
-      db = safetyFoodDataBase.getReadableDatabase();
-        Cursor cursor = db.rawQuery(sql,select);
+    public List<VaiTro> getAllVaitro(String sql, String... select) {
+        List<VaiTro> list = new ArrayList<>();
+        db = safetyFoodDataBase.getReadableDatabase();
+        Cursor cursor = db.rawQuery(sql, select);
         cursor.moveToFirst();
-        while (cursor.isAfterLast() == false){
+        while (cursor.isAfterLast() == false) {
             VaiTro vaiTro = new VaiTro();
 //            "Id INTEGER REFERENCES TaiKhoan(Roled)," +
 //                    "Name TEXT NOT NULL," +
@@ -49,39 +49,43 @@ public class VaitroDAO {
         return list;
     }
 
-    public boolean insertVaitro(VaiTro vaiTro){
+    public boolean insertVaitro(VaiTro vaiTro) {
         db = safetyFoodDataBase.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("Name",vaiTro.getNameVaitro());
-        values.put("Description",vaiTro.getDeschiptionVaitro());
-        values.put("Created",vaiTro.getCreateVaitro());
-        values.put("Updated",vaiTro.getUpdateVaitro());
-        Long row = db.insert("VaiTro",null,values);
-        return row>0;
+        values.put("Name", vaiTro.getNameVaitro());
+        values.put("Description", vaiTro.getDeschiptionVaitro());
+        values.put("Created", vaiTro.getCreateVaitro());
+        values.put("Updated", vaiTro.getUpdateVaitro());
+        Long row = db.insert("VaiTro", null, values);
+        return row > 0;
     }
-    public boolean updateVaitro(VaiTro vaiTro){
+
+    public boolean updateVaitro(VaiTro vaiTro) {
         db = safetyFoodDataBase.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("Id",vaiTro.getId());
-        values.put("Name",vaiTro.getNameVaitro());
-        values.put("Description",vaiTro.getDeschiptionVaitro());
-        values.put("Created",vaiTro.getCreateVaitro());
-        values.put("Updated",vaiTro.getUpdateVaitro());
-        int row = db.update("VaiTro",values,"Id=?",new String[]{vaiTro.getId()+""});
-        return row>0;
+        values.put("Id", vaiTro.getId());
+        values.put("Name", vaiTro.getNameVaitro());
+        values.put("Description", vaiTro.getDeschiptionVaitro());
+        values.put("Created", vaiTro.getCreateVaitro());
+        values.put("Updated", vaiTro.getUpdateVaitro());
+        int row = db.update("VaiTro", values, "Id=?", new String[]{vaiTro.getId() + ""});
+        return row > 0;
     }
-    public boolean deleteVaitro(String id){
+
+    public boolean deleteVaitro(String id) {
         db = safetyFoodDataBase.getWritableDatabase();
-        int row = db.delete("VaiTro","Id=?",new String[]{id});
-        return row >0;
+        int row = db.delete("VaiTro", "Id=?", new String[]{id});
+        return row > 0;
     }
-    public List<VaiTro>getAll(){
+
+    public List<VaiTro> getAll() {
         String sql = "SELECT * FROM VaiTro";
         return getAllVaitro(sql);
     }
-    public VaiTro getID(String id){
+
+    public VaiTro getID(String id) {
         String sql = "SELECT * FROM VaiTro where Id=?";
-        List<VaiTro>list = getAllVaitro(sql);
+        List<VaiTro> list = getAllVaitro(sql);
         return list.get(0);
     }
 }

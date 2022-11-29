@@ -26,14 +26,14 @@ public class ThongKeDAO {
         db = dataBase.getReadableDatabase();
     }
 
-    public List<Top> getTop(){
-        List<Top> list = new ArrayList<>(  );
-        String sql = "select "+ProductId+", count("+ProductId+") as sum from "+ Table_ChiTietDH +" group by "+ProductId+
+    public List<Top> getTop() {
+        List<Top> list = new ArrayList<>();
+        String sql = "select " + ProductId + ", count(" + ProductId + ") as sum from " + Table_ChiTietDH + " group by " + ProductId +
                 " order by sum desc limit 10";
-        Cursor cursor = db.rawQuery(sql,null);
+        Cursor cursor = db.rawQuery(sql, null);
         cursor.moveToFirst();
-        while (!cursor.isAfterLast()){
-            Top top = new Top(  );
+        while (!cursor.isAfterLast()) {
+            Top top = new Top();
             top.setProductId(cursor.getInt(cursor.getColumnIndex(ProductId)));
             top.setSum(cursor.getInt(cursor.getColumnIndex("sum")));
             list.add(top);
@@ -43,18 +43,18 @@ public class ThongKeDAO {
         return list;
     }
 
-    public int getDoanhThu(String tuNgay, String denNgay){
-        tuNgay = tuNgay.replace("/","");
-        denNgay = denNgay.replace("/","");
-        String sql = "select SUM("+TotalPrice+") as doanhThu from "+Table_DatHang+" where "+Created+" between ? and ?";
+    public int getDoanhThu(String tuNgay, String denNgay) {
+        tuNgay = tuNgay.replace("/", "");
+        denNgay = denNgay.replace("/", "");
+        String sql = "select SUM(" + TotalPrice + ") as doanhThu from " + Table_DatHang + " where " + Created + " between ? and ?";
         List<Integer> list = new ArrayList<>();
-        Cursor cursor = db.rawQuery(sql,new String[]{tuNgay,denNgay});
+        Cursor cursor = db.rawQuery(sql, new String[]{tuNgay, denNgay});
         cursor.moveToFirst();
-        if (cursor.getCount()!=0){
+        if (cursor.getCount() != 0) {
             cursor.moveToFirst();
             return cursor.getInt(0);
         }
-        cursor.close( );
+        cursor.close();
         return 0;
     }
 }

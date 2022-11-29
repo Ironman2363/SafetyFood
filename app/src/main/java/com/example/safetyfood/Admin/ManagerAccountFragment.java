@@ -65,18 +65,18 @@ public class ManagerAccountFragment extends Fragment {
             public void onClick(View view) {
                 String user = edtTK.getText().toString();
                 String pass = edtMK.getText().toString();
-                TaiKhoan taiKhoan = new TaiKhoan(0,user,pass,2);
-                if (taikhoanDAO.insertTaikhoan(taiKhoan) == true){
-                    if (user.equalsIgnoreCase("") || pass.equalsIgnoreCase("")){
+                TaiKhoan taiKhoan = new TaiKhoan(0, user, pass, 2);
+                if (taikhoanDAO.insertTaikhoan(taiKhoan) == true) {
+                    if (user.equalsIgnoreCase("") || pass.equalsIgnoreCase("")) {
                         Toast.makeText(getContext(), "Bạn cần nhập tài khoản hoặc mật khẩu", Toast.LENGTH_SHORT).show();
-                    }else {
+                    } else {
                         Toast.makeText(getContext(), "Đăng ký nhân viên thành công", Toast.LENGTH_SHORT).show();
                         loaddata();
                         edtTK.setText("");
                         edtMK.setText("");
                     }
 
-                }else {
+                } else {
                     Toast.makeText(getContext(), "Đăng ký thất bại", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -86,13 +86,13 @@ public class ManagerAccountFragment extends Fragment {
             public void onClick(View view) {
                 String user = edtTK.getText().toString();
                 String pass = edtMK.getText().toString();
-                TaiKhoan taiKhoan = new TaiKhoan(0,user,pass,2);
-                if(taikhoanDAO.thayDoiLoaiSach(taiKhoan)){
+                TaiKhoan taiKhoan = new TaiKhoan(0, user, pass, 2);
+                if (taikhoanDAO.thayDoiLoaiSach(taiKhoan)) {
 
                     loaddata();
                     Toast.makeText(getContext(), "Sửa thành công", Toast.LENGTH_SHORT).show();
 
-                }else {
+                } else {
                     Toast.makeText(getContext(), "Sửa không thành công", Toast.LENGTH_SHORT).show();
 
                 }

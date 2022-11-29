@@ -34,13 +34,13 @@ public class CheckCartService extends Service {
 
         int check = -1;
         Calendar calendar = Calendar.getInstance();
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat( "hh:mm dd/MM/yyyy");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm dd/MM/yyyy");
         String text = simpleDateFormat.format(calendar.getTime());
         datHangDAO = new DatHangDAO(getApplicationContext());
 
         DatHang datHang = datHangDAO.getBuyingCart(account_all.getId());
-        if(datHang==null){
-            DatHang datHang1 = new DatHang(  );
+        if (datHang == null) {
+            DatHang datHang1 = new DatHang();
             datHang1.setIdtaikhoan(account_all.getId());
             datHang1.setStatusDathang(0);
             datHang1.setCreateDathang(text);
@@ -50,22 +50,22 @@ public class CheckCartService extends Service {
             check = 1;
         }
 
-        if(check==1){
-            Log.e("Put1", "onStartCommand: " );
+        if (check == 1) {
+            Log.e("Put1", "onStartCommand: ");
             DatHang NewDH = datHangDAO.getBuyingCart(account_all.getId());
             Intent intent1 = new Intent();
             intent1.setAction("checkCart");
-            Bundle bundle = new Bundle(  );
-            bundle.putSerializable("cart",NewDH);
-            intent1.putExtra("bundle",bundle);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("cart", NewDH);
+            intent1.putExtra("bundle", bundle);
             LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent1);
-        }else {
-            Log.e("Put-1", "onStartCommand: " );
+        } else {
+            Log.e("Put-1", "onStartCommand: ");
             Intent intent1 = new Intent();
             intent1.setAction("checkCart");
-            Bundle bundle = new Bundle(  );
-            bundle.putSerializable("cart",datHang);
-            intent1.putExtra("bundle",bundle);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("cart", datHang);
+            intent1.putExtra("bundle", bundle);
             LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent1);
         }
         stopSelf();

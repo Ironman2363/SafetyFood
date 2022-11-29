@@ -10,6 +10,7 @@ import com.example.safetyfood.R;
 
 public class ThongTinCuaHang extends AppCompatActivity {
     WebView wed;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

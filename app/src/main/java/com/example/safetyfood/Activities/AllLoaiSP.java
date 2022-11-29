@@ -33,7 +33,7 @@ public class AllLoaiSP extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_loai_sp);
 
-        Intent intent =getIntent();
+        Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra("bundle");
         LoaiSanPham loaiSanPham = (LoaiSanPham) bundle.getSerializable("loaiSP");
 
@@ -41,7 +41,7 @@ public class AllLoaiSP extends AppCompatActivity {
 
         setSupportActionBar(loaiSP_Toolbar);
 
-        ActionBar actionBar = getSupportActionBar( );
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         getData(loaiSanPham);
@@ -50,14 +50,14 @@ public class AllLoaiSP extends AppCompatActivity {
 
     private void getData(LoaiSanPham loaiSanPham) {
         sanPhamList = sanPhamDAO.getListLoaiSP(loaiSanPham.getId());
-        Log.e("ALL", "getData: "+sanPhamList.get(0) );
+        Log.e("ALL", "getData: " + sanPhamList.get(0));
         setList();
     }
 
     private void setList() {
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),2);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         loaiSP_List.setLayoutManager(gridLayoutManager);
-        SanPhamAdapter adapter = new SanPhamAdapter(sanPhamList,getApplicationContext());
+        SanPhamAdapter adapter = new SanPhamAdapter(sanPhamList, getApplicationContext());
         loaiSP_List.setAdapter(adapter);
     }
 
@@ -69,9 +69,9 @@ public class AllLoaiSP extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId( )) {
+        switch (item.getItemId()) {
             case android.R.id.home: {
-                onBackPressed( );
+                onBackPressed();
                 break;
             }
         }

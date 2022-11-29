@@ -48,12 +48,12 @@ public class ChoXacNhanFragment extends Fragment {
     }
 
     private void getData() {
-        list = datHangDAO.getCartStatus(account_all.getId(),1);
+        list = datHangDAO.getCartStatus(account_all.getId(), 1);
         setList();
     }
 
     private void setList() {
-        OrderAdapter adapter = new OrderAdapter(list,getContext());
+        OrderAdapter adapter = new OrderAdapter(list, getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         Order_list.setLayoutManager(linearLayoutManager);
         Order_list.setAdapter(adapter);

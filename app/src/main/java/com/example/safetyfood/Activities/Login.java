@@ -56,15 +56,13 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(Login.this, "Vui lòng nhập tài khoản", Toast.LENGTH_SHORT).show();
                 } else if (mk.equalsIgnoreCase("")) {
                     Toast.makeText(Login.this, "Vui lòng nhập mật khẩu", Toast.LENGTH_SHORT).show();
-                }
-                else if (dao.checkDangNhapkhNVAD(mail,mk) == true){
+                } else if (dao.checkDangNhapkhNVAD(mail, mk) == true) {
                     intent = new Intent(getApplicationContext(), AdminActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("tk", dao.getName(mail));
                     intent.putExtra("bundle", bundle);
                     startActivity(intent);
-                }
-                else{
+                } else {
 
 
                     Toast.makeText(Login.this, "Tài khoản hoặc mật khẩu sai", Toast.LENGTH_SHORT).show();

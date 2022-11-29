@@ -2,6 +2,7 @@ package com.example.safetyfood.Admin;
 
 import static com.example.safetyfood.MainActivity.account_all;
 import static com.example.safetyfood.MainActivity.check_login;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -28,14 +29,14 @@ public class AdminActivity extends AppCompatActivity {
         setContentView(mainBinding.getRoot());
         replaceFragment(new HomeAdminFragment());
 
-        Intent intent = getIntent( );
+        Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra("bundle");
         if (bundle != null) {
             account_all = (TaiKhoan) bundle.getSerializable("tk");
             check_login = true;
         }
 
-        Log.e("ZZZZZ", "onCreate: "+account_all );
+        Log.e("ZZZZZ", "onCreate: " + account_all);
 
         mainBinding.bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {

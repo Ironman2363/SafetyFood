@@ -31,7 +31,7 @@ import com.example.safetyfood.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapterHolder>{
+public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapterHolder> {
 
     List<DatHang> list;
     DatHangDAO datHangDAO;
@@ -51,7 +51,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
     @NonNull
     @Override
     public OrderAdapterHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new OrderAdapterHolder(LayoutInflater.from(parent.getContext( )).inflate(R.layout.order_items,parent,false));
+        return new OrderAdapterHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.order_items, parent, false));
     }
 
     @Override
@@ -64,66 +64,66 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
         int statusDH = datHang.getStatusDathang();
         holder.Order_items_nameSP.setText(sanPham.getNameSanpham());
         holder.Order_items_Img.setImageResource(Integer.parseInt(sanPham.getImgSanpham()));
-        holder.Order_items_Amount.setText("x "+chiTietDatHang.getAmount());
-        holder.Order_items_Price.setText("Giá : "+sanPham.getPriceSanpham());
+        holder.Order_items_Amount.setText("x " + chiTietDatHang.getAmount());
+        holder.Order_items_Price.setText("Giá : " + sanPham.getPriceSanpham());
 //        holder.Order_items_totalAmount.setText(chiTietDatHangDAO.getListCT(datHang.getId( )).size()+" sản phẩm");
-        holder.Order_items_totalAmount.setText(chiTietDatHangDAO.getSum(datHang.getId( ))+" sản phẩm");
-        holder.Order_items_totalPrice.setText("Thành tiền : "+datHang.getTotalpriceDathang());
+        holder.Order_items_totalAmount.setText(chiTietDatHangDAO.getSum(datHang.getId()) + " sản phẩm");
+        holder.Order_items_totalPrice.setText("Thành tiền : " + datHang.getTotalpriceDathang());
         holder.btnXacnhan.setVisibility(View.VISIBLE);
-        if (account_all.getRole() != 1){
+        if (account_all.getRole() != 1) {
             holder.btnXacnhan.setVisibility(View.GONE);
         }
 
-        if (chiTietDatHangDAO.getListCT(datHang.getId( )).size()>1){
+        if (chiTietDatHangDAO.getListCT(datHang.getId()).size() > 1) {
             holder.Order_items_xemThem.setVisibility(View.VISIBLE);
         }
-        switch (statusDH){
-            case 1 : {
+        switch (statusDH) {
+            case 1: {
                 textStatus = "Đang chờ xử lý";
                 holder.Order_items_MuaLai.setText("Hủy");
                 break;
             }
-            case 2 :{
+            case 2: {
                 textStatus = "Đang giao hàng";
-                if (textStatus.equals("Đang giao hàng")){
+                if (textStatus.equals("Đang giao hàng")) {
                     holder.btnXacnhan.setVisibility(View.GONE);
                     holder.Order_items_MuaLai.setVisibility(View.GONE);
                 }
                 break;
             }
-            case 3 :{
+            case 3: {
                 textStatus = "Bị hủy từ phía bạn";
                 break;
             }
-            case 4 :{
+            case 4: {
                 textStatus = "Bị hủy từ phía cửa hàng";
                 break;
             }
-            case 5 :{
+            case 5: {
                 textStatus = "Giao hàng thành công";
                 break;
             }
         }
         holder.Order_items_status.setText(textStatus);
         holder.Order_items_MuaLai.setOnClickListener(v -> {
-            if(statusDH==3){
+            if (statusDH == 3) {
                 datHang.setStatusDathang(3);
                 datHangDAO.UpgradeDH(datHang);
                 holder.Order_items_View.setVisibility(View.GONE);
             }
         });
         holder.btnXacnhan.setOnClickListener(v -> {
-            if(statusDH==1){
+            if (statusDH == 1) {
                 datHang.setStatusDathang(2);
                 datHangDAO.UpgradeDH(datHang);
                 holder.Order_items_View.setVisibility(View.GONE);
             }
         });
         holder.Order_items_View.setOnClickListener(v -> {
-            Intent intent = new Intent( context, OrderDetail.class);
-            Bundle bundle = new Bundle(  );
-            bundle.putSerializable("datHang",datHang);
-            intent.putExtra("bundle",bundle);
+            Intent intent = new Intent(context, OrderDetail.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("datHang", datHang);
+            intent.putExtra("bundle", bundle);
             context.startActivity(intent);
         });
     }
@@ -136,10 +136,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
     class OrderAdapterHolder extends RecyclerView.ViewHolder {
 
         ImageView Order_items_Img;
-        TextView Order_items_nameSP,Order_items_Amount,Order_items_Price
-                ,Order_items_totalAmount,Order_items_totalPrice,Order_items_status,
+        TextView Order_items_nameSP, Order_items_Amount, Order_items_Price, Order_items_totalAmount, Order_items_totalPrice, Order_items_status,
                 Order_items_xemThem;
-        Button Order_items_MuaLai,btnXacnhan;
+        Button Order_items_MuaLai, btnXacnhan;
         ConstraintLayout Order_items_View;
 
         public OrderAdapterHolder(@NonNull View itemView) {

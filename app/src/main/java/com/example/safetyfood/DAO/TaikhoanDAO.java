@@ -128,10 +128,10 @@ public class TaikhoanDAO {
         SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getReadableDatabase();
         TaiKhoan taiKhoan;
         Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM TaiKhoan WHERE UserName = ? AND Password = ? AND Roled != 3 ", new String[]{UserName, Password});
-            if (cursor.getCount() != 0) {
-                return true;
-            } else {
-                return false;
-            }
+        if (cursor.getCount() != 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

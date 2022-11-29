@@ -28,7 +28,7 @@ public class OrderDetail extends AppCompatActivity {
 
     Toolbar OrderDetail_Toolbar;
     LinearLayout Order_Done_Check;
-    TextView Order_Done_Trang_Thai,Order_Done_Thanks,Order_Done_Address,Order_Done_TotalPrice;
+    TextView Order_Done_Trang_Thai, Order_Done_Thanks, Order_Done_Address, Order_Done_TotalPrice;
     RecyclerView Order_Done_list;
     ImageView Order_Done_Img;
     DatHangDAO datHangDAO;
@@ -40,22 +40,22 @@ public class OrderDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_detail);
-        Intent intent =getIntent();
+        Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra("bundle");
-        
+
         anhXa();
 
         setSupportActionBar(OrderDetail_Toolbar);
         OrderDetail_Toolbar.setTitle("Thông tin đơn hàng");
-        ActionBar actionBar =getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        
-        if(bundle!=null){
+
+        if (bundle != null) {
             datHang = (DatHang) bundle.getSerializable("datHang");
             checkStatus();
             getData();
-        }else {
-            
+        } else {
+
         }
     }
 
@@ -65,7 +65,7 @@ public class OrderDetail extends AppCompatActivity {
     }
 
     private void setList(List<ChiTietDatHang> list) {
-        CartAdapter adapter = new CartAdapter(list,this);
+        CartAdapter adapter = new CartAdapter(list, this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         Order_Done_list.setLayoutManager(linearLayoutManager);
         Order_Done_list.setAdapter(adapter);
@@ -74,24 +74,24 @@ public class OrderDetail extends AppCompatActivity {
 
     private void setMoney() {
         int money = (int) datHang.getTotalpriceDathang();
-        Order_Done_TotalPrice.setText("Thành tiền : "+money+" VNĐ");
+        Order_Done_TotalPrice.setText("Thành tiền : " + money + " VNĐ");
     }
 
     private void checkStatus() {
         int status = datHang.getStatusDathang();
-        String text1="";
-        String text2="";
+        String text1 = "";
+        String text2 = "";
         int color = 0;
         int img_src = 0;
-        switch (status){
-            case 1:{
+        switch (status) {
+            case 1: {
                 text1 = "Đơn hàng đang được xử lý";
                 text2 = "Cảm ơn bạn đã mua hàng tại SafetyFood";
                 color = R.color.Order_Done;
                 img_src = R.drawable.order_done;
                 break;
             }
-            case 2:{
+            case 2: {
                 text1 = "Đơn hàng đang được vận chuyển";
                 text2 = "Cảm ơn bạn đã mua hàng tại SafetyFood";
                 color = R.color.Order_Done;
@@ -106,7 +106,7 @@ public class OrderDetail extends AppCompatActivity {
                 color = R.color.red;
                 break;
             }
-            case 5:{
+            case 5: {
                 text1 = "Đơn hàng đã hoàn thành";
                 text2 = "Cảm ơn bạn đã mua hàng tại SafetyFood";
                 color = R.color.Order_Done;
@@ -136,8 +136,8 @@ public class OrderDetail extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:{
+        switch (item.getItemId()) {
+            case android.R.id.home: {
                 onBackPressed();
                 break;
             }

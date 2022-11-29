@@ -25,7 +25,7 @@ import com.example.safetyfood.R;
 
 import java.util.List;
 
-public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartAdapterHolder>{
+public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartAdapterHolder> {
 
     List<ChiTietDatHang> list;
     SanPhamDAO sanPhamDAO;
@@ -40,7 +40,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartAdapterHol
     @NonNull
     @Override
     public CartAdapterHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new CartAdapterHolder(LayoutInflater.from(parent.getContext( )).inflate(R.layout.cart_items,parent,false));
+        return new CartAdapterHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_items, parent, false));
     }
 
     @Override
@@ -49,27 +49,27 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartAdapterHol
         SanPham sanPham = sanPhamDAO.getID(chiTietDatHang.getProductid());
         holder.Cart_items_img.setImageResource(Integer.parseInt(sanPham.getImgSanpham()));
         holder.Cart_items_name.setText(sanPham.getNameSanpham());
-        holder.Cart_items_amount.setText("Số lượng : "+ chiTietDatHang.getAmount());
+        holder.Cart_items_amount.setText("Số lượng : " + chiTietDatHang.getAmount());
         holder.Cart_items_price.setText(String.valueOf(sanPham.getPriceSanpham()));
 
 
         holder.Cart_items_View.setOnClickListener(v -> {
             Intent intent = new Intent(context, SanPhamDetail.class);
-            Bundle bundle = new Bundle(  );
-            bundle.putSerializable("sp",sanPham);
-            intent.putExtra("bundle",bundle);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("sp", sanPham);
+            intent.putExtra("bundle", bundle);
             context.startActivity(intent);
         });
     }
 
     @Override
     public int getItemCount() {
-        return list.size( );
+        return list.size();
     }
 
     class CartAdapterHolder extends RecyclerView.ViewHolder {
         ImageView Cart_items_img;
-        TextView Cart_items_name,Cart_items_amount,Cart_items_price;
+        TextView Cart_items_name, Cart_items_amount, Cart_items_price;
         CardView Cart_items_View;
 
         public CartAdapterHolder(@NonNull View itemView) {

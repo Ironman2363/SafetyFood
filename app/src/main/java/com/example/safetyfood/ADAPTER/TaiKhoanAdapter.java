@@ -31,7 +31,7 @@ public class TaiKhoanAdapter extends RecyclerView.Adapter<TaiKhoanAdapter.ViewHo
     public TaiKhoanAdapter(Context context, ArrayList<TaiKhoan> list, Itemclick itemclick) {
         this.context = context;
         this.list = list;
-        this.itemclick=itemclick;
+        this.itemclick = itemclick;
     }
 
     @NonNull
@@ -89,7 +89,7 @@ public class TaiKhoanAdapter extends RecyclerView.Adapter<TaiKhoanAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView txt_tknv, txt_mknv;
-        ImageView btn_editnv,btn_deletenv;
+        ImageView btn_editnv, btn_deletenv;
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
