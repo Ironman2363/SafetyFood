@@ -44,18 +44,18 @@ public class ThongKeFragment extends Fragment {
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                                 String ngay = "";
                                 String thang = "";
-                                if (dayOfMonth <10){
-                                    ngay = "0"+dayOfMonth;
-                                }else {
+                                if (dayOfMonth < 10) {
+                                    ngay = "0" + dayOfMonth;
+                                } else {
                                     ngay = String.valueOf(dayOfMonth);
                                 }
-                                if (month <9){
-                                    thang =  "0"+(month+1);
-                                }else {
-                                    thang = String.valueOf(month+1);
+                                if (month < 9) {
+                                    thang = "0" + (month + 1);
+                                } else {
+                                    thang = String.valueOf(month + 1);
                                 }
 
-                                edtStart.setText(year+"/"+thang+ "/" + ngay);
+                                edtStart.setText(year + "/" + thang + "/" + ngay);
                             }
                         },
                         calendar.get(Calendar.YEAR),
@@ -75,18 +75,18 @@ public class ThongKeFragment extends Fragment {
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                                 String ngay = "";
                                 String thang = "";
-                                if (dayOfMonth <10){
-                                    ngay = "0"+dayOfMonth;
-                                }else {
+                                if (dayOfMonth < 10) {
+                                    ngay = "0" + dayOfMonth;
+                                } else {
                                     ngay = String.valueOf(dayOfMonth);
                                 }
-                                if (month <9){
-                                    thang =  "0"+(month+1);
-                                }else {
-                                    thang = String.valueOf(month+1);
+                                if (month < 9) {
+                                    thang = "0" + (month + 1);
+                                } else {
+                                    thang = String.valueOf(month + 1);
                                 }
 
-                                edtEnd.setText(year+"/"+thang+ "/" + ngay);
+                                edtEnd.setText(year + "/" + thang + "/" + ngay);
                             }
                         },
                         calendar.get(Calendar.YEAR),
@@ -100,14 +100,12 @@ public class ThongKeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ThongKeDAO thongKeDAO = new ThongKeDAO(getContext());
-                String tuNgay =edtStart.getText().toString();
-                String denNgay =edtEnd.getText().toString();
-                int doanhthu = thongKeDAO.getDoanhThu(tuNgay,denNgay);
-                txtThongKe.setText(String.valueOf(doanhthu+ "VND"));
+                String tuNgay = edtStart.getText().toString();
+                String denNgay = edtEnd.getText().toString();
+                int doanhthu = thongKeDAO.getDoanhThu(tuNgay, denNgay);
+                txtThongKe.setText(String.valueOf(doanhthu + "VND"));
             }
         });
-
-
 
 
         return view;

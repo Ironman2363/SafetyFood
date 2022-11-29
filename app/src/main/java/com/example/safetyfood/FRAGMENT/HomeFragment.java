@@ -32,7 +32,7 @@ public class HomeFragment extends Fragment {
     Context context;
     EditText edt_findFood;
     TextInputLayout Home_TIL_findFood;
-    RecyclerView RCL_loaiSP, RCL_SP,RCL_TSP;
+    RecyclerView RCL_loaiSP, RCL_SP, RCL_TSP;
     LoaiSanPhamDAO loaiSanPhamDAO;
     SanPhamDAO sanPhamDAO;
     List<LoaiSanPham> loaiSanPhamList;
@@ -65,8 +65,8 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         RCL_SP.setLayoutManager(layoutManager);
         RCL_SP.setAdapter(sanPhamAdapter);
-        SanPhamAdapter sanPhamAdapter1 = new SanPhamAdapter(sanPhamList,getContext());
-        LinearLayoutManager layoutManager1 = new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false);
+        SanPhamAdapter sanPhamAdapter1 = new SanPhamAdapter(sanPhamList, getContext());
+        LinearLayoutManager layoutManager1 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         RCL_TSP.setLayoutManager(layoutManager1);
         RCL_TSP.setAdapter(sanPhamAdapter1);
 

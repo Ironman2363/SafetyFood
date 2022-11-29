@@ -18,24 +18,23 @@ public class ViewPager2Adapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        switch (position){
-            case 0 :{
+        switch (position) {
+            case 0: {
                 return new ChoXacNhanFragment();
             }
-            case 1 :{
+            case 1: {
                 return new GiaoHangFragment();
             }
-            case 2 :{
+            case 2: {
                 return new DaNhanFragment();
             }
-            case 3 :{
+            case 3: {
                 return new HuyFragment();
             }
             default:
                 return new ChoXacNhanFragment();
         }
     }
-
 
 
     @Override

@@ -25,27 +25,27 @@ public class OrderFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view =inflater.inflate(R.layout.fragment_order, container, false);
+        view = inflater.inflate(R.layout.fragment_order, container, false);
 
         anhXa();
         Order_ViewPager2.setAdapter(adapter);
-        new TabLayoutMediator(Order_Tab, Order_ViewPager2, new TabLayoutMediator.TabConfigurationStrategy( ) {
+        new TabLayoutMediator(Order_Tab, Order_ViewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                switch (position){
-                    case 0:{
+                switch (position) {
+                    case 0: {
                         tab.setText("Chờ xử lý");
                         break;
                     }
-                    case 1:{
+                    case 1: {
                         tab.setText("Đang giao");
                         break;
                     }
-                    case 2:{
+                    case 2: {
                         tab.setText("Đã giao");
                         break;
                     }
-                    case 3:{
+                    case 3: {
                         tab.setText("Đã hủy");
                         break;
                     }

@@ -46,12 +46,12 @@ public class HuyFragment extends Fragment {
     }
 
     private void getData() {
-        list = datHangDAO.getCartStatus(account_all.getId(),3);
+        list = datHangDAO.getCartStatus(account_all.getId(), 3);
         setList();
     }
 
     private void setList() {
-        OrderAdapter adapter = new OrderAdapter(list,getContext());
+        OrderAdapter adapter = new OrderAdapter(list, getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         Order_list.setLayoutManager(linearLayoutManager);
         Order_list.setAdapter(adapter);

@@ -14,6 +14,7 @@ import com.example.safetyfood.R;
 public class DangKyThongTinActivity extends AppCompatActivity {
 
     Button hoantat;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

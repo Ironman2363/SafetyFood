@@ -29,7 +29,8 @@ public class LoaiSanPhamDAO {
         }
         return list;
     }
-    public boolean themLoaiSanPham(LoaiSanPham loaiSanPham){
+
+    public boolean themLoaiSanPham(LoaiSanPham loaiSanPham) {
         SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("Idcuahang", loaiSanPham.getIdCuahang());
@@ -43,7 +44,8 @@ public class LoaiSanPhamDAO {
             return false;
         return true;
     }
-    public boolean capnhatLoaiSanPham(LoaiSanPham loaiSanPham){
+
+    public boolean capnhatLoaiSanPham(LoaiSanPham loaiSanPham) {
         SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("Idcuahang", loaiSanPham.getIdCuahang());
@@ -52,7 +54,7 @@ public class LoaiSanPhamDAO {
         contentValues.put("Created", loaiSanPham.getCreateLoaisanpham());
         contentValues.put("Updated", loaiSanPham.getUpdatedLoaisanpham());
         contentValues.put("Status", loaiSanPham.getStatusLoaisanpham());
-        long check = sqLiteDatabase.update("LoaiSanPham",contentValues,"Id = ?",new String[]{String.valueOf(loaiSanPham.getId())});
+        long check = sqLiteDatabase.update("LoaiSanPham", contentValues, "Id = ?", new String[]{String.valueOf(loaiSanPham.getId())});
         if (check == -1)
             return false;
         return true;

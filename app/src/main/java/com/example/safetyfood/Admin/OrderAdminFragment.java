@@ -32,11 +32,11 @@ public class OrderAdminFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_order_admin, container, false);
-
 
 
         Order_list = view.findViewById(R.id.Order_list);
@@ -53,7 +53,7 @@ public class OrderAdminFragment extends Fragment {
     }
 
     private void setList() {
-        OrderAdapter adapter = new OrderAdapter(list,getContext());
+        OrderAdapter adapter = new OrderAdapter(list, getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         Order_list.setLayoutManager(linearLayoutManager);
         Order_list.setAdapter(adapter);

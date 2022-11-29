@@ -50,69 +50,75 @@ public class CartFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_cart, container, false);
 
-        anhXa( );
+        anhXa();
 
-        getData( );
+        getData();
 
         Cart_Dat_Hang.setOnClickListener(v -> {
-            MuaHang( );
+            MuaHang();
         });
 
         return view;
     }
 
     private void MuaHang() {
-        if (!chiTietDatHangList.isEmpty()){
+        if (!chiTietDatHangList.isEmpty()) {
             cart_all.setTotalpriceDathang(totalPrice);
             cart_all.setStatusDathang(1);
             datHangDAO.UpgradeDH(cart_all);
 
-            getContext( ).startService(new Intent(getContext( ), CheckCartService.class));
+            getContext().startService(new Intent(getContext(), CheckCartService.class));
         }
     }
 
     private int loadMoney() {
         int sum = 0;
         for (ChiTietDatHang x : chiTietDatHangList) {
-            sum += x.getUnitprice( );
+            sum += x.getUnitprice();
         }
         Cart_TotalPrice.setText("Tổng tiền : " + sum + "đ");
         return sum;
     }
 
     private void setAdapterToRCL() {
-        CartAdapter cartAdapter = new CartAdapter(chiTietDatHangList, getContext( ));
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext( ));
+        CartAdapter cartAdapter = new CartAdapter(chiTietDatHangList, getContext());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         Cart_list.setLayoutManager(linearLayoutManager);
         Cart_list.setAdapter(cartAdapter);
     }
 
     private void getData() {
-        chiTietDatHangList = chiTietDatHangDAO.getListCT(cart_all.getId( ));
-        if (chiTietDatHangList.isEmpty( )) {
+        chiTietDatHangList = chiTietDatHangDAO.getListCT(cart_all.getId());
+        if (chiTietDatHangList.isEmpty()) {
             Cart_TotalPrice.setText("Bạn chưa có gì trong giỏ hàng");
-            setAdapterToRCL( );
+            setAdapterToRCL();
             return;
         }
-        totalPrice = loadMoney( );
-        setAdapterToRCL( );
+        totalPrice = loadMoney();
+        setAdapterToRCL();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getData();
     }
 
     private void anhXa() {
         Cart_list = view.findViewById(R.id.Cart_list);
         Cart_TotalPrice = view.findViewById(R.id.Cart_TotalPrice);
         Cart_Dat_Hang = view.findViewById(R.id.Cart_Dat_Hang);
-        chiTietDatHangList = new ArrayList<>( );
-        chiTietDatHangDAO = new ChiTietDatHangDAO(getContext( ));
-        datHangDAO = new DatHangDAO(getContext( ));
+        chiTietDatHangList = new ArrayList<>();
+        chiTietDatHangDAO = new ChiTietDatHangDAO(getContext());
+        datHangDAO = new DatHangDAO(getContext());
         IntentFilter intentFilter = new IntentFilter("checkCart");
-        LocalBroadcastManager.getInstance(getContext( )).registerReceiver(broadcastReceiver, intentFilter);
+        LocalBroadcastManager.getInstance(getContext()).registerReceiver(broadcastReceiver, intentFilter);
     }
 
-    BroadcastReceiver broadcastReceiver = new BroadcastReceiver( ) {
+    BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            getData( );
+            getData();
         }
     };
 }

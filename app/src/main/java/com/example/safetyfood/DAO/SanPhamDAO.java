@@ -21,30 +21,30 @@ public class SanPhamDAO {
     }
 
     public ArrayList<SanPham> getDSSanPham() {
-        ArrayList<SanPham> list = new ArrayList<>( );
-        SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getReadableDatabase( );
+        ArrayList<SanPham> list = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM SanPham", null);
-        if (cursor.getCount( ) != 0) {
-            cursor.moveToFirst( );
+        if (cursor.getCount() != 0) {
+            cursor.moveToFirst();
             do {
                 list.add(new SanPham(cursor.getInt(0), cursor.getString(1),
                         cursor.getString(2), cursor.getInt(3), cursor.getString(4),
                         cursor.getString(5), cursor.getString(6), cursor.getInt(7)));
-            } while (cursor.moveToNext( ));
+            } while (cursor.moveToNext());
         }
         return list;
     }
 
     public boolean themSanpham(SanPham sanPham) {
-        SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getWritableDatabase( );
-        ContentValues contentValues = new ContentValues( );
-        contentValues.put("Name", sanPham.getNameSanpham( ));
-        contentValues.put("Image", sanPham.getImgSanpham( ));
-        contentValues.put("Price", sanPham.getPriceSanpham( ));
-        contentValues.put("TypeproDuct", sanPham.getLoaiSanpham( ));
-        contentValues.put("Created", sanPham.getCreateSanpham( ));
-        contentValues.put("Updated", sanPham.getUpdatedSanpham( ));
-        contentValues.put("Status", sanPham.getStatusSanpham( ));
+        SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("Name", sanPham.getNameSanpham());
+        contentValues.put("Image", sanPham.getImgSanpham());
+        contentValues.put("Price", sanPham.getPriceSanpham());
+        contentValues.put("TypeproDuct", sanPham.getLoaiSanpham());
+        contentValues.put("Created", sanPham.getCreateSanpham());
+        contentValues.put("Updated", sanPham.getUpdatedSanpham());
+        contentValues.put("Status", sanPham.getStatusSanpham());
         long check = sqLiteDatabase.insert("SanPham", null, contentValues);
         if (check == -1)
             return false;
@@ -52,25 +52,25 @@ public class SanPhamDAO {
     }
 
     public boolean capnhatSanpham(SanPham sanPham) {
-        SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getWritableDatabase( );
-        ContentValues contentValues = new ContentValues( );
-        contentValues.put("Name", sanPham.getNameSanpham( ));
-        contentValues.put("Image", sanPham.getImgSanpham( ));
-        contentValues.put("Price", sanPham.getPriceSanpham( ));
-        contentValues.put("TypeproDuct", sanPham.getLoaiSanpham( ));
-        contentValues.put("Created", sanPham.getCreateSanpham( ));
-        contentValues.put("Updated", sanPham.getUpdatedSanpham( ));
-        contentValues.put("Status", sanPham.getStatusSanpham( ));
-        long check = sqLiteDatabase.update("SanPham", contentValues, "Id = ?", new String[]{String.valueOf(sanPham.getId( ))});
+        SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("Name", sanPham.getNameSanpham());
+        contentValues.put("Image", sanPham.getImgSanpham());
+        contentValues.put("Price", sanPham.getPriceSanpham());
+        contentValues.put("TypeproDuct", sanPham.getLoaiSanpham());
+        contentValues.put("Created", sanPham.getCreateSanpham());
+        contentValues.put("Updated", sanPham.getUpdatedSanpham());
+        contentValues.put("Status", sanPham.getStatusSanpham());
+        long check = sqLiteDatabase.update("SanPham", contentValues, "Id = ?", new String[]{String.valueOf(sanPham.getId())});
         if (check == -1)
             return false;
         return true;
     }
 
     public int xoaSanPham(int Id) {
-        SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getWritableDatabase( );
+        SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getWritableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM SanPham WHERE id = ?", new String[]{String.valueOf(Id)});
-        if (cursor.getCount( ) != 0) {
+        if (cursor.getCount() != 0) {
             return -1;
         }
         long check = sqLiteDatabase.delete("SanPham", "Id = ?", new String[]{String.valueOf(Id)});
@@ -81,26 +81,26 @@ public class SanPhamDAO {
     }
 
     public SanPham getID(int id) {
-        SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getWritableDatabase( );
+        SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getWritableDatabase();
         String sql = "Select * from SanPham where id=?";
         Cursor cursor = sqLiteDatabase.rawQuery(sql, new String[]{String.valueOf(id)});
 
-        cursor.moveToFirst( );
+        cursor.moveToFirst();
 
         return new SanPham(cursor.getInt(0), cursor.getString(1),
                 cursor.getString(2), cursor.getInt(3), cursor.getString(4),
                 cursor.getString(5), cursor.getString(6), cursor.getInt(7));
     }
 
-    public List<SanPham> getSpTT(int loaiSP,int idSP) {
-        List<SanPham> list = new ArrayList<>( );
-        SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getReadableDatabase( );
+    public List<SanPham> getSpTT(int loaiSP, int idSP) {
+        List<SanPham> list = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getReadableDatabase();
         String sql = "select * from SanPham where TypeproDuct =? and Id!=?";
-        Cursor cursor = sqLiteDatabase.rawQuery(sql, new String[]{String.valueOf(loaiSP),String.valueOf(idSP)});
+        Cursor cursor = sqLiteDatabase.rawQuery(sql, new String[]{String.valueOf(loaiSP), String.valueOf(idSP)});
 
-        cursor.moveToFirst( );
+        cursor.moveToFirst();
 
-        while (!cursor.isAfterLast( )) {
+        while (!cursor.isAfterLast()) {
             list.add(new SanPham(cursor.getInt(0), cursor.getString(1),
                     cursor.getString(2), cursor.getInt(3), cursor.getString(4),
                     cursor.getString(5), cursor.getString(6), cursor.getInt(7)));
@@ -112,14 +112,14 @@ public class SanPhamDAO {
     }
 
     public List<SanPham> getListLoaiSP(int loaiSP) {
-        List<SanPham> list = new ArrayList<>( );
-        SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getReadableDatabase( );
+        List<SanPham> list = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getReadableDatabase();
         String sql = "select * from SanPham where TypeproDuct =?";
         Cursor cursor = sqLiteDatabase.rawQuery(sql, new String[]{String.valueOf(loaiSP)});
 
-        cursor.moveToFirst( );
+        cursor.moveToFirst();
 
-        while (!cursor.isAfterLast( )) {
+        while (!cursor.isAfterLast()) {
             list.add(new SanPham(cursor.getInt(0), cursor.getString(1),
                     cursor.getString(2), cursor.getInt(3), cursor.getString(4),
                     cursor.getString(5), cursor.getString(6), cursor.getInt(7)));

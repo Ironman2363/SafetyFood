@@ -34,7 +34,7 @@ public class LoaiSanPhamAdapter extends RecyclerView.Adapter<LoaiSanPhamAdapter.
     @NonNull
     @Override
     public LoaiSanPhamHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new LoaiSanPhamHolder(LayoutInflater.from(parent.getContext( )).inflate(R.layout.loaisp_items,parent,false));
+        return new LoaiSanPhamHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.loaisp_items, parent, false));
     }
 
     @Override
@@ -44,9 +44,9 @@ public class LoaiSanPhamAdapter extends RecyclerView.Adapter<LoaiSanPhamAdapter.
         holder.loaiSP_items_txt.setText(loaiSanPham.getNameLoaisanpham());
         holder.loaiSP_items_View.setOnClickListener(v -> {
             Intent intent = new Intent(context, AllLoaiSP.class);
-            Bundle bundle = new Bundle(  );
-            bundle.putSerializable("loaiSP",loaiSanPham);
-            intent.putExtra("bundle",bundle);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("loaiSP", loaiSanPham);
+            intent.putExtra("bundle", bundle);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         });
@@ -61,6 +61,7 @@ public class LoaiSanPhamAdapter extends RecyclerView.Adapter<LoaiSanPhamAdapter.
         ImageView loaiSP_items_Img;
         LinearLayout loaiSP_items_View;
         TextView loaiSP_items_txt;
+
         public LoaiSanPhamHolder(@NonNull View itemView) {
             super(itemView);
             loaiSP_items_txt = itemView.findViewById(R.id.loaiSP_items_txt);
