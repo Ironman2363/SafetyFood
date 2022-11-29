@@ -1,38 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_margin="8dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10dp"
+    android:layout_margin="8dp">
 
     <LinearLayout
+        android:background="@drawable/boder_search"
         android:id="@+id/SP_items_View"
-        android:layout_width="wrap_content"
-        android:orientation="vertical"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
         <ImageView
-            android:layout_gravity="center"
+            android:layout_margin="5dp"
             android:id="@+id/SP_items_Img"
-            android:src="@drawable/loaisp_coca"
-            android:layout_width="140dp"
-            android:layout_height="120dp"/>
-        <TextView
-            android:id="@+id/SP_items_Gia"
+            android:layout_width="120dp"
+            android:layout_height="100dp"
             android:layout_gravity="center"
-            android:text="25000 đ"
-            android:textSize="18sp"
-            android:textColor="@color/red"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:src="@drawable/loaisp_coca" />
 
         <TextView
-            android:textStyle="bold"
+            android:layout_margin="5dp"
             android:id="@+id/SP_items_Ten"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Coca Cola"
-            android:textSize="22sp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_margin="5dp"
+            android:id="@+id/SP_items_Gia"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="25000 đ"
+            android:textColor="@color/red"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

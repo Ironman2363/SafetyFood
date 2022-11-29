@@ -2,15 +2,17 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Order_items_View"
+    android:layout_margin="5dp"
+    android:background="@drawable/boder_recycel"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/Order_items_View">
+    android:layout_height="wrap_content">
 
     <TextView
-        android:layout_marginTop="10dp"
         android:id="@+id/Order_items_nameShop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="SafetyFood"
         android:textColor="@color/red"
         android:textSize="24sp"
@@ -48,6 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Coca-cola"
+                android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -56,7 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="x1"
-                android:textAlignment="viewEnd"/>
+                android:textAlignment="viewEnd" />
 
             <TextView
                 android:id="@+id/Order_items_Price"
@@ -73,11 +76,11 @@
 
     <TextView
         android:id="@+id/Order_items_xemThem"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Xem thêm"
         android:textAlignment="center"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
@@ -97,9 +100,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Total : 120000 VND"
-        android:textSize="22sp"
-        android:textStyle="bold"
         android:textColor="@color/red"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/Order_items_totalAmount"
@@ -116,24 +119,31 @@
 
         <TextView
             android:id="@+id/Order_items_status"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="8"
             android:padding="16dp"
             android:text="Giao hàng thành công" />
 
+
         <Button
             android:id="@+id/Order_items_MuaLai"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:backgroundTint="@color/red"
-            android:text="Mua lại" />
-        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Xac Nhan"
-            android:id="@+id/btnxacnhan"/>
+            android:layout_marginRight="10dp"
+            android:backgroundTint="@color/red"
+            android:text="Mua lại"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnxacnhan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:backgroundTint="#3F51B5"
+            android:text="Giao hàng"
+            android:textStyle="bold" />
+
 
     </LinearLayout>
 

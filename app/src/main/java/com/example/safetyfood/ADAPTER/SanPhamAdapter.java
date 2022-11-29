@@ -41,7 +41,7 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.SanPhamA
     public void onBindViewHolder(@NonNull SanPhamAdapterHolder holder, int position) {
         SanPham sp = list.get(position);
         holder.SP_items_Img.setImageResource(Integer.parseInt(sp.getImgSanpham()));
-        holder.SP_items_Gia.setText(sp.getPriceSanpham()+" VND");
+        holder.SP_items_Gia.setText(sp.getPriceSanpham()+"đ");
         holder.SP_items_Ten.setText(sp.getNameSanpham());
         holder.SP_items_View.setOnClickListener(v -> {
             Intent intent = new Intent(context,SanPhamDetail.class);

@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#E7E1E1"
-    android:layout_height="match_parent"
+    android:background="#E7E2E2"
+    android:layout_height="wrap_content"
     tools:context=".FRAGMENT.HomeFragment">
 
     <LinearLayout
@@ -17,6 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:hintEnabled="false"
+            android:layout_margin="5dp"
+            app:boxBackgroundMode="none"
             app:startIconDrawable="@drawable/ic_baseline_search_24">
 
 
@@ -27,32 +29,31 @@
                 android:id="@+id/edt_findFood"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_margin="5dp"
                 android:hint="Find your food" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="190dp"
-                android:padding="10dp"
+                android:layout_height="180dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/banner1a" />
+                android:src="@drawable/banner2" />
 
 
         <LinearLayout
-            android:background="@color/white"
+            android:background="@drawable/boder_recycel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:orientation="vertical">
 
             <TextView
+                android:textColor="@color/black"
                 android:layout_margin="10dp"
                 android:layout_marginBottom="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Loại sản phẩm"
+                android:text="Danh mục"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
@@ -65,13 +66,14 @@
         </LinearLayout>
 
         <LinearLayout
-            android:background="@color/white"
+            android:background="@drawable/boder_recycel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:orientation="vertical">
 
             <TextView
+                android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sản phẩm"
@@ -81,9 +83,30 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/RCL_SP"
+                android:padding="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
+        </LinearLayout>
+        <LinearLayout
+            android:background="@drawable/boder_recycel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical">
+            <TextView
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sản phẩm bán chạy"
+                android:layout_margin="10dp"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RCL_TSP"
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
     </LinearLayout>
