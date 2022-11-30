@@ -120,8 +120,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
                 }else {
                     datHang.setStatusDathang(4);
                 }
-
-            }else if (statusDH == 3) {
+            }
+            else if (statusDH == 3) {
                 datHang.setStatusDathang(1);
                 datHangDAO.UpgradeDH(datHang);
             }
@@ -143,6 +143,14 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
                 datHangDAO.UpgradeDH(datHang);
                 list.remove(holder.getAdapterPosition());
                 notifyItemRemoved(holder.getAdapterPosition());
+            }
+        });
+
+        holder.btnxacnhandagiahang.setOnClickListener(v ->{
+            if (statusDH == 2) {
+                datHang.setStatusDathang(5);
+                datHangDAO.UpgradeDH(datHang);
+                holder.Order_items_View.setVisibility(View.GONE);
             }
         });
         holder.Order_items_View.setOnClickListener(v -> {
