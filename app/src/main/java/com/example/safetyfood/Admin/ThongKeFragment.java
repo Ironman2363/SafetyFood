@@ -55,7 +55,7 @@ public class ThongKeFragment extends Fragment {
                                     thang = String.valueOf(month + 1);
                                 }
 
-                                edtStart.setText(year + "/" + thang + "/" + ngay);
+                                edtStart.setText(year + "-" + thang + "-" + ngay);
                             }
                         },
                         calendar.get(Calendar.YEAR),
@@ -86,7 +86,7 @@ public class ThongKeFragment extends Fragment {
                                     thang = String.valueOf(month + 1);
                                 }
 
-                                edtEnd.setText(year + "/" + thang + "/" + ngay);
+                                edtEnd.setText(year + "-" + thang + "-" + ngay);
                             }
                         },
                         calendar.get(Calendar.YEAR),
