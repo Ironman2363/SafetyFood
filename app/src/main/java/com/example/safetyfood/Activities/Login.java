@@ -39,28 +39,50 @@ public class Login extends AppCompatActivity {
         signUp = findViewById(R.id.signUp);
         dao = new TaikhoanDAO(this);
 
-        login.setOnClickListener(new View.OnClickListener( ) {
+        login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String mail = email.getText( ).toString( );
-                String mk = pass.getText( ).toString( );
-                if (mail.isEmpty( ) || mk.isEmpty( )) {
-                    Toast.makeText(Login.this, "Bạn cần nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show( );
+
+                Intent intent;
+                String mail = email.getText().toString();
+                String mk = pass.getText().toString();
+                if (dao.checkDangNhapkh(mail, mk) == true) {
+                    intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("tk", dao.getName(mail));
+                    intent.putExtra("bundle", bundle);
+                    startActivity(intent);
+                } else if (mail.equalsIgnoreCase("")) {
+                    Toast.makeText(Login.this, "Vui lòng nhập tài khoản", Toast.LENGTH_SHORT).show();
+                } else if (mk.equalsIgnoreCase("")) {
+                    Toast.makeText(Login.this, "Vui lòng nhập mật khẩu", Toast.LENGTH_SHORT).show();
+                } else if (dao.checkDangNhapkhNVAD(mail, mk) == true) {
+                    intent = new Intent(getApplicationContext(), AdminActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("tk", dao.getName(mail));
+                    intent.putExtra("bundle", bundle);
+                    startActivity(intent);
                 } else {
-                    if(checkTK(mail,mk)){
-                        Intent intent;
-                        if(tk.getRole()==3){
-                             intent = new Intent(getApplicationContext(),MainActivity.class);
-                        }else {
-                            intent =new Intent( getApplicationContext(), AdminActivity.class);
-                        }
-                        Toast.makeText(Login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show( );
-                        Bundle bundle = new Bundle(  );
-                        bundle.putSerializable("tk",dao.getName(mail));
-                        intent.putExtra("bundle",bundle);
-                        startActivity(intent);
-                    }
+
+
+                    Toast.makeText(Login.this, "Tài khoản hoặc mật khẩu sai", Toast.LENGTH_SHORT).show();
+
                 }
+                Toast.makeText(Login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+//                if (checkTK(mail,mk)){
+//                    Intent intent;
+//                    if (taiKhoan.getRole() == 3){
+//                        intent = new Intent(getApplicationContext(),MainActivity.class);
+//                    }else {
+//                        intent = new Intent(getApplicationContext(),AdminActivity.class);
+//                    }
+//                    Toast.makeText(Login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+//                    Bundle bundle = new Bundle();
+//                    bundle.putSerializable("tk", dao.getName(mail));
+//                    intent.putExtra("bundle", bundle);
+//                    startActivity(intent);
+//                }
+
             }
         });
         signUp.setOnClickListener(new View.OnClickListener( ) {
