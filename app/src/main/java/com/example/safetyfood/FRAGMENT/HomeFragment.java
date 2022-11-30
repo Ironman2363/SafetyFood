@@ -1,6 +1,9 @@
 package com.example.safetyfood.FRAGMENT;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -16,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.safetyfood.ADAPTER.LoaiSanPhamAdapter;
 import com.example.safetyfood.ADAPTER.SanPhamAdapter;
+import com.example.safetyfood.Activities.SearchItems;
 import com.example.safetyfood.DAO.LoaiSanPhamDAO;
 import com.example.safetyfood.DAO.SanPhamDAO;
 import com.example.safetyfood.MODEL.LoaiSanPham;
@@ -45,7 +49,9 @@ public class HomeFragment extends Fragment {
         anhXa();
 
         Home_TIL_findFood.setStartIconOnClickListener(v -> {
-            Toast.makeText(context, "" + edt_findFood.getText().toString(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getContext(), SearchItems.class);
+            intent.putExtra("search",edt_findFood.getText().toString().trim());
+            startActivity(intent);
         });
 
         getData();
@@ -65,6 +71,7 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         RCL_SP.setLayoutManager(layoutManager);
         RCL_SP.setAdapter(sanPhamAdapter);
+
         SanPhamAdapter sanPhamAdapter1 = new SanPhamAdapter(sanPhamList, getContext());
         LinearLayoutManager layoutManager1 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         RCL_TSP.setLayoutManager(layoutManager1);
@@ -164,7 +171,7 @@ public class HomeFragment extends Fragment {
 
     private void anhXa() {
         context = view.getContext();
-//        edt_findFood = view.findViewById(R.id.edt_findFood);
+        edt_findFood = view.findViewById(R.id.edt_findFood);
         Home_TIL_findFood = view.findViewById(R.id.Home_TIL_findFood);
         RCL_loaiSP = view.findViewById(R.id.RCL_loaiSP);
         RCL_SP = view.findViewById(R.id.RCL_SP);

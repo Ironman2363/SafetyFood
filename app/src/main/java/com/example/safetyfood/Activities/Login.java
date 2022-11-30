@@ -26,7 +26,7 @@ public class Login extends AppCompatActivity {
     Button login;
     TextView skip, signUp;
     TaikhoanDAO dao;
-    TaiKhoan taiKhoan;
+    TaiKhoan tk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,30 +85,30 @@ public class Login extends AppCompatActivity {
 
             }
         });
-        signUp.setOnClickListener(new View.OnClickListener() {
+        signUp.setOnClickListener(new View.OnClickListener( ) {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Login.this, Sign_Up.class));
             }
         });
-        skip.setOnClickListener(new View.OnClickListener() {
+        skip.setOnClickListener(new View.OnClickListener( ) {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Login.this, MainActivity.class));
-                cart_all = new DatHang();
-                account_all = new TaiKhoan();
+                cart_all = new DatHang(  );
+                account_all = new TaiKhoan(  );
             }
         });
     }
 
     private boolean checkTK(String mail, String mk) {
-        if (dao.getName(mail) == null) {
-            Toast.makeText(Login.this, "Tài khoản không tồn tại", Toast.LENGTH_SHORT).show();
+        if(dao.getName(mail)==null){
+            Toast.makeText(Login.this, "Tài khoản không tồn tại", Toast.LENGTH_SHORT).show( );
             return false;
-        } else {
-            TaiKhoan tk = dao.getName(mail);
-            if (!mk.equals(tk.getPassword())) {
-                Toast.makeText(Login.this, "Mật khẩu sai", Toast.LENGTH_SHORT).show();
+        }else {
+            tk = dao.getName(mail);
+            if(!mk.equals(tk.getPassword())){
+                Toast.makeText(Login.this, "Mật khẩu sai", Toast.LENGTH_SHORT).show( );
                 return false;
             }
         }
