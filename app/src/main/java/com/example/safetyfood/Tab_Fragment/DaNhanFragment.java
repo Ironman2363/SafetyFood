@@ -46,7 +46,7 @@ public class DaNhanFragment extends Fragment {
     }
 
     private void getData() {
-        list = datHangDAO.getCartStatus(account_all.getId(),5);
+        list = datHangDAO.getCartStatus(account_all.getId(),5,5);
         setList();
     }
 
