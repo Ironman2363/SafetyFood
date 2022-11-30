@@ -52,6 +52,12 @@ public class ChoXacNhanFragment extends Fragment {
         setList();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume( );
+        getData();
+    }
+
     private void setList() {
         OrderAdapter adapter = new OrderAdapter(list, getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());

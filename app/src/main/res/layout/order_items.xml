@@ -2,149 +2,160 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/Order_items_View"
     android:layout_margin="5dp"
     android:background="@drawable/boder_recycel"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/Order_items_nameShop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="SafetyFood"
-        android:textColor="@color/red"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.055"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/Order_items_View"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:weightSum="12"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Order_items_nameShop">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/Order_items_Img"
-            android:layout_width="0dp"
-            android:layout_height="80dp"
-            android:layout_weight="3"
-            android:src="@drawable/loaisp_coca" />
+        <TextView
+            android:id="@+id/Order_items_nameShop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="SafetyFood"
+            android:textColor="@color/red"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.055"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="9"
-            android:orientation="vertical">
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:weightSum="12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Order_items_nameShop">
 
-            <TextView
-                android:id="@+id/Order_items_nameSP"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Coca-cola"
-                android:textColor="@color/black"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+            <ImageView
+                android:id="@+id/Order_items_Img"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="3"
+                android:src="@drawable/loaisp_coca" />
 
-            <TextView
-                android:id="@+id/Order_items_Amount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="x1"
-                android:textAlignment="viewEnd" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="9"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/Order_items_Price"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="155000 VND"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/red"
-                android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/Order_items_nameSP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Coca-cola"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/Order_items_Amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="x1"
+                    android:textAlignment="viewEnd" />
+
+                <TextView
+                    android:id="@+id/Order_items_Price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="155000 VND"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/red"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/Order_items_xemThem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Xem thêm"
-        android:textAlignment="center"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
-
-    <TextView
-        android:id="@+id/Order_items_totalAmount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2 sản phẩm"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.047"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Order_items_xemThem" />
-
-    <TextView
-        android:id="@+id/Order_items_totalPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Total : 120000 VND"
-        android:textColor="@color/red"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/Order_items_totalAmount"
-        app:layout_constraintTop_toBottomOf="@+id/Order_items_xemThem" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="12"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Order_items_totalPrice">
+        <TextView
+            android:id="@+id/Order_items_xemThem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Xem thêm"
+            android:textAlignment="center"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
         <TextView
-            android:id="@+id/Order_items_status"
+            android:id="@+id/Order_items_totalAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="8"
-            android:padding="16dp"
-            android:text="Giao hàng thành công" />
+            android:text="2 sản phẩm"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.047"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Order_items_xemThem" />
 
-
-        <Button
-            android:id="@+id/Order_items_MuaLai"
+        <TextView
+            android:id="@+id/Order_items_totalPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:backgroundTint="@color/red"
-            android:text="Mua lại"
-            android:textStyle="bold" />
+            android:text="Total : 120000 VND"
+            android:textColor="@color/red"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/Order_items_totalAmount"
+            app:layout_constraintTop_toBottomOf="@+id/Order_items_xemThem" />
 
-        <Button
-            android:id="@+id/btnxacnhan"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:backgroundTint="#3F51B5"
-            android:text="Giao hàng"
-            android:textStyle="bold" />
+            android:weightSum="12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Order_items_totalPrice">
+
+            <TextView
+                android:id="@+id/Order_items_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:padding="16dp"
+                android:text="Giao hàng thành công" />
 
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/Order_items_MuaLai"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:backgroundTint="@color/red"
+                android:text="Mua lại"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnxacnhan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:backgroundTint="#3F51B5"
+                android:text="Giao hàng"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

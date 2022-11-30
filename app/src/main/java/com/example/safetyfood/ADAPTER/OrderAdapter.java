@@ -72,7 +72,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
         }
         holder.Order_items_Amount.setText("x " + chiTietDatHang.getAmount());
         holder.Order_items_Price.setText("Giá : " + sanPham.getPriceSanpham());
-//        holder.Order_items_totalAmount.setText(chiTietDatHangDAO.getListCT(datHang.getId( )).size()+" sản phẩm");
         holder.Order_items_totalAmount.setText(chiTietDatHangDAO.getSum(datHang.getId()) + " sản phẩm");
         holder.Order_items_totalPrice.setText("Thành tiền : " + datHang.getTotalpriceDathang());
         holder.btnXacnhan.setVisibility(View.VISIBLE);
@@ -112,11 +111,15 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
         }
         holder.Order_items_status.setText(textStatus);
         holder.Order_items_MuaLai.setOnClickListener(v -> {
-            if (statusDH == 3) {
+            if (statusDH == 1){
                 datHang.setStatusDathang(3);
                 datHangDAO.UpgradeDH(datHang);
-                holder.Order_items_View.setVisibility(View.GONE);
             }
+            else if (statusDH == 3) {
+                datHang.setStatusDathang(1);
+                datHangDAO.UpgradeDH(datHang);
+            }
+            holder.Order_items_View.setVisibility(View.GONE);
         });
         holder.btnXacnhan.setOnClickListener(v -> {
             if (statusDH == 1) {

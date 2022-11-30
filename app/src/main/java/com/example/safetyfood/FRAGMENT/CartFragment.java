@@ -10,12 +10,15 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -29,6 +32,7 @@ import com.example.safetyfood.MODEL.ChiTietDatHang;
 import com.example.safetyfood.R;
 import com.example.safetyfood.Service.CheckCartService;
 import com.example.safetyfood.Tab_Fragment.GiaoHangFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +72,7 @@ public class CartFragment extends Fragment {
             datHangDAO.UpgradeDH(cart_all);
 
             getContext().startService(new Intent(getContext(), CheckCartService.class));
+            replaceFragment(new OrderFragment());
         }
     }
 
@@ -113,6 +118,20 @@ public class CartFragment extends Fragment {
         datHangDAO = new DatHangDAO(getContext());
         IntentFilter intentFilter = new IntentFilter("checkCart");
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(broadcastReceiver, intentFilter);
+    }
+
+    private void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager( );
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction( )
+                .setCustomAnimations(R.anim.enter_right_to_left, R.anim.exit_right_to_left,
+                        R.anim.enter_left_to_right, R.anim.exit_left_to_right);
+        fragmentTransaction.replace(R.id.frameLayout, fragment);
+        fragmentTransaction.commit( );
+
+        BottomNavigationView view = getActivity().findViewById(R.id.bottomNavigationView);
+
+        Menu menu = view.getMenu();
+        menu.findItem(R.id.order).setChecked(true);
     }
 
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {

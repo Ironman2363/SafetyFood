@@ -38,22 +38,28 @@ public class HuyFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_huy, container, false);
 
         Order_list = view.findViewById(R.id.Order_list);
-        datHangDAO = new DatHangDAO(getContext());
+        datHangDAO = new DatHangDAO(getContext( ));
 
-        getData();
+        getData( );
 
         return view;
     }
 
     private void getData() {
-        list = datHangDAO.getCartStatus(account_all.getId(), 3);
-        setList();
+        list = datHangDAO.getCartStatus(account_all.getId( ), 3);
+        setList( );
     }
 
     private void setList() {
-        OrderAdapter adapter = new OrderAdapter(list, getContext());
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        OrderAdapter adapter = new OrderAdapter(list, getContext( ));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext( ));
         Order_list.setLayoutManager(linearLayoutManager);
         Order_list.setAdapter(adapter);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume( );
+        getData( );
     }
 }
