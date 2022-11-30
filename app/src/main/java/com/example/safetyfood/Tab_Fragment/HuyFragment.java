@@ -46,7 +46,7 @@ public class HuyFragment extends Fragment {
     }
 
     private void getData() {
-        list = datHangDAO.getCartStatus(account_all.getId( ), 3);
+        list = datHangDAO.getCartStatus(account_all.getId( ), 3,4);
         setList( );
     }
 

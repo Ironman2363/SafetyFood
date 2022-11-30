@@ -43,7 +43,7 @@ public class ThongKeDAO {
     }
 
     public int getDoanhThu(String tuNgay, String denNgay) {
-        String sql = "select SUM(TotalPrice) as doanhThu from DatHang where date(Created) between ? and ?";
+        String sql = "select SUM(TotalPrice) as doanhThu from DatHang where date(Created) between ? and ? and Status=5";
         List<Integer> list = new ArrayList<>();
         Cursor cursor = db.rawQuery(sql, new String[]{tuNgay, denNgay});
         cursor.moveToFirst();

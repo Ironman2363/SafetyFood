@@ -46,7 +46,7 @@ public class GiaoHangFragment extends Fragment {
     }
 
     private void getData() {
-        list = datHangDAO.getCartStatus(account_all.getId( ), 2);
+        list = datHangDAO.getCartStatus(account_all.getId( ), 2,2);
         setList( );
     }
 
