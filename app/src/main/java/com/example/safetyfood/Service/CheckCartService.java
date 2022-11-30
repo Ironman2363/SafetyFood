@@ -34,7 +34,7 @@ public class CheckCartService extends Service {
 
         int check = -1;
         Calendar calendar = Calendar.getInstance();
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm dd/MM/yyyy");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String text = simpleDateFormat.format(calendar.getTime());
         datHangDAO = new DatHangDAO(getApplicationContext());
 

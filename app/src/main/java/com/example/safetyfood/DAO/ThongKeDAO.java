@@ -28,8 +28,7 @@ public class ThongKeDAO {
 
     public List<Top> getTop() {
         List<Top> list = new ArrayList<>();
-        String sql = "select " + ProductId + ", count(" + ProductId + ") as sum from " + Table_ChiTietDH + " group by " + ProductId +
-                " order by sum desc limit 10";
+        String sql = "select ProductId, count(ProductId) as sum from ChiTietDatHang group by ProductId order by sum desc limit 10";
         Cursor cursor = db.rawQuery(sql, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
@@ -44,9 +43,7 @@ public class ThongKeDAO {
     }
 
     public int getDoanhThu(String tuNgay, String denNgay) {
-        tuNgay = tuNgay.replace("/", "");
-        denNgay = denNgay.replace("/", "");
-        String sql = "select SUM(" + TotalPrice + ") as doanhThu from " + Table_DatHang + " where " + Created + " between ? and ?";
+        String sql = "select SUM(TotalPrice) as doanhThu from DatHang where date(Created) between ? and ?";
         List<Integer> list = new ArrayList<>();
         Cursor cursor = db.rawQuery(sql, new String[]{tuNgay, denNgay});
         cursor.moveToFirst();
