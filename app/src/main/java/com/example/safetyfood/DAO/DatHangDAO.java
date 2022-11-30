@@ -82,9 +82,9 @@ public class DatHangDAO {
         return getData(sql, new String[]{String.valueOf(status)});
     }
 
-    public List<DatHang> getCartStatus(int ID, int status) {
-        String sql = "Select * from " + table_name + " where " + AccountId + "=? and " + Status + " = ?";
-        return getData(sql, new String[]{String.valueOf(ID), String.valueOf(status)});
+    public List<DatHang> getCartStatus(int ID, int status3,int status4) {
+        String sql = "Select * from " + table_name + " where " + AccountId + "=? and " + Status + " = ? or "+Status+" = ?";
+        return getData(sql, new String[]{String.valueOf(ID), String.valueOf(status3),String.valueOf(status4)});
     }
 
     public List<DatHang> getData(String sql, String... selectionArgs) {

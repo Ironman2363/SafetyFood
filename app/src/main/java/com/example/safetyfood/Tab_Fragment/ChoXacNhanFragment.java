@@ -48,7 +48,7 @@ public class ChoXacNhanFragment extends Fragment {
     }
 
     private void getData() {
-        list = datHangDAO.getCartStatus(account_all.getId(), 1);
+        list = datHangDAO.getCartStatus(account_all.getId(), 1,1);
         setList();
     }
 

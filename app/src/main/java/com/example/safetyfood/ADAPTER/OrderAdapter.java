@@ -74,8 +74,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
         holder.Order_items_Price.setText("Giá : " + sanPham.getPriceSanpham());
         holder.Order_items_totalAmount.setText(chiTietDatHangDAO.getSum(datHang.getId()) + " sản phẩm");
         holder.Order_items_totalPrice.setText("Thành tiền : " + datHang.getTotalpriceDathang());
-        holder.btnXacnhan.setVisibility(View.VISIBLE);
-        if (account_all.getRole() != 1) {
+
+        if (account_all.getRole() == 1 || account_all.getRole() == 2) {
+            holder.btnXacnhan.setVisibility(View.VISIBLE);
+        }else {
             holder.btnXacnhan.setVisibility(View.GONE);
         }
 
@@ -86,6 +88,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
             case 1: {
                 textStatus = "Đang chờ xử lý";
                 holder.Order_items_MuaLai.setText("Hủy");
+                holder.btnxacnhandagiahang.setVisibility(View.GONE);
                 break;
             }
             case 2: {
@@ -98,21 +101,29 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
             }
             case 3: {
                 textStatus = "Bị hủy từ phía bạn";
+                holder.btnxacnhandagiahang.setVisibility(View.GONE);
                 break;
             }
             case 4: {
                 textStatus = "Bị hủy từ phía cửa hàng";
+                holder.btnxacnhandagiahang.setVisibility(View.GONE);
                 break;
             }
             case 5: {
                 textStatus = "Giao hàng thành công";
+                holder.btnxacnhandagiahang.setVisibility(View.GONE);
+                holder.Order_items_MuaLai.setVisibility(View.GONE);
                 break;
             }
         }
         holder.Order_items_status.setText(textStatus);
         holder.Order_items_MuaLai.setOnClickListener(v -> {
-            if (statusDH == 1){
-                datHang.setStatusDathang(3);
+            if (statusDH == 1 ){
+                if (account_all.getRole()==3){
+                    datHang.setStatusDathang(3);
+                }else {
+                    datHang.setStatusDathang(4);
+                }
                 datHangDAO.UpgradeDH(datHang);
             }
             else if (statusDH == 3) {
@@ -124,6 +135,14 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
         holder.btnXacnhan.setOnClickListener(v -> {
             if (statusDH == 1) {
                 datHang.setStatusDathang(2);
+                datHangDAO.UpgradeDH(datHang);
+                holder.Order_items_View.setVisibility(View.GONE);
+            }
+        });
+
+        holder.btnxacnhandagiahang.setOnClickListener(v ->{
+            if (statusDH == 2) {
+                datHang.setStatusDathang(5);
                 datHangDAO.UpgradeDH(datHang);
                 holder.Order_items_View.setVisibility(View.GONE);
             }
@@ -147,7 +166,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
         ImageView Order_items_Img;
         TextView Order_items_nameSP, Order_items_Amount, Order_items_Price, Order_items_totalAmount, Order_items_totalPrice, Order_items_status,
                 Order_items_xemThem;
-        Button Order_items_MuaLai, btnXacnhan;
+        Button Order_items_MuaLai, btnXacnhan,btnxacnhandagiahang;
         ConstraintLayout Order_items_View;
 
         public OrderAdapterHolder(@NonNull View itemView) {
@@ -163,6 +182,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
             Order_items_View = itemView.findViewById(R.id.Order_items_View);
             Order_items_xemThem = itemView.findViewById(R.id.Order_items_xemThem);
             btnXacnhan = itemView.findViewById(R.id.btnxacnhan);
+            btnxacnhandagiahang = itemView.findViewById(R.id.btnxacnhandagiahang);
         }
     }
 }
