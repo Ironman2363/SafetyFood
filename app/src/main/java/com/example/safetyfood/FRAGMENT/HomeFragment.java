@@ -93,6 +93,10 @@ public class HomeFragment extends Fragment {
                     , "19/11/2022", "19/11/2022", 1));
             loaiSanPhamDAO.themLoaiSanPham(new LoaiSanPham(0, 0, "Thịt", String.valueOf(R.drawable.meat)
                     , "19/11/2022", "19/11/2022", 1));
+            loaiSanPhamDAO.themLoaiSanPham(new LoaiSanPham(0, 0, "Trà sữa", String.valueOf(R.drawable.trasua)
+                    , "19/11/2022", "19/11/2022", 1));
+            loaiSanPhamDAO.themLoaiSanPham(new LoaiSanPham(0, 0, "Tráng miệng", String.valueOf(R.drawable.trangmieng)
+                    , "19/11/2022", "19/11/2022", 1));
         }
         if (sanPhamDAO.getDSSanPham().isEmpty()) {
             sanPhamDAO.themSanpham(new SanPham(0, "Coca-cola", String.valueOf(R.drawable.cocanoback), 25000
@@ -101,14 +105,28 @@ public class HomeFragment extends Fragment {
                     , "4", "19/11/2022", "19/11/2022", 1));
             sanPhamDAO.themSanpham(new SanPham(0, "Cơm rang", String.valueOf(R.drawable.comrangduabo), 25000
                     , "4", "19/11/2022", "19/11/2022", 1));
+            sanPhamDAO.themSanpham(new SanPham(0, "Cơm gia đình", String.valueOf(R.drawable.comgiadinh), 25000
+                    , "4", "19/11/2022", "19/11/2022", 1));
             sanPhamDAO.themSanpham(new SanPham(0, "Phở bò", String.valueOf(R.drawable.phobo), 35000
                     , "2", "19/11/2022", "19/11/2022", 1));
+            sanPhamDAO.themSanpham(new SanPham(0, "Mì cay", String.valueOf(R.drawable.micay), 35000
+                    , "2", "19/11/2022", "19/11/2022", 1));
             sanPhamDAO.themSanpham(new SanPham(0, "Khoai tây chiên", String.valueOf(R.drawable.khaitaychiennoback), 35000
+                    , "3", "19/11/2022", "19/11/2022", 1));
+            sanPhamDAO.themSanpham(new SanPham(0, "Hot dog", String.valueOf(R.drawable.hotdog), 35000
                     , "3", "19/11/2022", "19/11/2022", 1));
             sanPhamDAO.themSanpham(new SanPham(0, "Pepsi", String.valueOf(R.drawable.pesinobg), 25000
                     , "1", "19/11/2022", "19/11/2022", 1));
             sanPhamDAO.themSanpham(new SanPham(0, "Phở", String.valueOf(R.drawable.phoooo), 40000
                     , "2", "19/11/2022", "19/11/2022", 1));
+            sanPhamDAO.themSanpham(new SanPham(0, "Bánh bao", String.valueOf(R.drawable.banhbaonoback), 40000
+                    , "5", "19/11/2022", "19/11/2022", 1));
+            sanPhamDAO.themSanpham(new SanPham(0, "Bánh mì", String.valueOf(R.drawable.banhminoback), 40000
+                    , "5", "19/11/2022", "19/11/2022", 1));
+            sanPhamDAO.themSanpham(new SanPham(0, "Bánh cuốn", String.valueOf(R.drawable.banhcuonnoback), 40000
+                    , "5", "19/11/2022", "19/11/2022", 1));
+            sanPhamDAO.themSanpham(new SanPham(0, "Bánh xèo", String.valueOf(R.drawable.banhxeonoback), 40000
+                    , "5", "19/11/2022", "19/11/2022", 1));
             sanPhamDAO.themSanpham(new SanPham(0, "Hamburger", String.valueOf(R.drawable.hamburgernobackk), 45000
                     , "3", "19/11/2022", "19/11/2022", 1));
             sanPhamDAO.themSanpham(new SanPham(0, "Cơm văn phòng", String.valueOf(R.drawable.comvanphong), 25000
@@ -121,6 +139,30 @@ public class HomeFragment extends Fragment {
                     , "3", "19/11/2022", "19/11/2022", 1));
             sanPhamDAO.themSanpham(new SanPham(0, "Nước cam", String.valueOf(R.drawable.nccamnoback), 25000
                     , "1", "19/11/2022", "19/11/2022", 1));
+            sanPhamDAO.themSanpham(new SanPham(0, "Sườn Nướng", String.valueOf(R.drawable.suongnuongno), 25000
+                    , "6", "19/11/2022", "19/11/2022", 1));
+            sanPhamDAO.themSanpham(new SanPham(0, "Bánh Flan", String.valueOf(R.drawable.banhplan), 25000
+                    , "8", "19/11/2022", "19/11/2022", 1));
+            sanPhamDAO.themSanpham(new SanPham(0, "Kem", String.valueOf(R.drawable.kem), 25000
+                    , "8", "19/11/2022", "19/11/2022", 1));
+            sanPhamDAO.themSanpham(new SanPham(0, "Sữa chua", String.valueOf(R.drawable.suachua), 25000
+                    , "8", "19/11/2022", "19/11/2022", 1));
+            sanPhamDAO.themSanpham(new SanPham(0, "Trái cây", String.valueOf(R.drawable.diahoaqua), 25000
+                    , "8", "19/11/2022", "19/11/2022", 1));
+            sanPhamDAO.themSanpham(new SanPham(0, "Heo quay", String.valueOf(R.drawable.heoquay), 25000
+                    , "6", "19/11/2022", "19/11/2022", 1));
+            sanPhamDAO.themSanpham(new SanPham(0, "Vịt quay", String.valueOf(R.drawable.vitquay), 25000
+                    , "6", "19/11/2022", "19/11/2022", 1));
+            sanPhamDAO.themSanpham(new SanPham(0, "Gà nướng", String.valueOf(R.drawable.ganuong), 25000
+                    , "6", "19/11/2022", "19/11/2022", 1));
+            sanPhamDAO.themSanpham(new SanPham(0, "Sữa tươi trân châu", String.valueOf(R.drawable.suatuoitranchau), 25000
+                    , "7", "19/11/2022", "19/11/2022", 1));
+            sanPhamDAO.themSanpham(new SanPham(0, "Trà sữa việt quất", String.valueOf(R.drawable.trasuavietquat), 25000
+                    , "7", "19/11/2022", "19/11/2022", 1));
+            sanPhamDAO.themSanpham(new SanPham(0, "Trà sữa dâu tây", String.valueOf(R.drawable.trausuadautay), 25000
+                    , "7", "19/11/2022", "19/11/2022", 1));
+            sanPhamDAO.themSanpham(new SanPham(0, "Trà sữa matcha", String.valueOf(R.drawable.matchakem), 25000
+                    , "7", "19/11/2022", "19/11/2022", 1));
         }
         loaiSanPhamList = loaiSanPhamDAO.getDSLoaiSanPham();
         Log.e("ZZZZZ", "getData: " + loaiSanPhamList.get(0));
