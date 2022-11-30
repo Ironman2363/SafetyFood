@@ -130,4 +130,23 @@ public class SanPhamDAO {
         return list;
     }
 
+    public List<SanPham> getListName(String name){
+        List<SanPham> list = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getReadableDatabase();
+        String sql = "select * from SanPham where Name like '%'||?||'%'";
+        Cursor cursor = sqLiteDatabase.rawQuery(sql, new String[]{String.valueOf(name)});
+
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()) {
+            list.add(new SanPham(cursor.getInt(0), cursor.getString(1),
+                    cursor.getString(2), cursor.getInt(3), cursor.getString(4),
+                    cursor.getString(5), cursor.getString(6), cursor.getInt(7)));
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        return list;
+    }
+
 }

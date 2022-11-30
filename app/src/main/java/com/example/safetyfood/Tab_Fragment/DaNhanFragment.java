@@ -56,4 +56,10 @@ public class DaNhanFragment extends Fragment {
         Order_list.setLayoutManager(linearLayoutManager);
         Order_list.setAdapter(adapter);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume( );
+        getData();
+    }
 }
