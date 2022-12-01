@@ -18,6 +18,7 @@ import android.util.Log;
 import com.example.safetyfood.Admin.OrderAdminFragment;
 import com.example.safetyfood.Admin.ThongKeFragment;
 import com.example.safetyfood.DAO.DatHangDAO;
+import com.example.safetyfood.DAO.ThongTinNguoiDungDAO;
 import com.example.safetyfood.FRAGMENT.CartFragment;
 import com.example.safetyfood.FRAGMENT.HomeFragment;
 import com.example.safetyfood.FRAGMENT.OrderFragment;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     public static TaiKhoan account_all = new TaiKhoan( );
     public static DatHang cart_all = new DatHang( );
     DatHangDAO datHangDAO;
-
+    ThongTinNguoiDungDAO thongTinNguoiDungDAO;
 
     BottomNavigationView bottomNavigationView;
 
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         replaceFragment(new HomeFragment( ));
 
         datHangDAO = new DatHangDAO(this);
+        thongTinNguoiDungDAO = new ThongTinNguoiDungDAO(this);
         IntentFilter intentFilter = new IntentFilter("checkCart");
         LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver, intentFilter);
 

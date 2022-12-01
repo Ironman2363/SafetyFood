@@ -19,11 +19,11 @@ public class ChiTietDatHangDAO {
 
     public ChiTietDatHangDAO(Context context) {
         dataBase = new SafetyFoodDataBase(context);
+        db = dataBase.getReadableDatabase();
     }
 
     public ArrayList<ChiTietDatHang> getDSChiTietDatHang() {
         ArrayList<ChiTietDatHang> list = new ArrayList<>();
-        db = dataBase.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM ChiTietDatHang", null);
 
         if (cursor.getCount() != 0) {
@@ -36,7 +36,6 @@ public class ChiTietDatHangDAO {
     }
 
     public boolean ThemChiTietDatHang(ChiTietDatHang chiTietDatHang) {
-        db = dataBase.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("OrderId", chiTietDatHang.getIdDathang());
         contentValues.put("ProductId", chiTietDatHang.getProductid());
@@ -49,7 +48,6 @@ public class ChiTietDatHangDAO {
     }
 
     public boolean CapNhapChiTietDatHang(ChiTietDatHang chiTietDatHang) {
-        db = dataBase.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("OrderId", chiTietDatHang.getIdDathang());
         contentValues.put("ProductId", chiTietDatHang.getProductid());
@@ -63,7 +61,6 @@ public class ChiTietDatHangDAO {
     }
 
     public int XoaChiTietDatHang(int Id) {
-        db = dataBase.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT*FROM ChiTietDatHang WHERE Id = ?", new String[]{String.valueOf(Id)});
         if (cursor.getCount() != 0) {
             return -1;
@@ -76,7 +73,6 @@ public class ChiTietDatHangDAO {
 
     public List<ChiTietDatHang> getListCT(int idDatHang) {
         List<ChiTietDatHang> list = new ArrayList<>();
-        db = dataBase.getWritableDatabase();
         String sql = "select * from ChiTietDatHang where OrderId =?";
         Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(idDatHang)});
         cursor.moveToFirst();
@@ -99,7 +95,6 @@ public class ChiTietDatHangDAO {
 
     public List<ChiTietDatHang> checkCart(int idDatHang, int IdSP) {
         List<ChiTietDatHang> list = new ArrayList<>();
-        db = dataBase.getWritableDatabase();
         String sql = "select * from ChiTietDatHang where OrderId =? and ProductId =?";
         Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(idDatHang), String.valueOf(IdSP)});
         cursor.moveToFirst();
