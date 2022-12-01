@@ -30,10 +30,9 @@ public class thongtinnguoidungDao {
         return list;
     }
 
-    public boolean themThongTinNguoiDung(int id, int AccountId, String FullName, String Email, String Addres, String Avatar, int Birthday, int Gender, int Created, int Updated) {
+    public boolean themThongTinNguoiDung(int AccountId, String FullName, String Email, String Addres, String Avatar, int Birthday, int Gender, int Created, int Updated) {
         SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("Id", id);
         contentValues.put("AccountId", AccountId);
         contentValues.put("FullName", FullName);
         contentValues.put("Email", Email);
