@@ -5,6 +5,7 @@ public class ThongTinNguoiDung {
     int idtaikhoan;
     String fullname;
     String emailNguoidung;
+    String sdtNguoidung;
     String addresNguoidung;
     String avatarNguoidung;
     String birthdayNguoidung;
@@ -15,11 +16,12 @@ public class ThongTinNguoiDung {
     public ThongTinNguoiDung() {
     }
 
-    public ThongTinNguoiDung(int id, int idtaikhoan, String fullname, String emailNguoidung, String addresNguoidung, String avatarNguoidung, String birthdayNguoidung, int gender, String createNguoidung, String updateNguoidung) {
+    public ThongTinNguoiDung(int id, int idtaikhoan, String fullname, String emailNguoidung, String sdtNguoidung, String addresNguoidung, String avatarNguoidung, String birthdayNguoidung, int gender, String createNguoidung, String updateNguoidung) {
         this.id = id;
         this.idtaikhoan = idtaikhoan;
         this.fullname = fullname;
         this.emailNguoidung = emailNguoidung;
+        this.sdtNguoidung = sdtNguoidung;
         this.addresNguoidung = addresNguoidung;
         this.avatarNguoidung = avatarNguoidung;
         this.birthdayNguoidung = birthdayNguoidung;
@@ -106,5 +108,30 @@ public class ThongTinNguoiDung {
 
     public void setUpdateNguoidung(String updateNguoidung) {
         this.updateNguoidung = updateNguoidung;
+    }
+
+    public String getSdtNguoidung() {
+        return sdtNguoidung;
+    }
+
+    public void setSdtNguoidung(String sdtNguoidung) {
+        this.sdtNguoidung = sdtNguoidung;
+    }
+
+    @Override
+    public String toString() {
+        return "ThongTinNguoiDung{" +
+                "id=" + id +
+                ", idtaikhoan=" + idtaikhoan +
+                ", fullname='" + fullname + '\'' +
+                ", emailNguoidung='" + emailNguoidung + '\'' +
+                ", sdtNguoidung='" + sdtNguoidung + '\'' +
+                ", addresNguoidung='" + addresNguoidung + '\'' +
+                ", avatarNguoidung='" + avatarNguoidung + '\'' +
+                ", birthdayNguoidung='" + birthdayNguoidung + '\'' +
+                ", gender=" + gender +
+                ", createNguoidung='" + createNguoidung + '\'' +
+                ", updateNguoidung='" + updateNguoidung + '\'' +
+                '}';
     }
 }

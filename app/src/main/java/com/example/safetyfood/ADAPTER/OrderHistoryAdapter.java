@@ -1,7 +1,9 @@
 package com.example.safetyfood.ADAPTER;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +13,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.safetyfood.Activities.OrderDetail;
 import com.example.safetyfood.DAO.ChiTietDatHangDAO;
+import com.example.safetyfood.DAO.ThongTinNguoiDungDAO;
 import com.example.safetyfood.MODEL.DatHang;
+import com.example.safetyfood.MODEL.ThongTinNguoiDung;
 import com.example.safetyfood.R;
 
 import java.util.List;
@@ -22,11 +27,13 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
     List<DatHang> list;
     Context context;
     ChiTietDatHangDAO chiTietDatHangDAO;
+    ThongTinNguoiDungDAO thongTinNguoiDungDAO;
 
     public OrderHistoryAdapter(List<DatHang> list, Context context) {
         this.list = list;
         this.context = context;
         chiTietDatHangDAO = new ChiTietDatHangDAO(context);
+        thongTinNguoiDungDAO = new ThongTinNguoiDungDAO(context);
     }
 
     @NonNull
@@ -38,13 +45,21 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
     @Override
     public void onBindViewHolder(@NonNull OrderHistoryAdapterHolder holder, int position) {
         DatHang datHang = list.get(position);
+        ThongTinNguoiDung info = thongTinNguoiDungDAO.getInfo(datHang.getIdtaikhoan());
         Log.e("Adapter", "onBindViewHolder: "+datHang );
         String status = "";
         holder.Order_History_items_ID.setText("Mã đơn :"+datHang.getId());
-        holder.Order_History_items_Buyer.setText("Khách hàng : Hung");
-        holder.Order_History_items_Address.setText("Địa chỉ : HN");
+        holder.Order_History_items_Buyer.setText("Khách hàng : "+info.getFullname());
+        holder.Order_History_items_Address.setText("Địa chỉ : "+info.getAddresNguoidung());
         holder.Order_History_items_Amount.setText(chiTietDatHangDAO.getSum(datHang.getId( ))+" sản phẩm");
         holder.Order_History_items_TotalPrice.setText("Tổng :"+datHang.getTotalpriceDathang()+"VND");
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, OrderDetail.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("datHang", datHang);
+            intent.putExtra("bundle", bundle);
+            context.startActivity(intent);
+        });
         switch (datHang.getStatusDathang()){
             case 1:{
                 status = "Đang chờ xử lý";
