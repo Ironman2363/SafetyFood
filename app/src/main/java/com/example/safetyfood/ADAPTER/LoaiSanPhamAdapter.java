@@ -2,6 +2,7 @@ package com.example.safetyfood.ADAPTER;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +41,12 @@ public class LoaiSanPhamAdapter extends RecyclerView.Adapter<LoaiSanPhamAdapter.
     @Override
     public void onBindViewHolder(@NonNull LoaiSanPhamHolder holder, int position) {
         LoaiSanPham loaiSanPham = list.get(position);
-        holder.loaiSP_items_Img.setImageResource(Integer.parseInt(loaiSanPham.getImgLoaisanpham()));
+        try{
+            holder.loaiSP_items_Img.setImageResource(Integer.parseInt(loaiSanPham.getImgLoaisanpham()));
+        }catch (Exception e){
+            Uri uri = Uri.parse(loaiSanPham.getImgLoaisanpham());
+            holder.loaiSP_items_Img.setImageURI(uri);
+        }
         holder.loaiSP_items_txt.setText(loaiSanPham.getNameLoaisanpham());
         holder.loaiSP_items_View.setOnClickListener(v -> {
             Intent intent = new Intent(context, AllLoaiSP.class);

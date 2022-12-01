@@ -2,6 +2,7 @@ package com.example.safetyfood.ADAPTER;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -47,7 +48,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartAdapterHol
     public void onBindViewHolder(@NonNull CartAdapterHolder holder, int position) {
         ChiTietDatHang chiTietDatHang = list.get(position);
         SanPham sanPham = sanPhamDAO.getID(chiTietDatHang.getProductid());
-        holder.Cart_items_img.setImageResource(Integer.parseInt(sanPham.getImgSanpham()));
+        try{
+            holder.Cart_items_img.setImageResource(Integer.parseInt(sanPham.getImgSanpham()));
+        }catch (Exception e){
+            Uri uri = Uri.parse(sanPham.getImgSanpham());
+            holder.Cart_items_img.setImageURI(uri);
+        }
+
         holder.Cart_items_name.setText(sanPham.getNameSanpham());
         holder.Cart_items_amount.setText("Số lượng : " + chiTietDatHang.getAmount());
         holder.Cart_items_price.setText(String.valueOf(sanPham.getPriceSanpham()));

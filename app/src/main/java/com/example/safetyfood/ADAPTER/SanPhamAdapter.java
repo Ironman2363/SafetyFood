@@ -2,6 +2,7 @@ package com.example.safetyfood.ADAPTER;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -40,7 +41,12 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.SanPhamA
     @Override
     public void onBindViewHolder(@NonNull SanPhamAdapterHolder holder, int position) {
         SanPham sp = list.get(position);
-        holder.SP_items_Img.setImageResource(Integer.parseInt(sp.getImgSanpham()));
+        try{
+            holder.SP_items_Img.setImageResource(Integer.parseInt(sp.getImgSanpham()));
+        }catch (Exception e){
+            Uri uri = Uri.parse(sp.getImgSanpham());
+            holder.SP_items_Img.setImageURI(uri);
+        }
         holder.SP_items_Gia.setText(sp.getPriceSanpham() + "đ");
         holder.SP_items_Ten.setText(sp.getNameSanpham());
         holder.SP_items_View.setOnClickListener(v -> {

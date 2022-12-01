@@ -82,8 +82,8 @@ public class SafetyFoodDataBase extends SQLiteOpenHelper {
                 "Name TEXT NOT NULL," +
                 "Image TEXT NOT NULL," +
                 "Created TEXT NOT NULL," +
-                "Updated TEXT NOT NULL," +
-                "Status INTEGER NOT NULL)";
+                "Updated TEXT," +
+                "Status INTEGER)";
         db.execSQL(createTableLoaiSanPham);
 
         String createTableSanPham = "create table SanPham(" +
@@ -93,8 +93,8 @@ public class SafetyFoodDataBase extends SQLiteOpenHelper {
                 "Price FLOAT NOT NULL," +
                 "TypeproDuct INTEGER REFERENCES LoaiSanPham(Id)," +
                 "Created TEXT NOT NULL," +
-                "Updated TEXT NOT NULL," +
-                "Status INTEGER NOT NULL)";
+                "Updated TEXT ," +
+                "Status INTEGER )";
         db.execSQL(createTableSanPham);
 
         db.execSQL("INSERT INTO VaiTro VALUES(1,'ADMIN','ADMIN','24/11/2022','24/11/2022'),(2,'NHANVIEN','NHANVIEN','24/11/2022','24/11/2022'),(3,'KHACHHANG','KHACHHANG','24/11/2022','24/11/2022')");

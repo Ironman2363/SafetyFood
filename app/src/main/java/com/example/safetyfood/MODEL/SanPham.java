@@ -3,7 +3,8 @@ package com.example.safetyfood.MODEL;
 import java.io.Serializable;
 
 public class SanPham implements Serializable {
-    int id;
+    int id , maLoaiSanPham;
+
     String nameSanpham;
     String imgSanpham;
     int priceSanpham;
@@ -24,6 +25,15 @@ public class SanPham implements Serializable {
         this.createSanpham = createSanpham;
         this.updatedSanpham = updatedSanpham;
         this.statusSanpham = statusSanpham;
+
+    }
+
+    public SanPham(String nameSanpham, String imgSanpham, int priceSanpham, String loaiSanpham, String createSanpham) {
+        this.nameSanpham = nameSanpham;
+        this.imgSanpham = imgSanpham;
+        this.priceSanpham = priceSanpham;
+        this.loaiSanpham = loaiSanpham;
+        this.createSanpham = createSanpham;
     }
 
     public int getId() {

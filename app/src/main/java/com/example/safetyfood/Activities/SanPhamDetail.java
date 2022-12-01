@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -88,6 +89,7 @@ public class SanPhamDetail extends AppCompatActivity {
 
     }
 
+
     private ChiTietDatHang CheckCart(SanPham sanPham) {
         List<ChiTietDatHang> list = new ArrayList<>();
         list = dao.checkCart(cart_all.getId(), sanPham.getId());
@@ -158,7 +160,13 @@ public class SanPhamDetail extends AppCompatActivity {
     }
 
     private void setData(SanPham sanPham) {
-        SPDetail_Img.setImageResource(Integer.parseInt(sanPham.getImgSanpham()));
+        try{
+            SPDetail_Img.setImageResource(Integer.parseInt(sanPham.getImgSanpham()));
+        }catch (Exception e){
+            Uri uri = Uri.parse(sanPham.getImgSanpham());
+            SPDetail_Img.setImageURI(uri);
+        }
+
         SPDetail_Ten.setText(sanPham.getNameSanpham());
         SPDetail_Gia.setText(sanPham.getPriceSanpham() + " VND");
         SpDetail_Created.setText(sanPham.getCreateSanpham());

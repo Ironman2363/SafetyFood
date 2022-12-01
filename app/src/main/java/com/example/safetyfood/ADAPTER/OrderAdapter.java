@@ -5,6 +5,7 @@ import static com.example.safetyfood.MainActivity.check_login;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -63,7 +64,12 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
         String textStatus = "";
         int statusDH = datHang.getStatusDathang();
         holder.Order_items_nameSP.setText(sanPham.getNameSanpham());
-        holder.Order_items_Img.setImageResource(Integer.parseInt(sanPham.getImgSanpham()));
+        try{
+            holder.Order_items_Img.setImageResource(Integer.parseInt(sanPham.getImgSanpham()));
+        }catch (Exception e){
+            Uri uri = Uri.parse(sanPham.getImgSanpham());
+            holder.Order_items_Img.setImageURI(uri);
+        }
         holder.Order_items_Amount.setText("x " + chiTietDatHang.getAmount());
         holder.Order_items_Price.setText("Giá : " + sanPham.getPriceSanpham());
         holder.Order_items_totalAmount.setText(chiTietDatHangDAO.getSum(datHang.getId()) + " sản phẩm");

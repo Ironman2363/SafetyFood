@@ -24,6 +24,12 @@ public class LoaiSanPham implements Serializable {
         this.statusLoaisanpham = statusLoaisanpham;
     }
 
+    public LoaiSanPham(String nameLoaisanpham, String imgLoaisanpham, String createLoaisanpham) {
+        this.nameLoaisanpham = nameLoaisanpham;
+        this.imgLoaisanpham = imgLoaisanpham;
+        this.createLoaisanpham = createLoaisanpham;
+    }
+
     public int getId() {
         return id;
     }
