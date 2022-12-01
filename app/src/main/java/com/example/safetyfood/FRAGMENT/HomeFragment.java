@@ -71,6 +71,7 @@ public class HomeFragment extends Fragment {
         RCL_TSP.setAdapter(sanPhamAdapter1);
 
     }
+// cho nay da sua
 
     private void getData() {
         if (loaiSanPhamDAO.getDSLoaiSanPham().isEmpty()) {

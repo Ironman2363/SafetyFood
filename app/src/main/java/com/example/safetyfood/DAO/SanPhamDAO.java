@@ -34,7 +34,6 @@ public class SanPhamDAO {
         }
         return list;
     }
-
     public boolean themSanpham(SanPham sanPham) {
         SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -67,17 +66,21 @@ public class SanPhamDAO {
         return true;
     }
 
-    public int xoaSanPham(int Id) {
+    public boolean xoaSanPham(String Id) {
         SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getWritableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM SanPham WHERE id = ?", new String[]{String.valueOf(Id)});
-        if (cursor.getCount() != 0) {
-            return -1;
-        }
-        long check = sqLiteDatabase.delete("SanPham", "Id = ?", new String[]{String.valueOf(Id)});
-        if (check == -1)
-            return 0;
-        return 1;
+//        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM SanPham WHERE id = ?", new String[]{String.valueOf(Id)});
+//        if (cursor.getCount() != 0) {
+//            return -1;
+//        }
 
+        long check = sqLiteDatabase.delete("SanPham", "Id = ?", new String[]{String.valueOf(Id)});
+//        if (check == -1)
+//            return 0;
+//        return 1;
+        if (check>0){
+            return true;
+        }
+        return false;
     }
 
     public SanPham getID(int id) {
