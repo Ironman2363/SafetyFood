@@ -9,73 +9,86 @@ import com.example.safetyfood.DATABASE.SafetyFoodDataBase;
 import com.example.safetyfood.MODEL.ThongTinNguoiDung;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class thongtinnguoidungDao {
+public class ThongTinNguoiDungDAO {
     SafetyFoodDataBase safetyFoodDataBase;
+    SQLiteDatabase db;
 
-    public thongtinnguoidungDao(Context context) {
+    public ThongTinNguoiDungDAO(Context context) {
         safetyFoodDataBase = new SafetyFoodDataBase(context);
+        db = safetyFoodDataBase.getReadableDatabase();
     }
 
-    public ArrayList<ThongTinNguoiDung> getThongTinNguoiDungs() {
-        ArrayList<ThongTinNguoiDung> list = new ArrayList<>();
-        SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM ThongTinNguoiDung", null);
-        if (cursor.getCount() != 0) {
-            cursor.moveToFirst();
-            do {
-                list.add(new ThongTinNguoiDung(cursor.getInt(0), cursor.getInt(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getInt(7), cursor.getString(8), cursor.getString(9)));
-            } while (cursor.moveToNext());
-        }
-        return list;
+    public List<ThongTinNguoiDung> getThongTinNguoiDungs() {
+        String sql = "SELECT * FROM ThongTinNguoiDung";
+        return getData(sql);
     }
 
-    public boolean themThongTinNguoiDung(int AccountId, String FullName, String Email, String Addres, String Avatar, int Birthday, int Gender, int Created, int Updated) {
-        SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getWritableDatabase();
+    public boolean themThongTinNguoiDung(ThongTinNguoiDung info) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put("AccountId", AccountId);
-        contentValues.put("FullName", FullName);
-        contentValues.put("Email", Email);
-        contentValues.put("Addres", Addres);
-        contentValues.put("Avatar", Avatar);
-        contentValues.put("Birthday", Birthday);
-        contentValues.put("Gender", Gender);
-        contentValues.put("Created", Created);
-        contentValues.put("Updated", Updated);
-        long check = sqLiteDatabase.insert("ThongTinNguoiDung", null, contentValues);
+        contentValues.put("AccountId", info.getIdtaikhoan());
+        contentValues.put("FullName", info.getFullname());
+        contentValues.put("Email", info.getEmailNguoidung());
+        contentValues.put("SDT", info.getEmailNguoidung());
+        contentValues.put("Addres", info.getAddresNguoidung());
+        contentValues.put("Avatar", info.getAvatarNguoidung());
+        contentValues.put("Birthday", info.getBirthdayNguoidung());
+        contentValues.put("Gender", info.getGender());
+        contentValues.put("Created", info.getCreateNguoidung());
+        contentValues.put("Updated", info.getUpdateNguoidung());
+        long check = db.insert("ThongTinNguoiDung", null, contentValues);
         if (check == -1)
             return false;
         return true;
     }
 
-    public boolean capNhatThongTinNguoiDung(int id, int AccountId, String FullName, String Email, String Addres, String Avatar, int Birthday, int Gender, int Created, int Updated) {
-        SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getWritableDatabase();
+    public boolean capNhatThongTinNguoiDung(ThongTinNguoiDung info) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put("Id", id);
-        contentValues.put("AccountId", AccountId);
-        contentValues.put("FullName", FullName);
-        contentValues.put("Email", Email);
-        contentValues.put("Addres", Addres);
-        contentValues.put("Avatar", Avatar);
-        contentValues.put("Birthday", Birthday);
-        contentValues.put("Gender", Gender);
-        contentValues.put("Created", Created);
-        contentValues.put("Updated", Updated);
-        long check = sqLiteDatabase.update("ThongTinNguoiDung", contentValues, "id = ?", new String[]{String.valueOf(id)});
+        contentValues.put("AccountId", info.getIdtaikhoan());
+        contentValues.put("FullName", info.getFullname());
+        contentValues.put("Email", info.getEmailNguoidung());
+        contentValues.put("SDT", info.getEmailNguoidung());
+        contentValues.put("Addres", info.getAddresNguoidung());
+        contentValues.put("Avatar", info.getAvatarNguoidung());
+        contentValues.put("Birthday", info.getBirthdayNguoidung());
+        contentValues.put("Gender", info.getGender());
+        contentValues.put("Created", info.getCreateNguoidung());
+        contentValues.put("Updated", info.getUpdateNguoidung());
+        long check = db.update("ThongTinNguoiDung", contentValues, "id = ?", new String[]{String.valueOf(info.getId())});
         if (check == -1)
             return false;
         return true;
     }
 
     public int XoaThongTinNguoiDung(int id) {
-        SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getWritableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM ThongTinNguoiDung WHERE Id = ?", new String[]{String.valueOf(id)});
+        Cursor cursor = db.rawQuery("SELECT * FROM ThongTinNguoiDung WHERE Id = ?", new String[]{String.valueOf(id)});
         if (cursor.getCount() != 0) {
             return -1;
         }
-        long check = sqLiteDatabase.delete("ThongTinNguoiDung", "id = ?", new String[]{String.valueOf(id)});
+        long check = db.delete("ThongTinNguoiDung", "id = ?", new String[]{String.valueOf(id)});
         if (check == -1)
             return 0;
         return 1;
+    }
+
+    public List<ThongTinNguoiDung> getData(String sql,String... selectionArgs){
+        List<ThongTinNguoiDung> list = new ArrayList<>(  );
+        Cursor cursor = db.rawQuery(sql,selectionArgs);
+        if (cursor.getCount() != 0) {
+            cursor.moveToFirst();
+            do {
+                list.add(new ThongTinNguoiDung(cursor.getInt(0), cursor.getInt(1), cursor.getString(2),
+                        cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6),
+                        cursor.getString(7), cursor.getInt(8), cursor.getString(9),cursor.getString(10)));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return list;
+    }
+
+    public ThongTinNguoiDung getInfo(int id){
+        String sql = "SELECT * FROM ThongTinNguoiDung WHERE AccountId=?";
+        return getData(sql,new String[]{String.valueOf(id)}).get(0);
     }
 }

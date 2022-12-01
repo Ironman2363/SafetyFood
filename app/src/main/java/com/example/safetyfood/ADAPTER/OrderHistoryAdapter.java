@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.example.safetyfood.MODEL.DatHang;
 import com.example.safetyfood.MODEL.ThongTinNguoiDung;
 import com.example.safetyfood.DAO.ChiTietDatHangDAO;
 import com.example.safetyfood.MODEL.DatHang;
+import com.example.safetyfood.MODEL.ThongTinNguoiDung;
 import com.example.safetyfood.R;
 
 import java.util.List;
