@@ -13,13 +13,10 @@ import com.example.safetyfood.R;
 
 public class Splash_Screen extends AppCompatActivity {
 
-    TaikhoanDAO dao;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-
 
         CountDownTimer countDownTimer = new CountDownTimer(3000, 3000) {
             @Override

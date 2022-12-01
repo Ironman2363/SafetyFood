@@ -18,8 +18,10 @@ import com.example.safetyfood.ADAPTER.CartAdapter;
 import com.example.safetyfood.DAO.ChiTietDatHangDAO;
 import com.example.safetyfood.DAO.DatHangDAO;
 import com.example.safetyfood.DAO.SanPhamDAO;
+import com.example.safetyfood.DAO.ThongTinNguoiDungDAO;
 import com.example.safetyfood.MODEL.ChiTietDatHang;
 import com.example.safetyfood.MODEL.DatHang;
+import com.example.safetyfood.MODEL.ThongTinNguoiDung;
 import com.example.safetyfood.R;
 
 import java.util.List;
@@ -32,6 +34,7 @@ public class OrderDetail extends AppCompatActivity {
     RecyclerView Order_Done_list;
     ImageView Order_Done_Img;
     DatHangDAO datHangDAO;
+    ThongTinNguoiDungDAO thongTinNguoiDungDAO;
     ChiTietDatHangDAO chiTietDatHangDAO;
     SanPhamDAO sanPhamDAO;
     DatHang datHang;
@@ -40,27 +43,36 @@ public class OrderDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_detail);
-        Intent intent = getIntent();
+        Intent intent = getIntent( );
         Bundle bundle = intent.getBundleExtra("bundle");
 
-        anhXa();
+        anhXa( );
 
         setSupportActionBar(OrderDetail_Toolbar);
         OrderDetail_Toolbar.setTitle("Thông tin đơn hàng");
-        ActionBar actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar( );
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         if (bundle != null) {
             datHang = (DatHang) bundle.getSerializable("datHang");
-            checkStatus();
-            getData();
+            checkInfo( );
+            checkStatus( );
+            getData( );
         } else {
 
         }
     }
 
+    private void checkInfo() {
+        ThongTinNguoiDung info = thongTinNguoiDungDAO.getInfo(datHang.getIdtaikhoan( ));
+        Order_Done_Address.setText(info.getFullname( ) + "\n"
+                + info.getAddresNguoidung( ) + "\n" +
+                info.getSdtNguoidung()
+        );
+    }
+
     private void getData() {
-        List<ChiTietDatHang> list = chiTietDatHangDAO.getListCT(datHang.getId());
+        List<ChiTietDatHang> list = chiTietDatHangDAO.getListCT(datHang.getId( ));
         setList(list);
     }
 
@@ -69,16 +81,16 @@ public class OrderDetail extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         Order_Done_list.setLayoutManager(linearLayoutManager);
         Order_Done_list.setAdapter(adapter);
-        setMoney();
+        setMoney( );
     }
 
     private void setMoney() {
-        int money = (int) datHang.getTotalpriceDathang();
+        int money = (int) datHang.getTotalpriceDathang( );
         Order_Done_TotalPrice.setText("Thành tiền : " + money + " VNĐ");
     }
 
     private void checkStatus() {
-        int status = datHang.getStatusDathang();
+        int status = datHang.getStatusDathang( );
         String text1 = "";
         String text2 = "";
         int color = 0;
@@ -129,16 +141,17 @@ public class OrderDetail extends AppCompatActivity {
         Order_Done_TotalPrice = findViewById(R.id.Order_Done_TotalPrice);
         Order_Done_list = findViewById(R.id.Order_Done_list);
         Order_Done_Img = findViewById(R.id.Order_Done_Img);
-        datHangDAO = new DatHangDAO(getApplicationContext());
-        chiTietDatHangDAO = new ChiTietDatHangDAO(getApplicationContext());
-        sanPhamDAO = new SanPhamDAO(getApplicationContext());
+        datHangDAO = new DatHangDAO(getApplicationContext( ));
+        chiTietDatHangDAO = new ChiTietDatHangDAO(getApplicationContext( ));
+        thongTinNguoiDungDAO = new ThongTinNguoiDungDAO(getApplicationContext( ));
+        sanPhamDAO = new SanPhamDAO(getApplicationContext( ));
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
+        switch (item.getItemId( )) {
             case android.R.id.home: {
-                onBackPressed();
+                onBackPressed( );
                 break;
             }
         }

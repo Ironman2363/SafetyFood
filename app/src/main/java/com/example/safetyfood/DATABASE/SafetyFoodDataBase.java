@@ -37,6 +37,7 @@ public class SafetyFoodDataBase extends SQLiteOpenHelper {
                 "AccountId INTEGER REFERENCES TaiKhoan(Id)," +
                 "FullName Text not null," +
                 "Email TEXT NOT NULL," +
+                "SDT TEXT NOT NULL,"+
                 "Addres TEXT NOT NULL," +
                 "Avatar TEXT NOT NULL," +
                 "Birthday DATE NOT NULL," +
@@ -98,6 +99,7 @@ public class SafetyFoodDataBase extends SQLiteOpenHelper {
 
         db.execSQL("INSERT INTO VaiTro VALUES(1,'ADMIN','ADMIN','24/11/2022','24/11/2022'),(2,'NHANVIEN','NHANVIEN','24/11/2022','24/11/2022'),(3,'KHACHHANG','KHACHHANG','24/11/2022','24/11/2022')");
         db.execSQL("INSERT INTO TaiKhoan VALUES(1,'ADMIN','ADMIN',1),(2,'KH1','KH1',3),(3,'NV1','MV1',2)");
+        db.execSQL("INSERT INTO ThongTinNguoiDung VALUES(0,2,'LeeHung','null','012345678','HaNoi','700042','04/04/2003','Nam','1/12/2022','1/12/2022')");
     }
 
     @Override

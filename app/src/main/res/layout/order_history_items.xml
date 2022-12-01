@@ -1,62 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="wrap_content">
-
-    <TextView
-        android:id="@+id/Order_History_items_ID"
-        android:text="Mã đơn hàng : 1"
-        android:textSize="24sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:id="@+id/Order_History_items_Buyer"
-        android:text="Tên khách hàng : Hung"
-        android:textSize="24sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:id="@+id/Order_History_items_Address"
-        android:text="Địa chỉ : HN"
-        android:textSize="24sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:layout_marginTop="16dp"
+    app:cardCornerRadius="15dp">
 
     <LinearLayout
-        android:weightSum="12"
+        android:padding="8dp"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/Order_History_items_Amount"
-            android:text="8 sản phẩm"
+            android:id="@+id/Order_History_items_ID"
+            android:text="Mã đơn hàng : 1"
             android:textSize="24sp"
-            android:layout_weight="5"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:id="@+id/Order_History_items_TotalPrice"
-            android:text="Tổng : 12000VND"
-            android:textColor="@color/red"
-            android:textStyle="bold"
+            android:id="@+id/Order_History_items_Buyer"
+            android:text="Tên khách hàng : Hung"
             android:textSize="24sp"
-            android:layout_weight="7"
-            android:textAlignment="viewEnd"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/Order_History_items_Address"
+            android:text="Địa chỉ : HN"
+            android:textSize="24sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:weightSum="12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/Order_History_items_Amount"
+                android:text="8 sản phẩm"
+                android:textSize="24sp"
+                android:layout_weight="5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/Order_History_items_TotalPrice"
+                android:text="Tổng : 12000VND"
+                android:textColor="@color/red"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_weight="7"
+                android:textAlignment="viewEnd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/Order_History_items_Status"
+            android:text="Đơn đang chờ xác nhận"
+            android:textSize="24sp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/Order_History_items_Status"
-        android:text="Đơn đang chờ xác nhận"
-        android:textSize="24sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-</LinearLayout>
+</androidx.cardview.widget.CardView>

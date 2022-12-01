@@ -48,7 +48,7 @@ public class OrderAdminFragment extends Fragment {
     }
 
     private void getData() {
-        list = datHangDAO.getAllOrderStatus(1);
+        list = datHangDAO.getAllOrderStatus(1,1);
         setList();
     }
 
