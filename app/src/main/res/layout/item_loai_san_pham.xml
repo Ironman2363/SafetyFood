@@ -4,8 +4,8 @@
     android:padding="20dp"
     android:layout_height="match_parent">
     <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:src="@mipmap/ic_launcher"
         android:id="@+id/txt_anh_loai_sp"
         />
@@ -13,6 +13,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Coca-cola"
+        android:textStyle="bold"
+        android:textColor="@color/black"
         android:layout_toRightOf="@+id/txt_anh_loai_sp"
         android:textSize="30sp"
         android:id="@+id/txt_ten_loai"
@@ -22,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="25/11/2022"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="20dp"
         android:layout_toRightOf="@+id/txt_anh_loai_sp"
         android:layout_below="@+id/txt_ten_loai"
         android:textSize="20sp"
