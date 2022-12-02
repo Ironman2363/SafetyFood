@@ -22,6 +22,7 @@ import com.example.safetyfood.ADAPTER.SanPhamAdapter;
 import com.example.safetyfood.Activities.SearchItems;
 import com.example.safetyfood.DAO.LoaiSanPhamDAO;
 import com.example.safetyfood.DAO.SanPhamDAO;
+import com.example.safetyfood.DAO.ThongKeDAO;
 import com.example.safetyfood.MODEL.LoaiSanPham;
 import com.example.safetyfood.MODEL.SanPham;
 import com.example.safetyfood.R;
@@ -40,7 +41,8 @@ public class HomeFragment extends Fragment {
     LoaiSanPhamDAO loaiSanPhamDAO;
     SanPhamDAO sanPhamDAO;
     List<LoaiSanPham> loaiSanPhamList;
-    List<SanPham> sanPhamList;
+    List<SanPham> sanPhamList,topSanPham;
+    ThongKeDAO thongKeDAO;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,8 +58,6 @@ public class HomeFragment extends Fragment {
 
         getData();
 
-        setRCLAdapter();
-
         return view;
     }
 
@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment {
         RCL_SP.setLayoutManager(layoutManager);
         RCL_SP.setAdapter(sanPhamAdapter);
 
-        SanPhamAdapter sanPhamAdapter1 = new SanPhamAdapter(sanPhamList, getContext());
+        SanPhamAdapter sanPhamAdapter1 = new SanPhamAdapter(topSanPham, getContext());
         LinearLayoutManager layoutManager1 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         RCL_TSP.setLayoutManager(layoutManager1);
         RCL_TSP.setAdapter(sanPhamAdapter1);
@@ -165,8 +165,12 @@ public class HomeFragment extends Fragment {
                     , "7", "19/11/2022", "19/11/2022", 1));
         }
         loaiSanPhamList = loaiSanPhamDAO.getDSLoaiSanPham();
-        Log.e("ZZZZZ", "getData: " + loaiSanPhamList.get(0));
+        topSanPham = thongKeDAO.getTop();
+        if(topSanPham.isEmpty() || topSanPham.size()<10){
+            topSanPham = sanPhamDAO.getDSSanPham();
+        }
         sanPhamList = sanPhamDAO.getDSSanPham();
+        setRCLAdapter();
     }
 
     private void anhXa() {
@@ -178,5 +182,6 @@ public class HomeFragment extends Fragment {
         RCL_TSP = view.findViewById(R.id.RCL_TSP);
         loaiSanPhamDAO = new LoaiSanPhamDAO(context);
         sanPhamDAO = new SanPhamDAO(context);
+        thongKeDAO = new ThongKeDAO(context);
     }
 }

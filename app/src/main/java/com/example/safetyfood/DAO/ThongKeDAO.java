@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.safetyfood.DATABASE.SafetyFoodDataBase;
+import com.example.safetyfood.MODEL.SanPham;
 import com.example.safetyfood.MODEL.Top;
 
 import java.util.ArrayList;
@@ -26,16 +27,18 @@ public class ThongKeDAO {
         db = dataBase.getReadableDatabase();
     }
 
-    public List<Top> getTop() {
-        List<Top> list = new ArrayList<>();
-        String sql = "select ProductId, count(ProductId) as sum from ChiTietDatHang group by ProductId order by sum desc limit 10";
+    public List<SanPham> getTop() {
+        List<SanPham> list = new ArrayList<>();
+        String sql = "SELECT SanPham.*,sum(amount) AS sum FROM ChiTietDatHang " +
+                "JOIN DatHang on DatHang.Id=ChiTietDatHang.orderid " +
+                "JOIN SanPham on ChiTietDatHang.ProductId = SanPham.Id " +
+                "WHERE DatHang.status=5 GROUP by productid ORDER BY sum DESC LIMIT 10";
         Cursor cursor = db.rawQuery(sql, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            Top top = new Top();
-            top.setProductId(cursor.getInt(cursor.getColumnIndex(ProductId)));
-            top.setSum(cursor.getInt(cursor.getColumnIndex("sum")));
-            list.add(top);
+            list.add(new SanPham(cursor.getInt(0), cursor.getString(1),
+                    cursor.getString(2), cursor.getInt(3), cursor.getString(4),
+                    cursor.getString(5), cursor.getString(6), cursor.getInt(7)));
             cursor.moveToNext();
         }
         cursor.close();
