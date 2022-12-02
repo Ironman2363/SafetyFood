@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -12,6 +13,8 @@ import com.example.safetyfood.DAO.TaikhoanDAO;
 import com.example.safetyfood.MODEL.TaiKhoan;
 
 import android.os.Handler;
+
+import com.example.safetyfood.MainActivity;
 
 import com.example.safetyfood.MainActivity;
 
@@ -37,6 +40,7 @@ public class Splash_Screen extends AppCompatActivity {
             }
         };
         countDownTimer.start();
+
 
         new Handler().postDelayed(new Runnable() {
             @Override
