@@ -73,7 +73,7 @@ public class ChiTietDatHangDAO {
 
     public List<ChiTietDatHang> getListCT(int idDatHang) {
         List<ChiTietDatHang> list = new ArrayList<>();
-        String sql = "select * from ChiTietDatHang where OrderId =?";
+        String sql = "select * from ChiTietDatHang where OrderId =? ";
         Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(idDatHang)});
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
