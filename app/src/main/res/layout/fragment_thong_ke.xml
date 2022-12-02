@@ -27,7 +27,7 @@
         android:id="@+id/edtStart"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/boder_edittext"
+        android:background="@drawable/boder_search"
         android:hint="Nhập ngày"
         android:padding="10dp" />
 
