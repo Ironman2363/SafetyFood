@@ -61,20 +61,20 @@ public class ThemSanPhamAdapter extends RecyclerView.Adapter<ThemSanPhamAdapter.
     @Override
     public ThemSanPhamHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_san_pham, null);
-        activityResultLauncher = new ActivityResultContracts.StartActivityForResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
-            @Override
-            public void onActivityResult(ActivityResult result) {
-                if (result.getResultCode() == RESULT_OK && result.getData()!=null){
-                    Bundle bundle = result.getData().getExtras();
-                    Bitmap bitmap = (Bitmap) bundle.get("data");
-                    if (bitmap != null){
-                        anh_sp.setImageBitmap(bitmap);
-
-                    }
-                    link = String.valueOf(getImageUri(getContext(),bitmap));
-                }
-            }
-        });
+//        activityResultLauncher = new ActivityResultContracts.StartActivityForResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+//            @Override
+//            public void onActivityResult(ActivityResult result) {
+//                if (result.getResultCode() == RESULT_OK && result.getData()!=null){
+//                    Bundle bundle = result.getData().getExtras();
+//                    Bitmap bitmap = (Bitmap) bundle.get("data");
+//                    if (bitmap != null){
+//                        anh_sp.setImageBitmap(bitmap);
+//
+//                    }
+//                    link = String.valueOf(getImageUri(getContext(),bitmap));
+//                }
+//            }
+//        });
         return new ThemSanPhamHolder(view);
     }
 
