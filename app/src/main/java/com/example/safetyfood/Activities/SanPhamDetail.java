@@ -33,6 +33,7 @@ import com.example.safetyfood.MODEL.ChiTietDatHang;
 import com.example.safetyfood.MODEL.SanPham;
 import com.example.safetyfood.R;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -168,7 +169,9 @@ public class SanPhamDetail extends AppCompatActivity {
         }
 
         SPDetail_Ten.setText(sanPham.getNameSanpham());
-        SPDetail_Gia.setText(sanPham.getPriceSanpham() + " VND");
+//        SPDetail_Gia.setText(sanPham.getPriceSanpham() + " VND");
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+        SPDetail_Gia.setText(decimalFormat.format(sanPham.getPriceSanpham()) + " đ");
         SpDetail_Created.setText(sanPham.getCreateSanpham());
         if (sanPham.getStatusSanpham() == 1) {
             SPDetail_Status.setTextColor(Color.GREEN);

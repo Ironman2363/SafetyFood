@@ -20,6 +20,7 @@ import com.example.safetyfood.Activities.SanPhamDetail;
 import com.example.safetyfood.MODEL.SanPham;
 import com.example.safetyfood.R;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.SanPhamAdapterHolder> {
@@ -41,13 +42,16 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.SanPhamA
     @Override
     public void onBindViewHolder(@NonNull SanPhamAdapterHolder holder, int position) {
         SanPham sp = list.get(position);
-        try{
+        try {
             holder.SP_items_Img.setImageResource(Integer.parseInt(sp.getImgSanpham()));
-        }catch (Exception e){
+        } catch (Exception e) {
             Uri uri = Uri.parse(sp.getImgSanpham());
             holder.SP_items_Img.setImageURI(uri);
         }
-        holder.SP_items_Gia.setText(sp.getPriceSanpham() + "đ");
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+        holder.SP_items_Gia.setText(decimalFormat.format(sp.getPriceSanpham()) + " đ");
+
+//        holder.SP_items_Gia.setText(sp.getPriceSanpham() + "đ");
         holder.SP_items_Ten.setText(sp.getNameSanpham());
         holder.SP_items_View.setOnClickListener(v -> {
             Intent intent = new Intent(context, SanPhamDetail.class);
