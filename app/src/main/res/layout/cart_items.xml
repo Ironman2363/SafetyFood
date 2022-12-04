@@ -3,12 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/boder_recycel"
     android:id="@+id/Cart_items_View">
 
     <LinearLayout
-        android:padding="10dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:weightSum="12">
@@ -16,37 +15,40 @@
         <ImageView
             android:id="@+id/Cart_items_img"
             android:src="@drawable/loaisp_coca"
-            android:layout_weight="2"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/size_img_cart"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:scaleType="centerCrop"/>
 
         <LinearLayout
+            android:layout_marginLeft="10dp"
             android:layout_weight="10"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
+                android:textColor="@color/black"
                 android:id="@+id/Cart_items_name"
                 android:text="Coca-cola"
                 android:textStyle="bold"
                 android:textSize="24sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-            
+
             <TextView
+                android:layout_marginTop="15dp"
                 android:id="@+id/Cart_items_amount"
                 android:text="Số lượng : 2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-            
+
             <TextView
                 android:id="@+id/Cart_items_price"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="@color/red"
                 android:text="45000đ"
+                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 

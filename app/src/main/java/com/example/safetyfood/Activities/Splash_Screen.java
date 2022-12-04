@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+
 import android.os.CountDownTimer;
 import android.util.Log;
 
@@ -18,6 +19,8 @@ import com.example.safetyfood.MainActivity;
 
 import com.example.safetyfood.MainActivity;
 
+
+import com.example.safetyfood.MainActivity;
 import com.example.safetyfood.R;
 
 public class Splash_Screen extends AppCompatActivity {

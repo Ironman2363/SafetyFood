@@ -29,6 +29,7 @@ import com.example.safetyfood.MODEL.SanPham;
 import com.example.safetyfood.MODEL.TaiKhoan;
 import com.example.safetyfood.R;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,7 +72,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
             holder.Order_items_Img.setImageURI(uri);
         }
         holder.Order_items_Amount.setText("x " + chiTietDatHang.getAmount());
-        holder.Order_items_Price.setText("Giá : " + sanPham.getPriceSanpham());
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+
+        holder.Order_items_Price.setText(decimalFormat.format(sanPham.getPriceSanpham()) + " đ");
         holder.Order_items_totalAmount.setText(chiTietDatHangDAO.getSum(datHang.getId()) + " sản phẩm");
         holder.Order_items_totalPrice.setText("Thành tiền : " + datHang.getTotalpriceDathang());
 
