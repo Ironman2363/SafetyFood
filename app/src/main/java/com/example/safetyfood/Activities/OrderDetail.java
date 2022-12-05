@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -77,7 +78,7 @@ public class OrderDetail extends AppCompatActivity {
     }
 
     private void setList(List<ChiTietDatHang> list) {
-        CartAdapter adapter = new CartAdapter(list, this);
+        CartAdapter adapter = new CartAdapter(list, getApplicationContext(),chiTietDatHangDAO);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         Order_Done_list.setLayoutManager(linearLayoutManager);
         Order_Done_list.setAdapter(adapter);
@@ -126,7 +127,9 @@ public class OrderDetail extends AppCompatActivity {
                 break;
             }
         }
-        Order_Done_Check.setBackgroundColor(getColor(color));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Order_Done_Check.setBackgroundColor(getColor(color));
+        }
         Order_Done_Trang_Thai.setText(text1);
         Order_Done_Thanks.setText(text2);
         Order_Done_Img.setImageResource(img_src);

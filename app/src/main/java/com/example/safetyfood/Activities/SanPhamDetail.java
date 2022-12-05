@@ -137,15 +137,13 @@ public class SanPhamDetail extends AppCompatActivity {
                 ChiTietDatHang chiTietDatHang = new ChiTietDatHang();
                 chiTietDatHang.setAmount(Integer.parseInt(dialog_atc_amount.getText().toString()));
                 chiTietDatHang.setProductid(sanPham.getId());
-                chiTietDatHang.setUnitprice(Integer.parseInt(dialog_atc_amount.getText().toString()) * sanPham.getPriceSanpham());
+                chiTietDatHang.setUnitprice(sanPham.getPriceSanpham());
                 chiTietDatHang.setIdDathang(cart_all.getId());
                 dao.ThemChiTietDatHang(chiTietDatHang);
                 Toast.makeText(this, "Đã đặt thành công", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             } else {
                 checkCart.setAmount(checkCart.getAmount() + Integer.parseInt(dialog_atc_amount.getText().toString()));
-                checkCart.setUnitprice(checkCart.getUnitprice() +
-                        (Integer.parseInt(dialog_atc_amount.getText().toString()) * sanPham.getPriceSanpham()));
                 dao.CapNhapChiTietDatHang(checkCart);
                 Toast.makeText(this, "Thêm thành công", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();

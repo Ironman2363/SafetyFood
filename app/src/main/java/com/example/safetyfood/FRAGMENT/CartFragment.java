@@ -80,7 +80,7 @@ public class CartFragment extends Fragment {
     private int loadMoney() {
         int sum = 0;
         for (ChiTietDatHang x : chiTietDatHangList) {
-            sum += x.getUnitprice();
+            sum += x.getUnitprice()*x.getAmount();
         }
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
 
@@ -89,7 +89,7 @@ public class CartFragment extends Fragment {
     }
 
     private void setAdapterToRCL() {
-        CartAdapter cartAdapter = new CartAdapter(chiTietDatHangList, getContext());
+        CartAdapter cartAdapter = new CartAdapter(chiTietDatHangList, getContext(),chiTietDatHangDAO);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         Cart_list.setLayoutManager(linearLayoutManager);
         Cart_list.setAdapter(cartAdapter);
@@ -140,7 +140,16 @@ public class CartFragment extends Fragment {
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            getData();
+            int type = intent.getIntExtra("type",0);
+            switch (type){
+                case 1:{
+                    chiTietDatHangList = chiTietDatHangDAO.getListCT(cart_all.getId());
+                    totalPrice = loadMoney();
+                    break;
+                }
+                default:
+                    getData();
+            }
         }
     };
 }

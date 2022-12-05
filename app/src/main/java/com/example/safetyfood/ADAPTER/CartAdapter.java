@@ -1,20 +1,26 @@
 package com.example.safetyfood.ADAPTER;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.safetyfood.Activities.SanPhamDetail;
@@ -32,11 +38,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartAdapterHol
     List<ChiTietDatHang> list;
     SanPhamDAO sanPhamDAO;
     Context context;
+    ChiTietDatHangDAO chiTietDatHangDAO;
 
-    public CartAdapter(List<ChiTietDatHang> list, Context context) {
+    public CartAdapter(List<ChiTietDatHang> list, Context context, ChiTietDatHangDAO chiTietDatHangDAO) {
         this.list = list;
         this.context = context;
         sanPhamDAO = new SanPhamDAO(context);
+        this.chiTietDatHangDAO = chiTietDatHangDAO;
     }
 
     @NonNull
@@ -48,6 +56,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartAdapterHol
     @Override
     public void onBindViewHolder(@NonNull CartAdapterHolder holder, int position) {
         ChiTietDatHang chiTietDatHang = list.get(position);
+        Intent CheckMN = new Intent(  );
+        CheckMN.setAction("checkCart");
+        CheckMN.putExtra("type",1);
         SanPham sanPham = sanPhamDAO.getID(chiTietDatHang.getProductid());
         try {
             holder.Cart_items_img.setImageResource(Integer.parseInt(sanPham.getImgSanpham()));
@@ -58,8 +69,51 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartAdapterHol
 
         holder.Cart_items_name.setText(sanPham.getNameSanpham());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        holder.Cart_items_amount.setText("Số lượng : " + decimalFormat.format(chiTietDatHang.getAmount()));
+        holder.Cart_items_amount.setText("x" + decimalFormat.format(chiTietDatHang.getAmount()));
+        holder.Cart_items_amount.addTextChangedListener(new TextWatcher( ) {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length()<=0){
+                    return;
+                }
+                String amount = s.toString().substring(1);
+                try {
+                    chiTietDatHang.setAmount(Float.parseFloat(amount));
+                    chiTietDatHangDAO.CapNhapChiTietDatHang(chiTietDatHang);
+                    LocalBroadcastManager.getInstance(context).sendBroadcast(CheckMN);
+                }catch (Exception e){
+
+                }
+            }
+        });
+
+        holder.Cart_items_plus.setOnClickListener(v -> {
+            chiTietDatHang.setAmount(chiTietDatHang.getAmount()+1);
+            chiTietDatHangDAO.CapNhapChiTietDatHang(chiTietDatHang);
+            holder.Cart_items_amount.setText("x" + decimalFormat.format(chiTietDatHang.getAmount()));
+            LocalBroadcastManager.getInstance(context).sendBroadcast(CheckMN);
+        });
+
+        holder.Cart_items_remove.setOnClickListener(v -> {
+            chiTietDatHang.setAmount(chiTietDatHang.getAmount()-1);
+            chiTietDatHangDAO.CapNhapChiTietDatHang(chiTietDatHang);
+            if(chiTietDatHang.getAmount()<=0){
+                list.remove(holder.getAdapterPosition());
+                chiTietDatHangDAO.XoaChiTietDatHang(chiTietDatHang);
+                notifyItemRemoved(holder.getAdapterPosition());
+            }
+            holder.Cart_items_amount.setText("x" + decimalFormat.format(chiTietDatHang.getAmount()));
+            LocalBroadcastManager.getInstance(context).sendBroadcast(CheckMN);
+        });
 
         holder.Cart_items_price.setText(decimalFormat.format(sanPham.getPriceSanpham()) + " đ");
 //        holder.Cart_items_price.setText(String.valueOf(sanPham.getPriceSanpham()));
@@ -81,8 +135,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartAdapterHol
 
     class CartAdapterHolder extends RecyclerView.ViewHolder {
         ImageView Cart_items_img;
-        TextView Cart_items_name, Cart_items_amount, Cart_items_price;
+        TextView Cart_items_name, Cart_items_price;
         CardView Cart_items_View;
+        ImageButton Cart_items_remove,Cart_items_plus;
+        EditText Cart_items_amount;
 
         public CartAdapterHolder(@NonNull View itemView) {
             super(itemView);
@@ -91,6 +147,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartAdapterHol
             Cart_items_amount = itemView.findViewById(R.id.Cart_items_amount);
             Cart_items_price = itemView.findViewById(R.id.Cart_items_price);
             Cart_items_View = itemView.findViewById(R.id.Cart_items_View);
+            Cart_items_remove = itemView.findViewById(R.id.Cart_items_remove);
+            Cart_items_plus = itemView.findViewById(R.id.Cart_items_plus);
         }
     }
 }
