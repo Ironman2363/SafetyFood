@@ -59,9 +59,12 @@ public class Sign_Up extends AppCompatActivity {
 
     private void DangKy(String username, String password, String repass) {
         if (password.equals(repass)){
-            TaiKhoan taiKhoan = new TaiKhoan(0, username, password, 2);
+            TaiKhoan taiKhoan = new TaiKhoan(0, username, password, 3);
             taikhoanDAO.insertTaikhoan(taiKhoan);
-            startActivity(new Intent(Sign_Up.this, DangKyThongTinActivity.class));
+            Intent intent = new Intent(this,DangKyThongTinActivity.class);
+            intent.putExtra("user",username);
+            intent.putExtra("pass",password);
+            startActivity(intent);
         }
         else{
             Toast.makeText(this, "Hai mật khẩu chưa trùng nhau", Toast.LENGTH_SHORT).show();

@@ -44,14 +44,6 @@ public class Splash_Screen extends AppCompatActivity {
         };
         countDownTimer.start();
 
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent(Splash_Screen.this, MainActivity.class));
-            }
-        }, 3000);
-
     }
 
 }

@@ -12,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.example.safetyfood.DAO.TaikhoanDAO;
 import com.example.safetyfood.DAO.ThongTinNguoiDungDAO;
+import com.example.safetyfood.MODEL.TaiKhoan;
 import com.example.safetyfood.MODEL.ThongTinNguoiDung;
 import com.example.safetyfood.MainActivity;
 import com.example.safetyfood.R;
@@ -21,15 +23,23 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class DangKyThongTinActivity extends AppCompatActivity {
-   ThongTinNguoiDungDAO nguoiDungDAO;
+    ThongTinNguoiDungDAO nguoiDungDAO;
     Button hoantat;
     ImageView avatar;
-    EditText sdt , email , dia_chi , name,ngay_sinh;
-    RadioButton GT_nam , GT_nu;
+    EditText sdt, email, dia_chi, name, ngay_sinh;
+    RadioButton GT_nam, GT_nu;
+    String userDK, passDK;
+    TaikhoanDAO taikhoanDAO;
+    TaiKhoan taiKhoan;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dang_ky_thong_tin);
+
+        Intent intent = getIntent();
+        userDK = intent.getStringExtra("user");
+        passDK = intent.getStringExtra("pass");
+
         hoantat = findViewById(R.id.btnDangkythongtin);
         sdt = findViewById(R.id.edtSdt);
         email = findViewById(R.id.edtEmail);
@@ -40,10 +50,11 @@ public class DangKyThongTinActivity extends AppCompatActivity {
         GT_nu = findViewById(R.id.rdo_BTN_Nu);
         avatar = findViewById(R.id.edtAvatar);
         nguoiDungDAO = new ThongTinNguoiDungDAO(this);
+        taikhoanDAO = new TaikhoanDAO(this);
         hoantat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String ten= name.getText().toString();
+                String ten = name.getText().toString();
                 String phone = sdt.getText().toString();
                 String mail = email.getText().toString();
                 String address = dia_chi.getText().toString();
@@ -57,21 +68,23 @@ public class DangKyThongTinActivity extends AppCompatActivity {
                 nguoiDung.setFullname(ten);
                 nguoiDung.setSdtNguoidung(phone);
 
-                if (GT_nu.isChecked()){
-                     nguoiDung.setGender(0);
-                }else if (GT_nam.isChecked()){
-                     nguoiDung.setGender(1);
+                if (GT_nu.isChecked()) {
+                    nguoiDung.setGender(0);
+                } else if (GT_nam.isChecked()) {
+                    nguoiDung.setGender(1);
                 }
                 Calendar calendar = Calendar.getInstance();
-                @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat( "dd/MM/yyyy");
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
                 String text = simpleDateFormat.format(calendar.getTime());
                 nguoiDung.setCreateNguoidung(text);
                 nguoiDung.setAvatarNguoidung(anh);
                 nguoiDung.setUpdateNguoidung(text);
                 nguoiDung.setIdtaikhoan(0);
-                if (nguoiDungDAO.themThongTinNguoiDung(nguoiDung)){
+                if (nguoiDungDAO.themThongTinNguoiDung(nguoiDung)) {
                     Toast.makeText(DangKyThongTinActivity.this, "Them thong tin thanh cong", Toast.LENGTH_SHORT).show();
-                }else{
+                    finish();
+                    startActivity(new Intent(getApplicationContext(), Login.class));
+                } else {
                     Toast.makeText(DangKyThongTinActivity.this, "Them thong tin that bai", Toast.LENGTH_SHORT).show();
                 }
             }

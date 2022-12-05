@@ -51,6 +51,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
     @Override
     public void onBindViewHolder(@NonNull OrderHistoryAdapterHolder holder, int position) {
         DatHang datHang = list.get(position);
+        Log.e("ZZZZ", "onBindViewHolder: "+datHang.getIdtaikhoan() );
         ThongTinNguoiDung info = thongTinNguoiDungDAO.getInfo(datHang.getIdtaikhoan());
         Log.e("Adapter", "onBindViewHolder: "+datHang );
         String status = "";
