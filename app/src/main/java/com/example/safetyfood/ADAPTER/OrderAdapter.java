@@ -1,11 +1,13 @@
 package com.example.safetyfood.ADAPTER;
 
 import static com.example.safetyfood.MainActivity.account_all;
+import static com.example.safetyfood.MainActivity.check_login;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +26,9 @@ import com.example.safetyfood.DAO.SanPhamDAO;
 import com.example.safetyfood.MODEL.ChiTietDatHang;
 import com.example.safetyfood.MODEL.DatHang;
 import com.example.safetyfood.MODEL.SanPham;
+import com.example.safetyfood.MODEL.TaiKhoan;
 import com.example.safetyfood.R;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -123,29 +127,19 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
                 }else {
                     datHang.setStatusDathang(4);
                 }
+                datHangDAO.UpgradeDH(datHang);
             }
             else if (statusDH == 3) {
                 datHang.setStatusDathang(1);
                 datHangDAO.UpgradeDH(datHang);
             }
-            list.remove(holder.getAdapterPosition());
-            notifyItemRemoved(holder.getAdapterPosition());
+            holder.Order_items_View.setVisibility(View.GONE);
         });
         holder.btnXacnhan.setOnClickListener(v -> {
             if (statusDH == 1) {
                 datHang.setStatusDathang(2);
                 datHangDAO.UpgradeDH(datHang);
-                list.remove(holder.getAdapterPosition());
-                notifyItemRemoved(holder.getAdapterPosition());
-            }
-        });
-
-        holder.btnxacnhandagiahang.setOnClickListener(v ->{
-            if (statusDH == 2) {
-                datHang.setStatusDathang(5);
-                datHangDAO.UpgradeDH(datHang);
-                list.remove(holder.getAdapterPosition());
-                notifyItemRemoved(holder.getAdapterPosition());
+                holder.Order_items_View.setVisibility(View.GONE);
             }
         });
 

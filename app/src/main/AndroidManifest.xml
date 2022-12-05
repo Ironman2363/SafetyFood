@@ -93,6 +93,8 @@
         <activity
             android:name=".Activities.Splash_Screen"
             android:exported="true">
+
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

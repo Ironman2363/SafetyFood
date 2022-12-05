@@ -7,15 +7,6 @@
     android:layout_marginTop="16dp"
     app:cardCornerRadius="15dp">
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
-    android:layout_marginTop="16dp"
-    android:orientation="vertical"
-    app:cardCornerRadius="15dp">
-
     <LinearLayout
         android:padding="8dp"
         android:orientation="vertical"
@@ -80,14 +71,15 @@
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>
+
+        <TextView
+            android:textStyle="bold"
+            android:id="@+id/Order_History_items_Status"
+            android:text="Đơn đang chờ xác nhận"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/Order_History_items_Status"
-        android:text="Đơn đang chờ xác nhận"
-        android:textSize="24sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-</LinearLayout>
 </androidx.cardview.widget.CardView>
