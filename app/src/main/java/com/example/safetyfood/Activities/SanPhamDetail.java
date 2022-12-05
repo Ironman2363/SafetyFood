@@ -214,7 +214,7 @@ public class SanPhamDetail extends AppCompatActivity {
                 break;
             }
             case R.id.badge_cart:{
-
+                startActivity(new Intent( SanPhamDetail.this,BadgeCart.class ));
                 break;
             }
         }
@@ -231,6 +231,10 @@ public class SanPhamDetail extends AppCompatActivity {
 
         setCartSize();
 
+        actionMenu.setOnClickListener(v -> {
+            onOptionsItemSelected(menuItem);
+        });
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -240,4 +244,12 @@ public class SanPhamDetail extends AppCompatActivity {
             setCartSize();
         }
     };
+
+    @Override
+    protected void onResume() {
+        super.onResume( );
+        if (sizeCart!=null){
+            setCartSize();
+        }
+    }
 }
