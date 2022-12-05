@@ -1,5 +1,6 @@
 package com.example.safetyfood.Activities;
 
+import static com.example.safetyfood.MainActivity.account_all;
 import static com.example.safetyfood.MainActivity.cart_all;
 import static com.example.safetyfood.MainActivity.check_login;
 
@@ -8,15 +9,20 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -41,7 +47,7 @@ public class SanPhamDetail extends AppCompatActivity {
 
     Toolbar SPDetail_toolbar;
     ImageView SPDetail_Img;
-    TextView SPDetail_Ten, SPDetail_Gia, SpDetail_Created, SPDetail_Status;
+    TextView SPDetail_Ten, SPDetail_Gia, SpDetail_Created, SPDetail_Status,sizeCart;
     ImageButton SPDetail_Buy;
     ChiTietDatHangDAO dao;
     RecyclerView SPDetail_List_Tuong_Tu, SPDetail_List_Goi_Y;
@@ -87,7 +93,6 @@ public class SanPhamDetail extends AppCompatActivity {
 
     private void getDataList(SanPham sanPham) {
         sanPhamListTT = sanPhamDAO.getSpTT(Integer.parseInt(sanPham.getLoaiSanpham()), sanPham.getId());
-
     }
 
 
@@ -148,6 +153,7 @@ public class SanPhamDetail extends AppCompatActivity {
                 Toast.makeText(this, "Thêm thành công", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
+            setCartSize();
         });
 
         dialog_atc_cancle.setOnClickListener(v -> {
@@ -180,6 +186,10 @@ public class SanPhamDetail extends AppCompatActivity {
         }
     }
 
+    private void setCartSize(){
+        sizeCart.setText(String.valueOf(dao.getSum(cart_all.getId( ))));
+    }
+
     private void anhXa() {
         SPDetail_toolbar = findViewById(R.id.SPDetail_toolbar);
         SPDetail_Img = findViewById(R.id.SPDetail_Img);
@@ -192,6 +202,8 @@ public class SanPhamDetail extends AppCompatActivity {
         SPDetail_List_Goi_Y = findViewById(R.id.SPDetail_List_Goi_Y);
         dao = new ChiTietDatHangDAO(getApplicationContext());
         sanPhamDAO = new SanPhamDAO(getApplicationContext());
+        IntentFilter intentFilter = new IntentFilter("CheckSizeCart");
+        LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver,intentFilter);
     }
 
     @Override
@@ -201,7 +213,31 @@ public class SanPhamDetail extends AppCompatActivity {
                 onBackPressed();
                 break;
             }
+            case R.id.badge_cart:{
+
+                break;
+            }
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.badge_cart_menu,menu);
+
+        MenuItem menuItem = menu.findItem(R.id.badge_cart);
+        View actionMenu = menuItem.getActionView();
+        sizeCart = actionMenu.findViewById(R.id.number_size_cart);
+
+        setCartSize();
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    BroadcastReceiver broadcastReceiver = new BroadcastReceiver( ) {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            setCartSize();
+        }
+    };
 }

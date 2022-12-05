@@ -97,8 +97,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartAdapterHol
                 }
                 String amount = s.toString().substring(1);
                 try {
-                    chiTietDatHang.setAmount(Float.parseFloat(amount));
-                    chiTietDatHangDAO.CapNhapChiTietDatHang(chiTietDatHang);
+                    if (Integer.parseInt(amount)<=0){
+                        list.remove(holder.getAdapterPosition());
+                        chiTietDatHangDAO.XoaChiTietDatHang(chiTietDatHang);
+                        notifyItemRemoved(holder.getAdapterPosition());
+                    }else {
+                        chiTietDatHang.setAmount(Float.parseFloat(amount));
+                        chiTietDatHangDAO.CapNhapChiTietDatHang(chiTietDatHang);
+                    }
                     LocalBroadcastManager.getInstance(context).sendBroadcast(CheckMN);
                 }catch (Exception e){
 
