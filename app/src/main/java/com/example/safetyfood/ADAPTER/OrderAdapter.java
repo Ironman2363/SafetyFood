@@ -3,6 +3,7 @@ package com.example.safetyfood.ADAPTER;
 import static com.example.safetyfood.MainActivity.account_all;
 import static com.example.safetyfood.MainActivity.check_login;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -30,7 +31,9 @@ import com.example.safetyfood.MODEL.TaiKhoan;
 import com.example.safetyfood.R;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapterHolder> {
@@ -64,6 +67,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
         SanPham sanPham = sanPhamDAO.getID(chiTietDatHang.getProductid());
         String textStatus = "";
         int statusDH = datHang.getStatusDathang();
+        Calendar calendar = Calendar.getInstance();
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         holder.Order_items_nameSP.setText(sanPham.getNameSanpham());
         try{
             holder.Order_items_Img.setImageResource(Integer.parseInt(sanPham.getImgSanpham()));
@@ -76,7 +81,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
 
         holder.Order_items_Price.setText(decimalFormat.format(sanPham.getPriceSanpham()) + " đ");
         holder.Order_items_totalAmount.setText(chiTietDatHangDAO.getSum(datHang.getId()) + " sản phẩm");
-        holder.Order_items_totalPrice.setText("Thành tiền : " + datHang.getTotalpriceDathang());
+        holder.Order_items_totalPrice.setText("Thành tiền : " + decimalFormat.format(datHang.getTotalpriceDathang())+"đ");
 
         if (account_all.getRole() == 1 || account_all.getRole() == 2) {
             holder.btnXacnhan.setVisibility(View.VISIBLE);
@@ -121,6 +126,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
         }
         holder.Order_items_status.setText(textStatus);
         holder.Order_items_MuaLai.setOnClickListener(v -> {
+            datHang.setUpdateDathang(simpleDateFormat.format(calendar.getTime()));
             if (statusDH == 1 ){
                 if (account_all.getRole()==3){
                     datHang.setStatusDathang(3);
@@ -137,6 +143,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
             notifyItemRemoved(holder.getAdapterPosition());
         });
         holder.btnXacnhan.setOnClickListener(v -> {
+            datHang.setUpdateDathang(simpleDateFormat.format(calendar.getTime()));
             if (statusDH == 1) {
                 datHang.setStatusDathang(2);
                 datHangDAO.UpgradeDH(datHang);
@@ -146,8 +153,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
         });
 
         holder.btnxacnhandagiahang.setOnClickListener(v ->{
+            datHang.setUpdateDathang(simpleDateFormat.format(calendar.getTime()));
             if (statusDH == 2) {
                 datHang.setStatusDathang(5);
+
                 datHangDAO.UpgradeDH(datHang);
             }
             list.remove(holder.getAdapterPosition());

@@ -82,6 +82,11 @@ public class DatHangDAO {
         return getData(sql, new String[]{String.valueOf(status),String.valueOf(status1)});
     }
 
+    public List<DatHang> getAllOrderDate(int status,String tuNgay, String denNgay) {
+        String sql = "Select * from " + table_name + " where  " + Status + " = ? and date(Updated) between ? and ?";
+        return getData(sql, new String[]{String.valueOf(status),tuNgay,denNgay});
+    }
+
     public List<DatHang> getOrderHistory(int status){
         String sql = "Select * from " + table_name + " where  " + Status + " != ?";
         return getData(sql, new String[]{String.valueOf(status)});
