@@ -133,22 +133,25 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
                 datHang.setStatusDathang(1);
                 datHangDAO.UpgradeDH(datHang);
             }
-            holder.Order_items_View.setVisibility(View.GONE);
+            list.remove(holder.getAdapterPosition());
+            notifyItemRemoved(holder.getAdapterPosition());
         });
         holder.btnXacnhan.setOnClickListener(v -> {
             if (statusDH == 1) {
                 datHang.setStatusDathang(2);
                 datHangDAO.UpgradeDH(datHang);
-                holder.Order_items_View.setVisibility(View.GONE);
             }
+            list.remove(holder.getAdapterPosition());
+            notifyItemRemoved(holder.getAdapterPosition());
         });
 
         holder.btnxacnhandagiahang.setOnClickListener(v ->{
             if (statusDH == 2) {
                 datHang.setStatusDathang(5);
                 datHangDAO.UpgradeDH(datHang);
-                holder.Order_items_View.setVisibility(View.GONE);
             }
+            list.remove(holder.getAdapterPosition());
+            notifyItemRemoved(holder.getAdapterPosition());
         });
         holder.Order_items_View.setOnClickListener(v -> {
             Intent intent = new Intent(context, OrderDetail.class);
