@@ -25,6 +25,7 @@ import com.example.safetyfood.MODEL.DatHang;
 import com.example.safetyfood.MODEL.ThongTinNguoiDung;
 import com.example.safetyfood.R;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class OrderDetail extends AppCompatActivity {
@@ -78,7 +79,7 @@ public class OrderDetail extends AppCompatActivity {
     }
 
     private void setList(List<ChiTietDatHang> list) {
-        CartAdapter adapter = new CartAdapter(list, getApplicationContext(),chiTietDatHangDAO);
+        CartAdapter adapter = new CartAdapter(list, getApplicationContext(),chiTietDatHangDAO,0);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         Order_Done_list.setLayoutManager(linearLayoutManager);
         Order_Done_list.setAdapter(adapter);
@@ -87,7 +88,8 @@ public class OrderDetail extends AppCompatActivity {
 
     private void setMoney() {
         int money = (int) datHang.getTotalpriceDathang( );
-        Order_Done_TotalPrice.setText("Thành tiền : " + money + " VNĐ");
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+        Order_Done_TotalPrice.setText("Thành tiền : " + decimalFormat.format(money) + "đ");
     }
 
     private void checkStatus() {

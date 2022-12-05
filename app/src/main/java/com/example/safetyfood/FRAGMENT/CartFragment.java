@@ -89,7 +89,7 @@ public class CartFragment extends Fragment {
     }
 
     private void setAdapterToRCL() {
-        CartAdapter cartAdapter = new CartAdapter(chiTietDatHangList, getContext(),chiTietDatHangDAO);
+        CartAdapter cartAdapter = new CartAdapter(chiTietDatHangList, getContext(),chiTietDatHangDAO,1);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         Cart_list.setLayoutManager(linearLayoutManager);
         Cart_list.setAdapter(cartAdapter);

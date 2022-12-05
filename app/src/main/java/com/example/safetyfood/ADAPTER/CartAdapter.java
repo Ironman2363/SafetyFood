@@ -39,12 +39,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartAdapterHol
     SanPhamDAO sanPhamDAO;
     Context context;
     ChiTietDatHangDAO chiTietDatHangDAO;
+    int type;
 
-    public CartAdapter(List<ChiTietDatHang> list, Context context, ChiTietDatHangDAO chiTietDatHangDAO) {
+    public CartAdapter(List<ChiTietDatHang> list, Context context, ChiTietDatHangDAO chiTietDatHangDAO,int type) {
         this.list = list;
         this.context = context;
         sanPhamDAO = new SanPhamDAO(context);
         this.chiTietDatHangDAO = chiTietDatHangDAO;
+        this.type = type;
     }
 
     @NonNull
@@ -67,10 +69,18 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartAdapterHol
             holder.Cart_items_img.setImageURI(uri);
         }
 
+        if(type==0){
+            holder.Cart_items_amount_edt.setVisibility(View.GONE);
+            holder.Cart_items_plus.setVisibility(View.GONE);
+            holder.Cart_items_remove.setVisibility(View.GONE);
+            holder.Cart_items_amount_txt.setVisibility(View.VISIBLE);
+        }
+
         holder.Cart_items_name.setText(sanPham.getNameSanpham());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        holder.Cart_items_amount.setText("x" + decimalFormat.format(chiTietDatHang.getAmount()));
-        holder.Cart_items_amount.addTextChangedListener(new TextWatcher( ) {
+        holder.Cart_items_amount_edt.setText("x" + decimalFormat.format(chiTietDatHang.getAmount()));
+        holder.Cart_items_amount_txt.setText("x" + decimalFormat.format(chiTietDatHang.getAmount()));
+        holder.Cart_items_amount_edt.addTextChangedListener(new TextWatcher( ) {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -99,7 +109,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartAdapterHol
         holder.Cart_items_plus.setOnClickListener(v -> {
             chiTietDatHang.setAmount(chiTietDatHang.getAmount()+1);
             chiTietDatHangDAO.CapNhapChiTietDatHang(chiTietDatHang);
-            holder.Cart_items_amount.setText("x" + decimalFormat.format(chiTietDatHang.getAmount()));
+            holder.Cart_items_amount_edt.setText("x" + decimalFormat.format(chiTietDatHang.getAmount()));
             LocalBroadcastManager.getInstance(context).sendBroadcast(CheckMN);
         });
 
@@ -111,7 +121,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartAdapterHol
                 chiTietDatHangDAO.XoaChiTietDatHang(chiTietDatHang);
                 notifyItemRemoved(holder.getAdapterPosition());
             }
-            holder.Cart_items_amount.setText("x" + decimalFormat.format(chiTietDatHang.getAmount()));
+            holder.Cart_items_amount_edt.setText("x" + decimalFormat.format(chiTietDatHang.getAmount()));
             LocalBroadcastManager.getInstance(context).sendBroadcast(CheckMN);
         });
 
@@ -135,16 +145,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartAdapterHol
 
     class CartAdapterHolder extends RecyclerView.ViewHolder {
         ImageView Cart_items_img;
-        TextView Cart_items_name, Cart_items_price;
+        TextView Cart_items_name, Cart_items_price,Cart_items_amount_txt;
         CardView Cart_items_View;
         ImageButton Cart_items_remove,Cart_items_plus;
-        EditText Cart_items_amount;
+        EditText Cart_items_amount_edt;
 
         public CartAdapterHolder(@NonNull View itemView) {
             super(itemView);
             Cart_items_img = itemView.findViewById(R.id.Cart_items_img);
             Cart_items_name = itemView.findViewById(R.id.Cart_items_name);
-            Cart_items_amount = itemView.findViewById(R.id.Cart_items_amount);
+            Cart_items_amount_edt = itemView.findViewById(R.id.Cart_items_amount_edt);
+            Cart_items_amount_txt = itemView.findViewById(R.id.Cart_items_amount_txt);
             Cart_items_price = itemView.findViewById(R.id.Cart_items_price);
             Cart_items_View = itemView.findViewById(R.id.Cart_items_View);
             Cart_items_remove = itemView.findViewById(R.id.Cart_items_remove);
