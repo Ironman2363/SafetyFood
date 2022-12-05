@@ -4,11 +4,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+
+
 import android.os.CountDownTimer;
 import android.util.Log;
 
 import com.example.safetyfood.DAO.TaikhoanDAO;
 import com.example.safetyfood.MODEL.TaiKhoan;
+
+import android.os.Handler;
+
+import com.example.safetyfood.MainActivity;
+
+import com.example.safetyfood.MainActivity;
+
+
+import com.example.safetyfood.MainActivity;
 import com.example.safetyfood.R;
 
 public class Splash_Screen extends AppCompatActivity {
@@ -17,6 +29,7 @@ public class Splash_Screen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+
 
         CountDownTimer countDownTimer = new CountDownTimer(3000, 3000) {
             @Override
@@ -30,6 +43,7 @@ public class Splash_Screen extends AppCompatActivity {
             }
         };
         countDownTimer.start();
+
     }
 
 }

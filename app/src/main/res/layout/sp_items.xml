@@ -1,48 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="10dp"
-    android:layout_margin="8dp">
+    android:layout_margin="8dp"
+    app:cardCornerRadius="5dp">
 
     <LinearLayout
-        android:background="@drawable/boder_search"
         android:id="@+id/SP_items_View"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/boder_search"
         android:orientation="vertical">
 
         <ImageView
-            android:layout_margin="5dp"
             android:id="@+id/SP_items_Img"
             android:layout_width="100dp"
-            android:layout_height="80dp"
+            android:layout_height="100dp"
             android:layout_gravity="center"
-            android:src="@drawable/loaisp_coca" />
+            android:layout_margin="5dp"
+            android:src="@mipmap/ic_launcher"  />
 
         <TextView
-            android:layout_margin="5dp"
             android:id="@+id/SP_items_Ten"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_margin="5dp"
             android:text="Coca Cola"
             android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textSize="18sp" />
 
-        <TextView
-            android:layout_margin="5dp"
-            android:id="@+id/SP_items_Gia"
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_name_sp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp">
+
+            <TextView
+                android:id="@+id/SP_items_Gia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"
+
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="25000 đ"
+                android:textColor="@color/red"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/img_free_ship"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/free_ship" />
+        </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="25000 đ"
-            android:textColor="@color/red"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:layout_below="@id/relativeLayout"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="10dp">
 
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="16dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/icon_start" />
+
+            <TextView
+                android:id="@+id/tv_da_ban"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Đã bán 7,5k"
+                android:textColor="@color/black"
+                android:textSize="12dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linearLayout"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            >
+
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:src="@drawable/ic_location"
+                android:layout_marginRight="5dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hà Nội"
+                android:textSize="12dp"
+                />
+
+        </LinearLayout>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

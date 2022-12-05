@@ -5,6 +5,7 @@ import static com.example.safetyfood.MainActivity.check_login;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,6 +29,7 @@ import com.example.safetyfood.MODEL.SanPham;
 import com.example.safetyfood.MODEL.TaiKhoan;
 import com.example.safetyfood.R;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,9 +65,16 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
         String textStatus = "";
         int statusDH = datHang.getStatusDathang();
         holder.Order_items_nameSP.setText(sanPham.getNameSanpham());
-        holder.Order_items_Img.setImageResource(Integer.parseInt(sanPham.getImgSanpham()));
+        try{
+            holder.Order_items_Img.setImageResource(Integer.parseInt(sanPham.getImgSanpham()));
+        }catch (Exception e){
+            Uri uri = Uri.parse(sanPham.getImgSanpham());
+            holder.Order_items_Img.setImageURI(uri);
+        }
         holder.Order_items_Amount.setText("x " + chiTietDatHang.getAmount());
-        holder.Order_items_Price.setText("Giá : " + sanPham.getPriceSanpham());
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+
+        holder.Order_items_Price.setText(decimalFormat.format(sanPham.getPriceSanpham()) + " đ");
         holder.Order_items_totalAmount.setText(chiTietDatHangDAO.getSum(datHang.getId()) + " sản phẩm");
         holder.Order_items_totalPrice.setText("Thành tiền : " + datHang.getTotalpriceDathang());
 
@@ -124,15 +133,13 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
                 datHang.setStatusDathang(1);
                 datHangDAO.UpgradeDH(datHang);
             }
-            list.remove(holder.getAdapterPosition());
-            notifyItemRemoved(holder.getAdapterPosition());
+            holder.Order_items_View.setVisibility(View.GONE);
         });
         holder.btnXacnhan.setOnClickListener(v -> {
             if (statusDH == 1) {
                 datHang.setStatusDathang(2);
                 datHangDAO.UpgradeDH(datHang);
-                list.remove(holder.getAdapterPosition());
-                notifyItemRemoved(holder.getAdapterPosition());
+                holder.Order_items_View.setVisibility(View.GONE);
             }
         });
 
@@ -140,8 +147,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
             if (statusDH == 2) {
                 datHang.setStatusDathang(5);
                 datHangDAO.UpgradeDH(datHang);
-                list.remove(holder.getAdapterPosition());
-                notifyItemRemoved(holder.getAdapterPosition());
+                holder.Order_items_View.setVisibility(View.GONE);
             }
         });
         holder.Order_items_View.setOnClickListener(v -> {

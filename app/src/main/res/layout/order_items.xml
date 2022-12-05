@@ -150,7 +150,6 @@
                 android:backgroundTint="#3F51B5"
                 android:text="Giao hàng"
                 android:textStyle="bold" />
-
             <Button
                 android:id="@+id/btnxacnhandagiahang"
                 android:layout_width="wrap_content"
@@ -159,8 +158,6 @@
                 android:backgroundTint="#3F51B5"
                 android:text="Đã Nhận Được Hàng"
                 android:textStyle="bold" />
-
-
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

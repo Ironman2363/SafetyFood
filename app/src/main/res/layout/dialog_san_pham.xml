@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:padding="20dp"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/them_anh"
+        >
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50sp"
+            android:src="@drawable/img_image"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thêm ảnh "
+            android:textSize="25sp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            />
+    </LinearLayout>
+    <ImageView
+        android:layout_width="60sp"
+        android:layout_height="60sp"
+        android:visibility="gone"
+        android:layout_marginTop="20dp"
+        android:id="@+id/img_loai_sp"
+        />
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_loai_sp"
+        android:layout_marginTop="20dp"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tên sản phẩm..."
+        android:id="@+id/edit_ten_sp"
+        android:layout_marginTop="10dp"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Giá sản phẩm..."
+        android:id="@+id/edit_gia_sp"
+        android:layout_marginTop="10dp"
+        />
+    <Button
+        android:layout_marginTop="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thêm"
+        android:id="@+id/btn_add_sp"
+        />
+</LinearLayout>

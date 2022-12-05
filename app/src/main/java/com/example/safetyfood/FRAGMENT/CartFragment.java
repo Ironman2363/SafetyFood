@@ -34,6 +34,7 @@ import com.example.safetyfood.Service.CheckCartService;
 import com.example.safetyfood.Tab_Fragment.GiaoHangFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,7 +82,9 @@ public class CartFragment extends Fragment {
         for (ChiTietDatHang x : chiTietDatHangList) {
             sum += x.getUnitprice();
         }
-        Cart_TotalPrice.setText("Tổng tiền : " + sum + "đ");
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+
+        Cart_TotalPrice.setText("Tổng thanh toán : " + decimalFormat.format(sum) + "đ");
         return sum;
     }
 

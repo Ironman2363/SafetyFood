@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,6 +33,7 @@ import com.example.safetyfood.MODEL.ChiTietDatHang;
 import com.example.safetyfood.MODEL.SanPham;
 import com.example.safetyfood.R;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,6 +89,7 @@ public class SanPhamDetail extends AppCompatActivity {
         sanPhamListTT = sanPhamDAO.getSpTT(Integer.parseInt(sanPham.getLoaiSanpham()), sanPham.getId());
 
     }
+
 
     private ChiTietDatHang CheckCart(SanPham sanPham) {
         List<ChiTietDatHang> list = new ArrayList<>();
@@ -158,9 +161,17 @@ public class SanPhamDetail extends AppCompatActivity {
     }
 
     private void setData(SanPham sanPham) {
-        SPDetail_Img.setImageResource(Integer.parseInt(sanPham.getImgSanpham()));
+        try{
+            SPDetail_Img.setImageResource(Integer.parseInt(sanPham.getImgSanpham()));
+        }catch (Exception e){
+            Uri uri = Uri.parse(sanPham.getImgSanpham());
+            SPDetail_Img.setImageURI(uri);
+        }
+
         SPDetail_Ten.setText(sanPham.getNameSanpham());
-        SPDetail_Gia.setText(sanPham.getPriceSanpham() + " VND");
+//        SPDetail_Gia.setText(sanPham.getPriceSanpham() + " VND");
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+        SPDetail_Gia.setText(decimalFormat.format(sanPham.getPriceSanpham()) + " đ");
         SpDetail_Created.setText(sanPham.getCreateSanpham());
         if (sanPham.getStatusSanpham() == 1) {
             SPDetail_Status.setTextColor(Color.GREEN);

@@ -1,59 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
+    android:layout_height="match_parent"
     android:layout_margin="10dp"
-    android:layout_height="match_parent">
+    android:orientation="vertical">
 
     <TextView
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="50sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:text="THỐNG KÊ"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:textColor="@color/red"
+        android:textSize="50sp"
+        android:textStyle="bold" />
+
     <TextView
-        android:textColor="@color/black"
-        android:layout_marginTop="50sp"
-        android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ngày bắt đầu"/>
+        android:layout_marginTop="50sp"
+        android:text="Ngày bắt đầu"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
     <EditText
-        android:background="@drawable/boder_edittext"
+        android:id="@+id/edtStart"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@drawable/boder_search"
         android:hint="Nhập ngày"
-        android:padding="10dp"
-        android:id="@+id/edtStart"/>
+        android:padding="10dp" />
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Đến ngày"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Đến ngày"/>
+        android:textStyle="bold" />
+
     <EditText
-        android:padding="10dp"
+        android:id="@+id/edtEnd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/boder_search"
         android:hint="Nhập ngày"
-        android:id="@+id/edtEnd"/>
+        android:padding="10dp" />
 
     <Button
+        android:id="@+id/btnThongKe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnThongKe"
-        android:text="Tìm Kiếm"/>
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/red"
+        android:text="Tìm Kiếm" />
+
     <TextView
+        android:id="@+id/txtKetQua"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txtKetQua"
         android:layout_gravity="center"
-        android:text="100vd"
-        android:textSize="24sp"
         android:textColor="#FF0000"
-        android:textStyle="bold"/>
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
 </LinearLayout>

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.graphics.Color;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,8 +20,12 @@ import com.example.safetyfood.DAO.ChiTietDatHangDAO;
 import com.example.safetyfood.DAO.ThongTinNguoiDungDAO;
 import com.example.safetyfood.MODEL.DatHang;
 import com.example.safetyfood.MODEL.ThongTinNguoiDung;
+import com.example.safetyfood.DAO.ChiTietDatHangDAO;
+import com.example.safetyfood.MODEL.DatHang;
+import com.example.safetyfood.MODEL.ThongTinNguoiDung;
 import com.example.safetyfood.R;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapter.OrderHistoryAdapterHolder>{
@@ -45,6 +51,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
     @Override
     public void onBindViewHolder(@NonNull OrderHistoryAdapterHolder holder, int position) {
         DatHang datHang = list.get(position);
+        Log.e("ZZZZ", "onBindViewHolder: "+datHang.getIdtaikhoan() );
         ThongTinNguoiDung info = thongTinNguoiDungDAO.getInfo(datHang.getIdtaikhoan());
         Log.e("Adapter", "onBindViewHolder: "+datHang );
         String status = "";
@@ -52,7 +59,9 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         holder.Order_History_items_Buyer.setText("Khách hàng : "+info.getFullname());
         holder.Order_History_items_Address.setText("Địa chỉ : "+info.getAddresNguoidung());
         holder.Order_History_items_Amount.setText(chiTietDatHangDAO.getSum(datHang.getId( ))+" sản phẩm");
-        holder.Order_History_items_TotalPrice.setText("Tổng :"+datHang.getTotalpriceDathang()+"VND");
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+
+        holder.Order_History_items_TotalPrice.setText(decimalFormat.format(datHang.getTotalpriceDathang()) + " đ");
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, OrderDetail.class);
             Bundle bundle = new Bundle();

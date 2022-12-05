@@ -69,19 +69,6 @@ public class Login extends AppCompatActivity {
 
                 }
                 Toast.makeText(Login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-//                if (checkTK(mail,mk)){
-//                    Intent intent;
-//                    if (taiKhoan.getRole() == 3){
-//                        intent = new Intent(getApplicationContext(),MainActivity.class);
-//                    }else {
-//                        intent = new Intent(getApplicationContext(),AdminActivity.class);
-//                    }
-//                    Toast.makeText(Login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-//                    Bundle bundle = new Bundle();
-//                    bundle.putSerializable("tk", dao.getName(mail));
-//                    intent.putExtra("bundle", bundle);
-//                    startActivity(intent);
-//                }
 
             }
         });

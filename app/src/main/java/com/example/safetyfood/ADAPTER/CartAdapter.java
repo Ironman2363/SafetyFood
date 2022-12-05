@@ -2,6 +2,7 @@ package com.example.safetyfood.ADAPTER;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import com.example.safetyfood.MODEL.ChiTietDatHang;
 import com.example.safetyfood.MODEL.SanPham;
 import com.example.safetyfood.R;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartAdapterHolder> {
@@ -47,10 +49,19 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartAdapterHol
     public void onBindViewHolder(@NonNull CartAdapterHolder holder, int position) {
         ChiTietDatHang chiTietDatHang = list.get(position);
         SanPham sanPham = sanPhamDAO.getID(chiTietDatHang.getProductid());
-        holder.Cart_items_img.setImageResource(Integer.parseInt(sanPham.getImgSanpham()));
-        holder.Cart_items_name.setText(sanPham.getNameSanpham());
-        holder.Cart_items_amount.setText("Số lượng : " + chiTietDatHang.getAmount());
-        holder.Cart_items_price.setText(String.valueOf(sanPham.getPriceSanpham()));
+        try {
+            holder.Cart_items_img.setImageResource(Integer.parseInt(sanPham.getImgSanpham()));
+        } catch (Exception e) {
+            Uri uri = Uri.parse(sanPham.getImgSanpham());
+            holder.Cart_items_img.setImageURI(uri);
+        }
+
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+        holder.Cart_items_amount.setText("Số lượng : " + decimalFormat.format(chiTietDatHang.getAmount()));
+
+
+        holder.Cart_items_price.setText(decimalFormat.format(sanPham.getPriceSanpham()) + " đ");
+//        holder.Cart_items_price.setText(String.valueOf(sanPham.getPriceSanpham()));
 
 
         holder.Cart_items_View.setOnClickListener(v -> {
