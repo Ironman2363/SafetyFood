@@ -56,6 +56,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartAdapterHol
             holder.Cart_items_img.setImageURI(uri);
         }
 
+        holder.Cart_items_name.setText(sanPham.getNameSanpham());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         holder.Cart_items_amount.setText("Số lượng : " + decimalFormat.format(chiTietDatHang.getAmount()));
 

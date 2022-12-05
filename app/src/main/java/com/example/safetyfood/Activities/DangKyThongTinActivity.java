@@ -51,6 +51,9 @@ public class DangKyThongTinActivity extends AppCompatActivity {
         avatar = findViewById(R.id.edtAvatar);
         nguoiDungDAO = new ThongTinNguoiDungDAO(this);
         taikhoanDAO = new TaikhoanDAO(this);
+        if (taikhoanDAO.getName(userDK).getPassword().equals(passDK)){
+            taiKhoan=taikhoanDAO.getName(userDK);
+        }
         hoantat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,7 +82,7 @@ public class DangKyThongTinActivity extends AppCompatActivity {
                 nguoiDung.setCreateNguoidung(text);
                 nguoiDung.setAvatarNguoidung(anh);
                 nguoiDung.setUpdateNguoidung(text);
-                nguoiDung.setIdtaikhoan(0);
+                nguoiDung.setIdtaikhoan(taiKhoan.getId());
                 if (nguoiDungDAO.themThongTinNguoiDung(nguoiDung)) {
                     Toast.makeText(DangKyThongTinActivity.this, "Them thong tin thanh cong", Toast.LENGTH_SHORT).show();
                     finish();

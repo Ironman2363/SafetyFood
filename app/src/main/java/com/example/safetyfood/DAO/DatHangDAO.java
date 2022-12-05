@@ -88,7 +88,7 @@ public class DatHangDAO {
     }
 
     public List<DatHang> getCartStatus(int ID, int status3,int status4) {
-        String sql = "Select * from " + table_name + " where " + AccountId + "=? and " + Status + " = ? or "+Status+" = ? Order by created desc";
+        String sql = "Select * from " + table_name + " where " + AccountId + "=? and (" + Status + " = ? or "+Status+" = ?) Order by created desc";
         return getData(sql, new String[]{String.valueOf(ID), String.valueOf(status3),String.valueOf(status4)});
     }
 

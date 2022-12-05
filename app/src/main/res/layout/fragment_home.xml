@@ -1,37 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="#EFEBEB"
-    android:layout_height="wrap_content"
-    tools:context=".FRAGMENT.HomeFragment">
+    android:orientation="vertical">
 
-    <LinearLayout
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/Home_TIL_findFood"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        app:hintEnabled="false"
+        android:layout_margin="15dp"
+        app:boxBackgroundMode="none"
+        app:startIconDrawable="@drawable/ic_baseline_search_24">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/Home_TIL_findFood"
+
+        <EditText
+            android:id="@+id/edt_findFood"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/boder_search"
+            android:hint="Find your food"
+            android:padding="5dp"
+            android:textStyle="italic" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:background="#EFEBEB"
+        android:layout_height="wrap_content"
+        tools:context=".FRAGMENT.HomeFragment">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:hintEnabled="false"
-            android:layout_margin="15dp"
-            app:boxBackgroundMode="none"
-            app:startIconDrawable="@drawable/ic_baseline_search_24">
-
-
-            <EditText
-                android:id="@+id/edt_findFood"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/boder_search"
-                android:hint="Find your food"
-                android:padding="5dp"
-                android:textStyle="italic" />
-        </com.google.android.material.textfield.TextInputLayout>
-
+            android:orientation="vertical">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -40,85 +46,87 @@
                 android:src="@drawable/abannner1" />
 
 
-        <LinearLayout
-            android:background="@drawable/boder_recycel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:layout_margin="10dp"
+            <LinearLayout
+                android:background="@drawable/boder_recycel"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:src="@drawable/category"
-                    android:layout_width="35dp"
-                    android:id="@+id/abcd"
-                    android:layout_height="35dp"/>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_margin="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:src="@drawable/category"
+                        android:layout_width="35dp"
+                        android:id="@+id/abcd"
+                        android:layout_height="35dp"/>
+
+                    <TextView
+                        android:layout_toRightOf="@+id/abcd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="DANH MỤC"
+                        android:layout_marginStart="10dp"
+                        android:textColor="@color/red"
+                        android:textSize="20sp" />
+                </RelativeLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/RCL_loaiSP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:background="@drawable/boder_recycel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical">
 
                 <TextView
-                    android:layout_toRightOf="@+id/abcd"
+                    android:layout_margin="10dp"
+                    android:textSize="20sp"
+                    android:textColor="@color/red"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="DANH MỤC"
-                    android:layout_marginStart="10dp"
-                    android:textColor="@color/red"
-                    android:textSize="20sp" />
-            </RelativeLayout>
+                    android:text="TẤT CẢ SẢN PHẨM"
+                    />
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/RCL_SP"
+                    android:padding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/RCL_loaiSP"
+            </LinearLayout>
+            <LinearLayout
+                android:background="@drawable/boder_recycel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="5dp" />
+                android:layout_marginTop="5dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SẢN PHẨM BÁN CHẠY"
+                    android:layout_margin="10dp"
+                    android:textSize="20sp"
+                    android:textColor="@color/red" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/RCL_TSP"
+                    android:padding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:background="@drawable/boder_recycel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:orientation="vertical">
+    </ScrollView>
 
-            <TextView
-                android:layout_margin="10dp"
-                android:textSize="20sp"
-                android:textColor="@color/red"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TẤT CẢ SẢN PHẨM"
-/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/RCL_SP"
-                android:padding="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-        <LinearLayout
-            android:background="@drawable/boder_recycel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="SẢN PHẨM BÁN CHẠY"
-                android:layout_margin="10dp"
-                android:textSize="20sp"
-                android:textColor="@color/red" />
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/RCL_TSP"
-                android:padding="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-</ScrollView>
+</LinearLayout>
