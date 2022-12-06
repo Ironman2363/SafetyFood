@@ -226,6 +226,9 @@ public class SanPhamDetail extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.badge_cart_menu,menu);
 
         MenuItem menuItem = menu.findItem(R.id.badge_cart);
+        if (account_all.getRole()!=3){
+            menuItem.setVisible(false);
+        }
         View actionMenu = menuItem.getActionView();
         sizeCart = actionMenu.findViewById(R.id.number_size_cart);
 

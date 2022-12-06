@@ -83,7 +83,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
         holder.Order_items_totalAmount.setText(chiTietDatHangDAO.getSum(datHang.getId()) + " sản phẩm");
         holder.Order_items_totalPrice.setText("Thành tiền : " + decimalFormat.format(datHang.getTotalpriceDathang())+"đ");
 
-        if (account_all.getRole() == 1 || account_all.getRole() == 2) {
+        if (account_all.getRole()!=3) {
             holder.btnXacnhan.setVisibility(View.VISIBLE);
         }else {
             holder.btnXacnhan.setVisibility(View.GONE);

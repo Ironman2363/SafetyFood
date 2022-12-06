@@ -1,5 +1,7 @@
 package com.example.safetyfood.ADAPTER;
 
+import static com.example.safetyfood.MainActivity.account_all;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -136,6 +138,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartAdapterHol
 
 
         holder.Cart_items_View.setOnClickListener(v -> {
+            if (account_all.getRole()!=3){
+                return;
+            }
             Intent intent = new Intent(context, SanPhamDetail.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("sp", sanPham);
