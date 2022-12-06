@@ -1,24 +1,21 @@
 package com.example.safetyfood.ADAPTER;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static com.example.safetyfood.MainActivity.account_all;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -145,6 +142,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartAdapterHol
             Bundle bundle = new Bundle();
             bundle.putSerializable("sp", sanPham);
             intent.putExtra("bundle", bundle);
+            intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         });
     }
