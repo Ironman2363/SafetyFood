@@ -138,6 +138,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartAdapterHol
             if (account_all.getRole()!=3){
                 return;
             }
+            if (type==1){
+                return;
+            }
             Intent intent = new Intent(context, SanPhamDetail.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("sp", sanPham);

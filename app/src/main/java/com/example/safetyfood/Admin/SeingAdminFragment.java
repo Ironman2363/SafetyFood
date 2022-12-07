@@ -31,6 +31,7 @@ public class SeingAdminFragment extends Fragment {
     List<DatHang> list;
     List<String> listspn;
     DatHangDAO datHangDAO;
+    int index,status,status1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,22 +51,27 @@ public class SeingAdminFragment extends Fragment {
                 switch (position){
                     case 0:{
                         getData();
+                        index = 0;
                         break;
                     }
                     case 1:{
                         getDataStatus(1,1);
+                        index = 1;
                         break;
                     }
                     case 2:{
                         getDataStatus(2,2);
+                        index = 2;
                         break;
                     }
                     case 3:{
                         getDataStatus(5,5);
+                        index = 3;
                         break;
                     }
                     case 4:{
                         getDataStatus(3,4);
+                        index = 4;
                         break;
                     }
                 }
@@ -114,9 +120,35 @@ public class SeingAdminFragment extends Fragment {
     }
 
     @Override
+    public void onPause() {
+        super.onPause( );
+    }
+
+    @Override
     public void onResume() {
         super.onResume( );
-        getData();
-        getDataSPN();
+        Order_History_Spn.setSelection(index);
+        switch (index){
+            case 0:{
+                getData();
+                break;
+            }
+            case 1:{
+                getDataStatus(1,1);
+                break;
+            }
+            case 2:{
+                getDataStatus(2,2);
+                break;
+            }
+            case 3:{
+                getDataStatus(5,5);
+                break;
+            }
+            case 4:{
+                getDataStatus(3,4);
+                break;
+            }
+        }
     }
 }

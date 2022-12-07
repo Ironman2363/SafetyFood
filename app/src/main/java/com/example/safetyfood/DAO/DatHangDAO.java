@@ -78,7 +78,7 @@ public class DatHangDAO {
     }
 
     public List<DatHang> getAllOrderStatus(int status, int status1) {
-        String sql = "Select * from " + table_name + " where  " + Status + " = ? or "+Status+" = ?";
+        String sql = "Select * from " + table_name + " where  " + Status + " = ? or "+Status+" = ? order by "+Created+" desc";
         return getData(sql, new String[]{String.valueOf(status),String.valueOf(status1)});
     }
 
@@ -88,7 +88,7 @@ public class DatHangDAO {
     }
 
     public List<DatHang> getOrderHistory(int status){
-        String sql = "Select * from " + table_name + " where  " + Status + " != ?";
+        String sql = "Select * from " + table_name + " where  " + Status + " != ? order by "+Created+" desc";
         return getData(sql, new String[]{String.valueOf(status)});
     }
 
