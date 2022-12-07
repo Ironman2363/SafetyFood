@@ -100,8 +100,9 @@ public class OrderDetail extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         datHang.setUpdateDathang(simpleDateFormat.format(calendar.getTime()));
-                        datHang.setStatusDathang(4);
+                        datHang.setStatusDathang(2);
                         datHangDAO.UpgradeDH(datHang);
+                        checkStatus();
                     }
                 });
 
@@ -119,8 +120,9 @@ public class OrderDetail extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         datHang.setUpdateDathang(simpleDateFormat.format(calendar.getTime()));
-                        datHang.setStatusDathang(2);
+                        datHang.setStatusDathang(4);
                         datHangDAO.UpgradeDH(datHang);
+                        checkStatus();
                     }
                 });
 
@@ -158,12 +160,14 @@ public class OrderDetail extends AppCompatActivity {
         int status = datHang.getStatusDathang( );
         String text1 = "";
         String text2 = "";
+        String textGiao = "";
         int color = 0;
         int img_src = 0;
         switch (status) {
             case 1: {
                 text1 = "Đơn hàng đang được xử lý";
                 text2 = "Cảm ơn bạn đã mua hàng tại SafetyFood";
+                textGiao = "Giao hàng";
                 color = R.color.Order_Done;
                 img_src = R.drawable.order_done;
                 break;
@@ -171,6 +175,9 @@ public class OrderDetail extends AppCompatActivity {
             case 2: {
                 text1 = "Đơn hàng đang được vận chuyển";
                 text2 = "Cảm ơn bạn đã mua hàng tại SafetyFood";
+                textGiao = "Đang giao hàng";
+                Btn_Admin_GiaoHang.setVisibility(View.GONE);
+                Btn_Admin_Huy.setVisibility(View.GONE);
                 color = R.color.Order_Done;
                 img_src = R.drawable.order_done;
                 break;
@@ -179,6 +186,9 @@ public class OrderDetail extends AppCompatActivity {
             case 4: {
                 text1 = "Đơn hàng đã bị hủy";
                 text2 = "Rất xin lỗi vì sự bất tiện của SafetyFood";
+                textGiao = "Đơn đã hủy";
+                Btn_Admin_GiaoHang.setVisibility(View.GONE);
+                Btn_Admin_Huy.setVisibility(View.GONE);
                 img_src = R.drawable.order_fail;
                 color = R.color.red;
                 break;
@@ -186,6 +196,9 @@ public class OrderDetail extends AppCompatActivity {
             case 5: {
                 text1 = "Đơn hàng đã hoàn thành";
                 text2 = "Cảm ơn bạn đã mua hàng tại SafetyFood";
+                textGiao = "Đã nhận";
+                Btn_Admin_GiaoHang.setVisibility(View.GONE);
+                Btn_Admin_Huy.setVisibility(View.GONE);
                 color = R.color.Order_Done;
                 img_src = R.drawable.order_done;
                 break;
@@ -194,6 +207,7 @@ public class OrderDetail extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             Order_Done_Check.setBackgroundColor(getColor(color));
         }
+        Btn_Admin_GiaoHang.setText(textGiao);
         Order_Done_Trang_Thai.setText(text1);
         Order_Done_Thanks.setText(text2);
         Order_Done_Img.setImageResource(img_src);

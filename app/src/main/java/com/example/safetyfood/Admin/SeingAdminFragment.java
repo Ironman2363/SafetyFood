@@ -112,4 +112,11 @@ public class SeingAdminFragment extends Fragment {
         OrderHistoryAdapter adapter = new OrderHistoryAdapter(list,getContext());
         Order_History_List.setAdapter(adapter);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume( );
+        getData();
+        getDataSPN();
+    }
 }
