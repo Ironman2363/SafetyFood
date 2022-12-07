@@ -33,18 +33,25 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="120dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/abannner1" />
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="150dp">
+
+        </androidx.viewpager.widget.ViewPager>
+        <me.relex.circleindicator.CircleIndicator
+            android:id="@+id/circle"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="-35dp"
+            android:layout_gravity="center_horizontal"
+            app:ci_drawable="@drawable/bg" />
 
 
         <LinearLayout
             android:background="@drawable/boder_recycel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:orientation="vertical">
 
             <RelativeLayout
