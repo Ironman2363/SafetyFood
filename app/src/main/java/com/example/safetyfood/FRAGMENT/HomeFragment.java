@@ -9,7 +9,10 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,17 +21,24 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.safetyfood.ADAPTER.LoaiSanPhamAdapter;
+import com.example.safetyfood.ADAPTER.PhotoAdapter;
 import com.example.safetyfood.ADAPTER.SanPhamAdapter;
 import com.example.safetyfood.Activities.SearchItems;
 import com.example.safetyfood.DAO.LoaiSanPhamDAO;
 import com.example.safetyfood.DAO.SanPhamDAO;
 import com.example.safetyfood.DAO.ThongKeDAO;
 import com.example.safetyfood.MODEL.LoaiSanPham;
+import com.example.safetyfood.MODEL.Photo;
 import com.example.safetyfood.MODEL.SanPham;
 import com.example.safetyfood.R;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import me.relex.circleindicator.CircleIndicator;
 
 
 public class HomeFragment extends Fragment {
@@ -41,24 +51,52 @@ public class HomeFragment extends Fragment {
     LoaiSanPhamDAO loaiSanPhamDAO;
     SanPhamDAO sanPhamDAO;
     List<LoaiSanPham> loaiSanPhamList;
-    List<SanPham> sanPhamList,topSanPham;
+    List<SanPham> sanPhamList, topSanPham;
     ThongKeDAO thongKeDAO;
+    ViewPager viewPager;
+    CircleIndicator indicator;
+    List<Photo> listImage = getListPhoto();
+    Timer timer;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
         anhXa();
-
+        autoSidelImage();
         Home_TIL_findFood.setStartIconOnClickListener(v -> {
             Intent intent = new Intent(getContext(), SearchItems.class);
-            intent.putExtra("search",edt_findFood.getText().toString().trim());
+            intent.putExtra("search", edt_findFood.getText().toString().trim());
             startActivity(intent);
         });
 
         getData();
 
         return view;
+    }
+
+    private void autoSidelImage() {
+        if (timer == null) {
+            timer = new Timer();
+        }
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        int item = viewPager.getCurrentItem();
+                        int totalitem = listImage.size() - 1;
+                        if (item < totalitem) {
+                            item++;
+                            viewPager.setCurrentItem(item);
+                        } else {
+                            viewPager.setCurrentItem(0);
+                        }
+                    }
+                });
+            }
+        }, 500, 3000);
     }
 
     private void setRCLAdapter() {
@@ -77,6 +115,21 @@ public class HomeFragment extends Fragment {
         RCL_TSP.setLayoutManager(layoutManager1);
         RCL_TSP.setAdapter(sanPhamAdapter1);
 
+        PhotoAdapter photoAdapter = new PhotoAdapter(context, getListPhoto());
+        viewPager.setAdapter(photoAdapter);
+        indicator.setViewPager(viewPager);
+        photoAdapter.registerDataSetObserver(indicator.getDataSetObserver());
+
+    }
+
+    private List<Photo> getListPhoto() {
+        List<Photo> list = new ArrayList<>();
+        list.add(new Photo(R.drawable.banner1));
+        list.add(new Photo(R.drawable.banner2));
+        list.add(new Photo(R.drawable.banner3));
+        list.add(new Photo(R.drawable.banner4));
+        list.add(new Photo(R.drawable.banner5));
+        return list;
     }
 // cho nay da sua
 
@@ -167,7 +220,7 @@ public class HomeFragment extends Fragment {
         }
         loaiSanPhamList = loaiSanPhamDAO.getDSLoaiSanPham();
         topSanPham = thongKeDAO.getTop();
-        if(topSanPham.isEmpty() || topSanPham.size()<10){
+        if (topSanPham.isEmpty() || topSanPham.size() < 10) {
             topSanPham = sanPhamDAO.getDSSanPham();
         }
         sanPhamList = sanPhamDAO.getDSSanPham();
@@ -184,5 +237,8 @@ public class HomeFragment extends Fragment {
         loaiSanPhamDAO = new LoaiSanPhamDAO(context);
         sanPhamDAO = new SanPhamDAO(context);
         thongKeDAO = new ThongKeDAO(context);
+        viewPager = view.findViewById(R.id.viewpager);
+        indicator = view.findViewById(R.id.circle);
+
     }
 }
