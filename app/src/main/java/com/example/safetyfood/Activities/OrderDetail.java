@@ -1,16 +1,23 @@
 package com.example.safetyfood.Activities;
 
+import static com.example.safetyfood.MainActivity.account_all;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,6 +33,8 @@ import com.example.safetyfood.MODEL.ThongTinNguoiDung;
 import com.example.safetyfood.R;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 public class OrderDetail extends AppCompatActivity {
@@ -40,6 +49,10 @@ public class OrderDetail extends AppCompatActivity {
     ChiTietDatHangDAO chiTietDatHangDAO;
     SanPhamDAO sanPhamDAO;
     DatHang datHang;
+    Button Btn_Admin_Huy,Btn_Admin_GiaoHang;
+    Calendar calendar;
+    @SuppressLint("SimpleDateFormat")
+    SimpleDateFormat simpleDateFormat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +73,58 @@ public class OrderDetail extends AppCompatActivity {
             checkInfo( );
             checkStatus( );
             getData( );
-        } else {
-
         }
+
+        if(account_all.getRole()==3){
+            Btn_Admin_Huy.setVisibility(View.GONE);
+            Btn_Admin_GiaoHang.setVisibility(View.GONE);
+        }
+
+        Btn_Admin_Huy.setOnClickListener(v -> {
+            AdminHuy();
+        });
+
+        Btn_Admin_GiaoHang.setOnClickListener(v -> {
+            AdminGiaoHang();
+        });
+    }
+
+    private void AdminGiaoHang() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this).setTitle("Bạn có chắc muốn giao đơn hàng này không ?")
+                .setNegativeButton("Hủy", new DialogInterface.OnClickListener( ) {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                .setPositiveButton("Chấp nhận", new DialogInterface.OnClickListener( ) {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        datHang.setUpdateDathang(simpleDateFormat.format(calendar.getTime()));
+                        datHang.setStatusDathang(4);
+                        datHangDAO.UpgradeDH(datHang);
+                    }
+                });
+
+        builder.create().show();
+    }
+
+    private void AdminHuy() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this).setTitle("Bạn có chắc muốn hủy đơn hàng này không ?")
+                .setNegativeButton("Hủy", new DialogInterface.OnClickListener( ) {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                .setPositiveButton("Chấp nhận", new DialogInterface.OnClickListener( ) {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        datHang.setUpdateDathang(simpleDateFormat.format(calendar.getTime()));
+                        datHang.setStatusDathang(2);
+                        datHangDAO.UpgradeDH(datHang);
+                    }
+                });
+
+        builder.create().show();
     }
 
     private void checkInfo() {
@@ -146,10 +208,14 @@ public class OrderDetail extends AppCompatActivity {
         Order_Done_TotalPrice = findViewById(R.id.Order_Done_TotalPrice);
         Order_Done_list = findViewById(R.id.Order_Done_list);
         Order_Done_Img = findViewById(R.id.Order_Done_Img);
+        Btn_Admin_Huy = findViewById(R.id.Btn_Admin_Huy);
+        Btn_Admin_GiaoHang = findViewById(R.id.Btn_Admin_GiaoHang);
         datHangDAO = new DatHangDAO(getApplicationContext( ));
         chiTietDatHangDAO = new ChiTietDatHangDAO(getApplicationContext( ));
         thongTinNguoiDungDAO = new ThongTinNguoiDungDAO(getApplicationContext( ));
         sanPhamDAO = new SanPhamDAO(getApplicationContext( ));
+        calendar = Calendar.getInstance();
+        simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
     }
 
     @Override
