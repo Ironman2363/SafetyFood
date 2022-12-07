@@ -19,6 +19,7 @@ import com.example.safetyfood.MODEL.TaiKhoan;
 import com.example.safetyfood.MainActivity;
 import com.example.safetyfood.R;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class Login extends AppCompatActivity {
 
@@ -27,6 +28,7 @@ public class Login extends AppCompatActivity {
     TextView skip, signUp;
     TaikhoanDAO dao;
     TaiKhoan tk;
+    TextInputLayout textInputName , textInputPass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +39,15 @@ public class Login extends AppCompatActivity {
         login = findViewById(R.id.btn_login);
         skip = findViewById(R.id.skip);
         signUp = findViewById(R.id.signUp);
+        textInputName = findViewById(R.id.Login_Til_Name);
+        textInputPass = findViewById(R.id.Login_Til_Pass);
         dao = new TaikhoanDAO(this);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+               textInputPass.setError("");
+               textInputName.setError("");
                 Intent intent;
                 String mail = email.getText().toString();
                 String mk = pass.getText().toString();
@@ -53,22 +58,22 @@ public class Login extends AppCompatActivity {
                     intent.putExtra("bundle", bundle);
                     startActivity(intent);
                 } else if (mail.equalsIgnoreCase("")) {
-                    Toast.makeText(Login.this, "Vui lòng nhập tài khoản", Toast.LENGTH_SHORT).show();
-                } else if (mk.equalsIgnoreCase("")) {
-                    Toast.makeText(Login.this, "Vui lòng nhập mật khẩu", Toast.LENGTH_SHORT).show();
+                    textInputName.setError("Vui lòng nhập tài khoản");
+                }
+                else if (mk.equalsIgnoreCase("")) {
+                   textInputPass.setError("Vui lòng nhập mật khẩu");
                 } else if (dao.checkDangNhapkhNVAD(mail, mk) == true) {
                     intent = new Intent(getApplicationContext(), AdminActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("tk", dao.getName(mail));
                     intent.putExtra("bundle", bundle);
+                    Toast.makeText(Login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                     startActivity(intent);
                 } else {
-
-
-                    Toast.makeText(Login.this, "Tài khoản hoặc mật khẩu sai", Toast.LENGTH_SHORT).show();
-
+                    textInputName.setError("Tài khoản hoặc mật khẩu sai");
+                    textInputPass.setError("Tài khoản hoặc mật khẩu sai");
                 }
-                Toast.makeText(Login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+
 
             }
         });
@@ -90,12 +95,12 @@ public class Login extends AppCompatActivity {
 
     private boolean checkTK(String mail, String mk) {
         if(dao.getName(mail)==null){
-            Toast.makeText(Login.this, "Tài khoản không tồn tại", Toast.LENGTH_SHORT).show( );
+           textInputName.setError("Tai khoan khong ton tai");
             return false;
         }else {
             tk = dao.getName(mail);
             if(!mk.equals(tk.getPassword())){
-                Toast.makeText(Login.this, "Mật khẩu sai", Toast.LENGTH_SHORT).show( );
+               textInputPass.setError("Mật khẩu sai");
                 return false;
             }
         }
