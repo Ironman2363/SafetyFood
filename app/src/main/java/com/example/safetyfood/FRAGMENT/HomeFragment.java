@@ -241,4 +241,5 @@ public class HomeFragment extends Fragment {
         indicator = view.findViewById(R.id.circle);
 
     }
+
 }

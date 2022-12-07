@@ -24,6 +24,7 @@
         android:layout_marginTop="40dp"
         app:startIconDrawable="@drawable/user_24"
         android:hint="Tài khoản"
+        android:id="@+id/Login_Til_Name"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -41,6 +42,7 @@
         android:layout_marginTop="20dp"
         android:hint="Mật khẩu"
         app:counterEnabled="true"
+        android:id="@+id/Login_Til_Pass"
         app:counterMaxLength="50"
         app:startIconDrawable="@drawable/lock_24"
         app:passwordToggleEnabled="true"
