@@ -1,15 +1,23 @@
 package com.example.safetyfood.Activities;
 
+import static com.example.safetyfood.MainActivity.account_all;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,6 +32,9 @@ import com.example.safetyfood.MODEL.DatHang;
 import com.example.safetyfood.MODEL.ThongTinNguoiDung;
 import com.example.safetyfood.R;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 public class OrderDetail extends AppCompatActivity {
@@ -38,6 +49,10 @@ public class OrderDetail extends AppCompatActivity {
     ChiTietDatHangDAO chiTietDatHangDAO;
     SanPhamDAO sanPhamDAO;
     DatHang datHang;
+    Button Btn_Admin_Huy,Btn_Admin_GiaoHang;
+    Calendar calendar;
+    @SuppressLint("SimpleDateFormat")
+    SimpleDateFormat simpleDateFormat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +73,60 @@ public class OrderDetail extends AppCompatActivity {
             checkInfo( );
             checkStatus( );
             getData( );
-        } else {
-
         }
+
+        if(account_all.getRole()==3){
+            Btn_Admin_Huy.setVisibility(View.GONE);
+            Btn_Admin_GiaoHang.setVisibility(View.GONE);
+        }
+
+        Btn_Admin_Huy.setOnClickListener(v -> {
+            AdminHuy();
+        });
+
+        Btn_Admin_GiaoHang.setOnClickListener(v -> {
+            AdminGiaoHang();
+        });
+    }
+
+    private void AdminGiaoHang() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this).setTitle("Bạn có chắc muốn giao đơn hàng này không ?")
+                .setNegativeButton("Hủy", new DialogInterface.OnClickListener( ) {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                .setPositiveButton("Chấp nhận", new DialogInterface.OnClickListener( ) {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        datHang.setUpdateDathang(simpleDateFormat.format(calendar.getTime()));
+                        datHang.setStatusDathang(2);
+                        datHangDAO.UpgradeDH(datHang);
+                        checkStatus();
+                    }
+                });
+
+        builder.create().show();
+    }
+
+    private void AdminHuy() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this).setTitle("Bạn có chắc muốn hủy đơn hàng này không ?")
+                .setNegativeButton("Hủy", new DialogInterface.OnClickListener( ) {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                .setPositiveButton("Chấp nhận", new DialogInterface.OnClickListener( ) {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        datHang.setUpdateDathang(simpleDateFormat.format(calendar.getTime()));
+                        datHang.setStatusDathang(4);
+                        datHangDAO.UpgradeDH(datHang);
+                        checkStatus();
+                    }
+                });
+
+        builder.create().show();
     }
 
     private void checkInfo() {
@@ -77,7 +143,7 @@ public class OrderDetail extends AppCompatActivity {
     }
 
     private void setList(List<ChiTietDatHang> list) {
-        CartAdapter adapter = new CartAdapter(list, this);
+        CartAdapter adapter = new CartAdapter(list, getApplicationContext(),chiTietDatHangDAO,0);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         Order_Done_list.setLayoutManager(linearLayoutManager);
         Order_Done_list.setAdapter(adapter);
@@ -86,19 +152,22 @@ public class OrderDetail extends AppCompatActivity {
 
     private void setMoney() {
         int money = (int) datHang.getTotalpriceDathang( );
-        Order_Done_TotalPrice.setText("Thành tiền : " + money + " VNĐ");
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+        Order_Done_TotalPrice.setText("Thành tiền : " + decimalFormat.format(money) + "đ");
     }
 
     private void checkStatus() {
         int status = datHang.getStatusDathang( );
         String text1 = "";
         String text2 = "";
+        String textGiao = "";
         int color = 0;
         int img_src = 0;
         switch (status) {
             case 1: {
                 text1 = "Đơn hàng đang được xử lý";
                 text2 = "Cảm ơn bạn đã mua hàng tại SafetyFood";
+                textGiao = "Giao hàng";
                 color = R.color.Order_Done;
                 img_src = R.drawable.order_done;
                 break;
@@ -106,6 +175,9 @@ public class OrderDetail extends AppCompatActivity {
             case 2: {
                 text1 = "Đơn hàng đang được vận chuyển";
                 text2 = "Cảm ơn bạn đã mua hàng tại SafetyFood";
+                textGiao = "Đang giao hàng";
+                Btn_Admin_GiaoHang.setVisibility(View.GONE);
+                Btn_Admin_Huy.setVisibility(View.GONE);
                 color = R.color.Order_Done;
                 img_src = R.drawable.order_done;
                 break;
@@ -114,6 +186,9 @@ public class OrderDetail extends AppCompatActivity {
             case 4: {
                 text1 = "Đơn hàng đã bị hủy";
                 text2 = "Rất xin lỗi vì sự bất tiện của SafetyFood";
+                textGiao = "Đơn đã hủy";
+                Btn_Admin_GiaoHang.setVisibility(View.GONE);
+                Btn_Admin_Huy.setVisibility(View.GONE);
                 img_src = R.drawable.order_fail;
                 color = R.color.red;
                 break;
@@ -121,12 +196,18 @@ public class OrderDetail extends AppCompatActivity {
             case 5: {
                 text1 = "Đơn hàng đã hoàn thành";
                 text2 = "Cảm ơn bạn đã mua hàng tại SafetyFood";
+                textGiao = "Đã nhận";
+                Btn_Admin_GiaoHang.setVisibility(View.GONE);
+                Btn_Admin_Huy.setVisibility(View.GONE);
                 color = R.color.Order_Done;
                 img_src = R.drawable.order_done;
                 break;
             }
         }
-        Order_Done_Check.setBackgroundColor(getColor(color));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Order_Done_Check.setBackgroundColor(getColor(color));
+        }
+        Btn_Admin_GiaoHang.setText(textGiao);
         Order_Done_Trang_Thai.setText(text1);
         Order_Done_Thanks.setText(text2);
         Order_Done_Img.setImageResource(img_src);
@@ -141,10 +222,14 @@ public class OrderDetail extends AppCompatActivity {
         Order_Done_TotalPrice = findViewById(R.id.Order_Done_TotalPrice);
         Order_Done_list = findViewById(R.id.Order_Done_list);
         Order_Done_Img = findViewById(R.id.Order_Done_Img);
+        Btn_Admin_Huy = findViewById(R.id.Btn_Admin_Huy);
+        Btn_Admin_GiaoHang = findViewById(R.id.Btn_Admin_GiaoHang);
         datHangDAO = new DatHangDAO(getApplicationContext( ));
         chiTietDatHangDAO = new ChiTietDatHangDAO(getApplicationContext( ));
         thongTinNguoiDungDAO = new ThongTinNguoiDungDAO(getApplicationContext( ));
         sanPhamDAO = new SanPhamDAO(getApplicationContext( ));
+        calendar = Calendar.getInstance();
+        simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
     }
 
     @Override

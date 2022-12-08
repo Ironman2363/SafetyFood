@@ -60,12 +60,8 @@ public class ChiTietDatHangDAO {
         return true;
     }
 
-    public int XoaChiTietDatHang(int Id) {
-        Cursor cursor = db.rawQuery("SELECT*FROM ChiTietDatHang WHERE Id = ?", new String[]{String.valueOf(Id)});
-        if (cursor.getCount() != 0) {
-            return -1;
-        }
-        long check = db.delete("ChiTietDatHang", "Id = ?", new String[]{String.valueOf(Id)});
+    public int XoaChiTietDatHang(ChiTietDatHang chiTietDatHang) {
+        long check = db.delete("ChiTietDatHang", "Id = ?", new String[]{String.valueOf(chiTietDatHang.getId())});
         if (check == -1)
             return 0;
         return 1;
@@ -73,7 +69,7 @@ public class ChiTietDatHangDAO {
 
     public List<ChiTietDatHang> getListCT(int idDatHang) {
         List<ChiTietDatHang> list = new ArrayList<>();
-        String sql = "select * from ChiTietDatHang where OrderId =? ";
+        String sql = "select * from ChiTietDatHang where OrderId =?";
         Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(idDatHang)});
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {

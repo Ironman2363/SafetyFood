@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.safetyfood.FRAGMENT.HomeFragment;
+import com.example.safetyfood.MODEL.DatHang;
 import com.example.safetyfood.MODEL.TaiKhoan;
 import com.example.safetyfood.R;
 import com.example.safetyfood.databinding.ActivityAdminBinding;
@@ -42,10 +43,6 @@ public class AdminActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.home1:
                     replaceFragment(new HomeAdminFragment());
-                    break;
-                case R.id.cart1:
-                    replaceFragment(new OrderAdminFragment());
-
                     break;
                 case R.id.order1:
                     replaceFragment(new SeingAdminFragment());

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +49,7 @@ public class ChoXacNhanFragment extends Fragment {
     }
 
     private void getData() {
+        Log.e("AccountID", "getData: "+account_all.getId() );
         list = datHangDAO.getCartStatus(account_all.getId(), 1,1);
         setList();
     }

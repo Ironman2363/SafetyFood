@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:orientation="vertical"-->
+<!--    android:background="#E7E2E2"-->
+<!--    android:layout_height="match_parent">-->
+
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/Badge_cart_List"-->
+<!--        android:layout_margin="10dp"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--    <LinearLayout-->
+<!--        android:background="@drawable/boder_recycel"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:weightSum="12"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent">-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/Badge_cart_Cart_TotalPrice"-->
+<!--            android:layout_weight="8"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:padding="16dp"-->
+<!--            android:text="Tổng giá : 200000VND"-->
+<!--            android:textAlignment="center"-->
+<!--            android:textColor="@color/red"-->
+<!--            android:textSize="16sp"-->
+<!--            android:textStyle="bold" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/Badge_cart_Cart_Dat_Hang"-->
+<!--            android:layout_weight="4"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:backgroundTint="@color/red"-->
+<!--            android:text="Mua hàng"-->
+<!--            android:textColor="@color/white" />-->
+
+<!--    </LinearLayout>-->
+
+
+
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/fragment_cart"/>
+
+</LinearLayout>

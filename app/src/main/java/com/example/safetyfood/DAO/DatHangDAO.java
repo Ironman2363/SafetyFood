@@ -78,17 +78,22 @@ public class DatHangDAO {
     }
 
     public List<DatHang> getAllOrderStatus(int status, int status1) {
-        String sql = "Select * from " + table_name + " where  " + Status + " = ? or "+Status+" = ?";
+        String sql = "Select * from " + table_name + " where  " + Status + " = ? or "+Status+" = ? order by "+Created+" desc";
         return getData(sql, new String[]{String.valueOf(status),String.valueOf(status1)});
     }
 
+    public List<DatHang> getAllOrderDate(int status,String tuNgay, String denNgay) {
+        String sql = "Select * from " + table_name + " where  " + Status + " = ? and date(Updated) between ? and ?";
+        return getData(sql, new String[]{String.valueOf(status),tuNgay,denNgay});
+    }
+
     public List<DatHang> getOrderHistory(int status){
-        String sql = "Select * from " + table_name + " where  " + Status + " != ?";
+        String sql = "Select * from " + table_name + " where  " + Status + " != ? order by "+Created+" desc";
         return getData(sql, new String[]{String.valueOf(status)});
     }
 
     public List<DatHang> getCartStatus(int ID, int status3,int status4) {
-        String sql = "Select * from " + table_name + " where " + AccountId + "=? and " + Status + " = ? or "+Status+" = ? Order by created desc";
+        String sql = "Select * from " + table_name + " where " + AccountId + "=? and (" + Status + " = ? or "+Status+" = ?) Order by created desc";
         return getData(sql, new String[]{String.valueOf(ID), String.valueOf(status3),String.valueOf(status4)});
     }
 

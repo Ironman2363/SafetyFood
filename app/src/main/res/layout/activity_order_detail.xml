@@ -107,7 +107,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_marginLeft="8dp"
             android:id="@+id/Order_Done_list"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <TextView
@@ -119,6 +119,29 @@
             android:textSize="20sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:weightSum="12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/Btn_Admin_Huy"
+                android:text="Hủy"
+                android:backgroundTint="@color/red"
+                android:layout_weight="6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/Btn_Admin_GiaoHang"
+                android:text="Giao hàng"
+                android:backgroundTint="@color/green"
+                android:layout_weight="6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
     </LinearLayout>
 
 </ScrollView>

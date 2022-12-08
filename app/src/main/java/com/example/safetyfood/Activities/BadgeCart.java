@@ -1,14 +1,8 @@
-package com.example.safetyfood.FRAGMENT;
+package com.example.safetyfood.Activities;
 
-import static com.example.safetyfood.MainActivity.account_all;
 import static com.example.safetyfood.MainActivity.cart_all;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.os.Bundle;
-
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -16,32 +10,32 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
-import android.view.LayoutInflater;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.safetyfood.ADAPTER.CartAdapter;
 import com.example.safetyfood.DAO.ChiTietDatHangDAO;
 import com.example.safetyfood.DAO.DatHangDAO;
+import com.example.safetyfood.FRAGMENT.CartFragment;
+import com.example.safetyfood.FRAGMENT.OrderFragment;
 import com.example.safetyfood.MODEL.ChiTietDatHang;
 import com.example.safetyfood.R;
 import com.example.safetyfood.Service.CheckCartService;
-import com.example.safetyfood.Tab_Fragment.GiaoHangFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+public class BadgeCart extends AppCompatActivity {
 
-public class CartFragment extends Fragment {
-
-    View view;
     RecyclerView Cart_list;
     TextView Cart_TotalPrice;
     ChiTietDatHangDAO chiTietDatHangDAO;
@@ -51,9 +45,9 @@ public class CartFragment extends Fragment {
     int totalPrice = 0;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_cart, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_badge_cart);
 
         anhXa();
 
@@ -63,7 +57,6 @@ public class CartFragment extends Fragment {
             MuaHang();
         });
 
-        return view;
     }
 
     private void MuaHang() {
@@ -72,8 +65,8 @@ public class CartFragment extends Fragment {
             cart_all.setStatusDathang(1);
             datHangDAO.UpgradeDH(cart_all);
 
-            getContext().startService(new Intent(getContext(), CheckCartService.class));
-            replaceFragment(new OrderFragment());
+            startService(new Intent( this,CheckCartService.class ));
+            finish();
         }
     }
 
@@ -89,8 +82,8 @@ public class CartFragment extends Fragment {
     }
 
     private void setAdapterToRCL() {
-        CartAdapter cartAdapter = new CartAdapter(chiTietDatHangList, getContext(),chiTietDatHangDAO,1);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        CartAdapter cartAdapter = new CartAdapter(chiTietDatHangList, getApplicationContext(),chiTietDatHangDAO,1);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         Cart_list.setLayoutManager(linearLayoutManager);
         Cart_list.setAdapter(cartAdapter);
     }
@@ -106,35 +99,15 @@ public class CartFragment extends Fragment {
         setAdapterToRCL();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        getData();
-    }
-
     private void anhXa() {
-        Cart_list = view.findViewById(R.id.Cart_list);
-        Cart_TotalPrice = view.findViewById(R.id.Cart_TotalPrice);
-        Cart_Dat_Hang = view.findViewById(R.id.Cart_Dat_Hang);
+        Cart_list = findViewById(R.id.Cart_list);
+        Cart_TotalPrice = findViewById(R.id.Cart_TotalPrice);
+        Cart_Dat_Hang = findViewById(R.id.Cart_Dat_Hang);
         chiTietDatHangList = new ArrayList<>();
-        chiTietDatHangDAO = new ChiTietDatHangDAO(getContext());
-        datHangDAO = new DatHangDAO(getContext());
+        chiTietDatHangDAO = new ChiTietDatHangDAO(getApplicationContext());
+        datHangDAO = new DatHangDAO(getApplicationContext());
         IntentFilter intentFilter = new IntentFilter("checkCart");
-        LocalBroadcastManager.getInstance(getContext()).registerReceiver(broadcastReceiver, intentFilter);
-    }
-
-    private void replaceFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager( );
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction( )
-                .setCustomAnimations(R.anim.enter_right_to_left, R.anim.exit_right_to_left,
-                        R.anim.enter_left_to_right, R.anim.exit_left_to_right);
-        fragmentTransaction.replace(R.id.frameLayout, fragment);
-        fragmentTransaction.commit( );
-
-        BottomNavigationView view = getActivity().findViewById(R.id.bottomNavigationView);
-
-        Menu menu = view.getMenu();
-        menu.findItem(R.id.order).setChecked(true);
+        LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(broadcastReceiver, intentFilter);
     }
 
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
@@ -152,4 +125,5 @@ public class CartFragment extends Fragment {
             }
         }
     };
+
 }

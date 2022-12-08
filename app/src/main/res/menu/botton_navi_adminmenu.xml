@@ -3,9 +3,6 @@
     <item android:title="Home"
         android:icon="@drawable/icon_home_selected"
         android:id="@+id/home1"/>
-    <item android:title="Cart"
-        android:icon="@drawable/icon_cart_selected"
-        android:id="@+id/cart1"/>
     <item android:title="Order history"
         android:icon="@drawable/icon_order_selected"
         android:id="@+id/order1"/>
