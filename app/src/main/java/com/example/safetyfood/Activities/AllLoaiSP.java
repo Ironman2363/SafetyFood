@@ -57,7 +57,7 @@ public class AllLoaiSP extends AppCompatActivity {
     private void setList() {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         loaiSP_List.setLayoutManager(gridLayoutManager);
-        SanPhamAdapter adapter = new SanPhamAdapter(sanPhamList, getApplicationContext());
+        SanPhamAdapter adapter = new SanPhamAdapter(sanPhamList, getApplicationContext(),1);
         loaiSP_List.setAdapter(adapter);
     }
 

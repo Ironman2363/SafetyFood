@@ -86,7 +86,7 @@ public class SanPhamDetail extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         getDataList(sanPham);
         SPDetail_List_Tuong_Tu.setLayoutManager(linearLayoutManager);
-        SanPhamAdapter adapterTT = new SanPhamAdapter(sanPhamListTT, getApplicationContext());
+        SanPhamAdapter adapterTT = new SanPhamAdapter(sanPhamListTT, getApplicationContext(),1);
 
         SPDetail_List_Tuong_Tu.setAdapter(adapterTT);
     }

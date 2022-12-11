@@ -53,7 +53,7 @@ public class SearchItems extends AppCompatActivity {
     }
 
     private void setData() {
-        SanPhamAdapter adapter = new SanPhamAdapter(list,this);
+        SanPhamAdapter adapter = new SanPhamAdapter(list,this,0);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         Search_List.setLayoutManager(gridLayoutManager);
         Search_List.setAdapter(adapter);

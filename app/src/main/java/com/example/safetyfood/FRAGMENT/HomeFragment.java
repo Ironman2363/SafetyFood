@@ -105,12 +105,12 @@ public class HomeFragment extends Fragment {
         RCL_loaiSP.setLayoutManager(linearLayoutManager);
         RCL_loaiSP.setAdapter(adapter);
 
-        SanPhamAdapter sanPhamAdapter = new SanPhamAdapter(sanPhamList, getContext());
+        SanPhamAdapter sanPhamAdapter = new SanPhamAdapter(sanPhamList, getContext(),1);
         LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         RCL_SP.setLayoutManager(layoutManager);
         RCL_SP.setAdapter(sanPhamAdapter);
 
-        SanPhamAdapter sanPhamAdapter1 = new SanPhamAdapter(topSanPham, getContext());
+        SanPhamAdapter sanPhamAdapter1 = new SanPhamAdapter(topSanPham, getContext(),1);
         LinearLayoutManager layoutManager1 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         RCL_TSP.setLayoutManager(layoutManager1);
         RCL_TSP.setAdapter(sanPhamAdapter1);

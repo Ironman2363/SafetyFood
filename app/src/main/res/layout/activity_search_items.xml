@@ -15,6 +15,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/Search_List"
         android:layout_width="match_parent"
+        android:layout_gravity="center"
         android:layout_height="match_parent"/>
 
 </LinearLayout>
