@@ -45,6 +45,23 @@ public class ThongKeDAO {
         return list;
     }
 
+    public List<Top> getTopSP(String tuNgay, String denNgay) {
+        List<Top> list = new ArrayList<>();
+        String sql = "SELECT ChiTietDatHang.ProductId,sum(ChiTietDatHang.Amount) as sum FROM ChiTietDatHang " +
+                "JOIN DatHang on ChiTietDatHang.OrderId=DatHang.Id " +
+                "JOIN SanPham on SanPham.Id=ChiTietDatHang.ProductId " +
+                "WHERE DatHang.Status=5 and (date(DatHang.Updated) BETWEEN ? AND ?) " +
+                "GROUP by productid ORDER BY sum DESC";
+        Cursor cursor = db.rawQuery(sql, new String[]{tuNgay, denNgay});
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            list.add(new Top(cursor.getInt(0), cursor.getInt(1)));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
+    }
+
     public int getDoanhThu(String tuNgay, String denNgay) {
         String sql = "select SUM(TotalPrice) as doanhThu from DatHang where (date(Created) between ? and ?) and Status=5";
         List<Integer> list = new ArrayList<>();

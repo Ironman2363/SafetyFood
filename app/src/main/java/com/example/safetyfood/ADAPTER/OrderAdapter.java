@@ -127,9 +127,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
                 }else {
                     datHang.setStatusDathang(4);
                 }
+                datHang.setUpdateDathang(simpleDateFormat.format(calendar.getTime()));
                 datHangDAO.UpgradeDH(datHang);
             }
             else if (statusDH == 3) {
+                datHang.setUpdateDathang(simpleDateFormat.format(calendar.getTime()));
                 datHang.setStatusDathang(1);
                 datHangDAO.UpgradeDH(datHang);
             }
@@ -140,8 +142,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
         holder.btnxacnhandagiahang.setOnClickListener(v ->{
             datHang.setUpdateDathang(simpleDateFormat.format(calendar.getTime()));
             if (statusDH == 2) {
+                datHang.setUpdateDathang(simpleDateFormat.format(calendar.getTime()));
                 datHang.setStatusDathang(5);
-
                 datHangDAO.UpgradeDH(datHang);
             }
             list.remove(holder.getAdapterPosition());
