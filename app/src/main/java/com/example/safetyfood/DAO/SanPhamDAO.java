@@ -152,4 +152,27 @@ public class SanPhamDAO {
         return list;
     }
 
+    public List<SanPham> getListMoney(int type){
+        List<SanPham> list = new ArrayList<>();
+        String text = "asc";
+        if (type==1){
+            text="desc";
+        }
+        SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getReadableDatabase();
+        String sql = "SELECT * from SanPham ORDER by Price "+text;
+        Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
+
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()) {
+            list.add(new SanPham(cursor.getInt(0), cursor.getString(1),
+                    cursor.getString(2), cursor.getInt(3), cursor.getString(4),
+                    cursor.getString(5), cursor.getString(6), cursor.getInt(7)));
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        return list;
+    }
+
 }

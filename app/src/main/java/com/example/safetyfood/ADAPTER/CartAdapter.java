@@ -78,7 +78,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartAdapterHol
         holder.Cart_items_name.setText(sanPham.getNameSanpham());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         holder.Cart_items_amount_edt.setText(decimalFormat.format(chiTietDatHang.getAmount()));
-        holder.Cart_items_amount_txt.setText(decimalFormat.format(chiTietDatHang.getAmount()));
+        holder.Cart_items_amount_txt.setText("Số sản phẩm :"+decimalFormat.format(chiTietDatHang.getAmount()));
         holder.Cart_items_amount_edt.addTextChangedListener(new TextWatcher( ) {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
