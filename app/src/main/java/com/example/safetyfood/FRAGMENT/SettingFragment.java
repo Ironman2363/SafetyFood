@@ -32,6 +32,7 @@ import com.example.safetyfood.Activities.Login;
 import com.example.safetyfood.Activities.Passwordchange;
 import com.example.safetyfood.Activities.ThongTinCuaHang;
 import com.example.safetyfood.DAO.ThongTinNguoiDungDAO;
+import com.example.safetyfood.MODEL.TaiKhoan;
 import com.example.safetyfood.MODEL.ThongTinNguoiDung;
 import com.example.safetyfood.R;
 
@@ -43,40 +44,54 @@ public class SettingFragment extends Fragment {
     ThongTinNguoiDung thongTinNguoiDung;
     TextView doiten;
     ImageView Anhnen, Anh_loai;
-    CardView btndangxuat, ThayDoiMk, txtThongtinchitiet, txtthongtinshop;
+    CardView btndangxuat, ThayDoiMk, txtThongtinchitiet, txtthongtinshop,btnDangNhap;
     ActivityResultLauncher<Intent> activityResultLauncher;
     ThongTinNguoiDungDAO dao;
-
     List<ThongTinNguoiDung> list;
-
-
     String link;
-
+    public static TaiKhoan account_all = new TaiKhoan( );
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_setting, container, false);
+        btnDangNhap = view.findViewById(R.id.btnDangNhap);
+        btndangxuat = view.findViewById(R.id.btnDangXuat);
+        txtthongtinshop = view.findViewById(R.id.thongtinshop);
+        txtThongtinchitiet = view.findViewById(R.id.txtThongtinchitiet);
+        ThayDoiMk = view.findViewById(R.id.ThayDoiMk);
         doiten = view.findViewById(R.id.doiten);
         Anhnen = view.findViewById(R.id.Anhnen);
         dao = new ThongTinNguoiDungDAO(getContext( ));
         thongTinNguoiDung = new ThongTinNguoiDung( );
         list = new ArrayList<>( );
+        SharedPreferences sharedPreferences = getContext( ).getSharedPreferences("OKLuon", Context.MODE_PRIVATE);
+        String ten = sharedPreferences.getString("FullName", "Chưa Đăng Nhập");
+
+        doiten.setText(ten);
+        if (ten == "Chưa Đăng Nhập"){
+            btndangxuat.setVisibility(View.GONE);
+            btnDangNhap.setVisibility(View.VISIBLE);
+        }else {
+            btndangxuat.setVisibility(View.VISIBLE);
+            btnDangNhap.setVisibility(View.GONE);
+        }
+
 //Code Anh
         Anhnen.setOnClickListener(new View.OnClickListener( ) {
             @Override
             public void onClick(View view) {
-                ThemAnh( );
+                if (ten == "Chưa Đăng Nhập"){
+                    Toast.makeText(getContext(), "Cần đăng nhập để sử dụng", Toast.LENGTH_SHORT).show();
+                }else {
+                    ThemAnh( );
+                }
             }
         });
-
-
 //Thong Tin Chi Tiet
-        txtThongtinchitiet = view.findViewById(R.id.txtThongtinchitiet);
         txtThongtinchitiet.setOnClickListener(v -> {
             replaceFragment(new ThongTinFragment( ));
         });
 //Doi Mat Khau
-        ThayDoiMk = view.findViewById(R.id.ThayDoiMk);
         ThayDoiMk.setOnClickListener(new View.OnClickListener( ) {
             @Override
             public void onClick(View view) {
@@ -86,7 +101,6 @@ public class SettingFragment extends Fragment {
             }
         });
 //Thong Tin Cua Hang
-        txtthongtinshop = view.findViewById(R.id.thongtinshop);
         txtthongtinshop.setOnClickListener(new View.OnClickListener( ) {
             @Override
             public void onClick(View view) {
@@ -94,9 +108,18 @@ public class SettingFragment extends Fragment {
                 startActivity(intent);
             }
         });
-//Dang Xuat
-        btndangxuat = view.findViewById(R.id.btnDangXuat);
+//Dang Xuat/DangNhap
         btndangxuat.setOnClickListener(new View.OnClickListener( ) {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext( ), Login.class);
+                startActivity(intent);
+
+                getActivity( ).finish( );
+
+            }
+        });
+        btnDangNhap.setOnClickListener(new View.OnClickListener( ) {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext( ), Login.class);
@@ -127,11 +150,7 @@ public class SettingFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume( );
-        SharedPreferences sharedPreferences = getContext( ).getSharedPreferences("OKLuon", Context.MODE_PRIVATE);
-        String ten = sharedPreferences.getString("FullName", "Chưa Đăng Nhập");
 
-
-        doiten.setText(ten);
     }
 
     //Chuyen Man

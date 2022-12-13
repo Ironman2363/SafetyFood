@@ -20,6 +20,8 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 <TextView
+    android:textColor="@color/black"
+    android:textSize="15dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="Nhập họ tên:"/>
@@ -37,6 +39,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
+            android:textColor="@color/black"
+            android:textSize="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nhập Eamil:"/>
@@ -53,6 +57,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
+            android:textColor="@color/black"
+            android:textSize="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nhập SDT:"/>
@@ -71,6 +77,8 @@
         android:orientation="horizontal">
 
         <TextView
+            android:textColor="@color/black"
+            android:textSize="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nhập Địa Chỉ:"/>
@@ -88,6 +96,8 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
     <TextView
+        android:textColor="@color/black"
+        android:textSize="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nhập Năm Sinh:"/>
@@ -105,6 +115,9 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
+            android:layout_marginTop="15dp"
+            android:textColor="@color/black"
+            android:textSize="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nhập Giới tính:"/>
@@ -126,6 +139,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="24sp"
+                android:checked="true"
                 android:text="Nam" />
 
         </RadioGroup>

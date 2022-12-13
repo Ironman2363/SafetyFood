@@ -1,7 +1,10 @@
 package com.example.safetyfood.FRAGMENT;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -9,18 +12,11 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-
 import com.example.safetyfood.ADAPTER.ThongTinNguoiDungAdapter;
-
 import com.example.safetyfood.DAO.ThongTinNguoiDungDAO;
 import com.example.safetyfood.MODEL.ThongTinNguoiDung;
 import com.example.safetyfood.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ThongTinFragment extends Fragment {
