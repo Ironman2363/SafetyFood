@@ -27,20 +27,29 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.SanPhamA
 
     List<SanPham> list;
     Context context;
+    int width;
+    int type;
 
-    public SanPhamAdapter(List<SanPham> list, Context context) {
+    public SanPhamAdapter(List<SanPham> list, Context context,int type) {
         this.list = list;
         this.context = context;
+        this.type = type;
     }
 
     @NonNull
     @Override
     public SanPhamAdapterHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new SanPhamAdapterHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.sp_items, parent, false));
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.sp_items, parent, false);
+        width = parent.getMeasuredWidth();
+        return new SanPhamAdapterHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull SanPhamAdapterHolder holder, int position) {
+        if (type==0){
+            holder.itemView.setMinimumWidth(width);
+            holder.SP_items_View.setMinimumWidth(width);
+        }
         SanPham sp = list.get(position);
         try {
             holder.SP_items_Img.setImageResource(Integer.parseInt(sp.getImgSanpham()));
@@ -82,3 +91,5 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.SanPhamA
         }
     }
 }
+
+// type = 0 : Dành riêng cho Grid layout manager

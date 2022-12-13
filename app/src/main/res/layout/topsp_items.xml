@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="16dp"
+    app:cardCornerRadius="16dp">
+
+    <LinearLayout
+        android:weightSum="12"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/topsp_items_trophy"
+            android:src="@drawable/gold_trophy"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/topsp_items_top"
+            android:text="4"
+            android:visibility="gone"
+            android:textSize="48sp"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:orientation="vertical"
+            android:layout_weight="6"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/topsp_items_name"
+                android:textColor="@color/red"
+                android:textStyle="bold"
+                android:textSize="24dp"
+                android:text="Tên : Coca-cola"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/topsp_items_count"
+                android:textSize="24dp"
+                android:text="Đã bán : 12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/topsp_items_img"
+            android:src="@drawable/loaisp_coca"
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -2,92 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
-    android:weightSum="12"
     android:orientation="vertical">
 
-    <TextView
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/ThongKe_TabLayout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="THỐNG KÊ"
-        android:textColor="@color/red"
-        android:textSize="50sp"
-        android:textStyle="bold" />
+        android:layout_height="wrap_content"/>
 
-    <ScrollView
-        android:layout_weight="10.5"
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/ThongKe_ViewPager2"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50sp"
-                android:text="Ngày bắt đầu"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/btnStart"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:backgroundTint="@color/red"
-                android:textColor="@color/white"
-                android:text="01/01/2022"
-                android:padding="10dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Đến ngày"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/btnEnd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/red"
-                android:textColor="@color/white"
-                android:text="01/01/2022"
-                android:padding="10dp" />
-
-            <Button
-                android:id="@+id/btnThongKe"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:backgroundTint="@color/red"
-                android:text="Tìm Kiếm" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/TK_List"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-        </LinearLayout>
-
-    </ScrollView>
-
-    <TextView
-        android:id="@+id/txtKetQua"
-        android:layout_weight="0.5"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:textAlignment="center"
-        android:textColor="#FF0000"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

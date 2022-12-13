@@ -77,8 +77,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartAdapterHol
 
         holder.Cart_items_name.setText(sanPham.getNameSanpham());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        holder.Cart_items_amount_edt.setText("x" + decimalFormat.format(chiTietDatHang.getAmount()));
-        holder.Cart_items_amount_txt.setText("x" + decimalFormat.format(chiTietDatHang.getAmount()));
+        holder.Cart_items_amount_edt.setText(decimalFormat.format(chiTietDatHang.getAmount()));
+        holder.Cart_items_amount_txt.setText("Số sản phẩm :"+decimalFormat.format(chiTietDatHang.getAmount()));
         holder.Cart_items_amount_edt.addTextChangedListener(new TextWatcher( ) {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -94,7 +94,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartAdapterHol
                 if (s.length()<=0){
                     return;
                 }
-                String amount = s.toString().substring(1);
+                String amount = s.toString();
                 try {
                     if (Integer.parseInt(amount)<=0){
                         list.remove(holder.getAdapterPosition());
@@ -114,7 +114,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartAdapterHol
         holder.Cart_items_plus.setOnClickListener(v -> {
             chiTietDatHang.setAmount(chiTietDatHang.getAmount()+1);
             chiTietDatHangDAO.CapNhapChiTietDatHang(chiTietDatHang);
-            holder.Cart_items_amount_edt.setText("x" + decimalFormat.format(chiTietDatHang.getAmount()));
+            holder.Cart_items_amount_edt.setText(decimalFormat.format(chiTietDatHang.getAmount()));
             LocalBroadcastManager.getInstance(context).sendBroadcast(CheckMN);
         });
 
@@ -126,7 +126,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartAdapterHol
                 chiTietDatHangDAO.XoaChiTietDatHang(chiTietDatHang);
                 notifyItemRemoved(holder.getAdapterPosition());
             }
-            holder.Cart_items_amount_edt.setText("x" + decimalFormat.format(chiTietDatHang.getAmount()));
+            holder.Cart_items_amount_edt.setText(decimalFormat.format(chiTietDatHang.getAmount()));
             LocalBroadcastManager.getInstance(context).sendBroadcast(CheckMN);
         });
 

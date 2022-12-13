@@ -10,11 +10,13 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/Search_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        app:menu="@menu/badge_cart_menu"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/Search_List"
         android:layout_width="match_parent"
+        android:layout_gravity="center"
         android:layout_height="match_parent"/>
 
 </LinearLayout>

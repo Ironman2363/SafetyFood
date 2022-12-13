@@ -1,5 +1,8 @@
 package com.example.safetyfood.Activities;
 
+import static com.example.safetyfood.MainActivity.account_all;
+import static com.example.safetyfood.MainActivity.cart_all;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,9 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.safetyfood.ADAPTER.SanPhamAdapter;
+import com.example.safetyfood.DAO.ChiTietDatHangDAO;
 import com.example.safetyfood.DAO.SanPhamDAO;
 import com.example.safetyfood.MODEL.SanPham;
 import com.example.safetyfood.R;
@@ -25,6 +32,8 @@ public class SearchItems extends AppCompatActivity {
     SanPhamDAO sanPhamDAO;
     List<SanPham> list;
     Toolbar Search_toolbar;
+    TextView sizeCart;
+    ChiTietDatHangDAO dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +43,7 @@ public class SearchItems extends AppCompatActivity {
         Search_List = findViewById(R.id.Search_List);
         Search_toolbar = findViewById(R.id.Search_toolbar);
         sanPhamDAO = new SanPhamDAO(this);
+        dao = new ChiTietDatHangDAO(this);
 
         setSupportActionBar(Search_toolbar);
 
@@ -53,7 +63,7 @@ public class SearchItems extends AppCompatActivity {
     }
 
     private void setData() {
-        SanPhamAdapter adapter = new SanPhamAdapter(list,this);
+        SanPhamAdapter adapter = new SanPhamAdapter(list,this,0);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         Search_List.setLayoutManager(gridLayoutManager);
         Search_List.setAdapter(adapter);
@@ -66,7 +76,43 @@ public class SearchItems extends AppCompatActivity {
                 onBackPressed();
                 break;
             }
+            case R.id.badge_cart:{
+                startActivity(new Intent( SearchItems.this,BadgeCart.class ));
+                break;
+            }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.badge_cart_menu,menu);
+
+        MenuItem menuItem = menu.findItem(R.id.badge_cart);
+        if (account_all.getRole()!=3){
+            menuItem.setVisible(false);
+        }
+        View actionMenu = menuItem.getActionView();
+        sizeCart = actionMenu.findViewById(R.id.number_size_cart);
+
+        setCartSize();
+
+        actionMenu.setOnClickListener(v -> {
+            onOptionsItemSelected(menuItem);
+        });
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    private void setCartSize(){
+        sizeCart.setText(String.valueOf(dao.getSum(cart_all.getId( ))));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume( );
+        if (sizeCart!=null){
+            setCartSize();
+        }
     }
 }

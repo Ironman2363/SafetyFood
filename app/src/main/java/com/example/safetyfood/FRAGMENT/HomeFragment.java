@@ -18,12 +18,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.safetyfood.ADAPTER.LoaiSanPhamAdapter;
 import com.example.safetyfood.ADAPTER.PhotoAdapter;
 import com.example.safetyfood.ADAPTER.SanPhamAdapter;
 import com.example.safetyfood.Activities.SearchItems;
+import com.example.safetyfood.Activities.ShowAll;
 import com.example.safetyfood.DAO.LoaiSanPhamDAO;
 import com.example.safetyfood.DAO.SanPhamDAO;
 import com.example.safetyfood.DAO.ThongKeDAO;
@@ -57,6 +59,7 @@ public class HomeFragment extends Fragment {
     CircleIndicator indicator;
     List<Photo> listImage = getListPhoto();
     Timer timer;
+    TextView Home_Show_All;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,6 +71,9 @@ public class HomeFragment extends Fragment {
             Intent intent = new Intent(getContext(), SearchItems.class);
             intent.putExtra("search", edt_findFood.getText().toString().trim());
             startActivity(intent);
+        });
+        Home_Show_All.setOnClickListener(v -> {
+            startActivity(new Intent( getContext(), ShowAll.class));
         });
 
         getData();
@@ -105,12 +111,12 @@ public class HomeFragment extends Fragment {
         RCL_loaiSP.setLayoutManager(linearLayoutManager);
         RCL_loaiSP.setAdapter(adapter);
 
-        SanPhamAdapter sanPhamAdapter = new SanPhamAdapter(sanPhamList, getContext());
+        SanPhamAdapter sanPhamAdapter = new SanPhamAdapter(sanPhamList, getContext(),1);
         LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         RCL_SP.setLayoutManager(layoutManager);
         RCL_SP.setAdapter(sanPhamAdapter);
 
-        SanPhamAdapter sanPhamAdapter1 = new SanPhamAdapter(topSanPham, getContext());
+        SanPhamAdapter sanPhamAdapter1 = new SanPhamAdapter(topSanPham, getContext(),1);
         LinearLayoutManager layoutManager1 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         RCL_TSP.setLayoutManager(layoutManager1);
         RCL_TSP.setAdapter(sanPhamAdapter1);
@@ -239,7 +245,7 @@ public class HomeFragment extends Fragment {
         thongKeDAO = new ThongKeDAO(context);
         viewPager = view.findViewById(R.id.viewpager);
         indicator = view.findViewById(R.id.circle);
-
+        Home_Show_All = view.findViewById(R.id.Home_Show_All);
     }
 
 }
