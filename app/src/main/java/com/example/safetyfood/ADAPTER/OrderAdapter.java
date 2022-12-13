@@ -98,6 +98,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
                 textStatus = "Đang giao hàng";
                 if (textStatus.equals("Đang giao hàng")) {
                     holder.Order_items_MuaLai.setVisibility(View.GONE);
+                    holder.btnxacnhandagiahang.setVisibility(View.VISIBLE);
                 }
                 break;
             }
