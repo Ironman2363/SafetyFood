@@ -36,171 +36,169 @@ import com.example.safetyfood.MODEL.ThongTinNguoiDung;
 import com.example.safetyfood.R;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SettingFragment extends Fragment {
-     ThongTinNguoiDung thongTinNguoiDung;
-        TextView doiten;
-        ImageView Anhnen,Anh_loai;
-        CardView btndangxuat,ThayDoiMk,txtThongtinchitiet,txtthongtinshop;
+    ThongTinNguoiDung thongTinNguoiDung;
+    TextView doiten;
+    ImageView Anhnen, Anh_loai;
+    CardView btndangxuat, ThayDoiMk, txtThongtinchitiet, txtthongtinshop;
     ActivityResultLauncher<Intent> activityResultLauncher;
-    ThongTinNguoiDungDAO dao ;
+    ThongTinNguoiDungDAO dao;
 
-    List<ThongTinNguoiDung> list ;
+    List<ThongTinNguoiDung> list;
 
 
     String link;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_setting, container, false);
         doiten = view.findViewById(R.id.doiten);
         Anhnen = view.findViewById(R.id.Anhnen);
-        dao = new ThongTinNguoiDungDAO(getContext());
-        thongTinNguoiDung =  new ThongTinNguoiDung();
+        dao = new ThongTinNguoiDungDAO(getContext( ));
+        thongTinNguoiDung = new ThongTinNguoiDung( );
+        list = new ArrayList<>( );
 //Code Anh
-        Anhnen.setOnClickListener(new View.OnClickListener() {
+        Anhnen.setOnClickListener(new View.OnClickListener( ) {
             @Override
             public void onClick(View view) {
-                    ThemAnh();
+                ThemAnh( );
             }
         });
-
-
-
-
-        
-
-//        try{
-//           Anhnen.setImageResource(Integer.parseInt(thongTinNguoiDung.getAvatarNguoidung()));
-//        }catch (Exception e){
-//            Uri uri = Uri.parse(thongTinNguoiDung.getAvatarNguoidung());
-//          Anhnen.setImageURI(uri);
-//       }
-
-
-
 
 
 //Thong Tin Chi Tiet
         txtThongtinchitiet = view.findViewById(R.id.txtThongtinchitiet);
-        txtThongtinchitiet.setOnClickListener( v-> {
-            replaceFragment(new ThongTinFragment());
+        txtThongtinchitiet.setOnClickListener(v -> {
+            replaceFragment(new ThongTinFragment( ));
         });
 //Doi Mat Khau
         ThayDoiMk = view.findViewById(R.id.ThayDoiMk);
-        ThayDoiMk.setOnClickListener(new View.OnClickListener() {
+        ThayDoiMk.setOnClickListener(new View.OnClickListener( ) {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), Passwordchange.class);
+                Intent intent = new Intent(getContext( ), Passwordchange.class);
                 startActivity(intent);
-                getActivity().finish();
+                getActivity( ).finish( );
             }
         });
 //Thong Tin Cua Hang
         txtthongtinshop = view.findViewById(R.id.thongtinshop);
-        txtthongtinshop.setOnClickListener(new View.OnClickListener() {
+        txtthongtinshop.setOnClickListener(new View.OnClickListener( ) {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), ThongTinCuaHang.class);
+                Intent intent = new Intent(getContext( ), ThongTinCuaHang.class);
                 startActivity(intent);
-                getActivity().finish();
             }
         });
 //Dang Xuat
         btndangxuat = view.findViewById(R.id.btnDangXuat);
-        btndangxuat.setOnClickListener(new View.OnClickListener() {
+        btndangxuat.setOnClickListener(new View.OnClickListener( ) {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), Login.class);
+                Intent intent = new Intent(getContext( ), Login.class);
                 startActivity(intent);
 
-                getActivity().finish();
+                getActivity( ).finish( );
 
             }
         });
-        activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult( ), new ActivityResultCallback<ActivityResult>( ) {
             @Override
             public void onActivityResult(ActivityResult result) {
-                if (result.getResultCode() == RESULT_OK && result.getData()!=null){
-                    Bundle bundle = result.getData().getExtras();
+                if (result.getResultCode( ) == RESULT_OK && result.getData( ) != null) {
+                    Bundle bundle = result.getData( ).getExtras( );
                     Bitmap bitmap = (Bitmap) bundle.get("data");
-                    if (bitmap != null){
+                    if (bitmap != null) {
                         Anh_loai.setImageBitmap(bitmap);
                         Anh_loai.setVisibility(View.VISIBLE);
                     }
-                    link = String.valueOf(getImageUri(getContext(),bitmap));
+                    link = String.valueOf(getImageUri(getContext( ), bitmap));
                 }
             }
         });
 
         return view;
     }
+
     @Override
     public void onResume() {
-        super.onResume();
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("OKLuon",Context.MODE_PRIVATE);
-        String ten = sharedPreferences.getString("FullName","Chưa Đăng Nhập");
+        super.onResume( );
+        SharedPreferences sharedPreferences = getContext( ).getSharedPreferences("OKLuon", Context.MODE_PRIVATE);
+        String ten = sharedPreferences.getString("FullName", "Chưa Đăng Nhập");
 
 
-             doiten.setText(ten);
+        doiten.setText(ten);
     }
+
     //Chuyen Man
     private void replaceFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager( );
+        FragmentManager fragmentManager = getActivity( ).getSupportFragmentManager( );
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction( )
                 .setCustomAnimations(R.anim.enter_right_to_left, R.anim.exit_right_to_left,
                         R.anim.enter_left_to_right, R.anim.exit_left_to_right);
         fragmentTransaction.replace(R.id.frameLayout, fragment);
         fragmentTransaction.commit( );
     }
-//    //Code Them Anh
-    private void ThemAnh(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_themanh,null);
+
+    //    //Code Them Anh
+    private void ThemAnh() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext( ));
+        View view = LayoutInflater.from(getContext( )).inflate(R.layout.dialog_themanh, null);
         builder.setView(view);
-        Dialog dialog = builder.create();
-        dialog.show();
+        Dialog dialog = builder.create( );
+        dialog.show( );
         ImageView add_anh = view.findViewById(R.id.add_anh);
         Anh_loai = view.findViewById(R.id.anh_loai_sp);
         Button them = view.findViewById(R.id.btn_loai_sp);
 
-        add_anh.setOnClickListener(new View.OnClickListener() {
+        add_anh.setOnClickListener(new View.OnClickListener( ) {
             @Override
             public void onClick(View view) {
-                openIm();
+                openIm( );
             }
         });
-        them.setOnClickListener(new View.OnClickListener() {
+        them.setOnClickListener(new View.OnClickListener( ) {
             @Override
             public void onClick(View view) {
-                ThongTinNguoiDung thongTinNguoiDung = new ThongTinNguoiDung();
+                ThongTinNguoiDung thongTinNguoiDung = new ThongTinNguoiDung( );
                 thongTinNguoiDung.setAvatarNguoidung(link);
-                if (dao.capNhatAnh(thongTinNguoiDung)){
-                    Toast.makeText(getContext(), "Cập nhập thành công", Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
-                    list.clear();
+                if (dao.capNhatAnh(thongTinNguoiDung)) {
+                    try {
+                        Anhnen.setImageResource(Integer.parseInt(thongTinNguoiDung.getAvatarNguoidung( )));
+                    } catch (Exception e) {
+                        Uri uri = Uri.parse(thongTinNguoiDung.getAvatarNguoidung( ));
+                        Anhnen.setImageURI(uri);
+                    }
+                    Toast.makeText(getContext( ), "Cập nhập thành công", Toast.LENGTH_SHORT).show( );
+                    dialog.dismiss( );
+                    list.clear( );
 
-                }else {
-                    Toast.makeText(getContext(), "Sửa Thất Bại", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext( ), "Sửa Thất Bại", Toast.LENGTH_SHORT).show( );
                 }
 
             }
         });
     }
-    private void openIm(){
+
+    private void openIm() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (intent.resolveActivity(getActivity().getPackageManager()) != null){
+        if (intent.resolveActivity(getActivity( ).getPackageManager( )) != null) {
             activityResultLauncher.launch(intent);
 
-        }else {
-            Toast.makeText(getActivity(), "Lỗi", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getActivity( ), "Lỗi", Toast.LENGTH_SHORT).show( );
         }
     }
+
     public Uri getImageUri(Context inContext, Bitmap inImage) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream( );
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver( ), inImage, "Title", null);
         return Uri.parse(path);
     }
 
