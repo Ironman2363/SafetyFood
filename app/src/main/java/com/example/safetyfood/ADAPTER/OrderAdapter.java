@@ -1,14 +1,12 @@
 package com.example.safetyfood.ADAPTER;
 
 import static com.example.safetyfood.MainActivity.account_all;
-import static com.example.safetyfood.MainActivity.check_login;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,12 +25,10 @@ import com.example.safetyfood.DAO.SanPhamDAO;
 import com.example.safetyfood.MODEL.ChiTietDatHang;
 import com.example.safetyfood.MODEL.DatHang;
 import com.example.safetyfood.MODEL.SanPham;
-import com.example.safetyfood.MODEL.TaiKhoan;
 import com.example.safetyfood.R;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 

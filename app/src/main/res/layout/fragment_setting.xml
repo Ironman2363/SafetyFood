@@ -14,24 +14,37 @@
     android:orientation="horizontal"
     android:background="#F56231">
 
-    <ImageView
-        android:id="@+id/Anhnen"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="60dp"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/anhmau1"/>
 
-    <TextView
-        android:id="@+id/doiten"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        android:textSize="25dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="100dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Phạm Xuân Đức"/>
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/Anhnen"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/anhmau1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.109"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/doiten"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#FFFFFF"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.158"
+            app:layout_constraintStart_toEndOf="@+id/Anhnen"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </LinearLayout>
 
@@ -154,6 +167,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Đăng Xuất"/>
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btnDangNhap"
+        android:layout_marginTop="200sp"
+        android:layout_width="200dp"
+        android:layout_marginHorizontal="100dp"
+        android:layout_height="50dp"
+        app:cardCornerRadius="40dp"
+        android:backgroundTint="#F56231">
+        <TextView
+            android:textColor="#FCFCFC"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đăng Nhập"/>
 
     </androidx.cardview.widget.CardView>
 

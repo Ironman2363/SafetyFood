@@ -6,7 +6,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +30,7 @@ import java.util.List;
 
     public class ThongTinNguoiDungAdapter extends RecyclerView.Adapter<ThongTinNguoiDungAdapter.ViewHolder> {
     private Context context;
+        SharedPreferences sharedPreferences;
     private List<ThongTinNguoiDung> list;
     private ThongTinNguoiDungDAO thongtinDao;
     String gioitinh = "";
@@ -78,7 +79,7 @@ import java.util.List;
 
         if (account_all.getId() == list.get(position).getIdtaikhoan() ) {
 
-        }else {
+        }else if (account_all.getId() != list.get(position).getIdtaikhoan() ){
 
             holder.LayoutTT.setVisibility(View.GONE);
         }
@@ -117,7 +118,7 @@ import java.util.List;
     }
     private void showDialog(ThongTinNguoiDung thongTinNguoiDung){
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context).setNegativeButton("Cập Nhập",null).setPositiveButton("Hủy",null);
         LayoutInflater inflater = ((Activity)context).getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_suathongtin,null);
         builder.setView(view);
@@ -142,49 +143,68 @@ import java.util.List;
         txtCreated.setVisibility(View.GONE);
         txtUpdated.setVisibility(View.GONE);
 
-        builder.setNegativeButton("Cập Nhập", new DialogInterface.OnClickListener() {
+
+
+
+        AlertDialog dialog = builder.create();
+        dialog.setCancelable(false);
+        dialog.show();
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+            public void onClick(View view) {
+                sharedPreferences = context.getSharedPreferences("OKLuon",context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
 
                 String HoTen = edtName.getText().toString();
                 String Email = edtEmail.getText().toString();
                 String SDT = edtSDT.getText().toString();
                 String Addres = edtAddres.getText().toString();
                 String Birthday =edtBirthday.getText().toString();
-                thongTinNguoiDung.setFullname(HoTen);
-                thongTinNguoiDung.setEmailNguoidung(Email);
-                thongTinNguoiDung.setSdtNguoidung(SDT);
-                thongTinNguoiDung.setAddresNguoidung(Addres);
-                thongTinNguoiDung.setBirthdayNguoidung(Birthday);
-                if (GT_nu.isChecked()){
-                    thongTinNguoiDung.setGender(1);
-                }else if (GT_nam.isChecked()){
-                    thongTinNguoiDung.setGender(0);
-                }
-                Calendar calendar = Calendar.getInstance();
-                @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                String text = simpleDateFormat.format(calendar.getTime());
-                thongTinNguoiDung.setCreateNguoidung(text);
-
-                thongTinNguoiDung.setUpdateNguoidung(text);
-                boolean check = thongtinDao.capNhatThongTinNguoiDung(thongTinNguoiDung);
-                if (check){
-                    Toast.makeText(context, "Cập nhập thành công", Toast.LENGTH_SHORT).show();
-
-                    loadData();
+                editor.putString("FullName",thongTinNguoiDung.setFullname(HoTen));
+                if (HoTen.equals("")){
+                    Toast.makeText(context, "Không được để trống họ tên", Toast.LENGTH_SHORT).show();
+                    return;
+                } if (Email.equals("")){
+                    Toast.makeText(context, "Không được để trống Email", Toast.LENGTH_SHORT).show();
+                    return;
+                }if (SDT.equals("")){
+                    Toast.makeText(context, "Không được để trống số điện thoại", Toast.LENGTH_SHORT).show();
+                    return;
+                }if (Addres.equals("")){
+                    Toast.makeText(context, "Không được để trống địa chỉ", Toast.LENGTH_SHORT).show();
+                    return;
+                }if (Birthday.equals("")){
+                    Toast.makeText(context, "Không được để trống sinh nhật", Toast.LENGTH_SHORT).show();
+                    return;
                 }else {
-                    Toast.makeText(context, "Thất bại", Toast.LENGTH_SHORT).show();
+                    thongTinNguoiDung.setEmailNguoidung(Email);
+                    thongTinNguoiDung.setSdtNguoidung(SDT);
+                    thongTinNguoiDung.setAddresNguoidung(Addres);
+                    thongTinNguoiDung.setBirthdayNguoidung(Birthday);
+                    editor.commit();
+                    if (GT_nu.isChecked()){
+                        thongTinNguoiDung.setGender(1);
+                    }else if (GT_nam.isChecked()){
+                        thongTinNguoiDung.setGender(0);
+                    }
+                    Calendar calendar = Calendar.getInstance();
+                    @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                    String text = simpleDateFormat.format(calendar.getTime());
+                    thongTinNguoiDung.setCreateNguoidung(text);
+
+                    thongTinNguoiDung.setUpdateNguoidung(text);
+                    boolean check = thongtinDao.capNhatThongTinNguoiDung(thongTinNguoiDung);
+                    if (check){
+                        Toast.makeText(context, "Cập nhập thành công", Toast.LENGTH_SHORT).show();
+
+                        loadData();
+                    }else {
+                        Toast.makeText(context, "Thất bại", Toast.LENGTH_SHORT).show();
+                    }
+                    dialog.dismiss();
                 }
             }
         });
-        builder.setPositiveButton("Hủy", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-        AlertDialog dialog = builder.create();
-        dialog.show();
     }
     public  void loadData(){
         list.clear();
