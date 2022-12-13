@@ -166,7 +166,7 @@ public class OrderDetail extends AppCompatActivity {
         switch (status) {
             case 1: {
                 text1 = "Đơn hàng đang được xử lý";
-                text2 = "Cảm ơn bạn đã mua hàng tại SafetyFood";
+                text2 = "Vui lòng xử lý đơn hàng";
                 textGiao = "Giao hàng";
                 color = R.color.Order_Done;
                 img_src = R.drawable.order_done;
@@ -174,7 +174,7 @@ public class OrderDetail extends AppCompatActivity {
             }
             case 2: {
                 text1 = "Đơn hàng đang được vận chuyển";
-                text2 = "Cảm ơn bạn đã mua hàng tại SafetyFood";
+                text2 = "Shipper đang được vận chuyển";
                 textGiao = "Đang giao hàng";
                 Btn_Admin_GiaoHang.setVisibility(View.GONE);
                 Btn_Admin_Huy.setVisibility(View.GONE);
@@ -185,7 +185,11 @@ public class OrderDetail extends AppCompatActivity {
             case 3:
             case 4: {
                 text1 = "Đơn hàng đã bị hủy";
-                text2 = "Rất xin lỗi vì sự bất tiện của SafetyFood";
+                if(datHang.getStatusDathang()==3){
+                    text2 = "Đơn đã bị hủy từ phía người dùng";
+                }else {
+                    text2 = "Đơn hàng bị hủy từ phía cửa hàng";
+                }
                 textGiao = "Đơn đã hủy";
                 Btn_Admin_GiaoHang.setVisibility(View.GONE);
                 Btn_Admin_Huy.setVisibility(View.GONE);
@@ -195,7 +199,7 @@ public class OrderDetail extends AppCompatActivity {
             }
             case 5: {
                 text1 = "Đơn hàng đã hoàn thành";
-                text2 = "Cảm ơn bạn đã mua hàng tại SafetyFood";
+                text2 = "Khách hàng đã nhận được đơn hàng";
                 textGiao = "Đã nhận";
                 Btn_Admin_GiaoHang.setVisibility(View.GONE);
                 Btn_Admin_Huy.setVisibility(View.GONE);

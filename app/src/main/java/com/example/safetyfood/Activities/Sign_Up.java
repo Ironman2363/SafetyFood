@@ -17,11 +17,11 @@ import com.example.safetyfood.DAO.TaikhoanDAO;
 import com.example.safetyfood.MODEL.TaiKhoan;
 import com.example.safetyfood.R;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class Sign_Up extends AppCompatActivity {
-    TextInputEditText SU_edt_UserName;
-    TextInputEditText SU_edt_PassWord;
-    TextInputEditText SU_edt_RePassWord;
+    TextInputEditText SU_edt_UserName,SU_edt_PassWord,SU_edt_RePassWord;
+    TextInputLayout SU_til_UserName,SU_til_PassWord,SU_til_RePassWord;
     TaikhoanDAO taikhoanDAO;
 
     Toolbar toolbar;
@@ -58,7 +58,25 @@ public class Sign_Up extends AppCompatActivity {
     }
 
     private void DangKy(String username, String password, String repass) {
-        if (password.equals(repass)){
+        SU_til_UserName.setErrorEnabled(false);
+        SU_til_PassWord.setErrorEnabled(false);
+        SU_til_RePassWord.setErrorEnabled(false);
+        if(username.isEmpty()){
+            SU_til_UserName.setError("Không được để trống username");
+            return;
+        }
+        else if (taikhoanDAO.getName(username)!=null){
+            SU_til_UserName.setError("Tài khoản đã tồn tại");
+            return;
+        }
+        if(password.isEmpty()){
+            SU_til_PassWord.setError("Không được để trống password");
+            return;
+        }else if(repass.isEmpty()){
+            SU_til_RePassWord.setError("Không được để trống repass");
+            return;
+        }
+        else if (password.equals(repass)){
             TaiKhoan taiKhoan = new TaiKhoan(0, username, password, 3);
             taikhoanDAO.insertTaikhoan(taiKhoan);
             Intent intent = new Intent(this,DangKyThongTinActivity.class);
@@ -67,7 +85,8 @@ public class Sign_Up extends AppCompatActivity {
             startActivity(intent);
         }
         else{
-            Toast.makeText(this, "Hai mật khẩu chưa trùng nhau", Toast.LENGTH_SHORT).show();
+            SU_til_PassWord.setError("Password không khớp");
+            SU_til_RePassWord.setError("Password không khớp");
         }
     }
 
@@ -79,10 +98,12 @@ public class Sign_Up extends AppCompatActivity {
         toolbar = findViewById(R.id.SU_tool_bar);
         txt_toLogin = findViewById(R.id.txt_toLogin);
         appCompatButton = findViewById(R.id.appCompatButton);
-
         SU_edt_UserName = findViewById(R.id.SU_edt_UserName);
         SU_edt_PassWord = findViewById(R.id.SU_edt_PassWord);
         SU_edt_RePassWord = findViewById(R.id.SU_edt_RePassWord);
+        SU_til_UserName = findViewById(R.id.SU_til_UserName);
+        SU_til_PassWord = findViewById(R.id.SU_til_PassWord);
+        SU_til_RePassWord = findViewById(R.id.SU_til_RePassWord);
         taikhoanDAO = new TaikhoanDAO(this);
     }
 
