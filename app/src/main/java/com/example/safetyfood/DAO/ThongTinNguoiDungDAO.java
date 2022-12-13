@@ -44,17 +44,25 @@ public class ThongTinNguoiDungDAO {
     }
 
     public boolean capNhatThongTinNguoiDung(ThongTinNguoiDung info) {
+
         ContentValues contentValues = new ContentValues();
         contentValues.put("AccountId", info.getIdtaikhoan());
         contentValues.put("FullName", info.getFullname());
         contentValues.put("Email", info.getEmailNguoidung());
-        contentValues.put("SDT", info.getEmailNguoidung());
+        contentValues.put("SDT", info.getSdtNguoidung());
         contentValues.put("Addres", info.getAddresNguoidung());
-        contentValues.put("Avatar", info.getAvatarNguoidung());
         contentValues.put("Birthday", info.getBirthdayNguoidung());
         contentValues.put("Gender", info.getGender());
         contentValues.put("Created", info.getCreateNguoidung());
         contentValues.put("Updated", info.getUpdateNguoidung());
+        long check = db.update("ThongTinNguoiDung", contentValues, "id = ?", new String[]{String.valueOf(info.getId())});
+        if (check == -1)
+            return false;
+        return true;
+    }
+    public boolean capNhatAnh(ThongTinNguoiDung info) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("Avatar", info.getAvatarNguoidung());
         long check = db.update("ThongTinNguoiDung", contentValues, "id = ?", new String[]{String.valueOf(info.getId())});
         if (check == -1)
             return false;
@@ -70,6 +78,20 @@ public class ThongTinNguoiDungDAO {
         if (check == -1)
             return 0;
         return 1;
+    }
+    public List<ThongTinNguoiDung> getData(){
+        List<ThongTinNguoiDung> list = new ArrayList<>(  );
+        Cursor cursor = db.rawQuery("select*from ThongTinNguoiDung",null);
+        if (cursor.getCount() != 0) {
+            cursor.moveToFirst();
+            do {
+                list.add(new ThongTinNguoiDung(cursor.getInt(0), cursor.getInt(1), cursor.getString(2),
+                        cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6),
+                        cursor.getString(7), cursor.getInt(8), cursor.getString(9),cursor.getString(10)));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return list;
     }
 
     public List<ThongTinNguoiDung> getData(String sql,String... selectionArgs){
@@ -91,4 +113,5 @@ public class ThongTinNguoiDungDAO {
         String sql = "SELECT * FROM ThongTinNguoiDung WHERE AccountId=?";
         return getData(sql,new String[]{String.valueOf(id)}).get(0);
     }
+
 }
