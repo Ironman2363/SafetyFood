@@ -23,7 +23,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/search/baseline_search_24.xml" />
+                                      <entry key="url" value="file:/D:/Android%20SDK/icons/material/materialicons/keyboard_backspace/baseline_keyboard_backspace_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -33,8 +33,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="ff8247" />
-                            <entry key="outputName" value="ic_timmmmm" />
+                            <entry key="color" value="040404" />
+                            <entry key="outputName" value="back" />
                             <entry key="sourceFile" value="D:\wavea.svg" />
                           </map>
                         </option>

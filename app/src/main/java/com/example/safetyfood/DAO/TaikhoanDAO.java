@@ -1,5 +1,7 @@
 package com.example.safetyfood.DAO;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -15,10 +17,12 @@ import java.util.List;
 public class TaikhoanDAO {
     SQLiteDatabase db;
     SafetyFoodDataBase safetyFoodDataBase;
+    SharedPreferences sharedPreferences;
 
     public TaikhoanDAO(Context context) {
         safetyFoodDataBase = new SafetyFoodDataBase(context);
         db = safetyFoodDataBase.getWritableDatabase();
+        sharedPreferences = context.getSharedPreferences("OKLuon",MODE_PRIVATE);
     }
 
     public ArrayList<TaiKhoan> getDSNV() {
@@ -116,8 +120,18 @@ public class TaikhoanDAO {
     public boolean checkDangNhapkh(String UserName, String Password) {
         SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getReadableDatabase();
 
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM TaiKhoan WHERE UserName = ? AND Password = ? AND Roled = 3 ", new String[]{UserName, Password});
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT tk.Id, tk.UserName,tk.Password,tk.Roled,tt.FullName,tt.Avatar FROM TaiKhoan tk , ThongTinNguoiDung tt  WHERE tk.Id = tt.AccountId AND UserName = ? AND Password = ? AND Roled = 3 ", new String[]{UserName, Password});
         if (cursor.getCount() != 0) {
+            cursor.moveToFirst();
+
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("Id",cursor.getString(0));
+            editor.putString("UserName",cursor.getString(1));
+            editor.putString("Password",cursor.getString(2));
+            editor.putString("Roled",cursor.getString(3));
+            editor.putString("FullName",cursor.getString(4));
+            editor.putString("Avatar",cursor.getString(5));
+            editor.commit();
             return true;
         } else {
             return false;
@@ -127,11 +141,35 @@ public class TaikhoanDAO {
     public boolean checkDangNhapkhNVAD(String UserName, String Password) {
         SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getReadableDatabase();
         TaiKhoan taiKhoan;
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM TaiKhoan WHERE UserName = ? AND Password = ? AND Roled != 3 ", new String[]{UserName, Password});
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM TaiKhoan   WHERE   UserName = ? AND Password = ? AND Roled != 3 ", new String[]{UserName, Password});
         if (cursor.getCount() != 0) {
+//            cursor.moveToFirst();
+
+//            SharedPreferences.Editor editor = sharedPreferences.edit();
+//            editor.putString("UserName",cursor.getString(0));
+//            editor.putString("Password",cursor.getString(1));
+//            editor.putString("Roled",cursor.getString(2));
+//            editor.putString("FullName",cursor.getString(3));
+//            editor.putString("Avatar",cursor.getString(4));
+//            editor.commit();
             return true;
         } else {
             return false;
         }
+    }
+    public int capNhapMatKhau(String username,String oldPass,String newPass){
+        db = safetyFoodDataBase.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM TaiKhoan WHERE Id =? AND Password =?",new String[]{username,oldPass});
+        if (cursor.getCount()>0){
+            ContentValues values = new ContentValues();
+            values.put("Password",newPass);
+            long check = db.update("TaiKhoan",values,"Id =?",new String[]{username});
+
+            if (check == -1)
+                return -1;
+            return 1;
+        }
+        return 0;
     }
 }

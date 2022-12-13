@@ -29,7 +29,6 @@ public class Login extends AppCompatActivity {
     TaikhoanDAO dao;
     TaiKhoan tk;
     TextInputLayout textInputName , textInputPass;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,9 +85,11 @@ public class Login extends AppCompatActivity {
         skip.setOnClickListener(new View.OnClickListener( ) {
             @Override
             public void onClick(View view) {
+
                 startActivity(new Intent(Login.this, MainActivity.class));
                 cart_all = new DatHang(  );
                 account_all = new TaiKhoan(  );
+
             }
         });
     }
