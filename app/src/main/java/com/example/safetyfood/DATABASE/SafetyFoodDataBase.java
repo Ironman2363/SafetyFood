@@ -35,15 +35,15 @@ public class SafetyFoodDataBase extends SQLiteOpenHelper {
         String createTableThongTinNguoiDung = "create table ThongTinNguoiDung(" +
                 "Id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "AccountId INTEGER REFERENCES TaiKhoan(Id)," +
-                "FullName Text not null," +
+                "FullName Text NOT NULL," +
                 "Email TEXT NOT NULL," +
                 "SDT TEXT NOT NULL,"+
                 "Addres TEXT NOT NULL," +
                 "Avatar TEXT NOT NULL," +
                 "Birthday DATE NOT NULL," +
                 "Gender INT NOT NULL," +
-                "Created TEXT not null," +
-                "Updated TEXT not null)";
+                "Created TEXT NOT NULL," +
+                "Updated TEXT NOT NULL)";
         db.execSQL(createTableThongTinNguoiDung);
 
         String createTableDatHang = "create table DatHang(" +
@@ -98,8 +98,8 @@ public class SafetyFoodDataBase extends SQLiteOpenHelper {
         db.execSQL(createTableSanPham);
 
         db.execSQL("INSERT INTO VaiTro VALUES(1,'ADMIN','ADMIN','24/11/2022','24/11/2022'),(2,'NHANVIEN','NHANVIEN','24/11/2022','24/11/2022'),(3,'KHACHHANG','KHACHHANG','24/11/2022','24/11/2022')");
-        db.execSQL("INSERT INTO TaiKhoan VALUES(1,'ADMIN','ADMIN',1),(2,'KH1','KH1',3),(3,'NV1','NV1',2)");
-        db.execSQL("INSERT INTO ThongTinNguoiDung VALUES(0,2,'LeeHung','null','012345678','HaNoi','700042','04/04/2003','Nam','1/12/2022','1/12/2022')");
+        db.execSQL("INSERT INTO TaiKhoan VALUES(1,'ADMIN','1',1),(2,'KH1','KH1',3),(3,'NV1','NV1',2),(4,'KH2','KH2',3),(5,'KH3','KH3',3)");
+        db.execSQL("INSERT INTO ThongTinNguoiDung VALUES(0,2,'LeeHung','null','012345678','HaNoi','700042','04/04/2003','Nam','1/12/2022','1/12/2022'),(1,4,'LeeHung','null','012345678','HaNoi','700042','04/04/2003','Nu','1/12/2022','1/12/2022'),(2,5,'LeeHung','null','012345678','HN','700042','04/04/2003','Nam','1/12/2022','1/12/2022')");
     }
 
     @Override
