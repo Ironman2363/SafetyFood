@@ -1,5 +1,9 @@
 package com.example.safetyfood;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,15 +12,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.os.Bundle;
-import android.util.Log;
-
-import com.example.safetyfood.Admin.OrderAdminFragment;
-import com.example.safetyfood.Admin.ThongKeFragment;
 import com.example.safetyfood.DAO.DatHangDAO;
 import com.example.safetyfood.DAO.ThongTinNguoiDungDAO;
 import com.example.safetyfood.FRAGMENT.CartFragment;
@@ -38,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     DatHangDAO datHangDAO;
     ThongTinNguoiDungDAO thongTinNguoiDungDAO;
 
+
     BottomNavigationView bottomNavigationView;
 
     @Override
@@ -46,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater( ));
         setContentView(binding.getRoot( ));
         replaceFragment(new HomeFragment( ));
-
         datHangDAO = new DatHangDAO(this);
         thongTinNguoiDungDAO = new ThongTinNguoiDungDAO(this);
         IntentFilter intentFilter = new IntentFilter("checkCart");

@@ -4,6 +4,7 @@ import static com.example.safetyfood.MainActivity.account_all;
 import static com.example.safetyfood.MainActivity.cart_all;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,7 @@ import com.example.safetyfood.Admin.AdminActivity;
 import com.example.safetyfood.DAO.TaikhoanDAO;
 import com.example.safetyfood.MODEL.DatHang;
 import com.example.safetyfood.MODEL.TaiKhoan;
+import com.example.safetyfood.MODEL.ThongTinNguoiDung;
 import com.example.safetyfood.MainActivity;
 import com.example.safetyfood.R;
 import com.google.android.material.textfield.TextInputEditText;
@@ -29,7 +31,8 @@ public class Login extends AppCompatActivity {
     TaikhoanDAO dao;
     TaiKhoan tk;
     TextInputLayout textInputName , textInputPass;
-
+    public static ThongTinNguoiDung settingFragment = new ThongTinNguoiDung();
+    SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,9 +89,14 @@ public class Login extends AppCompatActivity {
         skip.setOnClickListener(new View.OnClickListener( ) {
             @Override
             public void onClick(View view) {
+                sharedPreferences = getSharedPreferences("OKLuon",MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
                 startActivity(new Intent(Login.this, MainActivity.class));
                 cart_all = new DatHang(  );
                 account_all = new TaiKhoan(  );
+                settingFragment = new ThongTinNguoiDung(  );
+                editor.putString("FullName",settingFragment.getFullname());
+                editor.commit();
             }
         });
     }

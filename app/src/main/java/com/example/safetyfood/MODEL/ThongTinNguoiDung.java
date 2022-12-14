@@ -50,8 +50,9 @@ public class ThongTinNguoiDung {
         return fullname;
     }
 
-    public void setFullname(String fullname) {
+    public String setFullname(String fullname) {
         this.fullname = fullname;
+        return fullname;
     }
 
     public String getEmailNguoidung() {
@@ -134,4 +135,6 @@ public class ThongTinNguoiDung {
                 ", updateNguoidung='" + updateNguoidung + '\'' +
                 '}';
     }
+
+
 }
