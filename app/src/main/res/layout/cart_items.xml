@@ -15,30 +15,40 @@
         <ImageView
             android:id="@+id/Cart_items_img"
             android:src="@drawable/loaisp_coca"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:scaleType="centerCrop"/>
 
         <LinearLayout
+            android:layout_margin="5dp"
             android:layout_weight="10"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
+                android:layout_marginStart="10dp"
                 android:textColor="@color/black"
                 android:id="@+id/Cart_items_name"
                 android:text="Coca-cola"
                 android:textStyle="bold"
-                android:textSize="24sp"
+                android:textSize="26sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_marginStart="10dp"
+                android:id="@+id/Cart_items_price"
+                android:textSize="22sp"
+                android:textColor="@color/red"
+                android:text="45000đ"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-
             <LinearLayout
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:weightSum="12">
+                android:weightSum="15">
 
                 <ImageButton
                     android:id="@+id/Cart_items_remove"
@@ -46,7 +56,7 @@
                     android:backgroundTintMode="screen"
                     android:layout_weight="3"
                     android:layout_width="0dp"
-                    android:layout_height="24dp"/>
+                    android:layout_height="wrap_content"/>
 
                 <EditText
                     android:id="@+id/Cart_items_amount_edt"
@@ -54,9 +64,9 @@
                     android:background="@drawable/boder_edittext"
                     android:textAlignment="center"
                     android:textSize="24sp"
-                    android:layout_weight="6"
+                    android:layout_weight="5"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="match_parent"/>
 
                 <TextView
                     android:id="@+id/Cart_items_amount_txt"
@@ -71,18 +81,9 @@
                     android:backgroundTintMode="screen"
                     android:layout_weight="3"
                     android:layout_width="0dp"
-                    android:layout_height="24dp"/>
+                    android:layout_height="wrap_content"/>
 
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/Cart_items_price"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:textColor="@color/red"
-                android:text="45000đ"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
 
         </LinearLayout>
 

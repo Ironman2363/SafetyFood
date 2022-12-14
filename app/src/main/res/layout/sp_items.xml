@@ -25,8 +25,7 @@
             android:id="@+id/SP_items_Ten"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:text="Coca Cola"
             android:textColor="@color/black"
             android:textSize="18sp" />
@@ -51,12 +50,12 @@
                 android:layout_marginBottom="5dp"
                 android:text="25000 đ"
                 android:textColor="@color/red"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <ImageView
                 android:id="@+id/img_free_ship"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_alignParentRight="true"
                 android:src="@drawable/free_ship" />
         </RelativeLayout>
@@ -72,16 +71,25 @@
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="16dp"
-                android:layout_marginRight="10dp"
                 android:src="@drawable/icon_start" />
+            <TextView
+                android:layout_marginRight="20dp"
+                android:textSize="10sp"
+                android:text=" 5.0"
+                android:layout_width="match_parent"
+                android:layout_height="16dp"/>
 
+            <ImageView
+                android:src="@drawable/ic_thoigian"
+                android:layout_width="14dp"
+                android:layout_height="14dp"/>
             <TextView
                 android:id="@+id/tv_da_ban"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Đã bán 7,5k"
+                android:text=" 20 phút"
                 android:textColor="@color/black"
-                android:textSize="12dp" />
+                android:textSize="10dp" />
 
         </LinearLayout>
 

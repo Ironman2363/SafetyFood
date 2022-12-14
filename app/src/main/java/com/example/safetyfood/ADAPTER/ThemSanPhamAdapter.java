@@ -38,6 +38,7 @@ import com.example.safetyfood.R;
 import com.example.safetyfood.Tab_Fragment.LoaiSanPhamFragment;
 
 import java.io.ByteArrayOutputStream;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,9 +95,10 @@ public class ThemSanPhamAdapter extends RecyclerView.Adapter<ThemSanPhamAdapter.
 
             LoaiSanPham loaiSanPham = sanPhamDAO.getID(sanPham.getLoaiSanpham() + "");
             holder.ten_sp.setText(sanPham.getNameSanpham());
-            holder.gia_sp.setText(String.valueOf(sanPham.getPriceSanpham()));
+            DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+            holder.gia_sp.setText(decimalFormat.format(sanPham.getPriceSanpham())+"đ");
             holder.ngay_sp.setText(sanPham.getCreateSanpham());
-            holder.loai_sp.setText("Loai: " + loaiSanPham.getNameLoaisanpham());
+            holder.loai_sp.setText("Loại sản phẩm: " + loaiSanPham.getNameLoaisanpham());
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
@@ -106,10 +108,10 @@ public class ThemSanPhamAdapter extends RecyclerView.Adapter<ThemSanPhamAdapter.
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
                             if (item.getItemId() == R.id.xoa) {
-                                Toast.makeText(context, "Xoa san pham", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "XÓA", Toast.LENGTH_SHORT).show();
                                 XoaSanPham();
                             } else if (item.getItemId() == R.id.sua) {
-                                Toast.makeText(context, "Sua san pham", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "SỬA", Toast.LENGTH_SHORT).show();
                                 SuaSanPham();
                             }
                             return true;

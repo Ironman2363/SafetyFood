@@ -23,7 +23,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/search/baseline_search_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/access_time/baseline_access_time_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -33,8 +33,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="ff8247" />
-                            <entry key="outputName" value="ic_timmmmm" />
+                            <entry key="color" value="6f6b6b" />
+                            <entry key="outputName" value="ic_thoigian" />
                             <entry key="sourceFile" value="D:\wavea.svg" />
                           </map>
                         </option>

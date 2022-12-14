@@ -7,7 +7,6 @@
     app:cardCornerRadius="16dp">
 
     <LinearLayout
-        android:weightSum="12"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -15,9 +14,8 @@
         <ImageView
             android:id="@+id/topsp_items_trophy"
             android:src="@drawable/gold_trophy"
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:layout_height="match_parent"/>
+            android:layout_width="60dp"
+            android:layout_height="100dp"/>
 
         <TextView
             android:id="@+id/topsp_items_top"
@@ -31,23 +29,25 @@
             android:layout_height="wrap_content"/>
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:orientation="vertical"
             android:layout_weight="6"
             android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/topsp_items_name"
-                android:textColor="@color/red"
+                android:textColor="#C63F51B5"
                 android:textStyle="bold"
-                android:textSize="24dp"
+                android:textSize="16dp"
+                android:layout_margin="10sp"
                 android:text="Tên : Coca-cola"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:layout_margin="10sp"
                 android:id="@+id/topsp_items_count"
-                android:textSize="24dp"
+                android:textSize="12dp"
                 android:text="Đã bán : 12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -57,8 +57,7 @@
         <ImageView
             android:id="@+id/topsp_items_img"
             android:src="@drawable/loaisp_coca"
-            android:layout_weight="3"
-            android:layout_width="0dp"
+            android:layout_width="110dp"
             android:layout_height="match_parent"/>
 
     </LinearLayout>

@@ -57,20 +57,21 @@ public class SanPhamFragment extends Fragment {
     RecyclerView list_sp;
     SanPham sanPham;
     ThemSanPhamAdapter phamAdapter;
-    List<SanPham>list = new ArrayList<>();
-    List<LoaiSanPham>list_loai_sp;
+    List<SanPham> list = new ArrayList<>();
+    List<LoaiSanPham> list_loai_sp;
     LoaiSanPhamDAO phamDAO;
     SanPhamDAO sanPhamDAO;
     LoaiSanPhamSpinnerAdapter spinnerAdapter;
     ActivityResultLauncher<Intent> activityResultLauncher;
-    int position ;
+    int position;
     String link;
     ImageView anh;
-  int maLoaiSanPham;
+    int maLoaiSanPham;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_san_pham, container, false);
+        View view = inflater.inflate(R.layout.fragment_san_pham, container, false);
         add_sp = view.findViewById(R.id.add_sp);
         list_sp = view.findViewById(R.id.list_sp);
         sanPhamDAO = new SanPhamDAO(getContext());
@@ -78,7 +79,7 @@ public class SanPhamFragment extends Fragment {
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
         list_sp.setLayoutManager(manager);
         list = sanPhamDAO.getDSSanPham();
-        phamAdapter = new ThemSanPhamAdapter(getContext(),list);
+        phamAdapter = new ThemSanPhamAdapter(getContext(), list);
         list_sp.setAdapter(phamAdapter);
         registerForContextMenu(list_sp);
         add_sp.setOnClickListener(new View.OnClickListener() {
@@ -90,21 +91,21 @@ public class SanPhamFragment extends Fragment {
         activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
             @Override
             public void onActivityResult(ActivityResult result) {
-                if (result.getResultCode() == RESULT_OK && result.getData()!=null){
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                     Bundle bundle = result.getData().getExtras();
                     Bitmap bitmap = (Bitmap) bundle.get("data");
-                    if (bitmap != null){
+                    if (bitmap != null) {
                         anh.setImageBitmap(bitmap);
                         anh.setVisibility(View.VISIBLE);
                     }
-                    link = String.valueOf(getImageUri(getContext(),bitmap));
+                    link = String.valueOf(getImageUri(getContext(), bitmap));
                 }
             }
         });
         return view;
     }
 
-//    private void add() {
+    //    private void add() {
 //        list.add(new SanPham("pepsi",String.valueOf(R.drawable.pepsi),10000,1,"20/22/2022"));
 //        list.add(new SanPham("coca-cola",String.valueOf(R.drawable.pepsi),10000,2,"20/22/2022"));
 //        list.add(new SanPham("pepsi",String.valueOf(R.drawable.pepsi),20000,2,"20/22/2022"));
@@ -121,7 +122,7 @@ public class SanPhamFragment extends Fragment {
 
     private void themSanPham() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_san_pham,null);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_san_pham, null);
         builder.setView(view);
         Dialog dialog = builder.create();
         dialog.show();
@@ -142,10 +143,10 @@ public class SanPhamFragment extends Fragment {
             }
         });
         list_loai_sp = phamDAO.getDSLoaiSanPham();
-        spinnerAdapter = new LoaiSanPhamSpinnerAdapter(getContext(),list_loai_sp);
+        spinnerAdapter = new LoaiSanPhamSpinnerAdapter(getContext(), list_loai_sp);
         loai_sp.setAdapter(spinnerAdapter);
 
-        loai_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener( ) {
+        loai_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 maLoaiSanPham = list_loai_sp.get(position).getId();
@@ -182,14 +183,14 @@ public class SanPhamFragment extends Fragment {
                 String text = simpleDateFormat.format(calendar.getTime());
                 sanPham.setCreateSanpham(text);
                 sanPham.setUpdatedSanpham(text);
-                if (sanPhamDAO.themSanpham(sanPham)){
-                    Toast.makeText(getContext(), "Them thanh cong", Toast.LENGTH_SHORT).show();
+                if (sanPhamDAO.themSanpham(sanPham)) {
+                    Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                     list.clear();
                     list.addAll(sanPhamDAO.getDSSanPham());
                     phamAdapter.notifyDataSetChanged();
-                }else{
-                    Toast.makeText(getContext(), "Them that bai", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -199,13 +200,13 @@ public class SanPhamFragment extends Fragment {
     public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getActivity().getMenuInflater();
-        inflater.inflate(R.menu.option_sua_xoa,menu);
+        inflater.inflate(R.menu.option_sua_xoa, menu);
 
     }
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case 0:
                 Toast.makeText(getContext(), "ban da xoa", Toast.LENGTH_SHORT).show();
                 return true;
@@ -220,9 +221,9 @@ public class SanPhamFragment extends Fragment {
 
     private void openImage() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (intent.resolveActivity(getActivity().getPackageManager()) !=null){
+        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
             activityResultLauncher.launch(intent);
-        }else {
+        } else {
             Toast.makeText(getContext(), "app ko ho tro action", Toast.LENGTH_SHORT).show();
         }
     }
