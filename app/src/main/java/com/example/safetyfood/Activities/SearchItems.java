@@ -3,20 +3,19 @@ package com.example.safetyfood.Activities;
 import static com.example.safetyfood.MainActivity.account_all;
 import static com.example.safetyfood.MainActivity.cart_all;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.safetyfood.ADAPTER.SanPhamAdapter;
 import com.example.safetyfood.DAO.ChiTietDatHangDAO;
@@ -42,6 +41,7 @@ public class SearchItems extends AppCompatActivity {
 
         Search_List = findViewById(R.id.Search_List);
         Search_toolbar = findViewById(R.id.Search_toolbar);
+        
         sanPhamDAO = new SanPhamDAO(this);
         dao = new ChiTietDatHangDAO(this);
 
