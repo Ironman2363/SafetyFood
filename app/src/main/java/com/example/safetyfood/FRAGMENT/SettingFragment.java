@@ -43,7 +43,8 @@ import java.util.List;
 public class SettingFragment extends Fragment {
     ThongTinNguoiDung thongTinNguoiDung;
     TextView doiten;
-    ImageView Anhnen,Anh_loai;
+
+    ImageView Anhnen, Anh_loai;
     CardView btndangxuat, ThayDoiMk, txtThongtinchitiet, txtthongtinshop,btnDangNhap;
     ActivityResultLauncher<Intent> activityResultLauncher;
     ThongTinNguoiDungDAO dao;
