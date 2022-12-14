@@ -142,14 +142,14 @@
                 android:text="Mua lại"
                 android:textStyle="bold" />
             <Button
-                android:visibility="gone"
+                android:visibility="visible"
                 android:id="@+id/btnxacnhandagiahang"
                 android:layout_width="0dp"
                 android:layout_weight="7"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:backgroundTint="#3F51B5"
-                android:text="Đã Nhận Được Hàng"
+                android:text="Đã Nhận Hàng"
                 android:textStyle="bold" />
         </LinearLayout>
 

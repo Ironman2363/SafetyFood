@@ -3,45 +3,58 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
+    android:background="@drawable/boder_edittext"
     android:layout_marginTop="16dp"
-    app:cardCornerRadius="15dp">
+    app:cardCornerRadius="10dp">
 
     <LinearLayout
-        android:padding="8dp"
+
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <TextView
+            android:background="#FFEB3B"
+            android:textStyle="bold"
+            android:textColor="#AF090909"
+            android:gravity="center"
+            android:textSize="40sp"
+            android:text="Thông tin đơn hàng"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
         <TextView
-            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:textColor="#3F51B5"
             android:textStyle="bold"
             android:id="@+id/Order_History_items_ID"
-            android:text="Mã đơn hàng : 1"
+            android:text="Mã đơn hàng : "
             android:textSize="20sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:textColor="#3F51B5"
             android:textStyle="bold"
             android:id="@+id/Order_History_items_Buyer"
-            android:text="Tên khách hàng : Hung"
+            android:text="Tên khách hàng : "
             android:textSize="20sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:textColor="#3F51B5"
             android:textStyle="bold"
             android:id="@+id/Order_History_items_Address"
-            android:text="Địa chỉ : HN"
+            android:text="Địa chỉ : "
             android:textSize="20sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <LinearLayout
-            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:textColor="#3F51B5"
             android:textStyle="bold"
             android:weightSum="12"
             android:layout_width="match_parent"
@@ -49,7 +62,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:textColor="@color/black"
+                android:textColor="#3F51B5"
                 android:textStyle="bold"
                 android:id="@+id/Order_History_items_Amount"
                 android:text="8 sản phẩm"
@@ -61,18 +74,19 @@
             <TextView
 
                 android:id="@+id/Order_History_items_TotalPrice"
-                android:text="Tổng : 12000VND"
-                android:textColor="@color/red"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:layout_weight="7"
-                android:textAlignment="viewEnd"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_weight="7"
+                android:text="Tổng : "
+                android:textAlignment="viewEnd"
+                android:textColor="@color/red"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
         <TextView
+            android:layout_margin="10dp"
             android:textStyle="bold"
             android:id="@+id/Order_History_items_Status"
             android:text="Đơn đang chờ xác nhận"

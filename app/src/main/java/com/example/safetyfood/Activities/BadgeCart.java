@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.safetyfood.ADAPTER.CartAdapter;
 import com.example.safetyfood.DAO.ChiTietDatHangDAO;
@@ -28,6 +29,7 @@ import com.example.safetyfood.FRAGMENT.OrderFragment;
 import com.example.safetyfood.MODEL.ChiTietDatHang;
 import com.example.safetyfood.R;
 import com.example.safetyfood.Service.CheckCartService;
+import com.example.safetyfood.Tab_Fragment.ChoXacNhanFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.text.DecimalFormat;
@@ -67,8 +69,11 @@ public class BadgeCart extends AppCompatActivity {
 
             startService(new Intent( this,CheckCartService.class ));
             finish();
+            Toast.makeText(this, "Mua hàng thành công", Toast.LENGTH_SHORT).show();
+
         }
     }
+
 
     private int loadMoney() {
         int sum = 0;
