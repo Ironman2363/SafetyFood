@@ -113,10 +113,10 @@ public class SanPhamFragment extends Fragment {
 //        list.add(new SanPham("pepsi",String.valueOf(R.drawable.pepsi),400000,3,"20/22/2022"));
 //
 //    }
-    public Uri getImageUri(Context inContext, Bitmap inImage) {
+    public static Uri getImageUri(Context inContext, Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "IMG_" + Calendar.getInstance().getTime(),null);
         return Uri.parse(path);
     }
 

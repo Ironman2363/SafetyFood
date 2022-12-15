@@ -2,10 +2,12 @@ package com.example.safetyfood.Activities;
 
 import static com.example.safetyfood.MainActivity.account_all;
 import static com.example.safetyfood.MainActivity.cart_all;
+import static com.example.safetyfood.MainActivity.check_login;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -30,13 +32,15 @@ public class Login extends AppCompatActivity {
     TextView skip, signUp;
     TaikhoanDAO dao;
     TaiKhoan tk;
-    TextInputLayout textInputName , textInputPass;
+    TextInputLayout textInputName, textInputPass;
     public static ThongTinNguoiDung settingFragment = new ThongTinNguoiDung();
     SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+
         email = findViewById(R.id.edit_sdt);
         pass = findViewById(R.id.edit_pass);
         login = findViewById(R.id.btn_login);
@@ -46,11 +50,18 @@ public class Login extends AppCompatActivity {
         textInputPass = findViewById(R.id.Login_Til_Pass);
         dao = new TaikhoanDAO(this);
 
+        Intent intent = getIntent();
+        int key = intent.getIntExtra("key", -1);
+        if (key == 0) {
+            email.setText("");
+            pass.setText("");
+        }
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               textInputPass.setError("");
-               textInputName.setError("");
+                textInputPass.setError("");
+                textInputName.setError("");
                 Intent intent;
                 String mail = email.getText().toString();
                 String mk = pass.getText().toString();
@@ -62,9 +73,8 @@ public class Login extends AppCompatActivity {
                     startActivity(intent);
                 } else if (mail.equalsIgnoreCase("")) {
                     textInputName.setError("Vui lòng nhập tài khoản");
-                }
-                else if (mk.equalsIgnoreCase("")) {
-                   textInputPass.setError("Vui lòng nhập mật khẩu");
+                } else if (mk.equalsIgnoreCase("")) {
+                    textInputPass.setError("Vui lòng nhập mật khẩu");
                 } else if (dao.checkDangNhapkhNVAD(mail, mk) == true) {
                     intent = new Intent(getApplicationContext(), AdminActivity.class);
                     Bundle bundle = new Bundle();
@@ -80,35 +90,38 @@ public class Login extends AppCompatActivity {
 
             }
         });
-        signUp.setOnClickListener(new View.OnClickListener( ) {
+        signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Login.this, Sign_Up.class));
             }
         });
-        skip.setOnClickListener(new View.OnClickListener( ) {
+        skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sharedPreferences = getSharedPreferences("OKLuon",MODE_PRIVATE);
+                sharedPreferences = getSharedPreferences("OKLuon", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 startActivity(new Intent(Login.this, MainActivity.class));
-                cart_all = new DatHang(  );
-                account_all = new TaiKhoan(  );
-                settingFragment = new ThongTinNguoiDung(  );
-                editor.putString("FullName",settingFragment.getFullname());
+                cart_all = new DatHang();
+                check_login = false;
+                account_all = new TaiKhoan();
+                settingFragment = new ThongTinNguoiDung();
+                Log.e("ZZZZZ", "onClick: " + account_all + "." + check_login);
+                editor.putString("FullName", settingFragment.getFullname());
+                editor.putString("Avatar",settingFragment.getAvatarNguoidung());
                 editor.commit();
             }
         });
     }
 
     private boolean checkTK(String mail, String mk) {
-        if(dao.getName(mail)==null){
-           textInputName.setError("Tai khoan khong ton tai");
+        if (dao.getName(mail) == null) {
+            textInputName.setError("Tai khoan khong ton tai");
             return false;
-        }else {
+        } else {
             tk = dao.getName(mail);
-            if(!mk.equals(tk.getPassword())){
-               textInputPass.setError("Mật khẩu sai");
+            if (!mk.equals(tk.getPassword())) {
+                textInputPass.setError("Mật khẩu sai");
                 return false;
             }
         }

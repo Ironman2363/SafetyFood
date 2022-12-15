@@ -11,6 +11,8 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import com.example.safetyfood.FRAGMENT.HomeFragment;
 import com.example.safetyfood.MODEL.DatHang;
@@ -28,13 +30,25 @@ public class AdminActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mainBinding = ActivityAdminBinding.inflate(getLayoutInflater());
         setContentView(mainBinding.getRoot());
-        replaceFragment(new HomeAdminFragment());
+
 
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra("bundle");
         if (bundle != null) {
             account_all = (TaiKhoan) bundle.getSerializable("tk");
             check_login = true;
+        }
+
+        if(account_all.getRole()==2){
+            replaceFragment(new SeingAdminFragment());
+            mainBinding.bottomNavigationView.getMenu()
+                    .findItem(R.id.order1).setChecked(true);
+            mainBinding.bottomNavigationView.getMenu()
+                    .findItem(R.id.home1).setVisible(false);
+            mainBinding.bottomNavigationView.getMenu()
+                    .findItem(R.id.setting1).setVisible(false);
+        }else {
+            replaceFragment(new HomeAdminFragment());
         }
 
         Log.e("ZZZZZ", "onCreate: " + account_all);
@@ -51,7 +65,6 @@ public class AdminActivity extends AppCompatActivity {
                     replaceFragment(new ThongKeFragment());
                     break;
                 case R.id.setting1:
-
                     replaceFragment(new ManagerAccountFragment());
                     break;
             }

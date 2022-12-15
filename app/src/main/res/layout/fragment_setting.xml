@@ -72,7 +72,7 @@
                     android:textSize="20dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Thông tin chi tiết  " />
+                    android:text="  Thông tin chi tiết  " />
                 <ImageView
                     android:layout_marginTop="3dp"
                     android:layout_marginLeft="166dp"
@@ -104,7 +104,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Thay đổi mật khẩu"
+                    android:text="  Thay đổi mật khẩu"
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
@@ -132,16 +132,17 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:src="@drawable/thongtin"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    />
+                    android:layout_marginTop="3dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/thongtin" />
+
                 <TextView
                     android:textColor="@color/black"
                     android:textSize="20dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Thông tin shop " />
+                    android:text="  Thông tin shop " />
                 <ImageView
                     android:layout_marginTop="3dp"
                     android:layout_marginLeft="187dp"
