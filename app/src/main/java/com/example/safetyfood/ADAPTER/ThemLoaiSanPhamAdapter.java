@@ -5,9 +5,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +27,7 @@ import com.example.safetyfood.DAO.LoaiSanPhamDAO;
 import com.example.safetyfood.MODEL.LoaiSanPham;
 import com.example.safetyfood.R;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 public class ThemLoaiSanPhamAdapter extends RecyclerView.Adapter<ThemLoaiSanPhamAdapter.ThemLoaiSanPhamHolder> {
@@ -52,9 +55,13 @@ public class ThemLoaiSanPhamAdapter extends RecyclerView.Adapter<ThemLoaiSanPham
       LoaiSanPham sanPham = list.get(position);
       try{
           holder.anh_loai.setImageResource(Integer.parseInt(sanPham.getImgLoaisanpham()));
+
       }catch (Exception e){
-          Uri uri = Uri.parse(sanPham.getImgLoaisanpham());
-          holder.anh_loai.setImageURI(uri);
+
+//          Uri uri = Uri.parse(sanPham.getImgLoaisanpham());
+//          holder.anh_loai.setImageURI(uri);
+          Bitmap bit = StringToBitMap(sanPham.getImgLoaisanpham());
+          holder.anh_loai.setImageBitmap(bit);
       }
       holder.ten_sp.setText(sanPham.getNameLoaisanpham());
       holder.ngay_tao.setText(sanPham.getCreateLoaisanpham());
@@ -90,6 +97,17 @@ public class ThemLoaiSanPhamAdapter extends RecyclerView.Adapter<ThemLoaiSanPham
           }
       });
     }
+    public Bitmap StringToBitMap(String encodedString) {
+        try {
+            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
+        }
+    }
+
 
     @Override
     public int getItemCount() {

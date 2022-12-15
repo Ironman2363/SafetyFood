@@ -2,26 +2,39 @@ package com.example.safetyfood.DAO;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.AbstractWindowedCursor;
 import android.database.Cursor;
+import android.database.CursorWindow;
+import android.database.sqlite.SQLiteBlobTooBigException;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import com.example.safetyfood.DATABASE.SafetyFoodDataBase;
 import com.example.safetyfood.MODEL.LoaiSanPham;
 
+import java.sql.SQLClientInfoException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LoaiSanPhamDAO {
     SafetyFoodDataBase safetyFoodDataBase;
-
+    Context context;
     public LoaiSanPhamDAO(Context context) {
         safetyFoodDataBase = new SafetyFoodDataBase(context);
     }
-
+    @RequiresApi(api = Build.VERSION_CODES.P)
     public ArrayList<LoaiSanPham> getDSLoaiSanPham() {
         ArrayList<LoaiSanPham> list = new ArrayList<>();
+        LoaiSanPham sanPham = new LoaiSanPham();
         SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery("select * from LoaiSanPham", null);
+//        Cursor cursor = sqLiteDatabase.query("LoaiSanPham",null,
+//                "id=?",new String[]{sanPham.getId()+""},null,null,null);
+//        CursorWindow cw = new CursorWindow("test", 5000000);
+//        AbstractWindowedCursor ac = (AbstractWindowedCursor) cursor;
+//        ac.setWindow(cw);
         if (cursor.getCount() != 0) {
             cursor.moveToFirst();
             do {
@@ -37,6 +50,9 @@ public class LoaiSanPhamDAO {
         }
         return list;
     }
+
+
+
     public ArrayList<LoaiSanPham> getDSLoaiSanPham(String sql , String...select) {
         ArrayList<LoaiSanPham> list = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getReadableDatabase();
