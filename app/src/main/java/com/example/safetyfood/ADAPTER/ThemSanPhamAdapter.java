@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -182,6 +183,17 @@ public class ThemSanPhamAdapter extends RecyclerView.Adapter<ThemSanPhamAdapter.
                 loai_sp.setSelection(i);
             }
         }
+        loai_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener( ) {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                sanPham.setLoaiSanpham(String.valueOf(listLoaiSanPham.get(position).getId()));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         try {
             anh_sp.setImageResource(Integer.parseInt(sanPham.getImgSanpham()));
         } catch (Exception e) {
@@ -191,6 +203,8 @@ public class ThemSanPhamAdapter extends RecyclerView.Adapter<ThemSanPhamAdapter.
         sua_sp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sanPham.setNameSanpham(ten_sp.getText().toString());
+                sanPham.setPriceSanpham(Integer.parseInt(gia_sp.getText().toString()));
                 phamDAO.capnhatSanpham(sanPham);
                 dialog.dismiss();
                 notifyItemChanged(holder.getAdapterPosition());
