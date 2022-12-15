@@ -2,8 +2,12 @@ package com.example.safetyfood.ADAPTER;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +24,8 @@ import com.example.safetyfood.Activities.SanPhamDetail;
 import com.example.safetyfood.MODEL.LoaiSanPham;
 import com.example.safetyfood.R;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.List;
 
 public class LoaiSanPhamAdapter extends RecyclerView.Adapter<LoaiSanPhamAdapter.LoaiSanPhamHolder> {
@@ -44,8 +50,10 @@ public class LoaiSanPhamAdapter extends RecyclerView.Adapter<LoaiSanPhamAdapter.
         try{
             holder.loaiSP_items_Img.setImageResource(Integer.parseInt(loaiSanPham.getImgLoaisanpham()));
         }catch (Exception e){
-            Uri uri = Uri.parse(loaiSanPham.getImgLoaisanpham());
-            holder.loaiSP_items_Img.setImageURI(uri);
+//            Uri uri = Uri.parse(loaiSanPham.getImgLoaisanpham());
+//            holder.loaiSP_items_Img.setImageURI(uri);
+            Bitmap bit = StringToBitMap(loaiSanPham.getImgLoaisanpham());
+            holder.loaiSP_items_Img.setImageBitmap(bit);
         }
         holder.loaiSP_items_txt.setText(loaiSanPham.getNameLoaisanpham());
         holder.loaiSP_items_View.setOnClickListener(v -> {
@@ -56,6 +64,18 @@ public class LoaiSanPhamAdapter extends RecyclerView.Adapter<LoaiSanPhamAdapter.
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         });
+
+    }
+
+    public Bitmap StringToBitMap(String encodedString) {
+        try {
+            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
+        }
     }
 
     @Override
