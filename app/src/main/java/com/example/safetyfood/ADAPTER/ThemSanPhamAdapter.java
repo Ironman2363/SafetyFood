@@ -1,15 +1,13 @@
 package com.example.safetyfood.ADAPTER;
 
-import static android.app.Activity.RESULT_OK;
-
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.content.IntentFilter;
 import android.net.Uri;
-import android.os.Bundle;
-import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,22 +20,19 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.safetyfood.Activities.getImg;
 import com.example.safetyfood.DAO.LoaiSanPhamDAO;
 import com.example.safetyfood.DAO.SanPhamDAO;
 import com.example.safetyfood.MODEL.LoaiSanPham;
 import com.example.safetyfood.MODEL.SanPham;
 import com.example.safetyfood.R;
-import com.example.safetyfood.Tab_Fragment.LoaiSanPhamFragment;
 
-import java.io.ByteArrayOutputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -109,10 +104,10 @@ public class ThemSanPhamAdapter extends RecyclerView.Adapter<ThemSanPhamAdapter.
                         public boolean onMenuItemClick(MenuItem item) {
                             if (item.getItemId() == R.id.xoa) {
                                 Toast.makeText(context, "XÓA", Toast.LENGTH_SHORT).show();
-                                XoaSanPham();
+                                XoaSanPham(sanPham,position,holder);
                             } else if (item.getItemId() == R.id.sua) {
                                 Toast.makeText(context, "SỬA", Toast.LENGTH_SHORT).show();
-                                SuaSanPham();
+                                SuaSanPham(sanPham,holder);
                             }
                             return true;
                         }
@@ -126,14 +121,31 @@ public class ThemSanPhamAdapter extends RecyclerView.Adapter<ThemSanPhamAdapter.
 
 
 
-    private void SuaSanPham() {
+    private void SuaSanPham(SanPham sanPham, ThemSanPhamHolder holder) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_update_san_pham,null);
         builder.setView(view);
         Dialog dialog = builder.create();
         dialog.show();
 
-        SanPham sanPham = list.get(position);
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver( ) {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                link = intent.getStringExtra("link");
+                sanPham.setImgSanpham(link);
+                Log.e("ZZZZZZ", "onReceive: "+sanPham );
+                try {
+                    anh_sp.setImageResource(Integer.parseInt(sanPham.getImgSanpham()));
+                } catch (Exception e) {
+                    Uri uri = Uri.parse(sanPham.getImgSanpham());
+                    anh_sp.setImageURI(uri);
+                }
+            }
+        };
+
+        IntentFilter intentFilter = new IntentFilter("sendBack");
+        LocalBroadcastManager.getInstance(context).registerReceiver(broadcastReceiver,intentFilter);
+
         LoaiSanPhamDAO sanPhamDAO = new LoaiSanPhamDAO(context);
         anh_sp = view.findViewById(R.id.update_image_sp);
         EditText ten_sp = view.findViewById(R.id.update_edit_ten_sp);
@@ -145,6 +157,26 @@ public class ThemSanPhamAdapter extends RecyclerView.Adapter<ThemSanPhamAdapter.
         listLoaiSanPham = sanPhamDAO.getDSLoaiSanPham();
         loaiSpinnerAdapter = new LoaiSanPhamSpinnerAdapter(context,listLoaiSanPham);
         loai_sp.setAdapter(loaiSpinnerAdapter);
+        anh_sp.setOnClickListener(v -> {
+            final CharSequence[] items = {"Chụp ảnh", "Chọn ảnh từ thư viện"};
+            android.app.AlertDialog.Builder builder1 = new android.app.AlertDialog.Builder(context);
+            builder1.setIcon(R.drawable.img_image);
+            builder1.setItems(items, new DialogInterface.OnClickListener( ) {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if (items[which].equals("Chụp ảnh")) {
+                        Intent intent = new Intent(context,getImg.class);
+                        intent.putExtra("type",0);
+                        context.startActivity(intent);
+                    } else if (items[which].equals("Chọn ảnh từ thư viện")) {
+                        Intent intent = new Intent(context,getImg.class);
+                        intent.putExtra("type",1);
+                        context.startActivity(intent);
+                    }
+                }
+            });
+            builder1.show( );
+        });
         for (int i = 0 ; i<listLoaiSanPham.size();i++){
             if (Integer.parseInt(sanPham.getLoaiSanpham()) == (listLoaiSanPham.get(i).getId())){
                 loai_sp.setSelection(i);
@@ -159,25 +191,25 @@ public class ThemSanPhamAdapter extends RecyclerView.Adapter<ThemSanPhamAdapter.
         sua_sp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                phamDAO.capnhatSanpham(sanPham);
+                dialog.dismiss();
+                notifyItemChanged(holder.getAdapterPosition());
             }
         });
     }
 
-    private void XoaSanPham() {
-        SanPham sanPham = list.get(position);
+    private void XoaSanPham(SanPham sanPham, int position, ThemSanPhamHolder holder) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Xác nhận");
         builder.setMessage("Bạn có chắc chắn muốn xóa không ?");
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (phamDAO.xoaSanPham(sanPham.getId() + "")) {
+                if (phamDAO.xoaSanPham(String.valueOf(sanPham.getId()))) {
                     Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                    list.remove(holder.getAdapterPosition());
+                    notifyItemRemoved(holder.getAdapterPosition( ));
                     dialog.dismiss();
-                    list.clear();
-                    list.addAll(phamDAO.getDSSanPham());
-                    notifyDataSetChanged();
                 } else {
                     Toast.makeText(context, "Xóa không thành công", Toast.LENGTH_SHORT).show();
                 }
@@ -211,4 +243,5 @@ public class ThemSanPhamAdapter extends RecyclerView.Adapter<ThemSanPhamAdapter.
             loai_sp = itemView.findViewById(R.id.txt_loai_sp);
         }
     }
+
 }
