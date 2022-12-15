@@ -3,6 +3,7 @@ package com.example.safetyfood.ADAPTER;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,33 +46,48 @@ public class TaiKhoanAdapter extends RecyclerView.Adapter<TaiKhoanAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
-        holder.txt_tknv.setText("Tài khoản : " + list.get(position).getUsername());
-        holder.txt_mknv.setText("Mật khẩu : " + list.get(position).getPassword());
+        TaiKhoan taiKhoan = list.get(position);
+        holder.txt_tknv.setText("Tài khoản : " + taiKhoan.getUsername());
+        holder.txt_mknv.setText("Mật khẩu : " + taiKhoan.getPassword());
         holder.btn_deletenv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 TaikhoanDAO taikhoanDAO = new TaikhoanDAO(context);
-                int check = taikhoanDAO.deleteTaikhoan(String.valueOf(list.get(0).getId()));
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext())
+                        .setMessage("Bạn có muốn xóa tài khoản này không ?")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                int check = taikhoanDAO.deleteTaikhoan(String.valueOf(taiKhoan.getId()));
+                                switch (check) {
+                                    case 1:
 
-                switch (check) {
-                    case 1:
+                                        list.clear();
+                                        list = taikhoanDAO.getDSNV();
+                                        notifyDataSetChanged();
+                                        Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case -1:
+                                        Toast.makeText(context, "Không thể xóa tài khoản này", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 0:
+                                        Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                        })
+                        .setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
 
-                        list.clear();
-                        list = taikhoanDAO.getDSNV();
-                        notifyDataSetChanged();
-                        Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
-                        break;
-                    case -1:
-                        Toast.makeText(context, "Không thể xóa tài khoản này", Toast.LENGTH_SHORT).show();
-                        break;
-                    case 0:
-                        Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
-                        break;
-                    default:
-                        break;
-                }
+                            }
+                        });
+                builder.create();
+                builder.show();
             }
+
         });
         holder.btn_editnv.setOnClickListener(new View.OnClickListener() {
             @Override

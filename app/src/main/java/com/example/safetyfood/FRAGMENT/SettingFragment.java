@@ -2,6 +2,9 @@ package com.example.safetyfood.FRAGMENT;
 
 import static android.app.Activity.RESULT_OK;
 
+import static com.example.safetyfood.MainActivity.account_all;
+import static com.example.safetyfood.MainActivity.check_login;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -11,6 +14,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +42,10 @@ import com.example.safetyfood.R;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+
+import javax.security.auth.login.LoginException;
 
 public class SettingFragment extends Fragment {
     ThongTinNguoiDung thongTinNguoiDung;
@@ -50,7 +57,6 @@ public class SettingFragment extends Fragment {
     ThongTinNguoiDungDAO dao;
     List<ThongTinNguoiDung> list;
     String link;
-    public static TaiKhoan account_all = new TaiKhoan( );
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -65,23 +71,31 @@ public class SettingFragment extends Fragment {
         dao = new ThongTinNguoiDungDAO(getContext( ));
         thongTinNguoiDung = new ThongTinNguoiDung( );
         list = new ArrayList<>( );
-        SharedPreferences sharedPreferences = getContext( ).getSharedPreferences("OKLuon", Context.MODE_PRIVATE);
-        String ten = sharedPreferences.getString("FullName", "Chưa Đăng Nhập");
-
-        doiten.setText(ten);
-        if (ten == "Chưa Đăng Nhập"){
+        if(check_login==false){
+            Anhnen.setImageResource(R.drawable.avatar);
+            doiten.setText("Khách hàng");
             btndangxuat.setVisibility(View.GONE);
-            btnDangNhap.setVisibility(View.VISIBLE);
+            txtthongtinshop.setVisibility(View.GONE);
+            txtThongtinchitiet.setVisibility(View.GONE);
+            ThayDoiMk.setVisibility(View.GONE);
         }else {
-            btndangxuat.setVisibility(View.VISIBLE);
-            btnDangNhap.setVisibility(View.GONE);
+            thongTinNguoiDung = dao.getInfo(account_all.getId());
+            doiten.setText(thongTinNguoiDung.getFullname());
+            Log.e("ZZZZZ", "onCreateView: "+thongTinNguoiDung.getAvatarNguoidung() );
+            try {
+                Anhnen.setImageResource(Integer.parseInt(thongTinNguoiDung.getAvatarNguoidung()));
+            }catch (Exception e) {
+                Uri uri = Uri.parse(thongTinNguoiDung.getAvatarNguoidung());
+                Anhnen.setImageURI(uri);
+            }
         }
+
 
 //Code Anh
         Anhnen.setOnClickListener(new View.OnClickListener( ) {
             @Override
             public void onClick(View view) {
-                if (ten == "Chưa Đăng Nhập"){
+                if (!check_login){
                     Toast.makeText(getContext(), "Cần đăng nhập để sử dụng", Toast.LENGTH_SHORT).show();
                 }else {
                     ThemAnh( );
@@ -116,7 +130,7 @@ public class SettingFragment extends Fragment {
                 Intent intent = new Intent(getContext( ), Login.class);
                 startActivity(intent);
 
-                getActivity( ).finish( );
+                getActivity( ).finishAffinity( );
 
             }
         });
@@ -141,6 +155,7 @@ public class SettingFragment extends Fragment {
                         Anh_loai.setVisibility(View.VISIBLE);
                     }
                     link = String.valueOf(getImageUri(getContext( ), bitmap));
+                    Log.e("ZZZZZ", "onActivityResult: "+link );
                 }
             }
         });
@@ -151,7 +166,23 @@ public class SettingFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume( );
-
+        if(check_login==false){
+            Anhnen.setImageResource(R.drawable.avatar);
+            doiten.setText("Khách hàng");
+            btndangxuat.setVisibility(View.GONE);
+            txtthongtinshop.setVisibility(View.GONE);
+            txtThongtinchitiet.setVisibility(View.GONE);
+            ThayDoiMk.setVisibility(View.GONE);
+        }else {
+            thongTinNguoiDung = dao.getInfo(account_all.getId());
+            doiten.setText(thongTinNguoiDung.getFullname());
+            try {
+                Anhnen.setImageResource(Integer.parseInt(thongTinNguoiDung.getAvatarNguoidung()));
+            }catch (Exception e) {
+                Uri uri = Uri.parse(thongTinNguoiDung.getAvatarNguoidung());
+                Anhnen.setImageURI(uri);
+            }
+        }
     }
 
     //Chuyen Man
@@ -184,9 +215,11 @@ public class SettingFragment extends Fragment {
         them.setOnClickListener(new View.OnClickListener( ) {
             @Override
             public void onClick(View view) {
-                ThongTinNguoiDung thongTinNguoiDung = new ThongTinNguoiDung( );
+                ThongTinNguoiDung thongTinNguoiDung = dao.getInfo(account_all.getId());
                 thongTinNguoiDung.setAvatarNguoidung(link);
+                Log.e("ZZZZZ", "onClick: "+link );
                 if (dao.capNhatAnh(thongTinNguoiDung)) {
+                    Log.e("ZZZZ", "onClick: "+thongTinNguoiDung.getAvatarNguoidung() );
                     try {
                         Anhnen.setImageResource(Integer.parseInt(thongTinNguoiDung.getAvatarNguoidung( )));
                     } catch (Exception e) {
@@ -215,10 +248,10 @@ public class SettingFragment extends Fragment {
         }
     }
 
-    public Uri getImageUri(Context inContext, Bitmap inImage) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream( );
+    public static Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver( ), inImage, "Title", null);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "IMG_" + Calendar.getInstance().getTime(),null);
         return Uri.parse(path);
     }
 

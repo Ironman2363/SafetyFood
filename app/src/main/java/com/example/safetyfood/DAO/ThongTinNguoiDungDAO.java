@@ -1,7 +1,10 @@
 package com.example.safetyfood.DAO;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -14,10 +17,13 @@ import java.util.List;
 public class ThongTinNguoiDungDAO {
     SafetyFoodDataBase safetyFoodDataBase;
     SQLiteDatabase db;
+    SharedPreferences sharedPreferences;
 
     public ThongTinNguoiDungDAO(Context context) {
         safetyFoodDataBase = new SafetyFoodDataBase(context);
         db = safetyFoodDataBase.getReadableDatabase();
+        sharedPreferences = context.getSharedPreferences("OKLuon",MODE_PRIVATE);
+
     }
 
     public List<ThongTinNguoiDung> getThongTinNguoiDungs() {
@@ -63,7 +69,7 @@ public class ThongTinNguoiDungDAO {
     public boolean capNhatAnh(ThongTinNguoiDung info) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("Avatar", info.getAvatarNguoidung());
-        long check = db.update("ThongTinNguoiDung", contentValues, "id = ?", new String[]{String.valueOf(info.getId())});
+        long check = db.update("ThongTinNguoiDung", contentValues, "Id = ?", new String[]{String.valueOf(info.getId())});
         if (check == -1)
             return false;
         return true;

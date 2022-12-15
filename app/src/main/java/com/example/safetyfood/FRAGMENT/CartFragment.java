@@ -76,7 +76,7 @@ public class CartFragment extends Fragment {
     private int loadMoney() {
         int sum = 0;
         for (ChiTietDatHang x : chiTietDatHangList) {
-            sum += x.getUnitprice()*x.getAmount();
+            sum += x.getUnitprice() * x.getAmount();
         }
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
 
@@ -85,7 +85,7 @@ public class CartFragment extends Fragment {
     }
 
     private void setAdapterToRCL() {
-        CartAdapter cartAdapter = new CartAdapter(chiTietDatHangList, getContext(),chiTietDatHangDAO,1);
+        CartAdapter cartAdapter = new CartAdapter(chiTietDatHangList, getContext(), chiTietDatHangDAO, 1);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         Cart_list.setLayoutManager(linearLayoutManager);
         Cart_list.setAdapter(cartAdapter);
@@ -120,12 +120,12 @@ public class CartFragment extends Fragment {
     }
 
     private void replaceFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager( );
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction( )
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
                 .setCustomAnimations(R.anim.enter_right_to_left, R.anim.exit_right_to_left,
                         R.anim.enter_left_to_right, R.anim.exit_left_to_right);
         fragmentTransaction.replace(R.id.frameLayout, fragment);
-        fragmentTransaction.commit( );
+        fragmentTransaction.commit();
 
         BottomNavigationView view = getActivity().findViewById(R.id.bottomNavigationView);
 
@@ -136,9 +136,9 @@ public class CartFragment extends Fragment {
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            int type = intent.getIntExtra("type",0);
-            switch (type){
-                case 1:{
+            int type = intent.getIntExtra("type", 0);
+            switch (type) {
+                case 1: {
                     chiTietDatHangList = chiTietDatHangDAO.getListCT(cart_all.getId());
                     totalPrice = loadMoney();
                     break;
