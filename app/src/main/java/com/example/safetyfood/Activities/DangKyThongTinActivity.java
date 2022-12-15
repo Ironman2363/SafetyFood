@@ -71,42 +71,8 @@ public class DangKyThongTinActivity extends AppCompatActivity {
                 String mail = email.getText().toString();
                 String address = dia_chi.getText().toString();
                 String ngay = ngay_sinh.getText().toString();
-                String anh = avatar.getResources().toString();
 
-                if(ten.equals("") ||phone.equals("") || mail.equals("") || address.equals("") || ngay.equals("")){
-                    if (ten.equals("")){
-                        namelayout.setError("Không được để trống họ tên");
-                        return;
-                    } if (!ten.equals("")){
-                        namelayout.setError("");
-                    } if (!phonecheck(sdt.getEditableText().toString())){
-                        sdtlayout.setError("Số điện thoại không đúng định dạng");
-                        return;
-                    } if (phonecheck(sdt.getEditableText().toString())){
-                        sdtlayout.setError("");
-                    } if (mail.equals("")){
-                        emaillayout.setError("Không được để trống email ");
-
-                        return;
-                    } if (!mail.equals("")){
-                        emaillayout.setError("");
-                    } if (!emailcheck(email.getEditableText().toString())) {
-                        emaillayout.setError("Không đúng định dạng email");
-                        return;
-                    } if (emailcheck(email.getEditableText().toString())){
-                        emaillayout.setError("");
-                    }if (address.equals("")){
-                        diachilayout.setError("Không để trống địa chỉ");
-                        return;
-                    } if (!address.equals("")){
-                        diachilayout.setError("");
-                    } if (ngay.equals("")){
-                        ngaysinhlayout.setError("Không để trống ngày sinh");
-                        return;
-                    } if (!ngay.equals("")){
-                        ngaysinhlayout.setError("");
-                    }
-                }else {
+                if(check(ten,phone,mail,address,ngay)){
                     ThongTinNguoiDung nguoiDung = new ThongTinNguoiDung();
                     nguoiDung.setEmailNguoidung(mail);
                     nguoiDung.setAddresNguoidung(address);
@@ -123,7 +89,7 @@ public class DangKyThongTinActivity extends AppCompatActivity {
                     @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
                     String text = simpleDateFormat.format(calendar.getTime());
                     nguoiDung.setCreateNguoidung(text);
-                    nguoiDung.setAvatarNguoidung(anh);
+                    nguoiDung.setAvatarNguoidung(String.valueOf(R.drawable.avatar));
                     nguoiDung.setUpdateNguoidung(text);
                     nguoiDung.setIdtaikhoan(taiKhoan.getId());
                     if (nguoiDungDAO.themThongTinNguoiDung(nguoiDung)) {
@@ -144,5 +110,39 @@ public class DangKyThongTinActivity extends AppCompatActivity {
     }
     public boolean phonecheck(CharSequence e){
         return !TextUtils.isEmpty(e) && Patterns.PHONE.matcher(e).matches();
+    }
+    
+    public boolean check(String ten, String phone, String mail, String address, String ngay){
+        namelayout.setError("");
+        sdtlayout.setError("");
+        emaillayout.setError("");
+        ngaysinhlayout.setError("");
+        diachilayout.setError("");
+        if (ten.equals("")){
+            namelayout.setError("Không được để trống họ tên");
+            return false;
+        }if (!phonecheck(phone)){
+            sdtlayout.setError("Số điện thoại không đúng định dạng");
+            return false;
+        }else if(phone.length()<11){
+            sdtlayout.setError("Số điện thoại không đúng định dạng");
+            return false;
+        }
+        if (mail.equals("")){
+            emaillayout.setError("Không được để trống email ");
+
+            return false;
+        } if (!emailcheck(email.getEditableText().toString())) {
+            emaillayout.setError("Không đúng định dạng email");
+            return false;
+        } if (address.equals("")){
+            diachilayout.setError("Không để trống địa chỉ");
+            return false;
+        }  if (ngay.equals("")){
+            ngaysinhlayout.setError("Không để trống ngày sinh");
+            return false;
+        }
+        
+        return true;
     }
 }
