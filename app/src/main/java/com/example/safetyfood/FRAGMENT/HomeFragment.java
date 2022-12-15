@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -140,23 +141,25 @@ public class HomeFragment extends Fragment {
 // cho nay da sua
 
     private void getData() {
-        if (loaiSanPhamDAO.getDSLoaiSanPham().isEmpty()) {
-            loaiSanPhamDAO.themLoaiSanPham(new LoaiSanPham(0, 0, "Nước ngọt", String.valueOf(R.drawable.nuocoga)
-                    , "19/11/2022", "19/11/2022", 1));
-            loaiSanPhamDAO.themLoaiSanPham(new LoaiSanPham(0, 0, "Phở", String.valueOf(R.drawable.pho)
-                    , "19/11/2022", "19/11/2022", 1));
-            loaiSanPhamDAO.themLoaiSanPham(new LoaiSanPham(0, 0, "Đồ ăn nhanh", String.valueOf(R.drawable.doananh)
-                    , "19/11/2022", "19/11/2022", 1));
-            loaiSanPhamDAO.themLoaiSanPham(new LoaiSanPham(0, 0, "Cơm", String.valueOf(R.drawable.com)
-                    , "19/11/2022", "19/11/2022", 1));
-            loaiSanPhamDAO.themLoaiSanPham(new LoaiSanPham(0, 0, "Bánh", String.valueOf(R.drawable.bread)
-                    , "19/11/2022", "19/11/2022", 1));
-            loaiSanPhamDAO.themLoaiSanPham(new LoaiSanPham(0, 0, "Thịt", String.valueOf(R.drawable.meat)
-                    , "19/11/2022", "19/11/2022", 1));
-            loaiSanPhamDAO.themLoaiSanPham(new LoaiSanPham(0, 0, "Trà sữa", String.valueOf(R.drawable.trasua)
-                    , "19/11/2022", "19/11/2022", 1));
-            loaiSanPhamDAO.themLoaiSanPham(new LoaiSanPham(0, 0, "Tráng miệng", String.valueOf(R.drawable.trangmieng)
-                    , "19/11/2022", "19/11/2022", 1));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            if (loaiSanPhamDAO.getDSLoaiSanPham().isEmpty()) {
+                loaiSanPhamDAO.themLoaiSanPham(new LoaiSanPham(0, 0, "Nước ngọt", String.valueOf(R.drawable.nuocoga)
+                        , "19/11/2022", "19/11/2022", 1));
+                loaiSanPhamDAO.themLoaiSanPham(new LoaiSanPham(0, 0, "Phở", String.valueOf(R.drawable.pho)
+                        , "19/11/2022", "19/11/2022", 1));
+                loaiSanPhamDAO.themLoaiSanPham(new LoaiSanPham(0, 0, "Đồ ăn nhanh", String.valueOf(R.drawable.doananh)
+                        , "19/11/2022", "19/11/2022", 1));
+                loaiSanPhamDAO.themLoaiSanPham(new LoaiSanPham(0, 0, "Cơm", String.valueOf(R.drawable.com)
+                        , "19/11/2022", "19/11/2022", 1));
+                loaiSanPhamDAO.themLoaiSanPham(new LoaiSanPham(0, 0, "Bánh", String.valueOf(R.drawable.bread)
+                        , "19/11/2022", "19/11/2022", 1));
+                loaiSanPhamDAO.themLoaiSanPham(new LoaiSanPham(0, 0, "Thịt", String.valueOf(R.drawable.meat)
+                        , "19/11/2022", "19/11/2022", 1));
+                loaiSanPhamDAO.themLoaiSanPham(new LoaiSanPham(0, 0, "Trà sữa", String.valueOf(R.drawable.trasua)
+                        , "19/11/2022", "19/11/2022", 1));
+                loaiSanPhamDAO.themLoaiSanPham(new LoaiSanPham(0, 0, "Tráng miệng", String.valueOf(R.drawable.trangmieng)
+                        , "19/11/2022", "19/11/2022", 1));
+            }
         }
         if (sanPhamDAO.getDSSanPham().isEmpty()) {
             sanPhamDAO.themSanpham(new SanPham(0, "Coca-cola", String.valueOf(R.drawable.cocanoback), 25000
@@ -224,7 +227,9 @@ public class HomeFragment extends Fragment {
             sanPhamDAO.themSanpham(new SanPham(0, "Trà sữa matcha", String.valueOf(R.drawable.matchakem), 25000
                     , "7", "19/11/2022", "19/11/2022", 1));
         }
-        loaiSanPhamList = loaiSanPhamDAO.getDSLoaiSanPham();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            loaiSanPhamList = loaiSanPhamDAO.getDSLoaiSanPham();
+        }
         topSanPham = thongKeDAO.getTop();
         if (topSanPham.isEmpty() || topSanPham.size() < 10) {
             topSanPham = sanPhamDAO.getDSSanPham();

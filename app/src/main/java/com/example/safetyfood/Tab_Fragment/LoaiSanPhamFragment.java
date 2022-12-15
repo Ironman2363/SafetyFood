@@ -2,29 +2,28 @@ package com.example.safetyfood.Tab_Fragment;
 
 import static android.app.Activity.RESULT_OK;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
-import android.util.Log;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,14 +37,9 @@ import com.example.safetyfood.DAO.LoaiSanPhamDAO;
 import com.example.safetyfood.MODEL.LoaiSanPham;
 import com.example.safetyfood.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.gun0912.tedpermission.PermissionListener;
-import com.gun0912.tedpermission.TedPermissionActivity;
-import com.gun0912.tedpermission.TedPermissionResult;
-import com.gun0912.tedpermission.TedPermissionUtil;
-import com.gun0912.tedpermission.normal.TedPermission;
-import com.gun0912.tedpermission.provider.TedPermissionProvider;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -59,9 +53,12 @@ public class LoaiSanPhamFragment extends Fragment {
     ThemLoaiSanPhamAdapter phamAdapter;
     ImageView anh_loai;
     String link;
+    int SELECT_PICTURE = 200;
     ActivityResultLauncher<Intent> activityResultLauncher;
     List<LoaiSanPham> list = new ArrayList<>();
-
+    Uri selectImageUri;
+    private static final int REQUEST_CAMERA = 1;
+    private static final int SELECT_FILE = 2;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -93,18 +90,57 @@ public class LoaiSanPhamFragment extends Fragment {
                         anh_loai.setImageBitmap(bitmap);
                         anh_loai.setVisibility(View.VISIBLE);
                     }
-                    link = String.valueOf(getImageUri(getContext(),bitmap));
+                    link = String.valueOf(BitMapToString(bitmap));
                 }
             }
         });
         return view;
     }
 
+    private void imageChoose() {
+        Intent i = new Intent();
+        i.setType("image/*");
+        i.setAction(Intent.ACTION_GET_CONTENT);
+        LauncherSomeActivity.launch(i);
+    }
 
-    public static Uri getImageUri(Context inContext, Bitmap inImage) {
+    ActivityResultLauncher<Intent> LauncherSomeActivity =
+            registerForActivityResult(new ActivityResultContracts
+                            .StartActivityForResult(), result -> {
+                        if (result.getResultCode() == RESULT_OK) {
+                            Intent data = result.getData();
+                            if (data != null && data.getData() != null) {
+                                String path = null;
+                                Uri selectImageUri = data.getData();
+                                Bitmap SeclectImageBitmap = null;
+                                try {
+                                SeclectImageBitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(),selectImageUri);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+
+                               if (SeclectImageBitmap != null){
+                                   anh_loai.setImageBitmap(SeclectImageBitmap);
+                                   anh_loai.setVisibility(View.VISIBLE);
+                               }
+                             link = String.valueOf(getImageUri(getContext(),SeclectImageBitmap));
+//
+                            }
+                        }
+                    }
+            );
+
+    public String BitMapToString(Bitmap bitmap){
+        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
+        byte [] b=baos.toByteArray();
+        String temp= Base64.encodeToString(b, Base64.DEFAULT);
+        return temp;
+    }
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "IMG_" + Calendar.getInstance().getTime(),null);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
         return Uri.parse(path);
     }
 
@@ -122,23 +158,36 @@ public class LoaiSanPhamFragment extends Fragment {
         add_anh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-           openImgea();
+                final CharSequence[] items = {"Chụp ảnh" , "Chọn ảnh từ thư viện"};
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
+                builder1.setIcon(R.drawable.img_image);
+                builder1.setItems(items, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (items[which].equals("Chụp ảnh")){
+                           openImgea();
+                        }else if (items[which].equals("Chọn ảnh từ thư viện")){
+                            imageChoose();
+                        }
+                    }
+                });
+                builder1.show();
             }
         });
-
-
 
         them.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LoaiSanPham sanPham = new LoaiSanPham();
                 String ten = edit_ten.getText().toString();
+                String anh = anh_loai.getResources().toString();
                 Calendar calendar = Calendar.getInstance();
                 @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm dd/MM/yyyy");
                 String text = simpleDateFormat.format(calendar.getTime());
                 sanPham.setNameLoaisanpham(ten);
                 sanPham.setCreateLoaisanpham(text);
                 sanPham.setImgLoaisanpham(link);
+
                 sanPham.setUpdatedLoaisanpham(text);
                 sanPham.setIdCuahang(0);
 
@@ -155,14 +204,24 @@ public class LoaiSanPhamFragment extends Fragment {
         });
     }
 
-
-    // hoi ve phan nay
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RESULT_OK) {
+            if (requestCode == SELECT_PICTURE) {
+                Uri selectImageUri = data.getData();
+                if (null != selectImageUri) {
+                    anh_loai.setImageURI(selectImageUri);
+                }
+            }
+        }
+    }
 
     private void openImgea() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (intent.resolveActivity(getActivity().getPackageManager()) !=null){
+        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
             activityResultLauncher.launch(intent);
-        }else {
+        } else {
             Toast.makeText(getContext(), "app ko ho tro action", Toast.LENGTH_SHORT).show();
         }
     }
