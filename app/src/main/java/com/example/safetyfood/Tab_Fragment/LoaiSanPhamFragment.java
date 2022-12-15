@@ -115,7 +115,6 @@ public class LoaiSanPhamFragment extends Fragment {
                                 Bitmap SeclectImageBitmap = null;
                                 try {
                                 SeclectImageBitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(),selectImageUri);
-
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
@@ -124,8 +123,8 @@ public class LoaiSanPhamFragment extends Fragment {
                                    anh_loai.setImageBitmap(SeclectImageBitmap);
                                    anh_loai.setVisibility(View.VISIBLE);
                                }
-                             link = BitMapToString(SeclectImageBitmap);
-//                               Log.e("zzz",link);
+                             link = String.valueOf(getImageUri(getContext(),SeclectImageBitmap));
+//
                             }
                         }
                     }
@@ -138,12 +137,12 @@ public class LoaiSanPhamFragment extends Fragment {
         String temp= Base64.encodeToString(b, Base64.DEFAULT);
         return temp;
     }
-//    public Uri getImageUri(Context inContext, Bitmap inImage) {
-//        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-//        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-//        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
-//        return Uri.parse(path);
-//    }
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
 
     private void themLoaiSanPham() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -187,15 +186,6 @@ public class LoaiSanPhamFragment extends Fragment {
                 String text = simpleDateFormat.format(calendar.getTime());
                 sanPham.setNameLoaisanpham(ten);
                 sanPham.setCreateLoaisanpham(text);
-//                byte[] imagem_img = new byte[0];
-//                imagem_img = link.getBytes();
-//                if (imagem_img.length > 500000){
-//                    Bitmap bitmap = BitmapFactory.decodeByteArray(imagem_img, 0, imagem_img.length);
-//                    Bitmap resized = Bitmap.createScaledBitmap(bitmap, (int)(bitmap.getWidth()*0.8), (int)(bitmap.getHeight()*0.8), true);
-//                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//                    resized.compress(Bitmap.CompressFormat.PNG, 100, stream);
-//                    imagem_img = stream.toByteArray();
-//                }
                 sanPham.setImgLoaisanpham(link);
 
                 sanPham.setUpdatedLoaisanpham(text);
