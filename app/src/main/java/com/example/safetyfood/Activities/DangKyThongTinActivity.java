@@ -1,10 +1,10 @@
 package com.example.safetyfood.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,12 +12,14 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.safetyfood.DAO.TaikhoanDAO;
 import com.example.safetyfood.DAO.ThongTinNguoiDungDAO;
 import com.example.safetyfood.MODEL.TaiKhoan;
 import com.example.safetyfood.MODEL.ThongTinNguoiDung;
-import com.example.safetyfood.MainActivity;
 import com.example.safetyfood.R;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -26,7 +28,8 @@ public class DangKyThongTinActivity extends AppCompatActivity {
     ThongTinNguoiDungDAO nguoiDungDAO;
     Button hoantat;
     ImageView avatar;
-    EditText sdt, email, dia_chi, name, ngay_sinh;
+    TextInputLayout namelayout,sdtlayout,emaillayout,diachilayout,ngaysinhlayout;
+    EditText sdt,email, dia_chi, name, ngay_sinh;
     RadioButton GT_nam, GT_nu;
     String userDK, passDK;
     TaikhoanDAO taikhoanDAO;
@@ -39,6 +42,12 @@ public class DangKyThongTinActivity extends AppCompatActivity {
         Intent intent = getIntent();
         userDK = intent.getStringExtra("user");
         passDK = intent.getStringExtra("pass");
+
+        namelayout = findViewById(R.id.namelayout);
+        sdtlayout = findViewById(R.id.sdtlayout);
+        emaillayout = findViewById(R.id.emaillayout);
+        diachilayout = findViewById(R.id.diachilayout);
+        ngaysinhlayout = findViewById(R.id.ngaysinhlayout);
 
         hoantat = findViewById(R.id.btnDangkythongtin);
         sdt = findViewById(R.id.edtSdt);
@@ -64,33 +73,76 @@ public class DangKyThongTinActivity extends AppCompatActivity {
                 String ngay = ngay_sinh.getText().toString();
                 String anh = avatar.getResources().toString();
 
-                ThongTinNguoiDung nguoiDung = new ThongTinNguoiDung();
-                nguoiDung.setEmailNguoidung(mail);
-                nguoiDung.setAddresNguoidung(address);
-                nguoiDung.setBirthdayNguoidung(ngay);
-                nguoiDung.setFullname(ten);
-                nguoiDung.setSdtNguoidung(phone);
+                if(ten.equals("") ||phone.equals("") || mail.equals("") || address.equals("") || ngay.equals("")){
+                    if (ten.equals("")){
+                        namelayout.setError("Không được để trống họ tên");
+                        return;
+                    } if (!ten.equals("")){
+                        namelayout.setError("");
+                    } if (!phonecheck(sdt.getEditableText().toString())){
+                        sdtlayout.setError("Số điện thoại không đúng định dạng");
+                        return;
+                    } if (phonecheck(sdt.getEditableText().toString())){
+                        sdtlayout.setError("");
+                    } if (mail.equals("")){
+                        emaillayout.setError("Không được để trống email ");
 
-                if (GT_nu.isChecked()) {
-                    nguoiDung.setGender(0);
-                } else if (GT_nam.isChecked()) {
-                    nguoiDung.setGender(1);
+                        return;
+                    } if (!mail.equals("")){
+                        emaillayout.setError("");
+                    } if (!emailcheck(email.getEditableText().toString())) {
+                        emaillayout.setError("Không đúng định dạng email");
+                        return;
+                    } if (emailcheck(email.getEditableText().toString())){
+                        emaillayout.setError("");
+                    }if (address.equals("")){
+                        diachilayout.setError("Không để trống địa chỉ");
+                        return;
+                    } if (!address.equals("")){
+                        diachilayout.setError("");
+                    } if (ngay.equals("")){
+                        ngaysinhlayout.setError("Không để trống ngày sinh");
+                        return;
+                    } if (!ngay.equals("")){
+                        ngaysinhlayout.setError("");
+                    }
+                }else {
+                    ThongTinNguoiDung nguoiDung = new ThongTinNguoiDung();
+                    nguoiDung.setEmailNguoidung(mail);
+                    nguoiDung.setAddresNguoidung(address);
+                    nguoiDung.setBirthdayNguoidung(ngay);
+                    nguoiDung.setFullname(ten);
+                    nguoiDung.setSdtNguoidung(phone);
+
+                    if (GT_nu.isChecked()) {
+                        nguoiDung.setGender(0);
+                    } else if (GT_nam.isChecked()) {
+                        nguoiDung.setGender(1);
+                    }
+                    Calendar calendar = Calendar.getInstance();
+                    @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                    String text = simpleDateFormat.format(calendar.getTime());
+                    nguoiDung.setCreateNguoidung(text);
+                    nguoiDung.setAvatarNguoidung(anh);
+                    nguoiDung.setUpdateNguoidung(text);
+                    nguoiDung.setIdtaikhoan(taiKhoan.getId());
+                    if (nguoiDungDAO.themThongTinNguoiDung(nguoiDung)) {
+                        Toast.makeText(DangKyThongTinActivity.this, "Them thong tin thanh cong", Toast.LENGTH_SHORT).show();
+                        finish();
+                        startActivity(new Intent(getApplicationContext(), Login.class));
+                    } else {
+                        Toast.makeText(DangKyThongTinActivity.this, "Them thong tin that bai", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                Calendar calendar = Calendar.getInstance();
-                @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                String text = simpleDateFormat.format(calendar.getTime());
-                nguoiDung.setCreateNguoidung(text);
-                nguoiDung.setAvatarNguoidung(anh);
-                nguoiDung.setUpdateNguoidung(text);
-                nguoiDung.setIdtaikhoan(taiKhoan.getId());
-                if (nguoiDungDAO.themThongTinNguoiDung(nguoiDung)) {
-                    Toast.makeText(DangKyThongTinActivity.this, "Them thong tin thanh cong", Toast.LENGTH_SHORT).show();
-                    finish();
-                    startActivity(new Intent(getApplicationContext(), Login.class));
-                } else {
-                    Toast.makeText(DangKyThongTinActivity.this, "Them thong tin that bai", Toast.LENGTH_SHORT).show();
-                }
+
+
             }
         });
+    }
+    public boolean emailcheck(CharSequence e){
+        return !TextUtils.isEmpty(e) && Patterns.EMAIL_ADDRESS.matcher(e).matches();
+    }
+    public boolean phonecheck(CharSequence e){
+        return !TextUtils.isEmpty(e) && Patterns.PHONE.matcher(e).matches();
     }
 }

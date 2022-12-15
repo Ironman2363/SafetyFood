@@ -41,7 +41,6 @@ public class SearchItems extends AppCompatActivity {
 
         Search_List = findViewById(R.id.Search_List);
         Search_toolbar = findViewById(R.id.Search_toolbar);
-        
         sanPhamDAO = new SanPhamDAO(this);
         dao = new ChiTietDatHangDAO(this);
 

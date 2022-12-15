@@ -36,7 +36,7 @@ public class ThongTinNguoiDungDAO {
         contentValues.put("AccountId", info.getIdtaikhoan());
         contentValues.put("FullName", info.getFullname());
         contentValues.put("Email", info.getEmailNguoidung());
-        contentValues.put("SDT", info.getEmailNguoidung());
+        contentValues.put("SDT", info.getSdtNguoidung());
         contentValues.put("Addres", info.getAddresNguoidung());
         contentValues.put("Avatar", info.getAvatarNguoidung());
         contentValues.put("Birthday", info.getBirthdayNguoidung());

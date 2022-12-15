@@ -1,7 +1,6 @@
 package com.example.safetyfood.FRAGMENT;
 
 import static android.app.Activity.RESULT_OK;
-
 import static com.example.safetyfood.MainActivity.account_all;
 import static com.example.safetyfood.MainActivity.check_login;
 
@@ -9,7 +8,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -36,7 +34,6 @@ import com.example.safetyfood.Activities.Login;
 import com.example.safetyfood.Activities.Passwordchange;
 import com.example.safetyfood.Activities.ThongTinCuaHang;
 import com.example.safetyfood.DAO.ThongTinNguoiDungDAO;
-import com.example.safetyfood.MODEL.TaiKhoan;
 import com.example.safetyfood.MODEL.ThongTinNguoiDung;
 import com.example.safetyfood.R;
 
@@ -44,8 +41,6 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
-import javax.security.auth.login.LoginException;
 
 public class SettingFragment extends Fragment {
     ThongTinNguoiDung thongTinNguoiDung;
@@ -229,7 +224,6 @@ public class SettingFragment extends Fragment {
                     Toast.makeText(getContext( ), "Cập nhập thành công", Toast.LENGTH_SHORT).show( );
                     dialog.dismiss( );
                     list.clear( );
-
                 } else {
                     Toast.makeText(getContext( ), "Sửa Thất Bại", Toast.LENGTH_SHORT).show( );
                 }

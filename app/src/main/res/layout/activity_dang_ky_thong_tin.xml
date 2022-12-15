@@ -32,6 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:hint="Họ và tên"
+        android:id="@+id/namelayout"
         app:startIconDrawable="@drawable/name_24"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -46,24 +47,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:hint="Email"
-        app:startIconDrawable="@drawable/gmail_24"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-        <EditText
-            android:id="@+id/edtEmail"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-
-            android:padding="10dp" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:hint="Số điện thoại"
+        android:id="@+id/sdtlayout"
         app:startIconDrawable="@drawable/circle_phone_24"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -79,7 +64,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:hint="Email"
+        android:id="@+id/emaillayout"
+        app:startIconDrawable="@drawable/gmail_24"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <EditText
+            android:id="@+id/edtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+
+            android:padding="10dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:hint="Địa chỉ"
+        android:id="@+id/diachilayout"
         app:startIconDrawable="@drawable/map_24"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -96,6 +101,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:hint="Ngày sinh"
+        android:id="@+id/ngaysinhlayout"
         app:startIconDrawable="@drawable/calendar_24"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -115,6 +121,7 @@
         android:orientation="horizontal">
 
         <RadioButton
+            android:checked="true"
             android:id="@+id/rdo_GT_Nam"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
