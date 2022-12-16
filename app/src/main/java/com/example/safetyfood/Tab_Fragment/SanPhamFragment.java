@@ -104,6 +104,7 @@ public class SanPhamFragment extends Fragment {
                         anh.setVisibility(View.VISIBLE);
                     }
                     link = String.valueOf(getImageUri(getContext(),bitmap));
+                    Log.e("zzz",link+"/\n"+bitmap);
                 }
             }
         });
@@ -138,7 +139,7 @@ public class SanPhamFragment extends Fragment {
                                     anh.setVisibility(View.VISIBLE);
                                 }
                                 link = String.valueOf(getImageUri(getContext(),SeclectImageBitmap));
-//                               Log.e("zzz",link);
+                               Log.e("zzz",link+"/\n"+SeclectImageBitmap);
                             }
                         }
                     }
@@ -152,10 +153,10 @@ public class SanPhamFragment extends Fragment {
 //        list.add(new SanPham("pepsi",String.valueOf(R.drawable.pepsi),400000,3,"20/22/2022"));
 //
 //    }
-    public Uri getImageUri(Context inContext, Bitmap inImage) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream( );
+    public static Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver( ), inImage, "Title", null);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "IMG_" + Calendar.getInstance().getTime(),null);
         return Uri.parse(path);
     }
 
@@ -278,5 +279,15 @@ public class SanPhamFragment extends Fragment {
         } else {
             Toast.makeText(getContext( ), "app ko ho tro action", Toast.LENGTH_SHORT).show( );
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext( ));
+        list_sp.setLayoutManager(manager);
+        list = sanPhamDAO.getDSSanPham( );
+        phamAdapter = new ThemSanPhamAdapter(getContext( ), list);
+        list_sp.setAdapter(phamAdapter);
     }
 }

@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,7 +91,7 @@ public class LoaiSanPhamFragment extends Fragment {
                         anh_loai.setImageBitmap(bitmap);
                         anh_loai.setVisibility(View.VISIBLE);
                     }
-                    link = String.valueOf(BitMapToString(bitmap));
+                    link = String.valueOf(getImageUri(getContext(),bitmap));
                 }
             }
         });
@@ -124,7 +125,6 @@ public class LoaiSanPhamFragment extends Fragment {
                                    anh_loai.setVisibility(View.VISIBLE);
                                }
                              link = String.valueOf(getImageUri(getContext(),SeclectImageBitmap));
-//
                             }
                         }
                     }
@@ -137,10 +137,10 @@ public class LoaiSanPhamFragment extends Fragment {
         String temp= Base64.encodeToString(b, Base64.DEFAULT);
         return temp;
     }
-    public Uri getImageUri(Context inContext, Bitmap inImage) {
+    public static Uri getImageUri(Context inContext, Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "IMG_" + Calendar.getInstance().getTime(),null);
         return Uri.parse(path);
     }
 
@@ -224,5 +224,16 @@ public class LoaiSanPhamFragment extends Fragment {
         } else {
             Toast.makeText(getContext(), "app ko ho tro action", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
+        list_sp.setLayoutManager(manager);
+        sanPhamDAO = new LoaiSanPhamDAO(getContext());
+        list = sanPhamDAO.getDSLoaiSanPham();
+        phamAdapter = new ThemLoaiSanPhamAdapter(getContext(), list);
+        list_sp.setAdapter(phamAdapter);
     }
 }

@@ -83,6 +83,15 @@ public class SanPhamDAO {
         return false;
     }
 
+    public boolean xoaSPLoai(String Id){
+        SQLiteDatabase database = safetyFoodDataBase.getWritableDatabase();
+        long check = database.delete("SanPham","TypeproDuct=?",new String[]{Id});
+        if (check>0){
+            return true;
+        }
+        return false;
+    }
+
     public SanPham getID(int id) {
         SQLiteDatabase sqLiteDatabase = safetyFoodDataBase.getWritableDatabase();
         String sql = "Select * from SanPham where id=?";

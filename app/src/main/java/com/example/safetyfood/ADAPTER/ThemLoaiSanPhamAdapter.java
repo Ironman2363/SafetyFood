@@ -36,6 +36,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.safetyfood.Activities.AllLoaiSP;
 import com.example.safetyfood.Activities.getImg;
 import com.example.safetyfood.DAO.LoaiSanPhamDAO;
+import com.example.safetyfood.DAO.SanPhamDAO;
 import com.example.safetyfood.MODEL.LoaiSanPham;
 import com.example.safetyfood.R;
 
@@ -46,6 +47,7 @@ public class ThemLoaiSanPhamAdapter extends RecyclerView.Adapter<ThemLoaiSanPham
     Context context;
     List<LoaiSanPham>list;
     LoaiSanPhamDAO sanPhamDAO;
+    SanPhamDAO dao;
     String link;
     ImageView anh_sp;
 
@@ -53,6 +55,7 @@ public class ThemLoaiSanPhamAdapter extends RecyclerView.Adapter<ThemLoaiSanPham
         this.context = context;
         this.list = list;
         sanPhamDAO = new LoaiSanPhamDAO(context);
+        dao = new SanPhamDAO(context);
     }
 
     @NonNull
@@ -170,6 +173,31 @@ public class ThemLoaiSanPhamAdapter extends RecyclerView.Adapter<ThemLoaiSanPham
     }
 
     private void XoaSanPham(LoaiSanPham sanPham, int position, ThemLoaiSanPhamHolder holder) {
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context);
+        builder.setTitle("Xác nhận");
+        builder.setMessage("Bạn có chắc chắn muốn xóa không ?");
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (sanPhamDAO.deleteLoaiSanPham(String.valueOf(sanPham.getId()))) {
+                    dao.xoaSPLoai(String.valueOf(sanPham.getId()));
+                    Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                    list.remove(holder.getAdapterPosition());
+                    notifyItemRemoved(holder.getAdapterPosition( ));
+                    dialog.dismiss();
+                } else {
+                    Toast.makeText(context, "Xóa không thành công", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        Dialog dialog = builder.create();
+        dialog.show();
     }
 
     public Bitmap StringToBitMap(String encodedString) {

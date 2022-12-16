@@ -71,6 +71,7 @@ public class Login extends AppCompatActivity {
                     bundle.putSerializable("tk", dao.getName(mail));
                     intent.putExtra("bundle", bundle);
                     startActivity(intent);
+                    finishAffinity();
                 } else if (mail.equalsIgnoreCase("")) {
                     textInputName.setError("Vui lòng nhập tài khoản");
                 } else if (mk.equalsIgnoreCase("")) {

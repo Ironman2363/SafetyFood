@@ -40,6 +40,7 @@ public class Splash_Screen extends AppCompatActivity {
             @Override
             public void onFinish() {
                 startActivity(new Intent(getApplicationContext(), Login.class));
+                finish();
             }
         };
         countDownTimer.start();
